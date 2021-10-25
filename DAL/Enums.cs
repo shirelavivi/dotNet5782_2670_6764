@@ -11,7 +11,8 @@ namespace DAL
         class Enums
         {
             public enum weightCategories { easy, middle, weighty }
-            
+            public enum DroneStatuses { available, maintenance, transport }
+
         }
     }
 }
