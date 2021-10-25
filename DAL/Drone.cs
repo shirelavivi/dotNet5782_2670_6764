@@ -10,14 +10,14 @@ namespace DAL
     {
         class Drone
         {
+
+            public int id { get; set; }
+            public string Model { get; set; }
             
-            int id { get; set; }
-            string Model { get; set; }
-            public enum weightCategories { easy, middle, weighty }
-            weightCategories MaxWeight { get; set; }
-            public enum DroneStatuses { available, maintenance,transport }
-             DroneStatuses status { get; set; }
-            double Battery { get; set; }
+            public weightCategories MaxWeight { get; set; }
+            
+            public DroneStatuses status { get; set; }
+            public double Battery { get; set; }
         }
 
     }
