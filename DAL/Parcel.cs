@@ -15,7 +15,7 @@ namespace DAL
             public int Targetid { get; set; }// 
             public enum Weightcategories { easy,middle,heavy}
             public Weightcategories Weight { get; set; }//Location
-            public enum Priorities {  }
+            public enum Priorities { Normal, fast, emergency }
             public Priorities Priority { get; set; }//Location
             public DateTime Requested  { get; set; }
             public int Droneld { get; set; }
