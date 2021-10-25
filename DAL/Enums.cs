@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+using IDAL.DO;
+
+namespace IDAL
 {
     namespace DO
     {
-        class Enums
-        {
-            public enum weightCategories { easy, middle, weighty }
+        
+        
+            public enum Weightcategories { easy, middle, weighty }
             public enum DroneStatuses { available, maintenance, transport }
-
-        }
+            public enum Priorities { Normal, fast, emergency }
+        
     }
 }

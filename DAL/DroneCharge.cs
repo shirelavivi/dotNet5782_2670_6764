@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IDAL.DO;
 
-namespace DAL
+namespace IDAL
 {
     namespace DO
     {
-        class DroneCharge
+        public struct DroneCharge
         {
-            int Droneld { get; set; }
-            int Stations { get; set; }
+            public int Droneld { get; set; }
+            public int Stations { get; set; }
         }
     }
 }
