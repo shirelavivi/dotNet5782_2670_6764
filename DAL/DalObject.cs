@@ -10,10 +10,10 @@ namespace IDAL
 {
     namespace DalObject
     {
-        
+       
         class DataSource
         {
-
+            static Random rand = new Random(DateTime.Now.Millisecond);
             internal static List<Drone> drones = new List<Drone>();//רשימה של רחפנים
             internal static List<Station> Stations = new List<Station>();// רשימה של תחנות בסיס
             internal static List<Customer> customers = new List<Customer>();//רשימה של לקוחות
@@ -27,10 +27,10 @@ namespace IDAL
                 Station s=new Station();
                 for (int i=0;i<3;i++)
                 {
-                    int x = Rand.Next(); 
-                    s.Name = "Station"+i ;
-                    s.Longitude=
-                         s.Lattitude =
+                   s.Id = rand.Next(); 
+                   s.Name = "Station"+i ;
+                   s.Longitude= rand.Next();
+                   s.Lattitude = rand.Next();
                 }
                 Stations.Add( //הגרלת מספר);
             }
