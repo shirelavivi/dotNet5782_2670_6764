@@ -36,28 +36,7 @@ namespace IDAL
                    s.ChargeSlots = i + 3;
                     Stations.Add(s);
                 }
-                for (int i = 0; i < 7; i++)
-                {
-                    int x = rand.Next(3);
-                    d.id = rand.Next();
-                    d.Model = "drone" + i;
-                    switch (x)
-                    {
-                        case 0:
-                            d.MaxWeight = Weightcategories.easy;
-                            break;
-                        case 1:
-                            d.MaxWeight = Weightcategories.middle;
-                            break;
-                        case 2:
-                            d.MaxWeight = Weightcategories.weighty;
-                            break;       
-                    }
-                    
-                    
-                }
-
-
+                Stations.Add( //הגרלת מספר);
             }
 
         }
