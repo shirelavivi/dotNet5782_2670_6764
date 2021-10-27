@@ -36,23 +36,7 @@ namespace IDAL
                    s.ChargeSlots = i + 3;
                     Stations.Add(s);
                 }
-
-                t = (Weightcategories)int.Parse(
-                switch (t)
-                {
-                    case Weightcategories.easy:
-                        break;
-                    case Weightcategories.middle:
-                        break;
-                    case Weightcategories.weighty:
-                        break;
-                    default:
-                        break;
-
-                }
-                Console.ReadLine();
-
-
+                
 
             }
 
