@@ -36,7 +36,8 @@ namespace IDAL
                    s.ChargeSlots = i + 3;
                     Stations.Add(s);
                 }
-                Stations.Add( //הגרלת מספר);
+                
+
             }
 
         }
