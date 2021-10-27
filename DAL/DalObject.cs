@@ -10,19 +10,29 @@ namespace IDAL
 {
     namespace DalObject
     {
+        
         class DataSource
         {
-            internal List<Drone> drones = new List<Drone>();//רשימה של רחפנים
-            internal List<DroneCharge> droneCharges = new List<DroneCharge>();// רשימה של תחנות בסיס
-            internal List<Customer> customers = new List<Customer>();//רשימה של לקוחות
-            internal List<Parcel> packets = new List<Parcel>();// רשימה של חבילות
+
+            internal static List<Drone> drones = new List<Drone>();//רשימה של רחפנים
+            internal static List<Station> Stations = new List<Station>();// רשימה של תחנות בסיס
+            internal static List<Customer> customers = new List<Customer>();//רשימה של לקוחות
+            internal static List<Parcel> packets = new List<Parcel>();// רשימה של חבילות
             internal class config
             { 
-                static int IdPackets = 0;//  מספר מזהה סידורי לחבילות שיעודכן כל פעם שנוצרת חבילה חדשה 
+                static int CounterPackets = 0;//  מספר מזהה סידורי לחבילות שיעודכן כל פעם שנוצרת חבילה חדשה 
             }
            public static void Initialize ()
             {
-
+                Station s=new Station();
+                for (int i=0;i<3;i++)
+                {
+                    int x = Rand.Next(); 
+                    s.Name = "Station"+i ;
+                    s.Longitude=
+                         s.Lattitude =
+                }
+                Stations.Add( //הגרלת מספר);
             }
 
         }
