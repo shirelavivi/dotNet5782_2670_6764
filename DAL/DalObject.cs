@@ -37,27 +37,9 @@ namespace IDAL
                     Stations.Add(s);
                 }
                 
-
+                
             }
-            Weightcategories s;
-            string sd = Console.ReadLine();
-            s= (weightcategories) int.Parse(sd);
-             switch(s)
-                {
-                    case weightcategories.easy:
-                        break;
-                    case weightcategories.middle:
-                        break;
-                    case weightcategories.middle:
-                        break;
-                    default:
-                        break;
-
-                }
-        Console.ReadLine();
-            //shirelll
-
 
         }
-}
+    }
 }
