@@ -24,15 +24,40 @@ namespace IDAL
             }
            public static void Initialize ()
             {
+                
                 Station s=new Station();
+                Drone d = new Drone();
                 for (int i=0;i<3;i++)
                 {
                    s.Id = rand.Next(); 
                    s.Name = "Station"+i ;
                    s.Longitude= rand.Next();
                    s.Lattitude = rand.Next();
+                   s.ChargeSlots = i + 3;
+                    Stations.Add(s);
                 }
-                Stations.Add( //הגרלת מספר);
+                for (int i = 0; i < 7; i++)
+                {
+                    int x = rand.Next(3);
+                    d.id = rand.Next();
+                    d.Model = "drone" + i;
+                    switch (x)
+                    {
+                        case 0:
+                            d.MaxWeight = Weightcategories.easy;
+                            break;
+                        case 1:
+                            d.MaxWeight = Weightcategories.middle;
+                            break;
+                        case 2:
+                            d.MaxWeight = Weightcategories.weighty;
+                            break;       
+                    }
+                    
+                    
+                }
+
+
             }
 
         }
