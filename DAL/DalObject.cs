@@ -32,7 +32,25 @@ namespace IDAL
                    s.Longitude= rand.Next();
                    s.Lattitude = rand.Next();
                 }
-                Stations.Add( //הגרלת מספר);
+                Weightcategories s;
+                s= (weightcategories)int.Parse(sd);
+             switch(s)
+                {
+                    case weightcategories.easy:
+                        break;
+                    case weightcategories.middle:
+                        break;
+                    case weightcategories.middle:
+                        break;
+                    default:
+                        break;
+
+
+                }
+                Console.ReadLine();
+
+
+
             }
 
         }
