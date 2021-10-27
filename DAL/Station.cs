@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL
+namespace DAL
 {
     namespace DO
     {
-        class Station
+       public struct Station
         {
-            int Id { get; set; }
-            int Name { get; set; }
-            double Longitude { get; set; }
-            double Lattitude { get; set; }
-            int ChargeSlots { get; set; }
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public double Longitude { get; set; }
+            public double Lattitude { get; set; }
+            public int ChargeSlots { get; set; }
         }
     }
 }
