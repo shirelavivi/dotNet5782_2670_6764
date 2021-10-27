@@ -24,13 +24,17 @@ namespace IDAL
             }
            public static void Initialize ()
             {
+                
                 Station s=new Station();
+                Drone d = new Drone();
                 for (int i=0;i<3;i++)
                 {
                    s.Id = rand.Next(); 
                    s.Name = "Station"+i ;
                    s.Longitude= rand.Next();
                    s.Lattitude = rand.Next();
+                   s.ChargeSlots = i + 3;
+                    Stations.Add(s);
                 }
                 Weightcategories s;
                 s= (weightcategories)int.Parse(sd);
@@ -44,6 +48,7 @@ namespace IDAL
                         break;
                     default:
                         break;
+
 
                 }
                 Console.ReadLine();
