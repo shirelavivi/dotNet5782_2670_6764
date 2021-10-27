@@ -45,7 +45,6 @@ namespace IDAL
                     default:
                         break;
 
-
                 }
                 Console.ReadLine();
 
