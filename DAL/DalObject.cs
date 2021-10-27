@@ -24,7 +24,7 @@ namespace IDAL
             }
            public static void Initialize ()
             {
-                
+                Weightcategories t;
                 Station s=new Station();
                 Drone d = new Drone();
                 for (int i=0;i<3;i++)
@@ -36,7 +36,23 @@ namespace IDAL
                    s.ChargeSlots = i + 3;
                     Stations.Add(s);
                 }
-                
+
+                t = (Weightcategories)int.Parse(
+                switch (t)
+                {
+                    case Weightcategories.easy:
+                        break;
+                    case Weightcategories.middle:
+                        break;
+                    case Weightcategories.weighty:
+                        break;
+                    default:
+                        break;
+
+                }
+                Console.ReadLine();
+
+
 
             }
 
