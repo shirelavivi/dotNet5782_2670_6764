@@ -15,6 +15,15 @@ namespace IDAL
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
             public int ChargeSlots { get; set; }
+          public void Tostring()
+            {
+                Console.WriteLine(this.Id + "מזהה תחנה:");
+                Console.WriteLine(this.Name + "שם התחנה:");
+                Console.WriteLine("נקודת מיקום של התחנה:");
+                Console.WriteLine("(" + this.Longitude + "," + this.Lattitude + ")");
+                Console.WriteLine(this.ChargeSlots + "מספר עמדות הטענה פנויות:");
+
+            }
         }
     }
 }

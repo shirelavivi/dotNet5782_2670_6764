@@ -17,6 +17,14 @@ namespace IDAL
             public Weightcategories MaxWeight { get; set; } 
             public DroneStatuses status { get; set; }
             public double Battery { get; set; }
+            public void Tostring()
+            {
+                Console.WriteLine(this.id + "מזהה רחפן:");
+                Console.WriteLine(this.Model + "מוד הרחפן:");
+                Console.WriteLine(this.MaxWeight + "משקל:");
+                Console.WriteLine(this.status+"מצב תפוסה:");
+                Console.WriteLine( this.Battery +"מצב סוללה:");
+            }
         }
 
     }
