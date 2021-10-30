@@ -22,40 +22,16 @@ namespace IDAL
             { 
                 static int CounterPackets = 0;//  מספר מזהה סידורי לחבילות שיעודכן כל פעם שנוצרת חבילה חדשה 
             }
-           public static void Initialize ()
-            {
-                Weightcategories t;
-                Station s=new Station();
-                Drone d = new Drone();
-                for (int i=0;i<3;i++)
-                {
-                   s.Id = rand.Next(); 
-                   s.Name = "Station"+i ;
-                   s.Longitude= rand.Next();
-                   s.Lattitude = rand.Next();
-                   s.ChargeSlots = i + 3;
-                    Stations.Add(s);
-                }
-                
+           
 
             }
-            Weightcategories s;
-            string sd = Console.ReadLine();
-            s= (weightcategories) int.Parse(sd);
-             switch(s)
-                {
-                    case weightcategories.easy:
-                        break;
-                    case weightcategories.middle:
-                        break;
-                    case weightcategories.middle:
-                        break;
-                    default:
-                        break;
-
+          
                 }
-        Console.ReadLine();
+      
+       
+        
             //shirelll avivi
+
 
 
         }
