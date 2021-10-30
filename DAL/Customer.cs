@@ -12,6 +12,14 @@ namespace IDAL
             public string Phone { get; set; }// customer's cell phone
             public double Longitude { get; set; }//Location
             public double Lattitude { get; set; }//Location
+            public void Tostring()
+            {
+                Console.WriteLine(this.Id + "תעודת זהות של הלקוח:");
+                Console.WriteLine(this.Name + "שם הלקוח:");
+                Console.WriteLine(this.Phone + "מספר פלאפון של הלקוח:");
+                Console.WriteLine( "נקודת מיקום של הלקוח:");
+                Console.WriteLine("("+this.Longitude +","+this.Lattitude+")");
+            }
         }
     }
 }
