@@ -13,6 +13,7 @@ namespace IDAL
         {
             public int Droneld { get; set; }
             public int Stations { get; set; }
+
         }
     }
 }

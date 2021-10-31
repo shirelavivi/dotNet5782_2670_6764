@@ -20,7 +20,20 @@ namespace IDAL
             public DateTime Scheduled { get; set; }
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
+            public void Tostring()
+            {
+                Console.WriteLine(this.Id + "מזהה חבילה:");
+                Console.WriteLine(this.Senderld + "שם השולח:");
+                Console.WriteLine(this.Targetid+"שם המקבל:");
+                Console.WriteLine(this.Weight+"משקל חבילה");
+                Console.WriteLine(this.Priority +"עדיפות הזמנה");
+                Console.WriteLine(this.Requested + "זמן יצירת חבילה");
+                Console.WriteLine(this.Droneld + "רחפן מבצע");
+                Console.WriteLine(this.Scheduled + "זמן שיוך");
+                Console.WriteLine(this.PickedUp + "זמן איסוף");
+                Console.WriteLine(this.Delivered +"זמן אספקת חבילה");
 
+            }
         }
 
     }
