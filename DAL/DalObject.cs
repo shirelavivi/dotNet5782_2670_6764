@@ -276,6 +276,44 @@ namespace IDAL
                            
                     }
                 }
+                public void ShowCustomer(int s)
+                {
+                    List<Customer> run = customers;
+                    for(int i=0;i<run.Count;i++)
+                        {
+                        if (run[i].Id == s)
+                        {
+                            run[i].ToString();
+                            return;
+                        }
+                        }
+                    
+                }
+                public void ShowCustomer()
+                    {
+                    List<Customer> run = customers;
+                    for (int i = 0; i < run.Count; i++)
+                    {
+                        
+                        
+                            run[i].ToString();
+                            return;
+                    }
+                }
+                public void ShowParcel()
+                {
+                    List<Parcel> run = packets;
+                    for (int i = 0; i < run.Count; i++)
+                    {
+
+                        run[i].ToString();
+                 
+                    }
+                }
+
+
+
+            }
 
             }
 
