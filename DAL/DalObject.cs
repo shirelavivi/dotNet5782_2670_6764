@@ -220,31 +220,86 @@ namespace IDAL
 
 
                 }
-                public void ShowCustomer(int s)
+                public void ShowStation(int id)///הצגת  תחנת בסיס
+                {
+                    List<Station> run = Stations;
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                        if (run[i].Id == id)
+                        {
+                            run[i].Tostring();
+                            return;
+                        }
+                    }
+                }
+                public void ShowDrone(int id)///הצגת  רחפן
+                {
+                    List<Drone> run = drones;
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                        if (run[i].id == id)
+                        {
+                            run[i].Tostring();
+                            return;
+                        }
+                    }
+                }
+                public void ShowParcel(int id)///הצגת חבילה מסויימת
+                {
+                    List<Parcel> run = packets;
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                        if (run[i].Id == id)
+                        {
+                            run[i].Tostring();
+                            return;
+                        }
+                    }
+
+                }
+                public void ShowCustomer(int s)///הצגת לקוח מסויים
                 {
                     List<Customer> run = customers;
-                    for(int i=0;i<run.Count;i++)
-                        {
+                    for (int i = 0; i < run.Count; i++)
+                    {
                         if (run[i].Id == s)
                         {
                             run[i].ToString();
                             return;
                         }
-                        }
-                    
+                    }
+
                 }
-                public void ShowCustomer()
+                public void ShowStation()///הצגת  כל תחנות בסיס
+                {
+                    List<Station> run = Stations;
+                    for (int j = 0; j < run.Count(); j++)
+                    {
+                            run[j].Tostring();
+                          
+                        
+                    }
+                 }
+                public void ShowDrone()///הצגת כל הרחפנים
+                {
+                    List<Drone> run = drones;
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                            run[i].Tostring();
+                           
+                    }
+                }
+               
+                public void ShowCustomer()///הצגת כל הלקוחות
                     {
                     List<Customer> run = customers;
                     for (int i = 0; i < run.Count; i++)
                     {
-                        
-                        
                             run[i].ToString();
-                            return;
+                           
                     }
                 }
-                public void ShowParcel()
+                public void ShowParcel()///הצגת כל החבילות
                 {
                     List<Parcel> run = packets;
                     for (int i = 0; i < run.Count; i++)
@@ -266,13 +321,26 @@ namespace IDAL
 
                     }
                 }
+                }
+                public void ShowStationAvailable()///הדפסת כל התחנות שיש בהם עמדות טעינה פנויות
+                {
+                    List<Station> run = Stations;
+                    for (int i = 0; i < run.Count; i++)
+                    {
+                        if(run[i].ChargeSlots>0)
+                             run[i].ToString();
 
+                    }
+
+                }
 
 
             }
 
-        }
+            
 
+        }
     }
 }
+
 
