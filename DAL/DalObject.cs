@@ -254,6 +254,18 @@ namespace IDAL
                  
                     }
                 }
+                public void ShowParcelId()
+                {
+                    List<Parcel> run = packets;
+                    for (int i = 0; i < run.Count; i++)
+                    {
+                        if (run[i].Droneld == 0)
+                        {
+                            run[i].ToString();
+                        }
+
+                    }
+                }
 
 
 
