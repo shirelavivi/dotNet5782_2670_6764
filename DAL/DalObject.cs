@@ -131,9 +131,6 @@ namespace IDAL
 
             }
 
-
-
-
             public class DalObject
             {
 
@@ -158,6 +155,7 @@ namespace IDAL
                 public void ConnectParcelToDron(Parcel p)///שייוך חבילה לרחפן
                 {
                     List<Drone> run = drones;
+                    
 
                     for (int i = 0; i < run.Count(); i++)
                     {
@@ -166,7 +164,8 @@ namespace IDAL
                             if (run[i].MaxWeight == p.Weight)
                             {
                                 p.Droneld = run[i].id;
-                                run[i].status = DroneStatuses.transport;
+                                p.Scheduled = DateTime.Now;///שינוי זמן שיוך
+                                return;
                             }
                         }
                     }
@@ -174,6 +173,57 @@ namespace IDAL
 
                 }
 
+                public void collection(Parcel p)///איסוף חבילה על י
+
+                {
+                    List<Drone> run = drones;
+                    Drone temp = new Drone();
+
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                        if(run[i].id==p.Droneld)
+                        {
+                            temp.id = run[i].id;
+                            temp.MaxWeight = run[i].MaxWeight;
+                            temp.Model = run[i].Model;
+                            temp.status = DroneStatuses.transport;
+                            temp.Battery = run[i].Battery;
+                            run.Remove(run[i]);///מחיקת הרחפן הישן 
+                            run.Add(temp);///הוספת הרחפן  כאשר השדה של מצב הרחפן מעודכן ל" משלוח" מ
+                            p.PickedUp = DateTime.Now;///שינוי זמן איסוף
+                            return;
+
+                        }
+
+                    }
+                   
+                }
+                public void PackageDalvery(Parcel p)
+                {
+                    List<Drone> run = drones;
+                    Drone temp = new Drone();
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                        if (run[i].id == p.Droneld)
+                        {
+                            temp.id = run[i].id;
+                            temp.MaxWeight = run[i].MaxWeight;
+                            temp.Model = run[i].Model;
+                            temp.status = DroneStatuses.available;
+                            temp.Battery = run[i].Battery;
+                            run.Remove(run[i]);///מחיקת הרחפן הישן 
+                            run.Add(temp);
+                            p.Delivered = DateTime.Now;///שינוי זמן קבלת החבילה עי הלקח
+
+                        }
+                    }
+
+
+                }
+                public void ShowThis(object o)
+                {
+                    o.ToString();
+                }
 
             }
 
@@ -181,4 +231,5 @@ namespace IDAL
 
      }
 }
+
 

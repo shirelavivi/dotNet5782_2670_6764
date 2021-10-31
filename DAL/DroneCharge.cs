@@ -13,6 +13,13 @@ namespace IDAL
         {
             public int Droneld { get; set; }
             public int Stations { get; set; }
+            public void Tostring()
+            {
+                Console.WriteLine(this.Droneld + "מזהה רחפן:");
+                Console.WriteLine(this.Stations + "מזהה תחנת בסיס:");
+
+            }
         }
+       
     }
 }
