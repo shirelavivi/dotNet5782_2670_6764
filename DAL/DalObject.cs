@@ -240,7 +240,7 @@ namespace IDAL
                         if (run[i].id == id)
                         {
                             run[i].Tostring();
-                            return;
+
                         }
                     }
                 }
@@ -275,28 +275,28 @@ namespace IDAL
                     List<Station> run = Stations;
                     for (int j = 0; j < run.Count(); j++)
                     {
-                            run[j].Tostring();
-                          
-                        
+                        run[j].Tostring();
+
+
                     }
-                 }
+                }
                 public void ShowDrone()///הצגת כל הרחפנים
                 {
                     List<Drone> run = drones;
                     for (int i = 0; i < run.Count(); i++)
                     {
-                            run[i].Tostring();
-                           
+                        run[i].Tostring();
+
                     }
                 }
-               
+
                 public void ShowCustomer()///הצגת כל הלקוחות
-                    {
+                {
                     List<Customer> run = customers;
                     for (int i = 0; i < run.Count; i++)
                     {
-                            run[i].ToString();
-                           
+                        run[i].ToString();
+
                     }
                 }
                 public void ShowParcel()///הצגת כל החבילות
@@ -306,10 +306,10 @@ namespace IDAL
                     {
 
                         run[i].ToString();
-                 
+
                     }
                 }
-                public void ShowParcelId()
+                public void ShowParcelId()///הצגת רשימת החבילות שעוד לא שוייכו לרחפן
                 {
                     List<Parcel> run = packets;
                     for (int i = 0; i < run.Count; i++)
@@ -321,26 +321,33 @@ namespace IDAL
 
                     }
                 }
-                }
-                public void ShowStationAvailable()///הדפסת כל התחנות שיש בהם עמדות טעינה פנויות
+            }
+            public void ShowStationAvailable()///הדפסת כל התחנות שיש בהם עמדות טעינה פנויות
+            {
+                List<Station> run = Stations;
+                for (int i = 0; i < run.Count; i++)
                 {
-                    List<Station> run = Stations;
-                    for (int i = 0; i < run.Count; i++)
-                    {
-                        if(run[i].ChargeSlots>0)
-                             run[i].ToString();
-
-                    }
+                    if (run[i].ChargeSlots > 0)
+                        run[i].ToString();
 
                 }
 
+            }
+            public void SendDroneToCharge(int stationId,int droneId)
+            {
+                List<Station> run = Stations;
+                for (int i = 0; i < run.Count; i++)
+                {
+                    if (run[i].ChargeSlots > 0)
+                        run[i].ToString();
+
+                }
 
             }
 
-            
-
-        
+        }
     }
+  
 }
 
 
