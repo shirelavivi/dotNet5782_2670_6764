@@ -86,8 +86,8 @@ namespace IDAL
                     for (int i = 0; i < 11; i++)//מילוי 10 חבילות
                     {
                         a.Id = CounterPackets;
-                        a.Senderld = Rand.Next();
-                        a.Targetid = Rand.Next();
+                        a.SenderId = Rand.Next();
+                        a.TargetId = Rand.Next();
                         t = Rand.Next(3);
                         switch (t)
                         {
@@ -107,7 +107,7 @@ namespace IDAL
                         switch (t)
                         {
                             case 0:
-                                a.Priority = Priorities.Normal;
+                                a.Priority = Priorities.Standard;
                                 break;
                             case 1:
                                 a.Priority = Priorities.fast;
@@ -122,7 +122,7 @@ namespace IDAL
                         a.Scheduled = DateTime.Now;
                         a.PickedUp = DateTime.Now;
                         a.Delivered = DateTime.Now;
-                        a.Droneld = 0;
+                        a.DroneId = 0;
                         CounterPackets++;
                     }
 
@@ -180,6 +180,18 @@ namespace IDAL
                         }
                     }
                 }
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                        if (run[i].status == DroneStatuses.available)
+                        {
+                            if (run[i].MaxWeight == p.Weight)
+                            {
+                                p.DroneId = run[i].id;
+                                p.Scheduled = DateTime.Now;
+                                return;
+                            }
+                        }
+                    }
 
 
             }
@@ -207,6 +219,19 @@ namespace IDAL
                         run.Add(temp);
                         p.PickedUp = DateTime.Now;
                         return;
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                        if (run[i].id == p.DroneId)
+                        {
+                            temp.id = run[i].id;
+                            temp.MaxWeight = run[i].MaxWeight;
+                            temp.Model = run[i].Model;
+                            temp.status = DroneStatuses.transport;
+                            temp.Battery = run[i].Battery;
+                            run.Remove(run[i]);
+                            run.Add(temp);
+                            p.PickedUp = DateTime.Now;
+                            return;
 
                     }
 
@@ -229,6 +254,23 @@ namespace IDAL
                         run.Remove(run[i]);
                         run.Add(temp);
                         p.Delivered = DateTime.Now;
+                }
+                public void PackageDalvery(Parcel p)
+                {
+                    List<Drone> run = drones;
+                    Drone temp = new Drone();
+                    for (int i = 0; i < run.Count(); i++)
+                    {
+                        if (run[i].id == p.DroneId)
+                        {
+                            temp.id = run[i].id;
+                            temp.MaxWeight = run[i].MaxWeight;
+                            temp.Model = run[i].Model;
+                            temp.status = DroneStatuses.available;
+                            temp.Battery = run[i].Battery;
+                            run.Remove(run[i]);
+                            run.Add(temp);
+                            p.Delivered = DateTime.Now;
 
                     }
                 }
@@ -367,6 +409,13 @@ namespace IDAL
                 for (int j = 0; j < run.Count(); j++)
                 {
                     runTemp[j] = run[j];
+                    List<Parcel> run = packets;
+                    for (int i = 0; i < run.Count; i++)
+                    {
+                        if (run[i].DroneId == 0)
+                        {
+                            run[i].ToString();
+                        }
 
                 }
                 return temp;

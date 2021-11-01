@@ -1,16 +1,19 @@
 ﻿using System;
 using IDAL.DO;
+using DalObject;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DalObject;
 
+
 namespace ConsoleUI
 {
     class Program
     {
         public enum Options { Addition, Update, Display, ShowLists, Exit }
+        public enum Addition { AddStation, AddDrone, AddCustome, AddParcel }
         public enum Addition { AddStation, AddDrone, AddCustome, AddParcel, Exit }
         static void Main(string[] args)
         {
@@ -18,7 +21,122 @@ namespace ConsoleUI
             Console.WriteLine("please press the one of the options you want:");
             Console.WriteLine(" 1: Addition \n 2: Update \n 3: Display \n 4: ShowLists \n 5: Exit");
             op = (Options)int.Parse(Console.ReadLine());    //User input to go through the options
+            int num = 1;
 
+            while (num != 0)
+            {
+                switch (op)
+                {
+                    case Options.Addition:
+                        {
+                            Addition add;
+                            Console.WriteLine("please press the one of the options you want:");
+                            Console.WriteLine(" 1:AddStation \n 2: AddDrone \n 3:  AddCustome \n 4: AddParcel ");
+                            add = (Addition)int.Parse(Console.ReadLine());    //User input to go through the options
+                            switch (add)
+                            {
+                                case Addition.AddStation:
+                                    {
+                                        Station temp1 = new Station();
+                                        int tempId;
+                                        double tempLongitude;
+                                        double tempLattitude;
+                                        int tempChargeSlots;
+                                        int.TryParse(Console.ReadLine(), out tempId);
+                                        temp1.Name = Console.ReadLine();
+                                        double.TryParse(Console.ReadLine(), out tempLongitude);
+                                        temp1.Longitude = tempLongitude;
+                                        double.TryParse(Console.ReadLine(), out tempLattitude);
+                                        temp1.Lattitude = tempLattitude;
+                                        int.TryParse(Console.ReadLine(), out tempChargeSlots);
+                                        temp1.ChargeSlots = tempChargeSlots;
+                                        DalObject.DalObject.add(temp1);   // Adding the new object to the list of that object
+                                        break;
+
+                                    }
+                                    break;
+                                case Addition.AddDrone:
+                                    {
+                                        Drone temp = new Drone();  
+                                        int tempId;
+                                        int.TryParse(Console.ReadLine(), out tempId);
+                                        double tempBattery;
+                                        temp.Model = Console.ReadLine();
+                                        Weightcategories tempWeight;
+                                        Weightcategories.TryParse(Console.ReadLine(), out tempWeight);//convert??
+                                        temp.MaxWeight = tempWeight;
+                                        DroneStatuses tempstatus;
+                                        DroneStatuses.TryParse(Console.ReadLine(), out tempstatus);
+                                        temp.status = tempstatus;
+                                        double.TryParse(Console.ReadLine(), out tempBattery);
+                                        DalObject.DalObject.add(temp);   // Adding the new object to the list of that object
+                                        break;
+
+
+                                    }
+                                    break;
+                                case Addition.AddCustome:
+                                    {
+
+
+                                    }
+                                    break;
+                                case Addition.AddParcel:
+                                    {
+                                        Console.WriteLine("Enter All Package Data: SenderId, TargetId, DroneId, MaxWeight, Priority");  // Getting Package data from user
+                                        int packageSenderId, packageTargetId, packageDroneId;
+                                        int.TryParse(Console.ReadLine(), out packageSenderId);
+                                        int.TryParse(Console.ReadLine(), out packageTargetId);
+                                        int.TryParse(Console.ReadLine(), out packageDroneId);
+
+                                        Console.WriteLine("Choose package Weight: 0 : Light, 1 : Medium, 2 : Heavy :");
+                                        Weightcategories packageWeigh;
+                                        Weightcategories.TryParse(Console.ReadLine(), out packageWeigh);
+                                        Console.WriteLine("Choose package Priority: 0 :  Standard, 1 : Fast, 2 :  Emergency :");
+
+                                        Priorities packagePriority;
+                                        Priorities.TryParse(Console.ReadLine(), out packagePriority);
+                                        Parcel package = new Parcel();   //creating new object then assigning user input to that object
+
+                                        package.Id = 0;
+                                        package.SenderId = packageSenderId;
+                                        package.TargetId = packageTargetId;
+                                        package.DroneId = packageDroneId;
+                                        package.Weight = packageWeigh;
+                                        package.Priority = packagePriority;
+                                        package.Delivered = DateTime.Now;
+
+                                        DalObject.DalObject.add(package); // Adding the new object to the list of that object
+                                        break;
+
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+
+                        break;
+                    case Options.Update: 
+               
+                
+                        break;
+                    case Options.Display:
+                        break;
+                    case Options.ShowLists:
+                        break;
+                    case Options.Exit:
+                        num = 0;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }
+    }
+}
 
 
             switch (op)
