@@ -12,8 +12,8 @@ namespace ConsoleUI
     class Program
     {
         public enum Options { Addition, Update, Display, ShowLists, Exit }
-        public enum Addition { AddStation, AddDrone, AddCustome, AddParcel }
-        
+        public enum Addition { AddStation, AddDrone, AddCustomer, AddParcel }
+        public enum Update { connectParcelToDrone, PickedUpByDrone, DeliveredToCustomer,}
         static void Main(string[] args)
         {
             Options op;
@@ -72,7 +72,7 @@ namespace ConsoleUI
                                       
                                     }
                                     break;
-                                case Addition.AddCustome:
+                                case Addition.AddCustomer:
                                     {
                                         Customer temp = new Customer();
                                         int customerId;
