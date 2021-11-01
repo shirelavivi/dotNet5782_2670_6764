@@ -8,356 +8,399 @@ using IDAL.DO;
 
 namespace IDAL
 {
-    namespace DalObject
+    public class DataSource
     {
-
-        class DataSource
+        static Random Rand = new Random(DateTime.Now.Millisecond);
+        internal static List<Drone> drones = new List<Drone>();//רשימה של רחפנים
+        internal static List<Station> Stations = new List<Station>();// רשימה של תחנות בסיס
+        internal static List<Customer> customers = new List<Customer>();//רשימה של לקוחות
+        internal static List<Parcel> packets = new List<Parcel>();// רשימה של חבילות
+        internal class config
         {
-            static Random Rand = new Random(DateTime.Now.Millisecond);
-            internal static List<Drone> drones = new List<Drone>();//רשימה של רחפנים
-            internal static List<Station> Stations = new List<Station>();// רשימה של תחנות בסיס
-            internal static List<Customer> customers = new List<Customer>();//רשימה של לקוחות
-            internal static List<Parcel> packets = new List<Parcel>();// רשימה של חבילות
-            internal class config
-            {
-                /// <summary>
-                /// A serial number for packages that will be updated each time a new package is created
-                /// </summary>
-                static int CounterPackets = 0;
+            /// <summary>
+            /// A serial number for packages that will be updated each time a new package is created
+            /// </summary>
+            static int CounterPackets = 0;
 
-                public static void Initialize()
-                {
-
-                    int t;
-
-                    Station s = new Station();
-                    Drone d = new Drone();
-                    Customer c = new Customer();
-                    Parcel a = new Parcel();
-                    for (int i = 0; i < 3; i++)
-                    {
-                        s.Id = Rand.Next();
-                        s.Name = "Station" + i;
-                        s.Longitude = Rand.Next();
-                        s.Lattitude = Rand.Next();
-                        s.ChargeSlots = i + 3;
-                        Stations.Add(s);
-                    }
-
-                    for (int i = 0; i < 7; i++)//מילוי שישה רחפנים
-                    {
-                        d.id = Rand.Next();
-                        t = Rand.Next(3);
-                        switch (t)
-                        {
-                            case 0:
-                                d.MaxWeight = Weightcategories.easy;
-                                break;
-                            case 1:
-                                d.MaxWeight = Weightcategories.middle;
-                                break;
-                            case 2:
-                                d.MaxWeight = Weightcategories.weighty;
-                                break;
-
-                        }
-                        t = Rand.Next(3);
-                        switch (t)
-                        {
-                            case 0:
-                                d.status = DroneStatuses.available;
-                                break;
-                            case 1:
-                                d.status = DroneStatuses.maintenance;
-                                break;
-                            case 2:
-                                d.status = DroneStatuses.transport;
-                                break;
-
-                        }
-                        d.Battery = Rand.Next();
-                    }
-                    for (int i = 0; i < 11; i++)//מילוי 10 לקוחות
-                    {
-                        c.Id = Rand.Next();
-                        c.Name = "customer" + i;
-                        c.Phone = "05" + Rand.Next(4) + Rand.Next(9) + Rand.Next(9) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10);
-                        c.Longitude = Rand.Next();
-                        c.Lattitude = Rand.Next();
-                    }
-
-                    for (int i = 0; i < 11; i++)//מילוי 10 חבילות
-                    {
-                        a.Id = CounterPackets;
-                        a.SenderId = Rand.Next();
-                        a.TargetId = Rand.Next();
-                        t = Rand.Next(3);
-                        switch (t)
-                        {
-                            case 0:
-                                a.Weight = Weightcategories.easy;
-                                break;
-                            case 1:
-                                a.Weight = Weightcategories.middle;
-                                break;
-                            case 2:
-                                a.Weight = Weightcategories.weighty;
-                                break;
-
-                        }
-
-                        t = Rand.Next(3);
-                        switch (t)
-                        {
-                            case 0:
-                                a.Priority = Priorities.Standard;
-                                break;
-                            case 1:
-                                a.Priority = Priorities.fast;
-                                break;
-                            case 2:
-                                a.Priority = Priorities.emergency;
-                                break;
-                            default:
-                                break;
-                        }
-                        a.Requested = DateTime.Now;
-                        a.Scheduled = DateTime.Now;
-                        a.PickedUp = DateTime.Now;
-                        a.Delivered = DateTime.Now;
-                        a.DroneId = 0;
-                        CounterPackets++;
-                    }
-
-                }
-
-
-            }
-
-            public class DalObject
+            public static void Initialize()
             {
 
+                int t;
 
-                /// <summary>
-                /// Add station to stations list
-                /// </summary>
-                /// <param name="s"></param>
-                public void add(Station s)
+                Station s = new Station();
+                Drone d = new Drone();
+                Customer c = new Customer();
+                Parcel a = new Parcel();
+                for (int i = 0; i < 3; i++)
                 {
+                    s.Id = Rand.Next();
+                    s.Name = "Station" + i;
+                    s.Longitude = Rand.Next();
+                    s.Lattitude = Rand.Next();
+                    s.ChargeSlots = i + 3;
                     Stations.Add(s);
                 }
-                public void add(Drone d)
-                {
-                    drones.Add(d);
-                }
-                public void add(Customer c)
-                {
-                    customers.Add(c);
-                }
-                public void add(Parcel p)
-                {
-                    packets.Add(p);
-                }
-                public void ConnectParcelToDron(Parcel p)
-                {
-                    List<Drone> run = drones;
 
-
-                    for (int i = 0; i < run.Count(); i++)
+                for (int i = 0; i < 7; i++)//מילוי שישה רחפנים
+                {
+                    d.id = Rand.Next();
+                    t = Rand.Next(3);
+                    switch (t)
                     {
-                        if (run[i].status == DroneStatuses.available)
-                        {
-                            if (run[i].MaxWeight == p.Weight)
-                            {
-                                p.DroneId = run[i].id;
-                                p.Scheduled = DateTime.Now;
-                                return;
-                            }
-                        }
+                        case 0:
+                            d.MaxWeight = Weightcategories.easy;
+                            break;
+                        case 1:
+                            d.MaxWeight = Weightcategories.middle;
+                            break;
+                        case 2:
+                            d.MaxWeight = Weightcategories.weighty;
+                            break;
+
+                    }
+                    t = Rand.Next(3);
+                    switch (t)
+                    {
+                        case 0:
+                            d.status = DroneStatuses.available;
+                            break;
+                        case 1:
+                            d.status = DroneStatuses.maintenance;
+                            break;
+                        case 2:
+                            d.status = DroneStatuses.transport;
+                            break;
+
+                    }
+                    d.Battery = Rand.Next();
+                }
+                for (int i = 0; i < 11; i++)//מילוי 10 לקוחות
+                {
+                    c.Id = Rand.Next();
+                    c.Name = "customer" + i;
+                    c.Phone = "05" + Rand.Next(4) + Rand.Next(9) + Rand.Next(9) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10);
+                    c.Longitude = Rand.Next();
+                    c.Lattitude = Rand.Next();
+                }
+
+                for (int i = 0; i < 11; i++)//מילוי 10 חבילות
+                {
+                    a.Id = CounterPackets;
+                    a.SenderId = Rand.Next();
+                    a.TargetId = Rand.Next();
+                    t = Rand.Next(3);
+                    switch (t)
+                    {
+                        case 0:
+                            a.Weight = Weightcategories.easy;
+                            break;
+                        case 1:
+                            a.Weight = Weightcategories.middle;
+                            break;
+                        case 2:
+                            a.Weight = Weightcategories.weighty;
+                            break;
+
                     }
 
-
-                }
-                /// <summary>
-                /// If the package ID number matches the drone's ID number then it will collect the package,
-                /// The drone's status changes for transpot and we will delete the old drone from the list
-                /// </summary>
-                /// <param name="p"></param>
-                public void collection(Parcel p)
-
-                {
-                    List<Drone> run = drones;
-                    Drone temp = new Drone();
-
-                    for (int i = 0; i < run.Count(); i++)
+                    t = Rand.Next(3);
+                    switch (t)
                     {
-                        if (run[i].id == p.DroneId)
+                        case 0:
+                            a.Priority = Priorities.Standard;
+                            break;
+                        case 1:
+                            a.Priority = Priorities.fast;
+                            break;
+                        case 2:
+                            a.Priority = Priorities.emergency;
+                            break;
+                        default:
+                            break;
+                    }
+                    a.Requested = DateTime.Now;
+                    a.Scheduled = DateTime.Now;
+                    a.PickedUp = DateTime.Now;
+                    a.Delivered = DateTime.Now;
+                    a.DroneId = 0;
+                    CounterPackets++;
+                }
+
+            }
+
+
+
+
+
+
+
+        }
+
+    }
+    namespace DalObject
+    {
+        public class DalObject
+        {
+
+
+            /// <summary>
+            /// Add station to stations list
+            /// </summary>
+            /// <param name="s"></param>
+            void add(Station s)
+            {
+                IDAL.DataSource.Stations.Add(s);
+            }
+            public void add(Drone d)
+            {
+                IDAL.DataSource.drones.Add(d);
+            }
+            public void add(Customer c)
+            {
+                IDAL.DataSource.customers.Add(c);
+            }
+            public void add(Parcel p)
+            {
+                IDAL.DataSource.packets.Add(p);
+                
+            }
+            public void ConnectParcelToDron(Parcel p)///שייוך חבילה לרחפן
+            {
+                List<Drone> run = IDAL.DataSource.drones;
+
+
+                for (int i = 0; i < run.Count(); i++)
+                {
+                    if (run[i].status == DroneStatuses.available)
+                    {
+                        if (run[i].MaxWeight == p.Weight)
                         {
-                            temp.id = run[i].id;
-                            temp.MaxWeight = run[i].MaxWeight;
-                            temp.Model = run[i].Model;
-                            temp.status = DroneStatuses.transport;
-                            temp.Battery = run[i].Battery;
-                            run.Remove(run[i]);
-                            run.Add(temp);
-                            p.PickedUp = DateTime.Now;
+                            p.DroneId = run[i].id;
+                            p.Scheduled = DateTime.Now;
                             return;
-
-                        }
-
-                    }
-
-                }
-                public void PackageDalvery(Parcel p)
-                {
-                    List<Drone> run = drones;
-                    Drone temp = new Drone();
-                    for (int i = 0; i < run.Count(); i++)
-                    {
-                        if (run[i].id == p.DroneId)
-                        {
-                            temp.id = run[i].id;
-                            temp.MaxWeight = run[i].MaxWeight;
-                            temp.Model = run[i].Model;
-                            temp.status = DroneStatuses.available;
-                            temp.Battery = run[i].Battery;
-                            run.Remove(run[i]);
-                            run.Add(temp);
-                            p.Delivered = DateTime.Now;
-
                         }
                     }
-
-
                 }
-                public void ShowStation(int id)
+                for (int i = 0; i < run.Count(); i++)
                 {
-                    List<Station> run = Stations;
-                    for (int i = 0; i < run.Count(); i++)
+                    if (run[i].status == DroneStatuses.available)
                     {
-                        if (run[i].Id == id)
+                        if (run[i].MaxWeight == p.Weight)
                         {
-                            run[i].Tostring();
+                            p.DroneId = run[i].id;
+                            p.Scheduled = DateTime.Now;
                             return;
                         }
                     }
-                }
-                public void ShowDrone(int id)
-                {
-                    List<Drone> run = drones;
-                    for (int i = 0; i < run.Count(); i++)
-                    {
-                        if (run[i].id == id)
-                        {
-                            run[i].Tostring();
-                            return;
-                        }
-                    }
-                }
-                /// <summary>
-                /// run on the packets list and print
-                /// </summary>
-                /// <param name="id"> Get the id of parcel </param>
-                public void ShowParcel(int id)
-                {
-                    List<Parcel> run = packets;
-                    for (int i = 0; i < run.Count(); i++)
-                    {
-                        if (run[i].Id == id)
-                        {
-                            run[i].Tostring();
-                            return;
-                        }
-                    }
-
-                }
-                public void ShowCustomer(int s)
-                {
-                    List<Customer> run = customers;
-                    for (int i = 0; i < run.Count; i++)
-                    {
-                        if (run[i].Id == s)
-                        {
-                            run[i].ToString();
-                            return;
-                        }
-                    }
-
-                }
-                public void ShowStation()
-                {
-                    List<Station> run = Stations;
-                    for (int j = 0; j < run.Count(); j++)
-                    {
-                            run[j].Tostring();
-                          
-                        
-                    }
-                 }
-                /// <summary>
-                /// Print all drone's list
-                /// </summary>
-                public void ShowDrone()
-                {
-                    List<Drone> run = drones;
-                    for (int i = 0; i < run.Count(); i++)
-                    {
-                            run[i].Tostring();
-                           
-                    }
-                }
-               
-                public void ShowCustomer()
-                    {
-                    List<Customer> run = customers;
-                    for (int i = 0; i < run.Count; i++)
-                    {
-                            run[i].ToString();
-                           
-                    }
-                }
-                public void ShowParcel()
-                {
-                    List<Parcel> run = packets;
-                    for (int i = 0; i < run.Count; i++)
-                    {
-
-                        run[i].ToString();
-                 
-                    }
-                }
-                public void ShowParcelId()
-                {
-                    List<Parcel> run = packets;
-                    for (int i = 0; i < run.Count; i++)
-                    {
-                        if (run[i].DroneId == 0)
-                        {
-                            run[i].ToString();
-                        }
-
-                    }
-                }
-                }
-                public void ShowStationAvailable()
-                {
-                    List<Station> run = Stations;
-                    for (int i = 0; i < run.Count; i++)
-                    {
-                        if(run[i].ChargeSlots>0)
-                             run[i].ToString();
-
-                    }
-
                 }
 
 
             }
+            /// <summary>
+            /// If the package ID number matches the drone's ID number then it will collect the package,
+            /// The drone's status changes for transpot and we will delete the old drone from the list
+            /// </summary>
+            /// <param name="p"></param>
+            public void collection(Parcel p)
 
-            
+            {
+                List<Drone> run = IDAL.DataSource.drones;
+                Drone temp = new Drone();
 
-        
+                for (int i = 0; i < run.Count(); i++)
+                {
+                    if (run[i].id == p.DroneId)
+                    {
+                        temp.id = run[i].id;
+                        temp.MaxWeight = run[i].MaxWeight;
+                        temp.Model = run[i].Model;
+                        temp.status = DroneStatuses.transport;
+                        temp.Battery = run[i].Battery;
+                        run.Remove(run[i]);
+                        run.Add(temp);
+                        p.PickedUp = DateTime.Now;
+                        return;
+
+                    }
+
+                }
+            }
+            public void PackageDalvery(Parcel p)
+            {
+                List<Drone> run = IDAL.DataSource.drones;
+                Drone temp = new Drone();
+                for (int i = 0; i < run.Count(); i++)
+                {
+                    if (run[i].id == p.DroneId)
+                    {
+                        temp.id = run[i].id;
+                        temp.MaxWeight = run[i].MaxWeight;
+                        temp.Model = run[i].Model;
+                        temp.status = DroneStatuses.available;
+                        temp.Battery = run[i].Battery;
+                        run.Remove(run[i]);
+                        run.Add(temp);
+                        p.Delivered = DateTime.Now;
+                    }
+                }
+            }
+            public Station ShowStation(int id)
+            {
+                List<Station> run = IDAL.DataSource.Stations;
+                Station temp = new Station();
+                for (int i = 0; i < run.Count(); i++)
+                {
+                    if (run[i].Id == id)
+                    {
+                        temp = run[i];
+
+                    }
+                }
+                return temp;
+            }
+            /// <summary>
+            /// Print all drone's list
+            /// </summary>
+
+            public Drone ShowDrone(int id)
+            {
+                List<Drone> run = IDAL.DataSource.drones;
+                Drone temp = new Drone();
+                for (int i = 0; i < run.Count(); i++)
+                {
+                    if (run[i].id == id)
+                    {
+                        temp = run[i];
+
+                    }
+                }
+                return temp;
+            }
+            /// <summary>
+            /// run on the packets list and print
+            /// </summary>
+            /// <param name="id"> Get the id of parcel </param>
+            public Parcel ShowParcel(int id)
+            {
+                List<Parcel> run = IDAL.DataSource.packets;
+                Parcel temp = new Parcel();
+                for (int i = 0; i < run.Count(); i++)
+                {
+                    if (run[i].Id == id)
+                    {
+                        temp = run[i];
+
+                    }
+                }
+                return temp;
+
+            }
+            public Customer ShowCustomer(int s)
+            {
+                List<Customer> run = IDAL.DataSource.customers;
+                Customer temp = new Customer();
+                for (int i = 0; i < run.Count; i++)
+                {
+                    if (run[i].Id == s)
+                    {
+                        temp = run[i];
+                    }
+                }
+                return temp;
+            }
+
+
+            public void ShowParcelId()///הצגת רשימת החבילות שעוד לא שוייכו לרחפן
+            {
+                List<Parcel> run = IDAL.DataSource.packets;
+                for (int i = 0; i < run.Count; i++)
+                {
+                    if (run[i].DroneId == 0)
+                    {
+                        run[i].ToString();
+                    }
+
+                }
+            }
+
+            public void ShowStationAvailable()///הדפסת כל התחנות שיש בהם עמדות טעינה פנויות
+            {
+                List<Station> run = IDAL.DataSource.Stations;
+                for (int i = 0; i < run.Count; i++)
+                {
+                    if (run[i].ChargeSlots > 0)
+                        run[i].ToString();
+                }
+            }
+
+            public void SendDroneToCharge(int stationId, int droneId)
+            {
+                List<Station> run = IDAL.DataSource.Stations;
+                for (int i = 0; i < run.Count; i++)
+                {
+                    if (run[i].ChargeSlots > 0)
+                        run[i].ToString();
+
+                }
+
+            }
+            public List<Station> ShowStationList()///הצגת כל התחנות בסיס
+            {
+                List<Station> run = IDAL.DataSource.Stations;
+                List<Station> temp = new List<Station>();
+                List<Station> runTemp = temp;
+                for (int j = 0; j < run.Count(); j++)
+                {
+                    runTemp[j] = run[j];
+
+                }
+                return temp;
+            }
+            public List<Customer> ShowCustomerList()///הצגת כל הלקוחות 
+            {
+                List<Customer> run = IDAL.DataSource.customers;
+                List<Customer> temp = new List<Customer>();
+                List<Customer> runTemp = temp;
+                for (int j = 0; j < run.Count(); j++)
+                {
+                    runTemp[j] = run[j];
+
+                }
+                return temp;
+            }
+            public List<Drone> ShowDroneList()///הצגת כל הרחפנים 
+            {
+                List<Drone> run = IDAL.DataSource.drones;
+                List<Drone> temp = new List<Drone>();
+                List<Drone> runTemp = temp;
+                for (int j = 0; j < run.Count(); j++)
+                {
+                    runTemp[j] = run[j];
+
+                }
+                return temp;
+            }
+            public List<Parcel> ShowParcelList()///הצגת כל חבילות 
+            {
+                List<Parcel> run = IDAL.DataSource.packets;
+                List<Parcel> temp = new List<Parcel>();
+                List<Parcel> runTemp = temp;
+                for (int j = 0; j < run.Count(); j++)
+                {
+                    runTemp[j] = run[j];
+
+                }
+                return temp;
+            }
+
+        }
     }
 }
+                                    
+
+
+                        
+                   
+           
 
 
