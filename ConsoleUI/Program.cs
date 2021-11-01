@@ -112,8 +112,10 @@ namespace ConsoleUI
                         }
 
                         break;
-                    case Options.Update: 
-               
+                    case Options.Update:
+                        {
+
+                        }
                 
                         break;
                     case Options.Display:
