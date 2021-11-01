@@ -89,8 +89,8 @@ namespace IDAL
                     for (int i = 0; i < 11; i++)//מילוי 10 חבילות
                     {
                         a.Id = CounterPackets;
-                        a.Senderld = Rand.Next();
-                        a.Targetid = Rand.Next();
+                        a.SenderId = Rand.Next();
+                        a.TargetId = Rand.Next();
                         t = Rand.Next(3);
                         switch (t)
                         {
@@ -110,7 +110,7 @@ namespace IDAL
                         switch (t)
                         {
                             case 0:
-                                a.Priority = Priorities.Normal;
+                                a.Priority = Priorities.Standard;
                                 break;
                             case 1:
                                 a.Priority = Priorities.fast;
@@ -125,7 +125,7 @@ namespace IDAL
                         a.Scheduled = DateTime.Now;
                         a.PickedUp = DateTime.Now;
                         a.Delivered = DateTime.Now;
-                        a.Droneld = 0;
+                        a.DroneId = 0;
                         CounterPackets++;
                     }
 
@@ -169,7 +169,7 @@ namespace IDAL
                         {
                             if (run[i].MaxWeight == p.Weight)
                             {
-                                p.Droneld = run[i].id;
+                                p.DroneId = run[i].id;
                                 p.Scheduled = DateTime.Now;
                                 return;
                             }
@@ -191,7 +191,7 @@ namespace IDAL
 
                     for (int i = 0; i < run.Count(); i++)
                     {
-                        if (run[i].id == p.Droneld)
+                        if (run[i].id == p.DroneId)
                         {
                             temp.id = run[i].id;
                             temp.MaxWeight = run[i].MaxWeight;
@@ -214,7 +214,7 @@ namespace IDAL
                     Drone temp = new Drone();
                     for (int i = 0; i < run.Count(); i++)
                     {
-                        if (run[i].id == p.Droneld)
+                        if (run[i].id == p.DroneId)
                         {
                             temp.id = run[i].id;
                             temp.MaxWeight = run[i].MaxWeight;
@@ -331,7 +331,7 @@ namespace IDAL
                     List<Parcel> run = packets;
                     for (int i = 0; i < run.Count; i++)
                     {
-                        if (run[i].Droneld == 0)
+                        if (run[i].DroneId == 0)
                         {
                             run[i].ToString();
                         }
