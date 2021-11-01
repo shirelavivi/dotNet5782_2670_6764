@@ -20,7 +20,10 @@ namespace IDAL
             internal static List<Parcel> packets = new List<Parcel>();// רשימה של חבילות
             internal class config
             {
-                static int CounterPackets = 0;//  מספר מזהה סידורי לחבילות שיעודכן כל פעם שנוצרת חבילה חדשה 
+                /// <summary>
+                /// A serial number for packages that will be updated each time a new package is created
+                /// </summary>
+                static int CounterPackets = 0;
 
                 public static void Initialize()
                 {
@@ -31,7 +34,7 @@ namespace IDAL
                     Drone d = new Drone();
                     Customer c = new Customer();
                     Parcel a = new Parcel();
-                    for (int i = 0; i < 3; i++)//מילוי 2 תחנות בסיס
+                    for (int i = 0; i < 3; i++)
                     {
                         s.Id = Rand.Next();
                         s.Name = "Station" + i;
@@ -135,36 +138,39 @@ namespace IDAL
             {
 
 
-
-                public void add(Station s)///הוספת תחנת בסיס
+                /// <summary>
+                /// Add station to stations list
+                /// </summary>
+                /// <param name="s"></param>
+                public void add(Station s)
                 {
                     Stations.Add(s);
                 }
-                public void add(Drone d)/// הוספת רחפן
+                public void add(Drone d)
                 {
                     drones.Add(d);
                 }
-                public void add(Customer c)///הוספת לקוח חדש לרשימת הלקוחות
+                public void add(Customer c)
                 {
                     customers.Add(c);
                 }
-                public void add(Parcel p)///הוספת חבילה חדשה 
+                public void add(Parcel p)
                 {
                     packets.Add(p);
                 }
-                public void ConnectParcelToDron(Parcel p)///שייוך חבילה לרחפן
+                public void ConnectParcelToDron(Parcel p)
                 {
                     List<Drone> run = drones;
 
 
                     for (int i = 0; i < run.Count(); i++)
                     {
-                        if (run[i].status == DroneStatuses.available)///האם הרחפן פנוי
+                        if (run[i].status == DroneStatuses.available)
                         {
                             if (run[i].MaxWeight == p.Weight)
                             {
                                 p.Droneld = run[i].id;
-                                p.Scheduled = DateTime.Now;///שינוי זמן שיוך
+                                p.Scheduled = DateTime.Now;
                                 return;
                             }
                         }
@@ -172,8 +178,12 @@ namespace IDAL
 
 
                 }
-
-                public void collection(Parcel p)///איסוף חבילה על י
+                /// <summary>
+                /// If the package ID number matches the drone's ID number then it will collect the package,
+                /// The drone's status changes for transpot and we will delete the old drone from the list
+                /// </summary>
+                /// <param name="p"></param>
+                public void collection(Parcel p)
 
                 {
                     List<Drone> run = drones;
@@ -188,9 +198,9 @@ namespace IDAL
                             temp.Model = run[i].Model;
                             temp.status = DroneStatuses.transport;
                             temp.Battery = run[i].Battery;
-                            run.Remove(run[i]);///מחיקת הרחפן הישן 
-                            run.Add(temp);///הוספת הרחפן  כאשר השדה של מצב הרחפן מעודכן ל" משלוח" מ
-                            p.PickedUp = DateTime.Now;///שינוי זמן איסוף
+                            run.Remove(run[i]);
+                            run.Add(temp);
+                            p.PickedUp = DateTime.Now;
                             return;
 
                         }
@@ -211,16 +221,16 @@ namespace IDAL
                             temp.Model = run[i].Model;
                             temp.status = DroneStatuses.available;
                             temp.Battery = run[i].Battery;
-                            run.Remove(run[i]);///מחיקת הרחפן הישן 
+                            run.Remove(run[i]);
                             run.Add(temp);
-                            p.Delivered = DateTime.Now;///שינוי זמן קבלת החבילה עי הלקח
+                            p.Delivered = DateTime.Now;
 
                         }
                     }
 
 
                 }
-                public void ShowStation(int id)///הצגת  תחנת בסיס
+                public void ShowStation(int id)
                 {
                     List<Station> run = Stations;
                     for (int i = 0; i < run.Count(); i++)
@@ -232,7 +242,7 @@ namespace IDAL
                         }
                     }
                 }
-                public void ShowDrone(int id)///הצגת  רחפן
+                public void ShowDrone(int id)
                 {
                     List<Drone> run = drones;
                     for (int i = 0; i < run.Count(); i++)
@@ -244,7 +254,11 @@ namespace IDAL
                         }
                     }
                 }
-                public void ShowParcel(int id)///הצגת חבילה מסויימת
+                /// <summary>
+                /// run on the packets list and print
+                /// </summary>
+                /// <param name="id"> Get the id of parcel </param>
+                public void ShowParcel(int id)
                 {
                     List<Parcel> run = packets;
                     for (int i = 0; i < run.Count(); i++)
@@ -257,7 +271,7 @@ namespace IDAL
                     }
 
                 }
-                public void ShowCustomer(int s)///הצגת לקוח מסויים
+                public void ShowCustomer(int s)
                 {
                     List<Customer> run = customers;
                     for (int i = 0; i < run.Count; i++)
@@ -270,7 +284,7 @@ namespace IDAL
                     }
 
                 }
-                public void ShowStation()///הצגת  כל תחנות בסיס
+                public void ShowStation()
                 {
                     List<Station> run = Stations;
                     for (int j = 0; j < run.Count(); j++)
@@ -281,6 +295,11 @@ namespace IDAL
                     }
                 }
                 public void ShowDrone()///הצגת כל הרחפנים
+                 }
+                /// <summary>
+                /// Print all drone's list
+                /// </summary>
+                public void ShowDrone()
                 {
                     List<Drone> run = drones;
                     for (int i = 0; i < run.Count(); i++)
@@ -292,6 +311,9 @@ namespace IDAL
 
                 public void ShowCustomer()///הצגת כל הלקוחות
                 {
+               
+                public void ShowCustomer()
+                    {
                     List<Customer> run = customers;
                     for (int i = 0; i < run.Count; i++)
                     {
@@ -299,7 +321,7 @@ namespace IDAL
 
                     }
                 }
-                public void ShowParcel()///הצגת כל החבילות
+                public void ShowParcel()
                 {
                     List<Parcel> run = packets;
                     for (int i = 0; i < run.Count; i++)
@@ -329,6 +351,14 @@ namespace IDAL
                 {
                     if (run[i].ChargeSlots > 0)
                         run[i].ToString();
+                }
+                public void ShowStationAvailable()
+                {
+                    List<Station> run = Stations;
+                    for (int i = 0; i < run.Count; i++)
+                    {
+                        if(run[i].ChargeSlots>0)
+                             run[i].ToString();
 
                 }
 
