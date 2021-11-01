@@ -1,6 +1,5 @@
 ﻿using System;
 using IDAL.DO;
-using DalObject;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,7 @@ namespace ConsoleUI
     {
         public enum Options { Addition, Update, Display, ShowLists, Exit }
         public enum Addition { AddStation, AddDrone, AddCustome, AddParcel }
-        public enum Addition { AddStation, AddDrone, AddCustome, AddParcel, Exit }
+        
         static void Main(string[] args)
         {
             Options op;
@@ -51,7 +50,7 @@ namespace ConsoleUI
                                         int.TryParse(Console.ReadLine(), out tempChargeSlots);
                                         temp1.ChargeSlots = tempChargeSlots;
                                         DalObject.DalObject.add(temp1);   // Adding the new object to the list of that object
-                                        break;
+                                       
 
                                     }
                                     break;
@@ -69,27 +68,47 @@ namespace ConsoleUI
                                         DroneStatuses.TryParse(Console.ReadLine(), out tempstatus);
                                         temp.status = tempstatus;
                                         double.TryParse(Console.ReadLine(), out tempBattery);
-                                        DalObject.DalObject.add(temp);   // Adding the new object to the list of that object
-                                        break;
-
-
+                                        DalObject.dalobject.add(temp);   // Adding the new object to the list of that object
+                                      
                                     }
                                     break;
                                 case Addition.AddCustome:
                                     {
-
+                                        Customer temp = new Customer();
+                                        int customerId;
+                                        double d;
+                                        Console.WriteLine("Type a customer ID:");
+                                        int.TryParse(Console.ReadLine(), out customerId);
+                                        temp.Id = customerId;
+                                        Console.WriteLine("Type a customer name:");
+                                        temp.Name = Console.ReadLine();
+                                        Console.WriteLine("Type a customer phone:");
+                                        temp.Phone = Console.ReadLine();
+                                        Console.WriteLine("Type a Lattitude:");
+                                        double.TryParse(Console.ReadLine(), out d);
+                                        temp.Lattitude = d;
+                                        Console.WriteLine("Type a  longitude:");
+                                        double.TryParse(Console.ReadLine(), out d);
+                                        temp.Longitude = d;
+                                        IDAL.DalObject.DalObject.
 
                                     }
                                     break;
                                 case Addition.AddParcel:
                                     {
-                                        Console.WriteLine("Enter All Package Data: SenderId, TargetId, DroneId, MaxWeight, Priority");  // Getting Package data from user
-                                        int packageSenderId, packageTargetId, packageDroneId;
-                                        int.TryParse(Console.ReadLine(), out packageSenderId);
-                                        int.TryParse(Console.ReadLine(), out packageTargetId);
-                                        int.TryParse(Console.ReadLine(), out packageDroneId);
+                                        Parcel p = new Parcel();
+                                        Console.WriteLine("Type Send Customer ID:");  
+                                        int parcelSendId;
+                                        int.TryParse(Console.ReadLine(), out parcelSendId);
+                                        p.SenderId = parcelSendId;
+                                        Console.WriteLine("Receiving customer ID:");
+                                        int parcelTargetId;
+                                        int.TryParse(Console.ReadLine(), out parcelTargetId);
+                                        p.
 
-                                        Console.WriteLine("Choose package Weight: 0 : Light, 1 : Medium, 2 : Heavy :");
+                                        
+
+                                        Console.WriteLine("Choose package Weight: 0 : easy,  1 : middle,  2 : weighty:");
                                         Weightcategories packageWeigh;
                                         Weightcategories.TryParse(Console.ReadLine(), out packageWeigh);
                                         Console.WriteLine("Choose package Priority: 0 :  Standard, 1 : Fast, 2 :  Emergency :");
@@ -98,16 +117,17 @@ namespace ConsoleUI
                                         Priorities.TryParse(Console.ReadLine(), out packagePriority);
                                         Parcel package = new Parcel();   //creating new object then assigning user input to that object
 
-                                        package.Id = 0;
+                                        package.Id = IDAL.DataSource.CounterPackets;
+                                        IDAL.DataSource.CounterPackets++;
                                         package.SenderId = packageSenderId;
                                         package.TargetId = packageTargetId;
-                                        package.DroneId = packageDroneId;
+                                        package.DroneId = 0;
                                         package.Weight = packageWeigh;
                                         package.Priority = packagePriority;
                                         package.Delivered = DateTime.Now;
 
                                         DalObject.DalObject.add(package); // Adding the new object to the list of that object
-                                        break;
+                                       
 
                                     }
                                     break;
@@ -139,77 +159,7 @@ namespace ConsoleUI
 }
 
 
-            switch (op)
-            {
-                case Options.Addition:
-                    {
-                        Addition add;
-                        Console.WriteLine("please press the one of the options you want:");
-                        Console.WriteLine(" 1:AddStation \n 2: AddDrone \n 3:  AddCustome \n 4: AddParcel \n 5: Exit");
-                        add = (Addition)int.Parse(Console.ReadLine());    //User input to go through the options
-                        switch (add)
-                        {
-                            case Addition.AddStation:
-                                {
-                                    Station temp = new Station();
-                                    int tempId;
-                                    int tempName;
-                                    int.TryParse(Console.ReadLine(), out tempId);
-                                    temp.Id = tempId;
-                                    int.TryParse(Console.ReadLine(), out tempName);
-                                    temp.Name = Console.ReadLine();
-                                }
-                                break;
-                            case Addition.AddDrone:
-                                break;
-                            case Addition.AddCustome:
-                                {
-                                    Customer temp = new Customer();
-                                    int customerId;
-                                    double d;
-                                    Console.WriteLine("Type a customer ID:");
-                                    int.TryParse(Console.ReadLine(), out customerId);
-                                    temp.Id = customerId;
-                                    Console.WriteLine("Type a customer name:");
-                                    temp.Name = Console.ReadLine();
-                                    Console.WriteLine("Type a customer phone:");
-                                    temp.Phone = Console.ReadLine();
-                                    Console.WriteLine("Type a Lattitude:");
-                                    double.TryParse(Console.ReadLine(), out d);
-                                    temp.Lattitude = d;
-                                    Console.WriteLine("Type a  longitude:");
-                                    double.TryParse(Console.ReadLine(), out d);
-                                    temp.Longitude = d;
-                                    IDAL.DalObject.DalObject.
-
-                                }
-                                break;
-                            case Addition.AddParcel:
-                                break;
-                            case Addition.Exit:
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-                    break;
-                case Options.Update:
-
-                    break;
-                case Options.Display:
-                    break;
-                case Options.ShowLists:
-                    break;
-                case Options.Exit:
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-}
-
+           
 /*using System;
 using IDAL.DO;
 using DalObject;
