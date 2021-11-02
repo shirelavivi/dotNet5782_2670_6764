@@ -15,6 +15,8 @@ namespace IDAL
         internal static List<Station> Stations = new List<Station>();// רשימה של תחנות בסיס
         internal static List<Customer> customers = new List<Customer>();//רשימה של לקוחות
         internal static List<Parcel> packets = new List<Parcel>();// רשימה של חבילות
+        internal static List<DroneCharge> DronesCharge= new List<DroneCharge>(); 
+        
         internal class config
         {
             /// <summary>
@@ -264,6 +266,42 @@ namespace IDAL
                     }
                 }
             }
+            public static void SendDroneTpCharge(int StationId,int DroneId)
+            {
+
+                Drone tempDrone = IDAL.DalObject.DalObject.ShowDrone(DroneId);
+                tempDrone.status = DroneStatuses.maintenance;
+                IDAL.DataSource.drones.Add(tempDrone);
+                IDAL.DataSource.drones.Remove(IDAL.DalObject.DalObject.ShowDrone(DroneId));
+                DroneCharge tempDronecharge = new DroneCharge();
+                tempDronecharge.Droneld = DroneId;
+                tempDronecharge.StationId = StationId;
+                IDAL.DataSource.DronesCharge.Add(tempDronecharge);
+            }
+            public static void ReleaseDroneFromChargeStation(int DroneId)
+            {
+
+                Drone tempDrone1 = IDAL.DalObject.DalObject.ShowDrone(DroneId);
+                tempDrone1.status = DroneStatuses.available;
+                IDAL.DataSource.drones.Add(tempDrone1);
+                IDAL.DataSource.drones.Remove(IDAL.DalObject.DalObject.ShowDrone(DroneId));
+                List<DroneCharge> runDronesCharge =IDAL.DataSource.DronesCharge;  
+               int save=0;
+                for(int i=0;i < runDronesCharge.Count;i++)
+                {
+                    if (runDronesCharge[i].Droneld== DroneId)
+                    {
+                        save = runDronesCharge[i].StationId;
+                        IDAL.DataSource.DronesCharge.Remove(runDronesCharge[i]);
+                        
+                    }
+                }
+                Station s = IDAL.DalObject.DalObject.ShowStation(save);
+                s.ChargeSlots++;
+                IDAL.DataSource. Stations.Add(s);
+                IDAL.DataSource.Stations.Remove(IDAL.DalObject.DalObject.ShowStation(save));
+            }
+
             public static Station ShowStation(int id)
             {
                 List<Station> run = IDAL.DataSource.Stations;

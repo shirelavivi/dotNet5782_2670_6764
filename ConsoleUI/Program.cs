@@ -12,8 +12,10 @@ namespace ConsoleUI
     class Program
     {
         public enum Options { Addition, Update, Display, ShowLists, Exit }
-        public enum Addition { AddStation, AddDrone, AddCustomer, AddParcel }
-        public enum Update { connectParcelToDrone, PickedUpByDrone, DeliveredToCustomer,}
+        public enum Addition { AddStation, AddDrone, AddCustomer, AddParcel,Exit }
+        public enum UpDate { Assign, Collection, DeliveredToCustomer, Sending_for_loading,release_from_loading, Exit }             
+        public enum Show { Station, Drone, Customer ,Parcel , Exit }
+        public enum ShowList { Station, Drone, Customer, Parcel, Exit }
         static void Main(string[] args)
         {
             Options op;
@@ -72,7 +74,7 @@ namespace ConsoleUI
                                       
                                     }
                                     break;
-                                case Addition.AddCustome:
+                                case Addition.AddCustomer:
                                     {
                                         Customer temp = new Customer();
                                         int customerId;
@@ -121,7 +123,10 @@ namespace ConsoleUI
                                     }
                                     break;
                                 case Addition.Exit:
-
+                                    {
+                                        num = 0;
+                                    }
+                                    break;
                                  default:
                                     break;
                             }
@@ -138,7 +143,7 @@ namespace ConsoleUI
                             {
                                 case UpDate.Assign:
                                     {
-                                        Console.WriteLine("הקלד מזהה רחפן ולאחר מכן מזהה חבילה:");
+                                        Console.WriteLine("Please Type Drone's And Parcel's ID:");
                                         int droneID, parcelID;
                                         int.TryParse(Console.ReadLine(), out droneID);
                                         int.TryParse(Console.ReadLine(), out parcelID);
@@ -148,23 +153,26 @@ namespace ConsoleUI
                                     break;
                                 case UpDate.Collection:
                                     {
-                                        Console.WriteLine("הקלד מזהה חבילה:");
+                                        Console.WriteLine("Please Type Parcel ID:");
                                         int  parcelID;
                                         int.TryParse(Console.ReadLine(), out parcelID);
                                         IDAL.DalObject.DalObject.collection(parcelID);
                                     }
                                     break;
-                                case UpDate.delivery:
+                                case UpDate.DeliveredToCustomer:
                                     {
-                                        Console.WriteLine("הקלד מזהה חבילה:");
+                                        Console.WriteLine("Please Type Parcel ID:");
                                         int parcelID;
                                         int.TryParse(Console.ReadLine(), out parcelID);
                                         IDAL.DalObject.DalObject.PackageDalvery(parcelID);
                                     }
                                     break;
-                                case UpDate.sending_for_loading:
+                                case UpDate.Sending_for_loading:
                                     {
-
+                                        Console.WriteLine("Please Type Drone ID:");
+                                        int DroneelID;
+                                        int.TryParse(Console.ReadLine(), out DroneelID);
+                                        
                                     }
                                     break;
                                 case UpDate.release_from_loading:
@@ -182,7 +190,7 @@ namespace ConsoleUI
                     case Options.Display:
                         {
                             Show ShowSomthing;
-                            Console.WriteLine("הקלד בבקשה את אחת מהאופציות הבאות:");
+                            Console.WriteLine("Please type one of the following options:");
                             Console.WriteLine("1: Station\n 2: Drone \n 3:Customer \n 4:Parcel \n5: Exit ");
                            ShowSomthing = (Show)int.Parse(Console.ReadLine());
                             switch (ShowSomthing)
