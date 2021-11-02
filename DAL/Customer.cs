@@ -14,9 +14,9 @@ namespace IDAL
             public double Lattitude { get; set; }//Location
             public void Tostring()
             {
-                Console.WriteLine(this.Id + "Customer ID:");
-                Console.WriteLine(this.Name + "the customer's name:");
-                Console.WriteLine(this.Phone + "Customer cell phone number:");
+                Console.WriteLine("Customer ID:"+this.Id );
+                Console.WriteLine("the customer's name:"+ this.Name);
+                Console.WriteLine("Customer cell phone number:"+ this.Phone);
                 Console.WriteLine("Customer location:");
                 Console.WriteLine("("+this.Longitude +","+this.Lattitude+")");
             }

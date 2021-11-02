@@ -17,11 +17,11 @@ namespace IDAL
             public int ChargeSlots { get; set; }
           public void Tostring()
             {
-                Console.WriteLine(this.Id + "Station ID:");
-                Console.WriteLine(this.Name + "The station name:");
+                Console.WriteLine("Station ID:"+ this.Id );
+                Console.WriteLine("The station name:"+ this.Name );
                 Console.WriteLine("Location point of the station:");
                 Console.WriteLine("(" + this.Longitude + "," + this.Lattitude + ")");
-                Console.WriteLine(this.ChargeSlots + "Several claim positions are vacant:");
+                Console.WriteLine("Several claim positions are vacant:"+ this.ChargeSlots);
 
             }
         }
