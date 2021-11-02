@@ -13,7 +13,7 @@ namespace ConsoleUI
     {
         public enum Options { Addition, Update, Display, ShowLists, Exit }
         public enum Addition { AddStation, AddDrone, AddCustomer, AddParcel }
-        public enum Update { connectParcelToDrone, PickedUpByDrone, DeliveredToCustomer,}
+       
         static void Main(string[] args)
         {
             Options op;
