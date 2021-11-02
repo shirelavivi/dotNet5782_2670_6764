@@ -75,7 +75,7 @@ namespace ConsoleUI
                                       
                                     }
                                     break;
-                                case Addition.AddCustome:
+                                case Addition.AddCustomer:
                                     {
                                         Customer temp = new Customer();
                                         int customerId;
