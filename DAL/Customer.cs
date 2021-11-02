@@ -14,10 +14,10 @@ namespace IDAL
             public double Lattitude { get; set; }//Location
             public void Tostring()
             {
-                Console.WriteLine(this.Id + "תעודת זהות של הלקוח:");
-                Console.WriteLine(this.Name + "שם הלקוח:");
-                Console.WriteLine(this.Phone + "מספר פלאפון של הלקוח:");
-                Console.WriteLine( "נקודת מיקום של הלקוח:");
+                Console.WriteLine(this.Id + "Customer ID:");
+                Console.WriteLine(this.Name + "the customer's name:");
+                Console.WriteLine(this.Phone + "Customer cell phone number:");
+                Console.WriteLine("Customer location:");
                 Console.WriteLine("("+this.Longitude +","+this.Lattitude+")");
             }
         }

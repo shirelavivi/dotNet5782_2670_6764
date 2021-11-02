@@ -12,11 +12,11 @@ namespace IDAL
         public struct DroneCharge
         {
             public int Droneld { get; set; }
-            public int Stations { get; set; }
+            public int StationId { get; set; }
             public void Tostring()
             {
-                Console.WriteLine(this.Droneld + "מזהה רחפן:");
-                Console.WriteLine(this.Stations + "מזהה תחנת בסיס:");
+                Console.WriteLine(this.Droneld + "drone ID:");
+                Console.WriteLine(this.StationId + "Base Station ID:");
 
             }
 
