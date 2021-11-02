@@ -20,7 +20,7 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            
+            IDAL.DalObject.DalObject Obg=new DalObject();
             Options op;
             Console.WriteLine("please press the one of the options you want:");
             Console.WriteLine(" 0: Addition \n 1: Update \n 2: Display \n 3: ShowLists \n 4: Exit");
