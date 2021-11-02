@@ -15,8 +15,8 @@ namespace IDAL
             public int StationId { get; set; }
             public void Tostring()
             {
-                Console.WriteLine(this.Droneld + "מזהה רחפן:");
-                Console.WriteLine(this.StationId + "מזהה תחנת בסיס:");
+                Console.WriteLine(this.Droneld + "drone ID:");
+                Console.WriteLine(this.StationId + "Base Station ID:");
 
             }
 

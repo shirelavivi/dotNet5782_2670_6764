@@ -19,11 +19,11 @@ namespace IDAL
             public double Battery { get; set; }
             public void Tostring()
             {
-                Console.WriteLine(this.id + "מזהה רחפן:");
-                Console.WriteLine(this.Model + "מוד הרחפן:");
-                Console.WriteLine(this.MaxWeight + "משקל:");
-                Console.WriteLine(this.status+"מצב תפוסה:");
-                Console.WriteLine( this.Battery +"מצב סוללה:");
+                Console.WriteLine(this.id + "Drone ID:");
+                Console.WriteLine(this.Model + " Drone model:");
+                Console.WriteLine(this.MaxWeight + "Weight:");
+                Console.WriteLine(this.status+ "Occupancy status:");
+                Console.WriteLine( this.Battery + "Battery status:");
             }
         }
 

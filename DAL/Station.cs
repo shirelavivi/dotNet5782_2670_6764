@@ -17,11 +17,11 @@ namespace IDAL
             public int ChargeSlots { get; set; }
           public void Tostring()
             {
-                Console.WriteLine(this.Id + "מזהה תחנה:");
-                Console.WriteLine(this.Name + "שם התחנה:");
-                Console.WriteLine("נקודת מיקום של התחנה:");
+                Console.WriteLine(this.Id + "Station ID:");
+                Console.WriteLine(this.Name + "The station name:");
+                Console.WriteLine("Location point of the station:");
                 Console.WriteLine("(" + this.Longitude + "," + this.Lattitude + ")");
-                Console.WriteLine(this.ChargeSlots + "מספר עמדות הטענה פנויות:");
+                Console.WriteLine(this.ChargeSlots + "Several claim positions are vacant:");
 
             }
         }
