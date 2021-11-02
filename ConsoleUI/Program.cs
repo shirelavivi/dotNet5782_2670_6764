@@ -12,8 +12,11 @@ namespace ConsoleUI
     class Program
     {
         public enum Options { Addition, Update, Display, ShowLists, Exit }
-        public enum Addition { AddStation, AddDrone, AddCustome, AddParcel }
-        
+        public enum Addition { AddStation, AddDrone, AddCustome, AddParcel, Exit }
+        public enum UpDate { Assign, Collection, delivery, sending_for_loading, release_from_loading, Exit }
+        public enum Show {Station,Drone,Customer,Parcel, Exit }
+        public enum ShowList { Station, Drone, Customer, Parcel, Exit }
+
         static void Main(string[] args)
         {
             Options op;
@@ -49,8 +52,8 @@ namespace ConsoleUI
                                         temp1.Lattitude = tempLattitude;
                                         int.TryParse(Console.ReadLine(), out tempChargeSlots);
                                         temp1.ChargeSlots = tempChargeSlots;
-                                        DalObject.DalObject.add(temp1);   // Adding the new object to the list of that object
-                                       
+                                        IDAL.DalObject.DalObject.add(temp1);   // Adding the new object to the list of that object
+
 
                                     }
                                     break;
@@ -68,7 +71,7 @@ namespace ConsoleUI
                                         DroneStatuses.TryParse(Console.ReadLine(), out tempstatus);
                                         temp.status = tempstatus;
                                         double.TryParse(Console.ReadLine(), out tempBattery);
-                                        DalObject.dalobject.add(temp);   // Adding the new object to the list of that object
+                                        IDAL.DalObject.DalObject.add(temp);   // Adding the new object to the list of that object
                                       
                                     }
                                     break;
@@ -90,61 +93,208 @@ namespace ConsoleUI
                                         Console.WriteLine("Type a  longitude:");
                                         double.TryParse(Console.ReadLine(), out d);
                                         temp.Longitude = d;
-                                        IDAL.DalObject.DalObject.
+                                        IDAL.DalObject.DalObject.add(temp);
 
                                     }
                                     break;
                                 case Addition.AddParcel:
                                     {
                                         Parcel p = new Parcel();
+                                        int temp;
                                         Console.WriteLine("Type Send Customer ID:");  
-                                        int parcelSendId;
-                                        int.TryParse(Console.ReadLine(), out parcelSendId);
-                                        p.SenderId = parcelSendId;
+                                        int.TryParse(Console.ReadLine(), out temp);
+                                        p.SenderId = temp;
                                         Console.WriteLine("Receiving customer ID:");
-                                        int parcelTargetId;
-                                        int.TryParse(Console.ReadLine(), out parcelTargetId);
-                                        p.
-
-                                        
-
+                                        int.TryParse(Console.ReadLine(), out temp);
+                                        p.TargetId = temp;
                                         Console.WriteLine("Choose package Weight: 0 : easy,  1 : middle,  2 : weighty:");
-                                        Weightcategories packageWeigh;
-                                        Weightcategories.TryParse(Console.ReadLine(), out packageWeigh);
-                                        Console.WriteLine("Choose package Priority: 0 :  Standard, 1 : Fast, 2 :  Emergency :");
-
-                                        Priorities packagePriority;
-                                        Priorities.TryParse(Console.ReadLine(), out packagePriority);
-                                        Parcel package = new Parcel();   //creating new object then assigning user input to that object
-
-                                        package.Id = IDAL.DataSource.CounterPackets;
-                                        IDAL.DataSource.CounterPackets++;
-                                        package.SenderId = packageSenderId;
-                                        package.TargetId = packageTargetId;
-                                        package.DroneId = 0;
-                                        package.Weight = packageWeigh;
-                                        package.Priority = packagePriority;
-                                        package.Delivered = DateTime.Now;
-
-                                        DalObject.DalObject.add(package); // Adding the new object to the list of that object
-                                       
-
+                                        Weightcategories parcelWeigh;
+                                        Weightcategories.TryParse(Console.ReadLine(), out parcelWeigh);
+                                        p.Weight = parcelWeigh;
+                                        Console.WriteLine("Choose package Priority: 0 : Standard , 1: fast , 2:emergency:");
+                                        Priorities parcelPriority;
+                                        Priorities.TryParse(Console.ReadLine(), out parcelPriority);
+                                        p.Priority = parcelPriority;
+                                        Console.WriteLine("Type operation skimmer ID:");
+                                        int.TryParse(Console.ReadLine(), out temp);
+                                        p.Priority = parcelPriority;
+                                        p.Scheduled = DateTime.Now;
+                                        IDAL.DalObject.DalObject.add(p); ; // Adding the new object to the list of that object
+                                     
                                     }
                                     break;
+                                case Addition.Exit:
 
-                                default:
+                                 default:
                                     break;
                             }
                         }
 
                         break;
-                    case Options.Update: 
-               
+                    case Options.Update:
+                        {
+                            UpDate up;
+                            Console.WriteLine("please press the one of the options you want:");
+                            Console.WriteLine(" 1:Assign a package to a skimmer\n 2: Package collection by skimmer\n 3: Delivery package to customer\n 4: sending_for_loading\n 5:release_from_loading\n 6:Exit ");
+                            up = (UpDate)int.Parse(Console.ReadLine());
+                            switch (up)
+                            {
+                                case UpDate.Assign:
+                                    {
+                                        Console.WriteLine("הקלד מזהה רחפן ולאחר מכן מזהה חבילה:");
+                                        int droneID, parcelID;
+                                        int.TryParse(Console.ReadLine(), out droneID);
+                                        int.TryParse(Console.ReadLine(), out parcelID);
+                                        IDAL.DalObject.DalObject.ConnectParcelToDron(parcelID, droneID);
+
+                                    }
+                                    break;
+                                case UpDate.Collection:
+                                    {
+                                        Console.WriteLine("הקלד מזהה חבילה:");
+                                        int  parcelID;
+                                        int.TryParse(Console.ReadLine(), out parcelID);
+                                        IDAL.DalObject.DalObject.collection(parcelID);
+                                    }
+                                    break;
+                                case UpDate.delivery:
+                                    {
+                                        Console.WriteLine("הקלד מזהה חבילה:");
+                                        int parcelID;
+                                        int.TryParse(Console.ReadLine(), out parcelID);
+                                        IDAL.DalObject.DalObject.PackageDalvery(parcelID);
+                                    }
+                                    break;
+                                case UpDate.sending_for_loading:
+                                    {
+
+                                    }
+                                    break;
+                                case UpDate.release_from_loading:
+                                    break;
+                                case UpDate.Exit:
+                                    break;
+                                default:
+                                    break;
+                            }
+
+
+                        }
                 
                         break;
                     case Options.Display:
+                        {
+                            Show ShowSomthing;
+                            Console.WriteLine("הקלד בבקשה את אחת מהאופציות הבאות:");
+                            Console.WriteLine("1: Station\n 2: Drone \n 3:Customer \n 4:Parcel \n5: Exit ");
+                           ShowSomthing = (Show)int.Parse(Console.ReadLine());
+                            switch (ShowSomthing)
+                            {
+                                case Show.Station:
+                                    {
+                                        Station stationToShow;
+                                        Console.WriteLine("הקלד מזהה תחנה:");
+                                        int stationlID;
+                                        int.TryParse(Console.ReadLine(), out stationlID);
+                                        stationToShow= IDAL.DalObject.DalObject.ShowStation(stationlID);
+                                        stationToShow.Tostring();
+
+                                    }
+                                    break;
+                                case Show.Drone:
+                                    {
+                                        Drone droneToShow;
+                                        Console.WriteLine("הקלד מזהה רחפן:");
+                                        int dronelID;
+                                        int.TryParse(Console.ReadLine(), out dronelID);
+                                        droneToShow= IDAL.DalObject.DalObject.ShowDrone(dronelID);
+                                        droneToShow.Tostring();
+
+                                    }
+                                    break;
+                                case Show.Customer:
+                                    {
+                                        Customer customerToShow;
+                                        Console.WriteLine("הקלד מזהה לקוח:");
+                                        int customerID;
+                                        int.TryParse(Console.ReadLine(), out customerID);
+                                        customerToShow= IDAL.DalObject.DalObject.ShowCustomer(customerID);
+                                        customerToShow.Tostring();
+                                    }
+                                    break;
+                                case Show.Parcel:
+                                    {
+                                        Parcel parcelToShow;
+                                        Console.WriteLine("הקלד מזהה חבילה:");
+                                        int parcelID;
+                                        int.TryParse(Console.ReadLine(), out parcelID);
+                                       parcelToShow= IDAL.DalObject.DalObject.ShowParcel(parcelID);
+                                        parcelToShow.Tostring();
+                                    }
+                                    break;
+                                case Show.Exit:
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         break;
                     case Options.ShowLists:
+                        {
+                           ShowList  ShowListOf;
+                            Console.WriteLine("הקלד בבקשה את אחת מהאופציות הבאות:");
+                            Console.WriteLine("1: Station\n 2: Drone \n 3:Customer \n 4:Parcel \n5: Exit ");
+                            ShowListOf = (ShowList)int.Parse(Console.ReadLine());
+                            switch (ShowListOf)
+                            {
+                                case ShowList.Station:
+                                    {
+                                        List<Station> allStation = IDAL.DalObject.DalObject.ShowStationList();
+                                        for (int i = 0; i < allStation.Count(); i++)
+                                        {
+                                            allStation[i].Tostring();
+                                            Console.WriteLine("\n\n");
+                                        }
+
+                                    }
+                                    break;
+                                case ShowList.Drone:
+                                    {
+                                        List<Drone> allDrones = IDAL.DalObject.DalObject.ShowDroneList();
+                                        for (int i = 0; i < allDrones.Count(); i++)
+                                        {
+                                            allDrones[i].Tostring();
+                                            Console.WriteLine("\n\n");
+                                        }
+                                    }
+                                    break;
+                                case ShowList.Customer:
+                                    {
+                                        List<Customer> allCustomer = IDAL.DalObject.DalObject.ShowCustomerList();
+                                        for (int i = 0; i < allCustomer.Count(); i++)
+                                        {
+                                            allCustomer[i].Tostring();
+                                            Console.WriteLine("\n\n");
+                                        }
+                                    }
+                                    break;
+                                case ShowList.Parcel:
+                                    {
+                                        List<Parcel> allParcel = IDAL.DalObject.DalObject.ShowParcelList();
+                                        for (int i = 0; i < allParcel.Count(); i++)
+                                        {
+                                            allParcel[i].Tostring();
+                                            Console.WriteLine("\n\n");
+                                        }
+                                    }
+                                    break;
+                                case ShowList.Exit:
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
                         break;
                     case Options.Exit:
                         num = 0;
