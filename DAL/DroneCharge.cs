@@ -13,12 +13,13 @@ namespace IDAL
         {
             public int Droneld { get; set; }
             public int StationId { get; set; }
+           
             public void Tostring()
             {
-                Console.WriteLine(this.Droneld + "drone ID:");
-                Console.WriteLine(this.StationId + "Base Station ID:");
-
+                Console.WriteLine("Drone ID:" + this.Droneld);
+                Console.WriteLine("Station ID:" + this.StationId);
             }
+           
 
         }
        

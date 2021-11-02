@@ -25,16 +25,16 @@ namespace IDAL
             public DateTime Delivered { get; set; }
             public void Tostring()
             {
-                Console.WriteLine(this.Id + "ParcelID:");
-                Console.WriteLine(this.SenderId + "Sender name:");
-                Console.WriteLine(this.TargetId+ "Name of the receiver:");
-                Console.WriteLine(this.Weight+ "Parcel weight:");
-                Console.WriteLine(this.Priority + "Order priority:");
-                Console.WriteLine(this.Requested + "Package creation time:");
-                Console.WriteLine(this.DroneId + "Skimmer operation:");
-                Console.WriteLine(this.Scheduled + "Assignment time:");
-                Console.WriteLine(this.PickedUp + "Collection time:");
-                Console.WriteLine(this.Delivered + "Parcel delivery time:");
+                Console.WriteLine("ParcelID:"+ this.Id);
+                Console.WriteLine("Sender name:"+ this.SenderId );
+                Console.WriteLine("Name of the receiver:"+this.TargetId);
+                Console.WriteLine("Parcel weight:"+ this.Weight);
+                Console.WriteLine("Order priority:"+ this.Priority);
+                Console.WriteLine("Package creation time:"+ this.Requested);
+                Console.WriteLine("Drone operation:"+ this.DroneId );
+                Console.WriteLine("Assignment time:"+ this.Scheduled );
+                Console.WriteLine("Collection time:"+ this.PickedUp);
+                Console.WriteLine("Parcel delivery time:"+this.Delivered);
 
             }
         }
