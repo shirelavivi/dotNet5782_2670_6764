@@ -79,6 +79,7 @@ namespace IDAL
 
                     }
                     d.Battery = Rand.Next();
+                    drones.Add(d);
                 }
                 for (int i = 0; i < 11; i++)
                 {
@@ -87,6 +88,7 @@ namespace IDAL
                     c.Phone = "05" + Rand.Next(4) + Rand.Next(9) + Rand.Next(9) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10);
                     c.Longitude = Rand.Next();
                     c.Lattitude = Rand.Next();
+                    customers.Add(c);
                 }
 
                 for (int i = 0; i < 11; i++)
@@ -130,6 +132,7 @@ namespace IDAL
                     a.Delivered = DateTime.Now;
                     a.DroneId = 0;
                     CounterPackets++;
+                    packets.Add(a);
                 }
 
             }
@@ -411,51 +414,26 @@ namespace IDAL
 
 
             public static List<Station> ShowStationList()
-            {
-                List<Station> run = IDAL.DataSource.Stations;
-                List<Station> temp = new List<Station>();
-                List<Station> runTemp = temp;
-                for (int j = 0; j < run.Count(); j++)
-                {
-                    runTemp[j] = run[j];
-
-                }
+            {  
+                List<Station> temp = IDAL.DataSource.Stations;
                 return temp;
             }
             public static List<Customer> ShowCustomerList()
             {
-                List<Customer> run = IDAL.DataSource.customers;
-                List<Customer> temp = new List<Customer>();
-                List<Customer> runTemp = temp;
-                for (int j = 0; j < run.Count(); j++)
-                {
-                    runTemp[j] = run[j];
-
-                }
+               
+                List<Customer> temp = IDAL.DataSource.customers;
                 return temp;
             }
             public static List<Drone> ShowDroneList()
             {
-                List<Drone> run = IDAL.DataSource.drones;
-                List<Drone> temp = new List<Drone>();
-                List<Drone> runTemp = temp;
-                for (int j = 0; j < run.Count(); j++)
-                {
-                    runTemp[j] = run[j];
-
-                }
+                
+                List<Drone> temp = IDAL.DataSource.drones;
                 return temp;
             }
             public static List<Parcel> ShowParcelList()
             {
-                List<Parcel> run = IDAL.DataSource.packets;
-                List<Parcel> temp = new List<Parcel>();
-                List<Parcel> runTemp = temp;
-                for (int j = 0; j < run.Count(); j++)
-                {
-                    runTemp[j] = run[j];
-
-                }
+                
+                List<Parcel> temp = IDAL.DataSource.packets;
                 return temp;
             }
 
