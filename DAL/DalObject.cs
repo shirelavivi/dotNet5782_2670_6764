@@ -184,7 +184,6 @@ namespace IDAL
                 List<Parcel> runOfParcel = IDAL.DataSource.packets;
                 Parcel p = new Parcel();
                 Drone d = new Drone();
-
                 for (int i = 0; i < runOfParcel.Count(); i++)
                 {
                     if (runOfParcel[i].Id == ParcelId)
