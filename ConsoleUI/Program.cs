@@ -152,7 +152,7 @@ namespace ConsoleUI
                             }
                             break;
                         }
-
+                       
 
                     case Options.Update:
                         {
@@ -301,41 +301,38 @@ namespace ConsoleUI
                             {
                                 case ShowList.Station:
                                     {
-                                        List<Station> allStation = IDAL.DalObject.DalObject.ShowStationList();
-                                        for (int i = 0; i < allStation.Count(); i++)
+                                       
+                                        foreach (Station item in IDAL.DalObject.DalObject.ShowStationList())
                                         {
-                                            allStation[i].Tostring();
-                                            Console.WriteLine("\n\n");
+                                           item.Tostring();
+                                           Console.WriteLine("\n\n");
                                         }
 
                                     }
                                     break;
                                 case ShowList.Drone:
                                     {
-                                        List<Drone> allDrones = IDAL.DalObject.DalObject.ShowDroneList();
-                                        for (int i = 0; i < allDrones.Count(); i++)
+                                        foreach (Drone item in IDAL.DalObject.DalObject.ShowDroneList())
                                         {
-                                            allDrones[i].Tostring();
+                                            item.Tostring();
                                             Console.WriteLine("\n\n");
                                         }
                                     }
                                     break;
                                 case ShowList.Customer:
                                     {
-                                        List<Customer> allCustomer = IDAL.DalObject.DalObject.ShowCustomerList();
-                                        for (int i = 0; i < allCustomer.Count(); i++)
+                                        foreach (Customer item in IDAL.DalObject.DalObject.ShowCustomerList())
                                         {
-                                            allCustomer[i].Tostring();
+                                            item.Tostring();
                                             Console.WriteLine("\n\n");
                                         }
                                     }
                                     break;
                                 case ShowList.Parcel:
                                     {
-                                        List<Parcel> allParcel = IDAL.DalObject.DalObject.ShowParcelList();
-                                        for (int i = 0; i < allParcel.Count(); i++)
+                                        foreach (Parcel item in IDAL.DalObject.DalObject.ShowParcelList())
                                         {
-                                            allParcel[i].Tostring();
+                                            item.Tostring();
                                             Console.WriteLine("\n\n");
                                         }
                                     }
