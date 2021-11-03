@@ -216,7 +216,7 @@ namespace IDAL
             }
             /// <summary>
             /// If the package ID number matches the drone's ID number then it will collect the package,
-            /// The drone's status changes for transpot and we will delete the old drone from the list.
+            /// The drone's status changes for transpot and we will delete the old drone from the list
             /// </summary>
             /// <param name="p"></param>
             public static void collection(int ParcelId)
