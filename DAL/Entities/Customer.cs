@@ -12,13 +12,9 @@ namespace IDAL
             public string Phone { get; set; }// customer's cell phone
             public double Longitude { get; set; }//Location
             public double Lattitude { get; set; }//Location
-            public void Tostring()
+            public override string ToString()
             {
-                Console.WriteLine("Customer ID:"+this.Id );
-                Console.WriteLine("the customer's name:"+ this.Name);
-                Console.WriteLine("Customer cell phone number:"+ this.Phone);
-                Console.WriteLine("Customer location:");
-                Console.WriteLine("("+this.Longitude +","+this.Lattitude+")");
+                return this.ToStringProperty();
             }
         }
     }

@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DalObject;
+using IDAL;
+using DalObject;
+
 
 
 namespace ConsoleUI
@@ -21,12 +23,12 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            IDAL.DalObject.DalObject Obj = new DalObject();
             Options op;
             Console.WriteLine("Please press the one of the options you want:");
             Console.WriteLine(" 0: Addition \n 1: Update \n 2: Display \n 3: ShowLists \n 4: Exit");
             op = (Options)int.Parse(Console.ReadLine());    //User input to go through the options
             int num = 1;
+            DalObject.DalObject dl = new DalObject.DalObject();
 
             while (num != 0)
             {
@@ -61,7 +63,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Please type a cChargeSlots :");
                                         int.TryParse(Console.ReadLine(), out tempChargeSlots);
                                         temp1.ChargeSlots = tempChargeSlots;
-                                        IDAL.DalObject.DalObject.add(temp1);   // Adding the new object to the list of that object
+                                        dl.add(temp1);   // Adding the new object to the list of that object
                                     }
                                     break;
 
@@ -74,7 +76,7 @@ namespace ConsoleUI
                                         int.TryParse(Console.ReadLine(), out tempId);
                                         temp.id = tempId;
                                         Console.WriteLine("Please type a model drone :");
-                                        double tempBattery;
+                                        //double tempBattery;
                                         temp.Model = Console.ReadLine();
                                         Console.WriteLine("Please Choose package Weight: 0 : easy,  1 : middle,  2 : weighty:");
                                         Weightcategories tempWeight;
@@ -83,11 +85,11 @@ namespace ConsoleUI
                                         Console.WriteLine("Please type DroneStatuses: 0: available, 1: maintenance, 2: transport");
                                         DroneStatuses tempstatus;
                                         DroneStatuses.TryParse(Console.ReadLine(), out tempstatus);
-                                        temp.status = tempstatus;
-                                        Console.WriteLine("Please type a Percent Battery :");
-                                        double.TryParse(Console.ReadLine(), out tempBattery);
-                                        temp.Battery = tempBattery;
-                                        IDAL.DalObject.DalObject.add(temp);   // Adding the new object to the list of that object
+                                        //temp.status = tempstatus;
+                                        //Console.WriteLine("Please type a Percent Battery :");
+                                        //double.TryParse(Console.ReadLine(), out tempBattery);
+                                        //temp.Battery = tempBattery;
+                                       dl.add(temp);   // Adding the new object to the list of that object
 
                                     }
                                     break;
@@ -109,7 +111,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Type a  longitude:");
                                         double.TryParse(Console.ReadLine(), out d);
                                         temp.Longitude = d;
-                                        IDAL.DalObject.DalObject.add(temp);
+                                        dl.add(temp);
 
                                     }
                                     break;
@@ -117,7 +119,7 @@ namespace ConsoleUI
                                     {
                                         Parcel p = new Parcel();
                                         int temp;
-                                        p.Id = IDAL.DalObject.DalObject.runNumber();
+                                        p.Id = dl.runNumber();
                                         Console.WriteLine("Type Send Customer ID:");
                                         int.TryParse(Console.ReadLine(), out temp);
                                         p.SenderId = temp;
@@ -136,7 +138,7 @@ namespace ConsoleUI
                                         int.TryParse(Console.ReadLine(), out temp);
                                         p.Priority = parcelPriority;
                                         p.Scheduled = DateTime.Now;
-                                        IDAL.DalObject.DalObject.add(p); ; // Adding the new object to the list of that object
+                                        dl.add(p); ; // Adding the new object to the list of that object
 
                                     }
                                     break;
@@ -168,7 +170,7 @@ namespace ConsoleUI
                                         int droneID, parcelID;
                                         int.TryParse(Console.ReadLine(), out droneID);
                                         int.TryParse(Console.ReadLine(), out parcelID);
-                                        IDAL.DalObject.DalObject.ConnectParcelToDron(parcelID, droneID);
+                                        dl.ConnectParcelToDron(parcelID, droneID);
 
                                     }
                                     break;
@@ -177,7 +179,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Type parcel ID:");
                                         int parcelID;
                                         int.TryParse(Console.ReadLine(), out parcelID);
-                                        IDAL.DalObject.DalObject.collection(parcelID);
+                                        dl.collection(parcelID);
                                     }
                                     break;
                                 case UpDate.delivery:
@@ -185,12 +187,12 @@ namespace ConsoleUI
                                         Console.WriteLine("Type parcel ID:");
                                         int parcelID;
                                         int.TryParse(Console.ReadLine(), out parcelID);
-                                        IDAL.DalObject.DalObject.PackageDalvery(parcelID);
+                                        dl.PackageDalvery(parcelID);
                                     }
                                     break;
                                 case UpDate.sending_for_loading:
                                     {
-                                        List<Station> s = IDAL.DalObject.DalObject.ShowStationAvailable();
+                                        List<Station> s = dl.ShowStationAvailable();
                                         Console.WriteLine("Type drone ID:");
                                         int droneID, stationID;
                                         int.TryParse(Console.ReadLine(), out droneID);
@@ -200,7 +202,7 @@ namespace ConsoleUI
                                             Console.WriteLine(s[i].Id + "\n");
                                         }
                                         int.TryParse(Console.ReadLine(), out stationID);
-                                        IDAL.DalObject.DalObject.SendDroneTpCharge(stationID, droneID);
+                                       dl.SendDroneTpCharge(stationID, droneID);
                                     }
                                     break;
                                 case UpDate.release_from_loading:
@@ -209,7 +211,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Type drone ID:");
                                         int droneID;
                                         int.TryParse(Console.ReadLine(), out droneID);
-                                        IDAL.DalObject.DalObject.ReleaseDroneFromChargeStation(droneID);
+                                       dl.ReleaseDroneFromChargeStation(droneID);
 
                                     }
                                     break;
@@ -242,8 +244,8 @@ namespace ConsoleUI
                                         Console.WriteLine("Type a station ID:");
                                         int stationlID;
                                         int.TryParse(Console.ReadLine(), out stationlID);
-                                        stationToShow = IDAL.DalObject.DalObject.ShowStation(stationlID);
-                                        stationToShow.Tostring();
+                                        stationToShow = dl.ShowStation(stationlID);
+                                        stationToShow.ToString();
 
                                     }
                                     break;
@@ -253,8 +255,8 @@ namespace ConsoleUI
                                         Console.WriteLine("Type Drone ID:");
                                         int dronelID;
                                         int.TryParse(Console.ReadLine(), out dronelID);
-                                        droneToShow = IDAL.DalObject.DalObject.ShowDrone(dronelID);
-                                        droneToShow.Tostring();
+                                        droneToShow = dl.ShowDrone(dronelID);
+                                        droneToShow.ToString();
 
                                     }
                                     break;
@@ -264,8 +266,8 @@ namespace ConsoleUI
                                         Console.WriteLine("Type Customer ID:");
                                         int customerID;
                                         int.TryParse(Console.ReadLine(), out customerID);
-                                        customerToShow = IDAL.DalObject.DalObject.ShowCustomer(customerID);
-                                        customerToShow.Tostring();
+                                        customerToShow = dl.ShowCustomer(customerID);
+                                        customerToShow.ToString();
                                     }
                                     break;
                                 case Show.Parcel:
@@ -274,8 +276,8 @@ namespace ConsoleUI
                                         Console.WriteLine("Type Parcel ID:");
                                         int parcelID;
                                         int.TryParse(Console.ReadLine(), out parcelID);
-                                        parcelToShow = IDAL.DalObject.DalObject.ShowParcel(parcelID);
-                                        parcelToShow.Tostring();
+                                        parcelToShow = dl.ShowParcel(parcelID);
+                                        parcelToShow.ToString();
                                     }
                                     break;
                                 case Show.Exit:
@@ -302,9 +304,9 @@ namespace ConsoleUI
                                 case ShowList.Station:
                                     {
                                        
-                                        foreach (Station item in IDAL.DalObject.DalObject.ShowStationList())
+                                        foreach (Station item in dl.ShowStationList())
                                         {
-                                           item.Tostring();
+                                           item.ToString();
                                            Console.WriteLine("\n\n");
                                         }
 
@@ -312,27 +314,27 @@ namespace ConsoleUI
                                     break;
                                 case ShowList.Drone:
                                     {
-                                        foreach (Drone item in IDAL.DalObject.DalObject.ShowDroneList())
+                                        foreach (Drone item in dl.ShowDroneList())
                                         {
-                                            item.Tostring();
+                                            item.ToString();
                                             Console.WriteLine("\n\n");
                                         }
                                     }
                                     break;
                                 case ShowList.Customer:
                                     {
-                                        foreach (Customer item in IDAL.DalObject.DalObject.ShowCustomerList())
+                                        foreach (Customer item in dl.ShowCustomerList())
                                         {
-                                            item.Tostring();
+                                            item.ToString();
                                             Console.WriteLine("\n\n");
                                         }
                                     }
                                     break;
                                 case ShowList.Parcel:
                                     {
-                                        foreach (Parcel item in IDAL.DalObject.DalObject.ShowParcelList())
+                                        foreach (Parcel item in dl.ShowParcelList())
                                         {
-                                            item.Tostring();
+                                            item.ToString();
                                             Console.WriteLine("\n\n");
                                         }
                                     }

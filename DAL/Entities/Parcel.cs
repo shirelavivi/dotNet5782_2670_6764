@@ -23,19 +23,9 @@ namespace IDAL
             public DateTime Scheduled { get; set; }
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
-            public void Tostring()
+            public override string ToString()
             {
-                Console.WriteLine("ParcelID:"+ this.Id);
-                Console.WriteLine("Sender name:"+ this.SenderId );
-                Console.WriteLine("Name of the receiver:"+this.TargetId);
-                Console.WriteLine("Parcel weight:"+ this.Weight);
-                Console.WriteLine("Order priority:"+ this.Priority);
-                Console.WriteLine("Package creation time:"+ this.Requested);
-                Console.WriteLine("Drone operation:"+ this.DroneId );
-                Console.WriteLine("Assignment time:"+ this.Scheduled );
-                Console.WriteLine("Collection time:"+ this.PickedUp);
-                Console.WriteLine("Parcel delivery time:"+this.Delivered);
-
+                return this.ToStringProperty();
             }
         }
 

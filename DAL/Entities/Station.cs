@@ -15,15 +15,11 @@ namespace IDAL
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
             public int ChargeSlots { get; set; }
-          public void Tostring()
+            public override string ToString()
             {
-                Console.WriteLine("Station ID:"+ this.Id );
-                Console.WriteLine("The station name:"+ this.Name );
-                Console.WriteLine("Location point of the station:");
-                Console.WriteLine("(" + this.Longitude + "," + this.Lattitude + ")");
-                Console.WriteLine("Several claim positions are vacant:"+ this.ChargeSlots);
-
+                return this.ToStringProperty();
             }
+
         }
     }
 }
