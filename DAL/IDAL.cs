@@ -13,7 +13,7 @@ namespace IDAL
         public int runNumber();
         public void add(Station s);
         public void add(Drone d);
-        public void add(Customer c);
+        public void add(Customer c); 
         public void add(Parcel p);
         public void ConnectParcelToDron(int ParcelId, int DronId);
         public void collection(int ParcelId);
