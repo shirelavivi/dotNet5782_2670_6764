@@ -16,6 +16,7 @@ namespace IDAL
             {
                 return this.ToStringProperty();
             }
+             
         }
     }
 }

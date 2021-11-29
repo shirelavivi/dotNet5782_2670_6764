@@ -23,7 +23,7 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            Options op;
+            Options op; 
             Console.WriteLine("Please press the one of the options you want:");
             Console.WriteLine(" 0: Addition \n 1: Update \n 2: Display \n 3: ShowLists \n 4: Exit");
             op = (Options)int.Parse(Console.ReadLine());    //User input to go through the options
@@ -63,7 +63,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Please type a cChargeSlots :");
                                         int.TryParse(Console.ReadLine(), out tempChargeSlots);
                                         temp1.ChargeSlots = tempChargeSlots;
-                                        dl.add(temp1);   // Adding the new object to the list of that object
+                                        dl.AddStation(temp1);   // Adding the new object to the list of that object
                                     }
                                     break;
 
@@ -89,7 +89,7 @@ namespace ConsoleUI
                                         //Console.WriteLine("Please type a Percent Battery :");
                                         //double.TryParse(Console.ReadLine(), out tempBattery);
                                         //temp.Battery = tempBattery;
-                                       dl.add(temp);   // Adding the new object to the list of that object
+                                       dl.AddDrone(temp);   // Adding the new object to the list of that object
 
                                     }
                                     break;
@@ -111,7 +111,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Type a  longitude:");
                                         double.TryParse(Console.ReadLine(), out d);
                                         temp.Longitude = d;
-                                        dl.add(temp);
+                                        dl.AddCustomer(temp);
 
                                     }
                                     break;
@@ -138,7 +138,7 @@ namespace ConsoleUI
                                         int.TryParse(Console.ReadLine(), out temp);
                                         p.Priority = parcelPriority;
                                         p.Scheduled = DateTime.Now;
-                                        dl.add(p); ; // Adding the new object to the list of that object
+                                        dl.AddParcel(p); ; // Adding the new object to the list of that object
 
                                     }
                                     break;

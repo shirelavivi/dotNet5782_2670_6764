@@ -8,14 +8,19 @@ namespace IBL
 {
     namespace BO
     {
-        public class DroneInCharging
+        public class ParcelToList
         {
-            int IdNumber { get; set; }
-            double ButerryStatus { get; set; }
+            public int Id { get; set; }
+            public string SenderName { get; set; }
+            public string TargetName { get; set; }
+            public Weightcategories Weight { get; set; }
+            public Priorities Priority { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();
             }
+
         }
     }
 }
+

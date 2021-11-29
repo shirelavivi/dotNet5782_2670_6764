@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace IBL
 {
     namespace BO
     {
-        public class DroneInCharging
+        public class Location
         {
-            int IdNumber { get; set; }
-            double ButerryStatus { get; set; }
+            public double Longitude { get; set; }
+            public double Lattitude { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();

@@ -8,10 +8,10 @@ using IDAL.DO;
 namespace DalObject
 {
 
-        public class DalObject
+        public class DalObject: Idal
         {
 
-            IDAL.DataSource.config ds = new IDAL.DataSource.config();///לשאול איך להגדיר
+            IDAL.DataSource.config ds = new IDAL.DataSource.config();
             public DalObject()
             {
                 ds.Initialize();
@@ -25,19 +25,26 @@ namespace DalObject
             /// Add station to stations list
             /// </summary>
             /// <param name="s"></param>
-            public void add(Station s)
+            public void AddStation(Station s)
             {
                 IDAL.DataSource.Stations.Add(s);
             }
-            public void add(Drone d)
+            public void AddDrone(Drone d)
             {
                 IDAL.DataSource.drones.Add(d);
             }
-            public void add(Customer c)
+            public void AddCustomer(Customer c)
             {
+                
+                 //if(chekId(c.Id))
+                 
+                 //     throw new IDAL.DO.DuplicateIdException(c.Id, "Customer");
+                 
+           
                 IDAL.DataSource.customers.Add(c);
+            
             }
-            public void add(Parcel p)
+            public void AddParcel(Parcel p)
             {
                 IDAL.DataSource.packets.Add(p);
 
@@ -252,17 +259,19 @@ namespace DalObject
             }
             public Customer ShowCustomer(int s)
             {
-                List<Customer> run = IDAL.DataSource.customers;
-                Customer temp = new Customer();
-                for (int i = 0; i < run.Count; i++)
+
+
+            List<Customer> run = IDAL.DataSource.customers;
+            Customer temp = new Customer();
+            for (int i = 0; i < run.Count; i++)
+            {
+                if (run[i].Id == s)
                 {
-                    if (run[i].Id == s)
-                    {
-                        temp = run[i];
-                    }
+                    temp = run[i];
                 }
-                return temp;
             }
+            return temp;
+           }
 
 
             public List<Parcel> ShowParcelId()
@@ -335,9 +344,53 @@ namespace DalObject
                 }
 
                 return temp;
-
             }
-        }
+        //public Customer IsFoundCustomer(int id)
+        //{
+        //    foreach (Customer item in IDAL.DataSource.customers)
+        //    {
+        //        if (item.Id == id)
+        //            return item;
+        //    }
+        //    throw new IDAL.DO.MissingIdException(id, "Customer");
+
+        //}
+        //public Station IsFoundStation(int id)
+        //{
+        //    foreach (Station item in IDAL.DataSource.Stations)
+        //    {
+        //        if (item.Id == id)
+        //            return item;
+
+        //    }
+        //    throw new IDAL.DO.MissingIdException(id, "Station");
+
+        //}
+        //public Drone IsFoundDrone(int id)
+        //{
+        //    foreach (Drone item in IDAL.DataSource.drones)
+        //    {
+        //        if (item.id == id)
+        //            return item;
+
+        //    }
+
+        //    throw new IDAL.DO.MissingIdException(id, "Drone");
+
+        //}
+        //public Parcel IsFoundParcel(int id)
+        //{
+        //    foreach (Parcel item in IDAL.DataSource.packets)
+        //    {
+        //        if (item.Id == id)
+        //            return item;
+
+        //    }
+        //    throw new IDAL.DO.MissingIdException(id, "Parcel");
+
+        //}
+
+    }
     
 }
 

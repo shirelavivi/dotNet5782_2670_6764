@@ -5,31 +5,50 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
 
-namespace IDAL
+namespace DalObject
 {
-    public interface DalObject
+    public interface Idal
     {
-
-        public int runNumber();
-        public void add(Station s);
-        public void add(Drone d);
-        public void add(Customer c); 
-        public void add(Parcel p);
-        public void ConnectParcelToDron(int ParcelId, int DronId);
-        public void collection(int ParcelId);
-        public void SendDroneTpCharge(int StationId, int DroneId);
-        public void ReleaseDroneFromChargeStation(int DroneId);
-        public void PackageDalvery(int ParcelId);
-        public Station ShowStation(int id);
-        public Drone ShowDrone(int id);
-        public Parcel ShowParcel(int id);
+        #region customer
+       
+        public void AddCustomer(Customer c);
         public Customer ShowCustomer(int s);
-        public List<Parcel> ShowParcelId();
+        public IEnumerable<Customer> ShowCustomerList();
+        public Customer IsFoundCustomer(int id);
+        #endregion
+
+        #region station
+        public void AddStation(Station s);
+        public Station ShowStation(int id);
         public List<Station> ShowStationAvailable();
         public IEnumerable<Station> ShowStationList();
-        public IEnumerable<Customer> ShowCustomerList();
+        //public Station IsFoundStation(int id);
+        #endregion
+
+
+        #region drone
+        public void AddDrone(Drone d);
+        public void ConnectParcelToDron(int ParcelId, int DronId);
+        public void SendDroneTpCharge(int StationId, int DroneId);
+        public Drone ShowDrone(int id);
+        //public Drone IsFoundDrone(int id);
+        #endregion
+
+        #region parcel
+        public int runNumber();
+        public void AddParcel(Parcel p);
+       
+       
+        public void collection(int ParcelId);
+        public void ReleaseDroneFromChargeStation(int DroneId);
+        public void PackageDalvery(int ParcelId); 
+        public Parcel ShowParcel(int id);
+        public List<Parcel> ShowParcelId();
         public IEnumerable<Drone> ShowDroneList();
         public IEnumerable<Parcel> ShowParcelList();
+        //public Parcel IsFoundParcel(int id);
+        #endregion
+
     }
 
 }

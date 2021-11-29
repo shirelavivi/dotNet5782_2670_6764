@@ -5,17 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 namespace IBL
 {
-    namespace BL
+    namespace BO
     {
-        class Drone
+        public class Drone
         {
-            int IdDrone;
-            string Modle;
-            Weightcategories Weightcategories;
-            double ButerryStatus;
-            DroneStatuses DroneStatuses;
-            PackageInTransfer PackageInTransfer;
-            Location ThisLocation;
+            int IdDrone { get; set; }
+            string Modle { get; set; }
+            Weightcategories Weightcategories { get; set; }
+            double ButerryStatus { get; set; }
+            DroneStatuses DroneStatuses { get; set; }
+            ParcelInTransfer PackageInTransfer { get; set; }
+            Location ThisLocation { get; set; }
+            public override string ToString()
+            {
+                return this.ToStringProperty();
+            }
         }
     }
 }
