@@ -57,8 +57,7 @@ namespace ConsoleUI_BL
                                 
                                 case Addition.AddCustomer:
                                     {
-                                        
-                                        bl.AddCustomer(GetingCustomer());
+                                      bl.AddCustomer(GetingCustomer());
 
                                     }
                                     break;
@@ -78,7 +77,7 @@ namespace ConsoleUI_BL
                                         Priorities parcelPriority;
                                         Priorities.TryParse(Console.ReadLine(), out parcelPriority);
                                         parcel.Priority = parcelPriority;
-                                        dl.AddParcel(parcel); ; // Adding the new object to the list of that object
+                                        bl.AddrParcel(parcel); ; // Adding the new object to the list of that object
 
                                     }
                                     break;

@@ -42,49 +42,15 @@ namespace DalObject
             Parcel p = new Parcel();
             Drone d = new Drone();
             int j, i = IDAL.DataSource.packets.Count() + 1;
-            try
-            {
-                for (i = 0; i < IDAL.DataSource.packets.Count(); i++)
-                {
-                    if (IDAL.DataSource.packets[i].Id == ParcelId)
-                    {
-                        p = IDAL.DataSource.packets[i];
-                        break;
-                    }
-                }
-            }
-            catch (MissingIdException ec)
-            {
-                Console.WriteLine("My Exc: ");
-                Console.WriteLine(ec);
-
-            }
-            try
-            {
-                for (j = 0; j < IDAL.DataSource.drones.Count(); j++)
-                {
-                    if (IDAL.DataSource.drones[j].id == DronId)
-                    {
-                        d = IDAL.DataSource.drones[j];
-                        break;
-                    }
-                }
-            }
-            catch (MissingIdException ec)
-            {
-                Console.WriteLine("My Exc: ");
-                Console.WriteLine(ec);
-
-            }
-
+            p = GetParcel(ParcelId);
+            d =GetDrone(DronId);     
             if (d.MaxWeight == p.Weight)//צריך לבדוק לא רק אם הרחפן יכול לשאת משקל זהה ....
             {
                 p.DroneId = d.id;
                 p.Scheduled = DateTime.Now;
-                IDAL.DataSource.packets[i] = p;
+                IDAL.DataSource.packets[IDAL.DataSource.packets.FindIndex(ParcelId)] = p;
 
             }
-
         }
         /// <summary>
         /// If the package ID number matches the drone's ID number then it will collect the package,
@@ -96,14 +62,7 @@ namespace DalObject
         {
             Parcel p = new Parcel();
             int i;
-            for (i = 0; i < IDAL.DataSource.packets.Count(); i++)
-            {
-                if (IDAL.DataSource.packets[i].Id == ParcelId)
-                {
-                    p = IDAL.DataSource.packets[i];
-                    break;
-                }
-            }
+            p = GetParcel(ParcelId);
             List<Drone> run = IDAL.DataSource.drones;
 
             for (int j = 0; j < run.Count(); j++)

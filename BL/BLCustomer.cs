@@ -13,7 +13,7 @@ namespace IBL
     {
        public partial class BL : IBL
         {
-            void AddCustomer(BO.Customer customer)
+          public void AddCustomer(BO.Customer customer)
             {
                 try
                 {
@@ -32,6 +32,7 @@ namespace IBL
                 }
 
             }
+
 
         }
     } 
