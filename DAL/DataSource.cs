@@ -22,11 +22,22 @@ namespace IDAL
             /// <summary>
             /// A serial number for packages that will be updated each time a new package is created
             /// </summary>
-            static int CounterPackets = 0;
-            static double Light = 0;
-            static double Medium = 0;
-            static double Heavy = 0;
-            static double Free = 0;
+            public static int CounterPackets = 0;
+            public static double Free = 0.01;
+            public static double Light = 0.04;
+            public static double Medium = 0.08;
+            public static double Heavy = 0.1;
+            public static int ChargingRate = 25;
+            
+            public double [] returnArrBattery()
+            {
+                double[] arr = new double[4];
+                arr[0] = Free;
+                arr[1] = Light;
+                arr[2] = Medium;
+                arr[3] = Heavy;
+                return arr;
+            }
             public int runCounterPackets()
             {
                 CounterPackets++;

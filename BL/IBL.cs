@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace IBL
 {
+
     interface IBL
     {
-       public void AddCustomer(BO.Customer customer);
+        #region Customer
+        public void AddCustomer(BO.Customer customer);
+
+        #endregion
+        #region parcel
+        public void AddrParcel(BO.Parcel parcel);
+        #endregion
     }
+    
+
 }

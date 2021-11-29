@@ -12,8 +12,8 @@ namespace IBL
         public class Parcel
         {
             public int Id { get; set; }
-            CustomerAtParcels Sender;
-            CustomerAtParcels Target;
+            public CustomerAtParcels Sender;
+            public CustomerAtParcels Target;
             //public enum Weightcategories { easy, middle, weighty }
 
             //public enum Priorities { Standard, fast, emergency }

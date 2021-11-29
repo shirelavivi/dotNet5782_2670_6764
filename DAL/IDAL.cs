@@ -12,7 +12,6 @@ namespace DalObject
         #region customer
        
         public void AddCustomer(Customer c);
-        public Customer ShowCustomer(int s);
         public IEnumerable<Customer> ShowCustomerList();
         public Customer GetCustomer(int id);
         public bool CheckCusromer(int id);
@@ -24,17 +23,15 @@ namespace DalObject
 
         #region station
         public void AddStation(Station s);
-        public Station ShowStation(int id);
         public List< Station> ShowStationAvailable();
-        public IEnumerable<Station> ShowStationList();
-        public void AdditionStation( Station st);
-        public Station GetStation(int id);
+        public IEnumerable<Station> GetALLStations();
         public bool CheckStation(int id);
         public void UpdStation(Station st);
         public void DelStation(int id);
-         public IEnumerable<Station> GetStationByPerdicate(Predicate<Station> predicate);
-        public Station ShowStations(int s);
-         //public IEnumerable<Station> ShowStationList();
+        public IEnumerable<Station> GetStationByPerdicate(Predicate<Station> predicate);
+        public Station GetStation(int s);
+        public int GetChargingRate();
+
         #endregion
 
 
@@ -42,14 +39,13 @@ namespace DalObject
         public void AddDrone(Drone c);
         public void ConnectParcelToDron(int ParcelId, int DronId);
         public void SendDroneTpCharge(int StationId, int DroneId);
-        public Drone ShowDrone(int id);
         public Drone GetDrone(int id);
         public bool CheckDrone(int id);
         public IEnumerable<Drone> GetALLDrones();
         public void UpdDrone(Drone st);
         public void DelDrone(int id);
         public IEnumerable<Drone> GetDronetsByPerdicate(Predicate<Drone> predicate);
-        public IEnumerable<Drone> ShowDroneList();  
+        public double[] batteryArr();
         #endregion
 
         #region parcel
@@ -58,18 +54,14 @@ namespace DalObject
         public void collection(int ParcelId);
         public void ReleaseDroneFromChargeStation(int DroneId);
         public void PackageDalvery(int ParcelId); 
-        public Parcel ShowParcel(int id);
-        public List<Parcel> ShowParcelId();
-        public IEnumerable<Parcel> ShowParcelList();
-         public Parcel GetParcel(int id);
-         public void AdditionParcel(Parcel c);
+        
          public bool CheckParcel(int id);
         public IEnumerable<Parcel> GetALLParcel();
         public void UpdParcel(Parcel st);
          public void DelParcel(int id);
          public IEnumerable<Parcel> GetParcelByPerdicate(Predicate<Parcel> predicate);
-         public Parcel ShowParcels(int s);
-        //public IEnumerable<Parcel> ShowParcelList();
+         public Parcel GetParcel(int s);
+        
         #endregion
 
     }

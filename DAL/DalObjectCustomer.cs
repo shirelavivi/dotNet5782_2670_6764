@@ -10,14 +10,7 @@ namespace DalObject
 
     public partial class DalObject : Idal
     {
-        public Customer GetCustomer(int id)
-        {
-            if (!CheckCusromer(id))
-                throw new MissingIdException(id, "Customer");
-
-            Customer st = IDAL.DataSource.customers.Find(st => st.Id == id);
-            return st;
-        }
+       
         public void AddCustomer(Customer c)
         {
 
@@ -67,18 +60,13 @@ namespace DalObject
                    where predicate(st)
                    select st;
         }
-        public Customer ShowCustomer(int s)
+        public Customer GetCustomer(int s)
         {
-            List<Customer> run = IDAL.DataSource.customers;
-            Customer temp = new Customer();
-            for (int i = 0; i < run.Count; i++)
-            {
-                if (run[i].Id == s)
-                {
-                    temp = run[i];
-                }
-            }
-            return temp;
+            if (!CheckCusromer(s))
+                throw new MissingIdException(s, "Customer");
+
+            Customer st = IDAL.DataSource.customers.Find(st => st.Id == s);
+            return st;
 
         }
         public IEnumerable<Customer> ShowCustomerList()//כפילות בפונציה יש אותה פעמיים בשמות שונים 
