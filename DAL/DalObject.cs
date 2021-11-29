@@ -29,11 +29,7 @@ namespace DalObject
         {
             IDAL.DataSource.Stations.Add(s);
         }
-        public void AddDrone(Drone d)
-        {
-            IDAL.DataSource.drones.Add(d);
-        }
-       
+        
         public void AddParcel(Parcel p)
         {
             IDAL.DataSource.packets.Add(p);
@@ -214,20 +210,7 @@ namespace DalObject
         /// Print all drone's list
         /// </summary>
 
-        public Drone ShowDrone(int id)
-        {
-            List<Drone> run = IDAL.DataSource.drones;
-            Drone temp = new Drone();
-            for (int i = 0; i < run.Count(); i++)
-            {
-                if (run[i].id == id)
-                {
-                    temp = run[i];
-
-                }
-            }
-            return temp;
-        }
+        
         /// <summary>
         /// run on the packets list and print
         /// </summary>
@@ -289,17 +272,7 @@ namespace DalObject
             return temp;
         }
         
-        public IEnumerable<Drone> ShowDroneList()
-        {
-
-            List<Drone> temp = new List<Drone>();
-            foreach (Drone item in IDAL.DataSource.drones)
-            {
-                temp.Add(item);
-            }
-
-            return temp;
-        }
+     
         public IEnumerable<Parcel> ShowParcelList()
         {
 
@@ -311,41 +284,6 @@ namespace DalObject
 
             return temp;
         }
-
-        //public Station IsFoundStation(int id)
-        //{
-        //    foreach (Station item in IDAL.DataSource.Stations)
-        //    {
-        //        if (item.Id == id)
-        //            return item;
-
-        //    }
-        //    throw new IDAL.DO.MissingIdException(id, "Station");
-
-        //}
-        //public Drone IsFoundDrone(int id)
-        //{
-        //    foreach (Drone item in IDAL.DataSource.drones)
-        //    {
-        //        if (item.id == id)
-        //            return item;
-
-        //    }
-
-        //    throw new IDAL.DO.MissingIdException(id, "Drone");
-
-        //}
-        //public Parcel IsFoundParcel(int id)
-        //{
-        //    foreach (Parcel item in IDAL.DataSource.packets)
-        //    {
-        //        if (item.Id == id)
-        //            return item;
-
-        //    }
-        //    throw new IDAL.DO.MissingIdException(id, "Parcel");
-
-        //}
 
     }
     

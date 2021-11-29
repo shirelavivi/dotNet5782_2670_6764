@@ -48,7 +48,7 @@ namespace DalObject
             int count = IDAL.DataSource.customers.RemoveAll(st => st.Id == st.Id);
 
             if (count == 0)
-                throw new MissingIdException(st.Id, "Student");
+                throw new MissingIdException(st.Id, "Customer");
 
             IDAL.DataSource.customers.Add(st);
         }
@@ -58,7 +58,7 @@ namespace DalObject
             int count = IDAL.DataSource.customers.RemoveAll(st => st.Id == id);
 
             if (count == 0)
-                throw new MissingIdException(id, "Student");
+                throw new MissingIdException(id, "Customer");
         }
 
         public IEnumerable<Customer> GetCustomertsByPerdicate(Predicate<Customer> predicate)

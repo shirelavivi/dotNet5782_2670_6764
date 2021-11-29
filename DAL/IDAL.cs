@@ -16,6 +16,10 @@ namespace DalObject
         public IEnumerable<Customer> ShowCustomerList();
         public Customer GetCustomer(int id);
         public bool CheckCusromer(int id);
+        public IEnumerable<Customer> GetALLCustomers();
+        public void UpdCustomer(Customer st);
+        public void DelCustomer(int id);
+        public IEnumerable<Customer> GetCustomertsByPerdicate(Predicate<Customer> predicate);
         #endregion
 
         #region station
@@ -35,24 +39,27 @@ namespace DalObject
 
 
         #region drone
-        public void AddDrone(Drone d);
+        public void AddDrone(Drone c);
         public void ConnectParcelToDron(int ParcelId, int DronId);
         public void SendDroneTpCharge(int StationId, int DroneId);
         public Drone ShowDrone(int id);
-        //public Drone IsFoundDrone(int id);
+        public Drone GetDrone(int id);
+        public bool CheckDrone(int id);
+        public IEnumerable<Drone> GetALLDrones();
+        public void UpdDrone(Drone st);
+        public void DelDrone(int id);
+        public IEnumerable<Drone> GetDronetsByPerdicate(Predicate<Drone> predicate);
+        public IEnumerable<Drone> ShowDroneList();  
         #endregion
 
         #region parcel
         public int runNumber();
-        public void AddParcel(Parcel p);
-       
-       
+        public void AddParcel(Parcel p); 
         public void collection(int ParcelId);
         public void ReleaseDroneFromChargeStation(int DroneId);
         public void PackageDalvery(int ParcelId); 
         public Parcel ShowParcel(int id);
         public List<Parcel> ShowParcelId();
-        public IEnumerable<Drone> ShowDroneList();
         public IEnumerable<Parcel> ShowParcelList();
          public Parcel GetParcel(int id);
          public void AdditionParcel(Parcel c);
