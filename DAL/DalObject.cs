@@ -8,108 +8,46 @@ using IDAL.DO;
 namespace DalObject
 {
 
-        public class DalObject: Idal
+    public partial class DalObject : Idal
+    {
+
+        IDAL.DataSource.config ds = new IDAL.DataSource.config();
+        public DalObject()
+        {
+            ds.Initialize();
+        }
+        public int runNumber()
         {
 
-            IDAL.DataSource.config ds = new IDAL.DataSource.config();
-            public DalObject()
-            {
-                ds.Initialize();
-            }
-            public int runNumber()
-            {
+            return ds.runCounterPackets();
+        }
+        /// <summary>
+        /// Add station to stations list
+        /// </summary>
+        /// <param name="s"></param>
+        public void AddStation(Station s)
+        {
+            IDAL.DataSource.Stations.Add(s);
+        }
+        public void AddDrone(Drone d)
+        {
+            IDAL.DataSource.drones.Add(d);
+        }
+       
+        public void AddParcel(Parcel p)
+        {
+            IDAL.DataSource.packets.Add(p);
 
-                return ds.runCounterPackets();
-            }
-            /// <summary>
-            /// Add station to stations list
-            /// </summary>
-            /// <param name="s"></param>
-            public void AddStation(Station s)
+        }
+        public void ConnectParcelToDron(int ParcelId, int DronId)// (מעודכן(קישור חבילה לרחפן
+        {
+            //    List<Drone> runOfDrone = IDAL.DataSource.drones;
+            //    List<Parcel> runOfParcel = IDAL.DataSource.packets;
+            Parcel p = new Parcel();
+            Drone d = new Drone();
+            int j, i = IDAL.DataSource.packets.Count() + 1;
+            try
             {
-                IDAL.DataSource.Stations.Add(s);
-            }
-            public void AddDrone(Drone d)
-            {
-                IDAL.DataSource.drones.Add(d);
-            }
-            public void AddCustomer(Customer c)
-            {
-                
-                 //if(chekId(c.Id))
-                 
-                 //     throw new IDAL.DO.DuplicateIdException(c.Id, "Customer");
-                 
-           
-                IDAL.DataSource.customers.Add(c);
-            
-            }
-            public void AddParcel(Parcel p)
-            {
-                IDAL.DataSource.packets.Add(p);
-
-            }
-            public void ConnectParcelToDron(int ParcelId, int DronId)// (מעודכן(קישור חבילה לרחפן
-            {
-                //    List<Drone> runOfDrone = IDAL.DataSource.drones;
-                //    List<Parcel> runOfParcel = IDAL.DataSource.packets;
-                Parcel p = new Parcel();
-                Drone d = new Drone();
-                int j, i= IDAL.DataSource.packets.Count()+1;
-                try
-                {
-                    for (i = 0; i < IDAL.DataSource.packets.Count(); i++)
-                    {
-                        if (IDAL.DataSource.packets[i].Id == ParcelId)
-                        {
-                            p = IDAL.DataSource.packets[i];
-                            break;
-                        }
-                    }
-                }
-                catch (MissingIdException ec)
-                {
-                    Console.WriteLine("My Exc: ");
-                    Console.WriteLine(ec);
-
-                }
-                try
-                {
-                    for (j = 0; j < IDAL.DataSource.drones.Count(); j++)
-                    {
-                        if (IDAL.DataSource.drones[j].id == DronId)
-                        {
-                            d = IDAL.DataSource.drones[j];
-                            break;
-                        }
-                    }
-                }
-                catch (MissingIdException ec)
-                {
-                    Console.WriteLine("My Exc: ");
-                    Console.WriteLine(ec);
-
-                }
-
-                if (d.MaxWeight == p.Weight)//צריך לבדוק לא רק אם הרחפן יכול לשאת משקל זהה ....
-                {
-                    p.DroneId = d.id;
-                    p.Scheduled = DateTime.Now;
-                    IDAL.DataSource.packets[i] = p;
-
-                }
-         
-            }
-            /// <summary>
-            /// If the package ID number matches the drone's ID number then it will collect the package,
-            /// The drone's status changes for transpot and we will delete the old drone from the list
-            /// </summary>
-            /// <param name="p"></param>
-            public void collection(int ParcelId)//(מעודכן)איסוף חבעלה על ידי רחפן
-
-            {
-                Parcel p = new Parcel();
-                int i;
                 for (i = 0; i < IDAL.DataSource.packets.Count(); i++)
                 {
                     if (IDAL.DataSource.packets[i].Id == ParcelId)
@@ -118,243 +56,262 @@ namespace DalObject
                         break;
                     }
                 }
-                List<Drone> run = IDAL.DataSource.drones;
-
-                for (int j = 0; j < run.Count(); j++)
-                {
-                    if (run[j].id == p.DroneId)
-                    {
-
-                        Drone temp = new Drone();
-                        //temp.status = DroneStatuses.transport;
-                        run[j] = temp;
-                        Parcel temp2 = IDAL.DataSource.packets[i];
-                        temp2.PickedUp = DateTime.Now;
-                        IDAL.DataSource.packets[i] = temp2;
-                        return;
-
-                    }
-
-                }
             }
-            public void SendDroneTpCharge(int StationId, int DroneId)///)מעודכן)שליחת רחפן לטעינה
+            catch (MissingIdException ec)
             {
-                DalObject dl = new DalObject();
-                Station tempStation = dl.ShowStation(StationId);
-                Drone tempDrone = dl.ShowDrone(DroneId);
-                //tempDrone.status = DroneStatuses.maintenance;
-                tempStation.ChargeSlots--;///עידכון עמדות טעינה
-                IDAL.DataSource.drones.Add(tempDrone);
-                IDAL.DataSource.drones.Remove(dl.ShowDrone(DroneId));
-                IDAL.DataSource.Stations.Add(tempStation);///הוספת התחנה המעודכנת
-                IDAL.DataSource.Stations.Remove(dl.ShowStation(StationId));
-                DroneCharge tempDronecharge = new DroneCharge();
-                tempDronecharge.Droneld = DroneId;
-                tempDronecharge.StationId = StationId;
-                IDAL.DataSource.DronesCharge.Add(tempDronecharge);
-            }
-            public void ReleaseDroneFromChargeStation(int DroneId)//(מעודכן) ניתוק רחפן מעמדת טעינה
-            {
-                DalObject dl = new DalObject();
-                Drone tempDrone1 = dl.ShowDrone(DroneId);
-                //tempDrone1.status = DroneStatuses.available;
-                IDAL.DataSource.drones.Add(tempDrone1);
-                IDAL.DataSource.drones.Remove(dl.ShowDrone(DroneId));
-                //List<DroneCharge> runDronesCharge = IDAL.DataSource.DronesCharge;
-                int save = 0;
-                for (int i = 0; i < IDAL.DataSource.DronesCharge.Count; i++)
-                {
-                    if (IDAL.DataSource.DronesCharge[i].Droneld == DroneId)
-                    {
-                        save = IDAL.DataSource.DronesCharge[i].StationId;
-                        IDAL.DataSource.DronesCharge.Remove(IDAL.DataSource.DronesCharge[i]);
+                Console.WriteLine("My Exc: ");
+                Console.WriteLine(ec);
 
-                    }
-                }
-                Station s = dl.ShowStation(save);
-                s.ChargeSlots++;
-                IDAL.DataSource.Stations.Add(s);
-                IDAL.DataSource.Stations.Remove(dl.ShowStation(save));
             }
-
-            public void PackageDalvery(int ParcelId)//)מעודכן) איסוף חבילה עך ידי רחפן
+            try
             {
-                int i, j;
-                Parcel p = new Parcel();
-                List<Parcel> runOfParcel = IDAL.DataSource.packets;
-                for (i = 0; i < runOfParcel.Count(); i++)
+                for (j = 0; j < IDAL.DataSource.drones.Count(); j++)
                 {
-                    if (runOfParcel[i].Id == ParcelId)
+                    if (IDAL.DataSource.drones[j].id == DronId)
                     {
-                        p = runOfParcel[i];
+                        d = IDAL.DataSource.drones[j];
                         break;
                     }
                 }
-                List<Drone> run = IDAL.DataSource.drones;
-
-                for (j = 0; j < run.Count(); j++)
-                {
-                    if (run[j].id == p.DroneId)
-                    {
-                        Drone temp = run[j];
-                        //temp.status = DroneStatuses.available;
-                        run[j] = temp;
-                        Parcel temp2 = runOfParcel[i];
-                        temp2.Delivered = DateTime.Now;
-                        runOfParcel[i] = temp2;
-
-                    }
-                }
             }
-            public Station ShowStation(int id)
+            catch (MissingIdException ec)
             {
-                List<Station> run = IDAL.DataSource.Stations;
-                Station temp = new Station();
-                for (int i = 0; i < run.Count(); i++)
-                {
-                    if (run[i].Id == id)
-                    {
-                        temp = run[i];
-
-                    }
-                }
-                return temp;
-            }
-            /// <summary>
-            /// Print all drone's list
-            /// </summary>
-
-            public Drone ShowDrone(int id)
-            {
-                List<Drone> run = IDAL.DataSource.drones;
-                Drone temp = new Drone();
-                for (int i = 0; i < run.Count(); i++)
-                {
-                    if (run[i].id == id)
-                    {
-                        temp = run[i];
-
-                    }
-                }
-                return temp;
-            }
-            /// <summary>
-            /// run on the packets list and print
-            /// </summary>
-            /// <param name="id"> Get the id of parcel </param>
-            public Parcel ShowParcel(int id)
-            {
-                List<Parcel> run = IDAL.DataSource.packets;
-                Parcel temp = new Parcel();
-                for (int i = 0; i < run.Count(); i++)
-                {
-                    if (run[i].Id == id)
-                    {
-                        temp = run[i];
-
-                    }
-                }
-                return temp;
+                Console.WriteLine("My Exc: ");
+                Console.WriteLine(ec);
 
             }
-            public Customer ShowCustomer(int s)
-            {
 
-
-            List<Customer> run = IDAL.DataSource.customers;
-            Customer temp = new Customer();
-            for (int i = 0; i < run.Count; i++)
+            if (d.MaxWeight == p.Weight)//צריך לבדוק לא רק אם הרחפן יכול לשאת משקל זהה ....
             {
-                if (run[i].Id == s)
+                p.DroneId = d.id;
+                p.Scheduled = DateTime.Now;
+                IDAL.DataSource.packets[i] = p;
+
+            }
+
+        }
+        /// <summary>
+        /// If the package ID number matches the drone's ID number then it will collect the package,
+        /// The drone's status changes for transpot and we will delete the old drone from the list
+        /// </summary>
+        /// <param name="p"></param>
+        public void collection(int ParcelId)//(מעודכן)איסוף חבעלה על ידי רחפן
+
+        {
+            Parcel p = new Parcel();
+            int i;
+            for (i = 0; i < IDAL.DataSource.packets.Count(); i++)
+            {
+                if (IDAL.DataSource.packets[i].Id == ParcelId)
+                {
+                    p = IDAL.DataSource.packets[i];
+                    break;
+                }
+            }
+            List<Drone> run = IDAL.DataSource.drones;
+
+            for (int j = 0; j < run.Count(); j++)
+            {
+                if (run[j].id == p.DroneId)
+                {
+
+                    Drone temp = new Drone();
+                    //temp.status = DroneStatuses.transport;
+                    run[j] = temp;
+                    Parcel temp2 = IDAL.DataSource.packets[i];
+                    temp2.PickedUp = DateTime.Now;
+                    IDAL.DataSource.packets[i] = temp2;
+                    return;
+
+                }
+
+            }
+        }
+        public void SendDroneTpCharge(int StationId, int DroneId)///)מעודכן)שליחת רחפן לטעינה
+        {
+            DalObject dl = new DalObject();
+            Station tempStation = dl.ShowStation(StationId);
+            Drone tempDrone = dl.ShowDrone(DroneId);
+            //tempDrone.status = DroneStatuses.maintenance;
+            tempStation.ChargeSlots--;///עידכון עמדות טעינה
+            IDAL.DataSource.drones.Add(tempDrone);
+            IDAL.DataSource.drones.Remove(dl.ShowDrone(DroneId));
+            IDAL.DataSource.Stations.Add(tempStation);///הוספת התחנה המעודכנת
+            IDAL.DataSource.Stations.Remove(dl.ShowStation(StationId));
+            DroneCharge tempDronecharge = new DroneCharge();
+            tempDronecharge.Droneld = DroneId;
+            tempDronecharge.StationId = StationId;
+            IDAL.DataSource.DronesCharge.Add(tempDronecharge);
+        }
+        public void ReleaseDroneFromChargeStation(int DroneId)//(מעודכן) ניתוק רחפן מעמדת טעינה
+        {
+            DalObject dl = new DalObject();
+            Drone tempDrone1 = dl.ShowDrone(DroneId);
+            //tempDrone1.status = DroneStatuses.available;
+            IDAL.DataSource.drones.Add(tempDrone1);
+            IDAL.DataSource.drones.Remove(dl.ShowDrone(DroneId));
+            //List<DroneCharge> runDronesCharge = IDAL.DataSource.DronesCharge;
+            int save = 0;
+            for (int i = 0; i < IDAL.DataSource.DronesCharge.Count; i++)
+            {
+                if (IDAL.DataSource.DronesCharge[i].Droneld == DroneId)
+                {
+                    save = IDAL.DataSource.DronesCharge[i].StationId;
+                    IDAL.DataSource.DronesCharge.Remove(IDAL.DataSource.DronesCharge[i]);
+
+                }
+            }
+            Station s = dl.ShowStation(save);
+            s.ChargeSlots++;
+            IDAL.DataSource.Stations.Add(s);
+            IDAL.DataSource.Stations.Remove(dl.ShowStation(save));
+        }
+
+        public void PackageDalvery(int ParcelId)//)מעודכן) איסוף חבילה עך ידי רחפן
+        {
+            int i, j;
+            Parcel p = new Parcel();
+            List<Parcel> runOfParcel = IDAL.DataSource.packets;
+            for (i = 0; i < runOfParcel.Count(); i++)
+            {
+                if (runOfParcel[i].Id == ParcelId)
+                {
+                    p = runOfParcel[i];
+                    break;
+                }
+            }
+            List<Drone> run = IDAL.DataSource.drones;
+
+            for (j = 0; j < run.Count(); j++)
+            {
+                if (run[j].id == p.DroneId)
+                {
+                    Drone temp = run[j];
+                    //temp.status = DroneStatuses.available;
+                    run[j] = temp;
+                    Parcel temp2 = runOfParcel[i];
+                    temp2.Delivered = DateTime.Now;
+                    runOfParcel[i] = temp2;
+
+                }
+            }
+        }
+        public Station ShowStation(int id)
+        {
+            List<Station> run = IDAL.DataSource.Stations;
+            Station temp = new Station();
+            for (int i = 0; i < run.Count(); i++)
+            {
+                if (run[i].Id == id)
                 {
                     temp = run[i];
+
                 }
             }
             return temp;
-           }
+        }
+        /// <summary>
+        /// Print all drone's list
+        /// </summary>
 
-
-            public List<Parcel> ShowParcelId()
+        public Drone ShowDrone(int id)
+        {
+            List<Drone> run = IDAL.DataSource.drones;
+            Drone temp = new Drone();
+            for (int i = 0; i < run.Count(); i++)
             {
-                List<Parcel> temp = new List<Parcel>();
-                List<Parcel> run = IDAL.DataSource.packets;
-                for (int i = 0; i < run.Count; i++)
+                if (run[i].id == id)
                 {
-                    if (run[i].DroneId == 0)
-                    {
-                        temp.Add(run[i]);
-                    }
+                    temp = run[i];
 
                 }
-                return temp;
             }
-
-            public List<Station> ShowStationAvailable()
+            return temp;
+        }
+        /// <summary>
+        /// run on the packets list and print
+        /// </summary>
+        /// <param name="id"> Get the id of parcel </param>
+        public Parcel ShowParcel(int id)
+        {
+            List<Parcel> run = IDAL.DataSource.packets;
+            Parcel temp = new Parcel();
+            for (int i = 0; i < run.Count(); i++)
             {
-                List<Station> run = IDAL.DataSource.Stations;
-                List<Station> temp = new List<Station>();
-                for (int i = 0; i < run.Count; i++)
+                if (run[i].Id == id)
                 {
-                    if (run[i].ChargeSlots > 0)
-                        temp.Add(run[i]);
+                    temp = run[i];
+
                 }
-                return temp;
             }
+            return temp;
+
+        }
+       
 
 
-            public IEnumerable<Station> ShowStationList()
+        public List<Parcel> ShowParcelId()
+        {
+            List<Parcel> temp = new List<Parcel>();
+            List<Parcel> run = IDAL.DataSource.packets;
+            for (int i = 0; i < run.Count; i++)
             {
-                List<Station> temp = new List<Station>();
-                foreach (Station item in IDAL.DataSource.Stations)
+                if (run[i].DroneId == 0)
                 {
-                    temp.Add(item);
-                }
-
-                return temp;
-            }
-            public IEnumerable<Customer> ShowCustomerList()
-            {
-
-                List<Customer> temp = new List<Customer>();
-                foreach (Customer item in IDAL.DataSource.customers)
-                {
-                    temp.Add(item);
-                }
-
-                return temp;
-            }
-            public IEnumerable<Drone> ShowDroneList()
-            {
-
-                List<Drone> temp = new List<Drone>();
-                foreach (Drone item in IDAL.DataSource.drones)
-                {
-                    temp.Add(item);
+                    temp.Add(run[i]);
                 }
 
-                return temp;
             }
-            public IEnumerable<Parcel> ShowParcelList()
+            return temp;
+        }
+
+        public List<Station> ShowStationAvailable()
+        {
+            List<Station> run = IDAL.DataSource.Stations;
+            List<Station> temp = new List<Station>();
+            for (int i = 0; i < run.Count; i++)
             {
-
-                List<Parcel> temp = new List<Parcel>();
-                foreach (Parcel item in IDAL.DataSource.packets)
-                {
-                    temp.Add(item);
-                }
-
-                return temp;
+                if (run[i].ChargeSlots > 0)
+                    temp.Add(run[i]);
             }
-        //public Customer IsFoundCustomer(int id)
-        //{
-        //    foreach (Customer item in IDAL.DataSource.customers)
-        //    {
-        //        if (item.Id == id)
-        //            return item;
-        //    }
-        //    throw new IDAL.DO.MissingIdException(id, "Customer");
+            return temp;
+        }
 
-        //}
+
+        public IEnumerable<Station> ShowStationList()
+        {
+            List<Station> temp = new List<Station>();
+            foreach (Station item in IDAL.DataSource.Stations)
+            {
+                temp.Add(item);
+            }
+
+            return temp;
+        }
+        
+        public IEnumerable<Drone> ShowDroneList()
+        {
+
+            List<Drone> temp = new List<Drone>();
+            foreach (Drone item in IDAL.DataSource.drones)
+            {
+                temp.Add(item);
+            }
+
+            return temp;
+        }
+        public IEnumerable<Parcel> ShowParcelList()
+        {
+
+            List<Parcel> temp = new List<Parcel>();
+            foreach (Parcel item in IDAL.DataSource.packets)
+            {
+                temp.Add(item);
+            }
+
+            return temp;
+        }
+
         //public Station IsFoundStation(int id)
         //{
         //    foreach (Station item in IDAL.DataSource.Stations)
@@ -391,6 +348,7 @@ namespace DalObject
         //}
 
     }
+    
     
 }
 

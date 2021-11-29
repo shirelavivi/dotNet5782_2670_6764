@@ -14,7 +14,8 @@ namespace DalObject
         public void AddCustomer(Customer c);
         public Customer ShowCustomer(int s);
         public IEnumerable<Customer> ShowCustomerList();
-        public Customer IsFoundCustomer(int id);
+        public Customer GetCustomer(int id);
+        public bool CheckCusromer(int id);
         #endregion
 
         #region station
