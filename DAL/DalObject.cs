@@ -25,16 +25,22 @@ namespace DalObject
         /// Add station to stations list
         /// </summary>
         /// <param name="s"></param>
-        public void AddStation(Station s)
-        {
-            IDAL.DataSource.Stations.Add(s);
-        }
-        
-        public void AddParcel(Parcel p)
-        {
-            IDAL.DataSource.packets.Add(p);
+        //public void AddStation(Station station)
+        //{
+        //    if (CheckStation(station.Id))
+        //        throw new DuplicateIdException(station.Id, "Station");
 
-        }
+        //    IDAL.DataSource.Stations.Add(station);
+        //}
+        
+        //public void AddParcel(Parcel parcel)
+        //{
+        //    if (CheckParcel(parcel.Id))
+        //        throw new DuplicateIdException(parcel.Id, "Parcel");
+
+        //    IDAL.DataSource.packets.Add(parcel);
+
+        //}
         public void ConnectParcelToDron(int ParcelId, int DronId)// (מעודכן(קישור חבילה לרחפן
         {
             //    List<Drone> runOfDrone = IDAL.DataSource.drones;

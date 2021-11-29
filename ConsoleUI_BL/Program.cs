@@ -34,6 +34,7 @@ namespace ConsoleUI_BL
                 double.TryParse(Console.ReadLine(), out d);
                 location.Longitude = d;
                 customer.
+                    
                 return customer;
             }//פונקציה שקולטת לקוח ומחזירה עצם של BL מטיפוס לקוח
             Options op;

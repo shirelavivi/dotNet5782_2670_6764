@@ -22,6 +22,8 @@ namespace IBL
                     stationDo.Lattitude = station.locationOfStation.Lattitude;
                     stationDo.Longitude = station.locationOfStation.Longitude;
                     stationDo.ChargeSlots = station.ChargingAvailable;
+                   
+
                     dl.AddStation(stationDo);
                 }
                 catch (IDAL.DO.DuplicateIdException ex)
