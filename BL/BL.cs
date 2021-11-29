@@ -15,9 +15,21 @@ namespace IBL
         {
             internal static List<DroneToList> drones_bl = new List<DroneToList>();
             DalObject.DalObject dl = new DalObject.DalObject();
-           public BL()
+            internal static double Free ;
+            internal static double Light ;
+            internal static double Medium;
+            internal static double Heavy ;
+            public BL()
             {
+                
+                Free = dl.batteryArr()[0];
+                Light=dl.batteryArr()[1];
+                Medium = dl.batteryArr()[2];
+                Heavy = dl.batteryArr()[3];
+                foreach(IDAL.DO.Drone item in  dl.GetALLDrones())
+                {
 
+                }
             }
         }
     }

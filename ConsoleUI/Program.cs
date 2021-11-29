@@ -44,7 +44,7 @@ namespace ConsoleUI
                             {
                                 case Addition.AddStation:
                                     {
-                                        Customer temp1 = new Customer();
+                                        Station temp1 = new Station();
                                         int tempId;
                                         double tempLongitude;
                                         double tempLattitude;
@@ -192,7 +192,7 @@ namespace ConsoleUI
                                     break;
                                 case UpDate.sending_for_loading:
                                     {
-                                        List<Customer> s = dl.ShowStationAvailable();
+                                        List<Station> s = dl.ShowStationAvailable();
                                         Console.WriteLine("Type drone ID:");
                                         int droneID, stationID;
                                         int.TryParse(Console.ReadLine(), out droneID);
@@ -240,11 +240,11 @@ namespace ConsoleUI
                             {
                                 case Show.Station:
                                     {
-                                        Customer stationToShow;
+                                        Station stationToShow;
                                         Console.WriteLine("Type a station ID:");
                                         int stationlID;
                                         int.TryParse(Console.ReadLine(), out stationlID);
-                                        stationToShow = dl.ShowStation(stationlID);
+                                        stationToShow = dl.GetStation(stationlID);
                                         stationToShow.ToString();
 
                                     }
@@ -255,7 +255,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Type Drone ID:");
                                         int dronelID;
                                         int.TryParse(Console.ReadLine(), out dronelID);
-                                        droneToShow = dl.ShowDrone(dronelID);
+                                        droneToShow = dl.GetDrone(dronelID);
                                         droneToShow.ToString();
 
                                     }
@@ -266,7 +266,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Type Customer ID:");
                                         int customerID;
                                         int.TryParse(Console.ReadLine(), out customerID);
-                                        customerToShow = dl.ShowCustomer(customerID);
+                                        customerToShow = dl.GetCustomer(customerID);
                                         customerToShow.ToString();
                                     }
                                     break;
@@ -276,7 +276,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Type Parcel ID:");
                                         int parcelID;
                                         int.TryParse(Console.ReadLine(), out parcelID);
-                                        parcelToShow = dl.ShowParcel(parcelID);
+                                        parcelToShow = dl.GetParcel(parcelID);
                                         parcelToShow.ToString();
                                     }
                                     break;
@@ -304,7 +304,7 @@ namespace ConsoleUI
                                 case ShowList.Station:
                                     {
                                        
-                                        foreach (Customer item in dl.ShowStationList())
+                                        foreach (Station item in dl.GetALLStations())
                                         {
                                            item.ToString();
                                            Console.WriteLine("\n\n");
@@ -314,7 +314,7 @@ namespace ConsoleUI
                                     break;
                                 case ShowList.Drone:
                                     {
-                                        foreach (Drone item in dl.ShowDroneList())
+                                        foreach (Drone item in dl.GetALLDrones())
                                         {
                                             item.ToString();
                                             Console.WriteLine("\n\n");
@@ -332,7 +332,7 @@ namespace ConsoleUI
                                     break;
                                 case ShowList.Parcel:
                                     {
-                                        foreach (Parcel item in dl.ShowParcelList())
+                                        foreach (Parcel item in dl.GetALLParcel())
                                         {
                                             item.ToString();
                                             Console.WriteLine("\n\n");

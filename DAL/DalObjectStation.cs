@@ -9,15 +9,8 @@ namespace DalObject
 {
     public partial class DalObject : Idal
     {
-        public Station GetStation(int id)
-        {
-            if (!CheckStation(id))
-                throw new MissingIdException(id, "Station");
-
-            Station st = IDAL.DataSource.Stations.Find(st => st.Id == id);
-            return st;
-        }
-        public void AdditionStation(Station c)
+       
+        public void AddStation(Station c)
         {
 
             if (CheckStation(c.Id))
@@ -33,13 +26,6 @@ namespace DalObject
         {
             return IDAL.DataSource.Stations.Any(st => st.Id == id);
         }
-
-        public IEnumerable<Station> GetALLStations()
-        {
-            return from st in IDAL.DataSource.Stations select st;
-            //return DataSource.Customers;
-        }
-
 
 
         public void UpdStation(Station st)
@@ -66,31 +52,20 @@ namespace DalObject
                    where predicate(st)
                    select st;
         }
-        public Station ShowStations(int s)
+        public Station GetStation(int s)
         {
-            List<Station> run = IDAL.DataSource.Stations;
-            Station temp = new Station();
-            for (int i = 0; i < run.Count; i++)
-            {
-                if (run[i].Id == s)
-                {
-                    temp = run[i];
-                }
-            }
-            return temp;
+            if (!CheckStation(s))
+                throw new MissingIdException(s, "Station");
+
+            Station st = IDAL.DataSource.Stations.Find(st => st.Id == s);
+            return st;
 
         }
-    //    public IEnumerable<Station> ShowStationList()//כפילות בפונציה יש אותה פעמיים בשמות שונים 
-    //    {
+        public IEnumerable<Station> GetALLStations()
+        {
 
-    //        List<Station> temp = new List<Station>();
-    //        foreach (Station item in IDAL.DataSource.Stations)
-    //        {
-    //            temp.Add(item);
-    //        }
-
-    //        return temp;
-    //    }
+            return from st in IDAL.DataSource.Stations select st;
+        }
     }
 }
 

@@ -10,14 +10,7 @@ namespace DalObject
 
     public partial class DalObject : Idal
     {
-        public Drone GetDrone(int id)
-        {
-            if (!CheckDrone(id))
-                throw new MissingIdException(id, "Drone");
-
-            Drone st = IDAL.DataSource.drones.Find(st => st.id == id);
-            return st;
-        }
+        
         public void AddDrone(Drone c)
         {
 
@@ -34,14 +27,6 @@ namespace DalObject
         {
             return IDAL.DataSource.drones.Any(st => st.id == id);
         }
-
-        public IEnumerable<Drone> GetALLDrones()
-        {
-            return from st in IDAL.DataSource.drones select st;
-            //return DataSource.Customers;
-        }
-
-
 
         public void UpdDrone(Drone st)
         {
@@ -67,30 +52,19 @@ namespace DalObject
                    where predicate(st)
                    select st;
         }
-        public Drone ShowDrone(int id)
+        public Drone GetDrone(int id)
         {
-            List<Drone> run = IDAL.DataSource.drones;
-            Drone temp = new Drone();
-            for (int i = 0; i < run.Count(); i++)
-            {
-                if (run[i].id == id)
-                {
-                    temp = run[i];
+            if (!CheckDrone(id))
+                throw new MissingIdException(id, "Drone");
 
-                }
-            }
-            return temp;
+            Drone st = IDAL.DataSource.drones.Find(st => st.id == id);
+            return st;
         }
-        public IEnumerable<Drone> ShowDroneList()
+        public IEnumerable<Drone> GetALLDrones()
         {
 
-            List<Drone> temp = new List<Drone>();
-            foreach (Drone item in IDAL.DataSource.drones)
-            {
-                temp.Add(item);
-            }
-
-            return temp;
+            return from st in IDAL.DataSource.drones select st;
+            //return DataSource.Customers;
         }
     }
 }
