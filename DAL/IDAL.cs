@@ -21,9 +21,16 @@ namespace DalObject
         #region station
         public void AddStation(Station s);
         public Station ShowStation(int id);
-        public List<Station> ShowStationAvailable();
+        public List< Station> ShowStationAvailable();
         public IEnumerable<Station> ShowStationList();
-        //public Station IsFoundStation(int id);
+        public void AdditionStation( Station st);
+        public Station GetStation(int id);
+        public bool CheckStation(int id);
+        public void UpdStation(Station st);
+        public void DelStation(int id);
+         public IEnumerable<Station> GetStationByPerdicate(Predicate<Station> predicate);
+        public Station ShowStations(int s);
+         //public IEnumerable<Station> ShowStationList();
         #endregion
 
 
@@ -47,7 +54,15 @@ namespace DalObject
         public List<Parcel> ShowParcelId();
         public IEnumerable<Drone> ShowDroneList();
         public IEnumerable<Parcel> ShowParcelList();
-        //public Parcel IsFoundParcel(int id);
+         public Parcel GetParcel(int id);
+         public void AdditionParcel(Parcel c);
+         public bool CheckParcel(int id);
+        public IEnumerable<Parcel> GetALLParcel();
+        public void UpdParcel(Parcel st);
+         public void DelParcel(int id);
+         public IEnumerable<Parcel> GetParcelByPerdicate(Predicate<Parcel> predicate);
+         public Parcel ShowParcels(int s);
+        //public IEnumerable<Parcel> ShowParcelList();
         #endregion
 
     }
