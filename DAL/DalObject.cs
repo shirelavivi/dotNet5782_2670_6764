@@ -285,41 +285,6 @@ namespace DalObject
             return temp;
         }
 
-        //public Station IsFoundStation(int id)
-        //{
-        //    foreach (Station item in IDAL.DataSource.Stations)
-        //    {
-        //        if (item.Id == id)
-        //            return item;
-
-        //    }
-        //    throw new IDAL.DO.MissingIdException(id, "Station");
-
-        //}
-        //public Drone IsFoundDrone(int id)
-        //{
-        //    foreach (Drone item in IDAL.DataSource.drones)
-        //    {
-        //        if (item.id == id)
-        //            return item;
-
-        //    }
-
-        //    throw new IDAL.DO.MissingIdException(id, "Drone");
-
-        //}
-        //public Parcel IsFoundParcel(int id)
-        //{
-        //    foreach (Parcel item in IDAL.DataSource.packets)
-        //    {
-        //        if (item.Id == id)
-        //            return item;
-
-        //    }
-        //    throw new IDAL.DO.MissingIdException(id, "Parcel");
-
-        //}
-
     }
     
     
