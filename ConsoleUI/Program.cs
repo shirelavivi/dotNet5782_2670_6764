@@ -44,7 +44,7 @@ namespace ConsoleUI
                             {
                                 case Addition.AddStation:
                                     {
-                                        Station temp1 = new Station();
+                                        Customer temp1 = new Customer();
                                         int tempId;
                                         double tempLongitude;
                                         double tempLattitude;
@@ -192,7 +192,7 @@ namespace ConsoleUI
                                     break;
                                 case UpDate.sending_for_loading:
                                     {
-                                        List<Station> s = dl.ShowStationAvailable();
+                                        List<Customer> s = dl.ShowStationAvailable();
                                         Console.WriteLine("Type drone ID:");
                                         int droneID, stationID;
                                         int.TryParse(Console.ReadLine(), out droneID);
@@ -240,7 +240,7 @@ namespace ConsoleUI
                             {
                                 case Show.Station:
                                     {
-                                        Station stationToShow;
+                                        Customer stationToShow;
                                         Console.WriteLine("Type a station ID:");
                                         int stationlID;
                                         int.TryParse(Console.ReadLine(), out stationlID);
@@ -304,7 +304,7 @@ namespace ConsoleUI
                                 case ShowList.Station:
                                     {
                                        
-                                        foreach (Station item in dl.ShowStationList())
+                                        foreach (Customer item in dl.ShowStationList())
                                         {
                                            item.ToString();
                                            Console.WriteLine("\n\n");
