@@ -43,8 +43,8 @@ namespace IBL
                     {
                         if (countChargingSlots >= station.ChargeSlots)
                         {
-                            int i, count = 0;
-                            IDAL.DO.DroneCharge d = IDAL.DataSource.DronesCharge.FindAll(item => item.StationId == numStation);
+                            
+                            List<IDAL.DO.DroneCharge> d = IDAL.DataSource.DronesCharge.FindAll(item => item.StationId == numStation);
                             station.ChargeSlots = countChargingSlots - d.Count;
 
 

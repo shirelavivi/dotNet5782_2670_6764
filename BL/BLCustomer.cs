@@ -11,7 +11,7 @@ namespace IBL
 {
     namespace BO
     {
-       public partial class BL : IBL
+        public partial class BL : IBL
         {
             public void AddCustomer(BO.Customer customer)
             {
@@ -58,5 +58,6 @@ namespace IBL
 
 
             }
+        }
     } 
 }
