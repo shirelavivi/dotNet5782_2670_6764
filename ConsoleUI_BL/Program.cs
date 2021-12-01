@@ -7,7 +7,7 @@ namespace ConsoleUI_BL
         
         public enum Options { Addition, Update, Display, ShowLists, Exit }
         public enum Addition { AddStation, AddDrone, AddCustomer, AddParcel, Exit }
-        public enum UpDate { UpDateDrone, UpDateStation, UpDateCustome, SendingDroneforCharging, ReleaseDronefromCharging, ParcelToDrone, CollectionParcelByDrone, SupplyParcelByDrone, Exit }
+        public enum UpDate { UpDateDrone, UpDateStation, UpDateCustomer, SendingDroneforCharging, ReleaseDronefromCharging, ParcelToDrone, CollectionParcelByDrone, SupplyParcelByDrone, Exit }
         public enum Show { Station, Drone, Customer, Parcel, Exit }
         public enum ShowList { Station, Drone, Customer, Parcel, ParcelFreeDrone, StationFree, Exit }
 
@@ -54,13 +54,66 @@ namespace ConsoleUI_BL
                             add = (Addition)int.Parse(Console.ReadLine());    //User input to go through the options
                             switch (add)
                             {
-                                
+                                case Addition.AddStation:
+                                    {
+                                        IBL.BO.BaseStation baseStation = new IBL.BO.BaseStation();
+                                        IBL.BO.Location location = new IBL.BO.Location();
+                                        int stationId;
+                                        int available;
+                                        double temp;
+                                        Console.WriteLine(" Please type a station id:");
+                                        int.TryParse(Console.ReadLine(), out stationId);
+                                        baseStation.Idnumber = stationId;
+                                        Console.WriteLine("Please type a station name:");
+                                        baseStation.NameStation = Console.ReadLine();
+                                        Console.WriteLine("Please type a  Longitude:");
+                                        double.TryParse(Console.ReadLine(), out temp);
+                                        location.Longitude = temp;
+                                        Console.WriteLine("Please type a Lattitude:");
+                                        double.TryParse(Console.ReadLine(), out temp);
+                                        location.Lattitude = temp;
+                                        Console.WriteLine("Please type a charging Station Available:");
+                                        int.TryParse(Console.ReadLine(), out available);
+                                        baseStation.ChargingAvailable = available;
+                                        baseStation.droneInCharging = null;
+                                        bl.AddBaseStation(baseStation);
+                                    }
+                                    break;
+                                case Addition.AddDrone:
+                                    {
+                                        IBL.BO.Drone drone = new IBL.BO.Drone();
+                                        IBL.BO.Location location = new IBL.BO.Location();
+                                        int droneId;
+                                        int maxweight;
+                                        int available;
+                                        double temp;
+                                        Console.WriteLine(" Please type a drone id:");
+                                        int.TryParse(Console.ReadLine(), out droneId);
+                                        drone.IdDrone = droneId;
+                                        Console.WriteLine("Please type drone's model:");
+                                        drone.Modle = Console.ReadLine();
+                                        Console.WriteLine("Please type a MaxWeight:");
+                                        int.TryParse(Console.ReadLine(), out maxweight);
+                                        drone.Weightcategories =(Weightcategories)maxweight;//Right?
+                                        Console.WriteLine("Please type a charging Station Available:");
+                                        int.TryParse(Console.ReadLine(), out available);
+                                        // drone. לאן אני מכניסה עמדות טעינה פנויות?
+                                        Random random = new Random();
+                                        drone.ButerryStatus = (random.NextDouble() * (20.0)) + 20.0;
+                                        drone.DroneStatuses = DroneStatuses.maintenance;
+                                        //drone.ThisLocation =איפה יש לי מיקום תחנה
+
+                                        bl.AddDrone(drone);
+                                    }
+                                    break;
+
                                 case Addition.AddCustomer:
                                     {
                                       bl.AddCustomer(GetingCustomer());
 
                                     }
                                     break;
+
                                 case Addition.AddParcel:
                                     {
                                         IBL.BO.Parcel parcel = new IBL.BO.Parcel();  
@@ -104,13 +157,14 @@ namespace ConsoleUI_BL
                             {
                                 case UpDate.UpDateDrone:
                                     {
-                                        Console.WriteLine("Type drone ID :");
-                                        Console.WriteLine("Type drone model :");
+                                        
                                         int droneID;
                                         string model;
+                                        Console.WriteLine("Type drone ID :");
                                         int.TryParse(Console.ReadLine(), out droneID);
+                                        Console.WriteLine("Type drone model :");
                                         model= Console.ReadLine();
-                                        //........
+                                        bl.UpdateDrone(droneID, model);
 
                                     }
                                     break;
@@ -118,14 +172,27 @@ namespace ConsoleUI_BL
                                 case UpDate.UpDateStation:
                                     {
                                         Console.WriteLine("Type ststion ID:");
-                                        int stationID,number_charg_slout;
-                                        string name_station;
-                                        int.TryParse(Console.ReadLine(), out stationID);
+                                        int stationId, numberChargSlout;
+                                        string nameStation;
+                                        int.TryParse(Console.ReadLine(), out stationId);
                                         Console.WriteLine("Type a station name :");
-                                        name_station = Console.ReadLine();
+                                        nameStation = Console.ReadLine();
                                         Console.WriteLine("Type a number of charg slouts:");
-                                        int.TryParse(Console.ReadLine(), out number_charg_slout); 
-                                        
+                                        int.TryParse(Console.ReadLine(), out numberChargSlout);
+                                        bl.UpdStation(stationId, nameStation, numberChargSlout);
+                                    }
+                                    break;
+                                case UpDate.UpDateCustomer:
+                                    {
+                                        int customerID;
+                                        string nameCustomer, phoneCustomer;
+                                        Console.WriteLine("Type Customer ID :");
+                                        int.TryParse(Console.ReadLine(), out customerID);
+                                        Console.WriteLine("Type Customer Name :");
+                                        nameCustomer = Console.ReadLine();
+                                        phoneCustomer = Console.ReadLine();
+                                        bl.UpdCustomer(customerID, phoneCustomer, nameCustomer);
+
                                     }
                                     break;
                                 case UpDate.delivery:
@@ -151,16 +218,27 @@ namespace ConsoleUI_BL
                                         dl.SendDroneTpCharge(stationID, droneID);
                                     }
                                     break;
-                                case UpDate.release_from_loading:
+                                case UpDate.ReleaseDronefromCharging:
                                     {
-
+                                        int droneID, timeInCharging;
                                         Console.WriteLine("Type drone ID:");
-                                        int droneID;
                                         int.TryParse(Console.ReadLine(), out droneID);
-                                        dl.ReleaseDroneFromChargeStation(droneID);
+                                        Console.WriteLine("Type Time In Charging:");
+                                        int.TryParse(Console.ReadLine(), out timeInCharging);
+                                        bl.ReleaseDroneFromChargeStation(droneID, timeInCharging);
 
                                     }
                                     break;
+                                case UpDate.CollectionParcelByDrone:
+                                    {
+                                        int droneID;
+                                        Console.WriteLine("Type drone ID:");
+                                        int.TryParse(Console.ReadLine(), out droneID);
+                                        bl.PickUpPackage(droneID);
+
+                                    }
+                                    break;
+
                                 case UpDate.Exit:
                                     {
                                         num = 0;
@@ -172,6 +250,9 @@ namespace ConsoleUI_BL
                                     break;
                             }
                             break;
+
+
+
 
                         }
 

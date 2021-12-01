@@ -9,13 +9,13 @@ namespace IBL
     {
         public class Drone
         {
-            int IdDrone { get; set; }
-            string Modle { get; set; }
-            Weightcategories Weightcategories { get; set; }
-            double ButerryStatus { get; set; }
-            DroneStatuses DroneStatuses { get; set; }
-            ParcelInTransfer PackageInTransfer { get; set; }
-            Location ThisLocation { get; set; }
+           public int IdDrone { get; set; }
+            public string Model { get; set; }
+            public Weightcategories Weightcategories { get; set; }
+            public double ButerryStatus { get; set; }
+            public DroneStatuses DroneStatuses { get; set; }
+            public ParcelInTransfer PackageInTransfer { get; set; }//זה אמור להיות רשימת חבילות אצל..
+            public Location ThisLocation { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();

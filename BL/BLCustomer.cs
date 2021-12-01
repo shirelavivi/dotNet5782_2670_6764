@@ -13,7 +13,7 @@ namespace IBL
     {
        public partial class BL : IBL
         {
-          public void AddCustomer(BO.Customer customer)
+            public void AddCustomer(BO.Customer customer)
             {
                 try
                 {
@@ -30,10 +30,33 @@ namespace IBL
                 {
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
+            }
+            public void UpdCustomer(int idCustomer, string nameCustomer = "", string newNumPhone = "")
+            {
+                try
+                {
+                    IDAL.DO.Customer customer = dl.GetCustomer(idCustomer);
+                    customer.Id = idCustomer;
+
+                    if (nameCustomer != "")
+                    {
+                        customer.Name = nameCustomer;
+                    }
+
+                    if (newNumPhone != "")
+                    {
+                        customer.Phone = newNumPhone;
+                    }
+
+                    dl.DelCustomer(idCustomer);
+                    dl.AddCustomer(customer);
+                }
+                catch (IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
+                }
+
 
             }
-
-
-        }
     } 
 }

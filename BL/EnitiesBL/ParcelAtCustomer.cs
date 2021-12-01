@@ -10,11 +10,11 @@ namespace IBL
     {
         public class ParcelAtCustomer
         {
-            int Idnumber { get; set; }
-            Weightcategories Weightcategories { get; set; }
-            Priorities Priorities { get; set; }
-            PacketStatuses PacketStatuses { get; set; }
-            CustomerAtParcels CustomerInPackage { get; set; }
+            public int Idnumber { get; set; }
+            public Weightcategories Weightcategories { get; set; }
+            public Priorities Priorities { get; set; }
+            public PacketStatuses PacketStatuses { get; set; }
+            public CustomerAtParcels CustomerInPackage { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();

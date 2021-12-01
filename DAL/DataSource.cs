@@ -15,7 +15,7 @@ namespace IDAL
         internal static List< Station> Stations = new List<Station>();
         internal static List<Customer> customers = new List<Customer>();
         internal static List<Parcel> packets = new List<Parcel>();
-        internal static List<DroneCharge> DronesCharge = new List<DroneCharge>();
+        public static List<DroneCharge> DronesCharge = new List<DroneCharge>();
 
         internal class config
         {
@@ -64,7 +64,7 @@ namespace IDAL
 
                 for (int i = 0; i < 7; i++)
                 {
-                    d.id = Rand.Next();
+                    d.Id = Rand.Next();
                     t = Rand.Next(3);
                     switch (t)
                     {

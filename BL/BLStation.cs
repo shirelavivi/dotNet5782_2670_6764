@@ -11,7 +11,7 @@ namespace IBL
     {
         public partial class BL : IBL
         {
-            void AddBaseStation(BO.BaseStation station)
+            public void AddBaseStation(BO.BaseStation station)
             {
                 try
                 {
@@ -22,16 +22,46 @@ namespace IBL
                     stationDo.Lattitude = station.locationOfStation.Lattitude;
                     stationDo.Longitude = station.locationOfStation.Longitude;
                     stationDo.ChargeSlots = station.ChargingAvailable;
-                   
-
                     dl.AddStation(stationDo);
                 }
                 catch (IDAL.DO.DuplicateIdException ex)
                 {
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
-
             }
+            public void UpdStation(int numStation, string nameStation = "", int countChargingSlots = 0)
+            {
+                try
+                {
+                    IDAL.DO.Station station = dl.GetStation(numStation);
+                    station.Id = numStation;
+                    if (nameStation != "")
+                    {
+                        station.Name = nameStation;
+                    }
+                    if (countChargingSlots != 0)
+                    {
+                        if (countChargingSlots >= station.ChargeSlots)
+                        {
+                            int i, count = 0;
+                            IDAL.DO.DroneCharge d = IDAL.DataSource.DronesCharge.FindAll(item => item.StationId == numStation);
+                            station.ChargeSlots = countChargingSlots - d.Count;
+
+
+                        }
+                        else
+                            throw new NotImplementedExceptin(ex, "ERROR");
+                    }
+                    dl.DelStation(numStation);
+                    dl.AddStation(station);
+                }
+                catch (IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
+                }
+            }
+
+        }
 
 
         }
