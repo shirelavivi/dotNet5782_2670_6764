@@ -87,4 +87,32 @@ namespace IBL
         }
 
     }
+        public class NotImplementedExceptin : Exception
+        {
+            public int ID;
+
+            public string EntityName;
+            public NotImplementedExceptin(int id, string entity) : base() { ID = id; EntityName = entity; }
+            public NotImplementedExceptin(int id, string entity, string message) :
+                base(message)
+            { ID = id; EntityName = entity; }
+            public NotImplementedExceptin(int id, string entity, string message, Exception innerException) :
+                base(message, innerException)
+            { ID = id; EntityName = entity; }
+            public override string ToString() => base.ToString() + $", {EntityName} - duplicate id: {ID}";
+        }
+        [Serializable]
+        public class CanNotRelease : Exception//חריגה חרפן לא יכול להשתחרר מטעינה
+        {
+            public int ID;
+
+            public string EntityName;
+            public CanNotRelease(int id, string entity) : base() { ID = id; EntityName = entity; }
+            public CanNotRelease(int id, string entity, string message) :
+                base(message)
+            { ID = id; EntityName = entity; }
+            public CanNotRelease(int id, string entity, string message, Exception innerException) :
+                base(message, innerException)
+            { ID = id; EntityName = entity; }
+        }
 }

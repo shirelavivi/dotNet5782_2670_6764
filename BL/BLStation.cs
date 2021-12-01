@@ -30,6 +30,38 @@ namespace IBL
                 {
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
+            }
+            public void UpdStation(int numStation, string nameStation = "", int countChargingSlots = 0)
+            {
+                try
+                {
+                    IDAL.DO.Station station = dl.GetStation(numStation);
+                    station.Id = numStation;
+                    if (nameStation != "")
+                    {
+                        station.Name = nameStation;
+                    }
+                    if (countChargingSlots != 0)
+                    {
+                        if (countChargingSlots >= station.ChargeSlots)
+                        {
+                            int i, count = 0;
+                            IDAL.DO.DroneCharge d = IDAL.DataSource.DronesCharge.FindAll(item => item.StationId == numStation);
+                            station.ChargeSlots = countChargingSlots - d.Count;
+
+
+                        }
+                        else
+                            throw new NotImplementedExceptin(ex, "ERROR");
+                    }
+                    dl.DelStation(numStation);
+                    dl.AddStation(station);
+                }
+                catch (IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
+                }
+            }
 
             }
             public BO.BaseStationToList MinFarToStation(BO.Location location)//התחנה הכי קרובה לנקודה הנל שיש לה עמדות טעינה פנויות

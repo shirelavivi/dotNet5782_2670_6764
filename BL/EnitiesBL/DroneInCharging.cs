@@ -10,8 +10,8 @@ namespace IBL
     {
         public class DroneInCharging
         {
-            int IdNumber { get; set; }
-            double ButerryStatus { get; set; }
+            public int IdNumber { get; set; }
+            public double ButerryStatus { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();

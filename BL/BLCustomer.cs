@@ -30,7 +30,31 @@ namespace IBL
                 {
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
+            }
+            public void UpdCustomer(int idCustomer, string nameCustomer = "", string newNumPhone = "")
+            {
+                try
+                {
+                    IDAL.DO.Customer customer = dl.GetCustomer(idCustomer);
+                    customer.Id = idCustomer;
 
+                    if (nameCustomer != "")
+                    {
+                        customer.Name = nameCustomer;
+                    }
+
+                    if (newNumPhone != "")
+                    {
+                        customer.Phone = newNumPhone;
+                    }
+
+                    dl.DelCustomer(idCustomer);
+                    dl.AddCustomer(customer);
+                }
+                catch (IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
+                }
             }
             public IEnumerable<BO.CustomerToList> GetALLCostumerToList()
             {
@@ -53,5 +77,6 @@ namespace IBL
       
 
 
+            }
     } 
 }

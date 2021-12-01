@@ -23,6 +23,8 @@ namespace IBL
             internal static double Light ;
             internal static double Medium;
             internal static double Heavy ;
+            internal static double ChargingRate;//אחוז טעינה לשעה
+
             public BL()
             {
                 

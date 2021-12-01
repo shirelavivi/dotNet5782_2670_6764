@@ -9,9 +9,9 @@ namespace IBL
     {
         public class DroneInParcel
         {
-            int IdNumber { get; set; }
-            double ButerryStatus { get; set; }
-            Location ThisLocation { get; set; }
+            public int IdNumber { get; set; }
+            public double ButerryStatus { get; set; }
+            public Location ThisLocation { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();
