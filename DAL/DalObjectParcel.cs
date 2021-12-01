@@ -63,7 +63,7 @@ namespace DalObject
             return st;
 
         }
-        public IEnumerable<Parcel> GetALLParcel()//כפילות בפונציה יש אותה פעמיים בשמות שונים 
+        public IEnumerable<Parcel> GetALLParcel()
         {
 
             return from st in IDAL.DataSource.packets select st;

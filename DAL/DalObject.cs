@@ -36,14 +36,14 @@ namespace DalObject
             //    List<Parcel> runOfParcel = IDAL.DataSource.packets;
             Parcel p = new Parcel();
             Drone d = new Drone();
-            int j, i = IDAL.DataSource.packets.Count() + 1;
+            int  i = IDAL.DataSource.packets.Count() + 1;
             p = GetParcel(ParcelId);
             d =GetDrone(DronId);     
             if (d.MaxWeight == p.Weight)//צריך לבדוק לא רק אם הרחפן יכול לשאת משקל זהה ....
             {
-                p.DroneId = d.Id;
+                p.DroneId = d.id;
                 p.Scheduled = DateTime.Now;
-                IDAL.DataSource.packets[IDAL.DataSource.packets.FindIndex(ParcelId)] = p;
+                IDAL.DataSource.packets[IDAL.DataSource.packets.FindIndex(ParcelId)] = p;//לבדוק איך עושים את הפיינד אינדקס
 
             }
         }
@@ -52,7 +52,7 @@ namespace DalObject
         /// The drone's status changes for transpot and we will delete the old drone from the list
         /// </summary>
         /// <param name="p"></param>
-        public void collection(int ParcelId)//(מעודכן)איסוף חבעלה על ידי רחפן
+        public void collection(int ParcelId)//(מעודכן)איסוף חבילה על ידי רחפן
 
         {
             Parcel p = new Parcel();
@@ -62,7 +62,7 @@ namespace DalObject
 
             for (int j = 0; j < run.Count(); j++)
             {
-                if (run[j].Id == p.DroneId)
+                if (run[j].id == p.DroneId)
                 {
                     Drone temp = new Drone();
                     //temp.status = DroneStatuses.transport;
@@ -133,7 +133,7 @@ namespace DalObject
 
             for (j = 0; j < run.Count(); j++)
             {
-                if (run[j].Id == p.DroneId)
+                if (run[j].id == p.DroneId)
                 {
                     Drone temp = run[j];
                     //temp.status = DroneStatuses.available;

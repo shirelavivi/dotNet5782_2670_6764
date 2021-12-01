@@ -55,6 +55,26 @@ namespace IBL
                 {
                     throw new MissingIdException(ex.ID, ex.EntityName);
                 }
+            }
+            public IEnumerable<BO.CustomerToList> GetALLCostumerToList()
+            {
+                CustomerToList customer = new CustomerToList();
+                foreach (IDAL.DO.Customer item in dl.GetALLCustomers())//מיוי הנתונים ב BL מתוך DAL
+                {
+                    customer.Id = item.Id;
+                    customer.Name = item.Name;
+                    customer.Phone = item.Phone;
+                    customer.numOfParcelDontProvided = ;// איך אני ממלא אותם
+                    customer.numOfParcelGet = ;
+                    customer.numOfParcelOnTheWay =;
+                    customer.numOfParcelProvided =;
+                    customerBl.Add(customer);
+                }
+                return customerBl;
+            }
+
+        }
+      
 
 
             }

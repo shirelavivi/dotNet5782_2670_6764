@@ -33,6 +33,32 @@ namespace IBL
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
             }
+            public void ConnectParcelToDrone(int droneid)
+            {
+                if (GetDroneToList(droneid).DroneStatuses != (DroneStatuses)0)//אם הסטטוס שונה מפנוי יש חריגה
+                    throw new UnsuitableDroneMode(GetDroneToList(droneid).DroneStatuses, "Drone");
+
+            }
+            //public bool IfItPossible(BO.DroneToList drone,BO.Parcel parcel)
+            //{
+
+            //}
+            public IEnumerable<BO.ParcelToList> GetALLParcelToList()
+            {
+                ParcelToList parcel = new ParcelToList();
+                foreach (IDAL.DO.Parcel item in dl.GetALLParcel())//מיוי הנתונים ב BL מתוך DAL
+                {
+                    parcel.Id = item.Id;
+                    parcel.Priority = (Priorities)(item.Priority);
+                    parcel.SenderName = dl.GetCustomer(item.SenderId).Name;
+                    parcel.TargetName= dl.GetCustomer(item.TargetId).Name;
+                    parcel.Weight = (Weightcategories)(item.Weight);
+                    parcelBl.Add(parcel);
+
+                }
+                return parcelBl;
+            }
+
         }
 
     }

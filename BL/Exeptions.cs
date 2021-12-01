@@ -40,6 +40,53 @@ namespace IBL
             { ID = id; EntityName = entity; }
             public override string ToString() => base.ToString() + $", {EntityName} - duplicate id: {ID}";
         }
+
+        [Serializable]
+        public class UnsuitableDroneMode : Exception// מצב רחפן לא מתאים
+        {
+            public DroneStatuses Status;
+
+            public string EntityName;
+            public UnsuitableDroneMode(DroneStatuses status, string entity) : base() { Status = status; EntityName = entity; }
+            public UnsuitableDroneMode(DroneStatuses status, string entity, string message) :
+                base(message)
+            { Status = status; EntityName = entity; }
+            public UnsuitableDroneMode(DroneStatuses status, string entity, string message, Exception innerException) :
+                base(message, innerException)
+            { Status = status; EntityName = entity; }
+            public override string ToString() => base.ToString() + $", {EntityName} - Unsuitable Drone Mode: {Status}";
+        }
+        [Serializable]
+        public class NotEnoughBattery : Exception// אין מספיק סוללה
+        {
+            public double Baterry;
+
+            public string EntityName;
+            public NotEnoughBattery(double baterry, string entity) : base() { Baterry = baterry; EntityName = entity; }
+            public NotEnoughBattery(double baterry, string entity, string message) :
+                base(message)
+            { Baterry = baterry; EntityName = entity; }
+            public NotEnoughBattery(double baterry, string entity, string message, Exception innerException) :
+                base(message, innerException)
+            { Baterry = baterry; EntityName = entity; }
+            public override string ToString() => base.ToString() + $", {EntityName} - Not Enough Battery: {Baterry}";
+        }
+        [Serializable]
+        public class CanNotSentForCharging : Exception// לא ניתן לשלוח רחפן לטעינה)לא בטוח זה טוב )
+        {
+          
+            public string EntityName;
+            public CanNotSentForCharging( ) : base() { }
+            public CanNotSentForCharging(string entity, string message) :
+                base(message)
+            {  EntityName = entity; }
+            public CanNotSentForCharging( string entity, string message, Exception innerException) :
+                base(message, innerException)
+            {  EntityName = entity; }
+            public override string ToString() => base.ToString() + $", {EntityName} - Can Not Sent For Charging";
+        }
+
+    }
         public class NotImplementedExceptin : Exception
         {
             public int ID;

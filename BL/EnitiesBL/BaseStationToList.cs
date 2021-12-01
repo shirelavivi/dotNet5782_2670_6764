@@ -9,8 +9,8 @@ namespace IBL
     {
         public class BaseStationToList
         {
-            public int IdNumber { get; set; }
-            public string nameStation{ get; set; }
+            public int idnumber { get; set; }
+            public string nameStation { get; set; }
             public  int chargingAvailable { get; set; }
             public int chargingNotAvailable { get; set; }
             public override string ToString()
