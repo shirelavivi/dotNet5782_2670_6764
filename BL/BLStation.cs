@@ -11,7 +11,7 @@ namespace IBL
     {
         public partial class BL : IBL
         {
-            
+
             public void AddBaseStation(BO.BaseStation station)
             {
                 try
@@ -22,7 +22,7 @@ namespace IBL
                     stationDo.Name = station.NameStation;
                     stationDo.Lattitude = station.locationOfStation.Lattitude;
                     stationDo.Longitude = station.locationOfStation.Longitude;
-                    stationDo.ChargeSlots = station.ChargingAvailable;   
+                    stationDo.ChargeSlots = station.ChargingAvailable;
 
                     dl.AddStation(stationDo);
                 }
@@ -45,8 +45,8 @@ namespace IBL
                     {
                         if (countChargingSlots >= station.ChargeSlots)
                         {
-                            int i, count = 0;
-                            IDAL.DO.DroneCharge d = IDAL.DataSource.DronesCharge.FindAll(item => item.StationId == numStation);
+                            
+                            List<IDAL.DO.DroneCharge> d = IDAL.DataSource.DronesCharge.FindAll(item => item.StationId == numStation);
                             station.ChargeSlots = countChargingSlots - d.Count;
 
 
@@ -63,7 +63,7 @@ namespace IBL
                 }
             }
 
-            }
+
             public BO.BaseStationToList MinFarToStation(BO.Location location)//התחנה הכי קרובה לנקודה הנל שיש לה עמדות טעינה פנויות
             {
                 BaseStationToList station = new BaseStationToList();
@@ -93,11 +93,11 @@ namespace IBL
 
                     }
                 }
-                
+
                 return station;
-                 throw new CanNotSentForCharging();//אין עמדות טעינה פנויות
+                throw new CanNotSentForCharging();//אין עמדות טעינה פנויות
             }
-            public IEnumerable< BO.BaseStationToList> GetALLbaseStationToList()
+            public IEnumerable<BO.BaseStationToList> GetALLbaseStationToList()
             {
                 BaseStationToList station = new BaseStationToList();
                 foreach (IDAL.DO.Station item in dl.GetALLStations())//מיוי הנתונים ב BL מתוך DAL
@@ -110,10 +110,9 @@ namespace IBL
                 }
                 return basStationBl;
             }
-
         }
-       
     }
-}
+
+}  
 
 
