@@ -63,12 +63,18 @@ namespace ConsoleUI_BL
                                     break;
                                 case Addition.AddParcel:
                                     {
-                                        IBL.BO.Parcel parcel = new IBL.BO.Parcel();  
-                                        
+                                        IBL.BO.Parcel parcel = new IBL.BO.Parcel();
+                                        int customerId;
                                         Console.WriteLine("Type Send Customer ID:");
-                                        parcel.Sender = lGetingCustomer();
-                                        Console.WriteLine("Type Receiving customer ID:");
-                                        parcel.Target = GetingCustomer();
+                                        int.TryParse(Console.ReadLine(), out customerId);
+                                        parcel.Sender.Id = customerId;
+                                        Console.WriteLine("Type a Send customer name:");
+                                        parcel.Sender.Name = Console.ReadLine();
+                                        Console.WriteLine("Type Receiving Customer ID:");
+                                        int.TryParse(Console.ReadLine(), out customerId);
+                                        parcel.Target.Id = customerId;
+                                        Console.WriteLine("Type a Receiving customer name:");
+                                        parcel.Target.Name = Console.ReadLine();
                                         Console.WriteLine("Choose package Weight: 0 : easy,  1 : middle,  2 : weighty:");
                                         Weightcategories parcelWeigh;
                                         Weightcategories.TryParse(Console.ReadLine(), out parcelWeigh);
@@ -117,56 +123,34 @@ namespace ConsoleUI_BL
 
                                 case UpDate.UpDateStation:
                                     {
+                                      
                                         Console.WriteLine("Type ststion ID:");
-                                        int stationID,number_charg_slout;
-                                        string name_station;
-                                        int.TryParse(Console.ReadLine(), out stationID);
+                                        int stationId, numberChargSlout;
+                                        string nameStation;
+                                        int.TryParse(Console.ReadLine(), out stationId);
                                         Console.WriteLine("Type a station name :");
-                                        name_station = Console.ReadLine();
+                                        nameStation = Console.ReadLine();
                                         Console.WriteLine("Type a number of charg slouts:");
-                                        int.TryParse(Console.ReadLine(), out number_charg_slout); 
-                                        
-                                    }
-                                    break;
-                                case UpDate.delivery:
-                                    {
-                                        Console.WriteLine("Type parcel ID:");
-                                        int parcelID;
-                                        int.TryParse(Console.ReadLine(), out parcelID);
-                                        dl.PackageDalvery(parcelID);
-                                    }
-                                    break;
-                                case UpDate.sending_for_loading:
-                                    {
-                                        List<Customer> s = dl.ShowStationAvailable();
-                                        Console.WriteLine("Type drone ID:");
-                                        int droneID, stationID;
-                                        int.TryParse(Console.ReadLine(), out droneID);
-                                        Console.WriteLine("Type a station ID from the list:");
-                                        for (int i = 0; i < s.Count(); i++)
-                                        {
-                                            Console.WriteLine(s[i].Id + "\n");
-                                        }
-                                        int.TryParse(Console.ReadLine(), out stationID);
-                                        dl.SendDroneTpCharge(stationID, droneID);
-                                    }
-                                    break;
-                                case UpDate.release_from_loading:
-                                    {
-
-                                        Console.WriteLine("Type drone ID:");
-                                        int droneID;
-                                        int.TryParse(Console.ReadLine(), out droneID);
-                                        dl.ReleaseDroneFromChargeStation(droneID);
+                                        int.TryParse(Console.ReadLine(), out numberChargSlout);
+                                        bl.UpdStation(stationId, nameStation, numberChargSlout);
 
                                     }
                                     break;
-                                case UpDate.Exit:
+                                case UpDate.SendingDroneforCharging:
                                     {
-                                        num = 0;
-
+                                        int droneId;
+                                        int.TryParse(Console.ReadLine(), out droneId);
+                                        bl.SendingDroneforCharging(droneId);
                                     }
                                     break;
+                                case UpDate.ParcelToDrone:
+                                    {
+                                        int droneId;
+                                        int.TryParse(Console.ReadLine(), out droneId);
+                                        bl.ConnectParcelToDrone(droneId);
+                                    }
+                                    break;
+
 
                                 default:
                                     break;

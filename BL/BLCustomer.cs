@@ -11,9 +11,9 @@ namespace IBL
 {
     namespace BO
     {
-       public partial class BL : IBL
+        public partial class BL : IBL
         {
-          public void AddCustomer(BO.Customer customer)
+            public void AddCustomer(BO.Customer customer)
             {
                 try
                 {
@@ -32,8 +32,26 @@ namespace IBL
                 }
 
             }
-
+            public IEnumerable<BO.CustomerToList> GetALLCostumerToList()
+            {
+                CustomerToList customer = new CustomerToList();
+                foreach (IDAL.DO.Customer item in dl.GetALLCustomers())//מיוי הנתונים ב BL מתוך DAL
+                {
+                    customer.Id = item.Id;
+                    customer.Name = item.Name;
+                    customer.Phone = item.Phone;
+                    customer.numOfParcelDontProvided = ;// איך אני ממלא אותם
+                    customer.numOfParcelGet = ;
+                    customer.numOfParcelOnTheWay =;
+                    customer.numOfParcelProvided =;
+                    customerBl.Add(customer);
+                }
+                return customerBl;
+            }
 
         }
+      
+
+
     } 
 }
