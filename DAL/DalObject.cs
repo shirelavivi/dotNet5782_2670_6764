@@ -41,7 +41,7 @@ namespace DalObject
             d =GetDrone(DronId);     
             if (d.MaxWeight == p.Weight)//צריך לבדוק לא רק אם הרחפן יכול לשאת משקל זהה ....
             {
-                p.DroneId = d.Id;
+                p.DroneId = d.id;
                 p.Scheduled = DateTime.Now;
                 IDAL.DataSource.packets[IDAL.DataSource.packets.FindIndex(ParcelId)] = p;//לבדוק איך עושים את הפיינד אינדקס
 
@@ -62,7 +62,7 @@ namespace DalObject
 
             for (int j = 0; j < run.Count(); j++)
             {
-                if (run[j].Id == p.DroneId)
+                if (run[j].id == p.DroneId)
                 {
                     Drone temp = new Drone();
                     //temp.status = DroneStatuses.transport;
@@ -133,7 +133,7 @@ namespace DalObject
 
             for (j = 0; j < run.Count(); j++)
             {
-                if (run[j].Id == p.DroneId)
+                if (run[j].id == p.DroneId)
                 {
                     Drone temp = run[j];
                     //temp.status = DroneStatuses.available;

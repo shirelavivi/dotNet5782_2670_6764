@@ -64,7 +64,7 @@ namespace IDAL
 
                 for (int i = 0; i < 7; i++)
                 {
-                    d.Id = Rand.Next();
+                    d.id = Rand.Next();
                     t = Rand.Next(3);
                     switch (t)
                     {

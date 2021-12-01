@@ -1,10 +1,11 @@
 ﻿using System;
 using IBL.BO;
+
 namespace ConsoleUI_BL
 {
     class Program
     {
-        
+
         public enum Options { Addition, Update, Display, ShowLists, Exit }
         public enum Addition { AddStation, AddDrone, AddCustomer, AddParcel, Exit }
         public enum UpDate { UpDateDrone, UpDateStation, UpDateCustomer, SendingDroneforCharging, ReleaseDronefromCharging, ParcelToDrone, CollectionParcelByDrone, SupplyParcelByDrone, Exit }
@@ -56,29 +57,30 @@ namespace ConsoleUI_BL
                             {
                                 case Addition.AddStation:
                                     {
-                                        IBL.BO.BaseStation baseStation = new IBL.BO.BaseStation();
-                                        IBL.BO.Location location = new IBL.BO.Location();
-                                        int stationId;
-                                        int available;
-                                        double temp;
-                                        Console.WriteLine(" Please type a station id:");
-                                        int.TryParse(Console.ReadLine(), out stationId);
-                                        baseStation.Idnumber = stationId;
-                                        Console.WriteLine("Please type a station name:");
-                                        baseStation.NameStation = Console.ReadLine();
-                                        Console.WriteLine("Please type a  Longitude:");
-                                        double.TryParse(Console.ReadLine(), out temp);
-                                        location.Longitude = temp;
-                                        Console.WriteLine("Please type a Lattitude:");
-                                        double.TryParse(Console.ReadLine(), out temp);
-                                        location.Lattitude = temp;
-                                        Console.WriteLine("Please type a charging Station Available:");
-                                        int.TryParse(Console.ReadLine(), out available);
-                                        baseStation.ChargingAvailable = available;
-                                        baseStation.droneInCharging = null;
-                                        bl.AddBaseStation(baseStation);
-                                    }
-                                    break;
+                                        {
+                                            IBL.BO.BaseStation baseStation = new IBL.BO.BaseStation();
+                                            IBL.BO.Location location = new IBL.BO.Location();
+                                            int stationId;
+                                            int available;
+                                            double temp;
+                                            Console.WriteLine(" Please type a station id:");
+                                            int.TryParse(Console.ReadLine(), out stationId);
+                                            baseStation.Idnumber = stationId;
+                                            Console.WriteLine("Please type a station name:");
+                                            baseStation.NameStation = Console.ReadLine();
+                                            Console.WriteLine("Please type a  Longitude:");
+                                            double.TryParse(Console.ReadLine(), out temp);
+                                            location.Longitude = temp;
+                                            Console.WriteLine("Please type a Lattitude:");
+                                            double.TryParse(Console.ReadLine(), out temp);
+                                            location.Lattitude = temp;
+                                            Console.WriteLine("Please type a charging Station Available:");
+                                            int.TryParse(Console.ReadLine(), out available);
+                                            baseStation.ChargingAvailable = available;
+                                            baseStation.droneInCharging = null;
+                                            bl.AddBaseStation(baseStation);
+                                        }
+                                        break;
                                 case Addition.AddDrone:
                                     {
                                         IBL.BO.Drone drone = new IBL.BO.Drone();
@@ -91,10 +93,10 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         drone.IdDrone = droneId;
                                         Console.WriteLine("Please type drone's model:");
-                                        drone.Modle = Console.ReadLine();
+                                        drone.Model = Console.ReadLine();
                                         Console.WriteLine("Please type a MaxWeight:");
                                         int.TryParse(Console.ReadLine(), out maxweight);
-                                        drone.Weightcategories =(Weightcategories)maxweight;//Right?
+                                        drone.Weightcategories = (Weightcategories)maxweight;//Right?
                                         Console.WriteLine("Please type a charging Station Available:");
                                         int.TryParse(Console.ReadLine(), out available);
                                         // drone. לאן אני מכניסה עמדות טעינה פנויות?
@@ -103,13 +105,13 @@ namespace ConsoleUI_BL
                                         drone.DroneStatuses = DroneStatuses.maintenance;
                                         //drone.ThisLocation =איפה יש לי מיקום תחנה
 
-                                        bl.AddDrone(drone);
+                                        //bl.AddDrone(drone,);
                                     }
                                     break;
 
                                 case Addition.AddCustomer:
                                     {
-                                      bl.AddCustomer(GetingCustomer());
+                                        bl.AddCustomer(GetingCustomer());
 
                                     }
                                     break;
@@ -153,6 +155,7 @@ namespace ConsoleUI_BL
 
                             break;
                         }
+
                     case Options.Update:
                         {
                             UpDate up;
@@ -163,13 +166,13 @@ namespace ConsoleUI_BL
                             {
                                 case UpDate.UpDateDrone:
                                     {
-                                        
+
                                         int droneID;
                                         string model;
                                         Console.WriteLine("Type drone ID :");
                                         int.TryParse(Console.ReadLine(), out droneID);
                                         Console.WriteLine("Type drone model :");
-                                        model= Console.ReadLine();
+                                        model = Console.ReadLine();
                                         bl.UpdateDrone(droneID, model);
 
                                     }
@@ -177,7 +180,7 @@ namespace ConsoleUI_BL
 
                                 case UpDate.UpDateStation:
                                     {
-                                      
+
                                         Console.WriteLine("Type ststion ID:");
                                         int stationId, numberChargSlout;
                                         string nameStation;
@@ -238,17 +241,16 @@ namespace ConsoleUI_BL
                                         num = 0;
 
 
+                                        
+                                    break;
+                                    }
                                 default:
                                     break;
+
                             }
-                            break;
-
-
 
 
                         }
-
-
                 }
             }
         }

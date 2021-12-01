@@ -14,9 +14,9 @@ namespace DalObject
         public void AddDrone(Drone c)
         {
 
-            if (CheckDrone(c.Id))
+            if (CheckDrone(c.id))
 
-                throw new IDAL.DO.DuplicateIdException(c.Id, "Drone");
+                throw new IDAL.DO.DuplicateIdException(c.id, "Drone");
 
 
             IDAL.DataSource.drones.Add(c);
@@ -25,7 +25,7 @@ namespace DalObject
 
         public bool CheckDrone(int id)
         {
-            return IDAL.DataSource.drones.Any(st => st.Id == id);
+            return IDAL.DataSource.drones.Any(st => st.id == id);
         }
 
         public void UpdDrone(Drone st)
@@ -33,14 +33,14 @@ namespace DalObject
             int count = IDAL.DataSource.customers.RemoveAll(st => st.Id == st.Id);
 
             if (count == 0)
-                throw new MissingIdException(st.Id, "Drone");
+                throw new MissingIdException(st.id, "Drone");
 
             IDAL.DataSource.drones.Add(st);
         }
 
         public void DelDrone(int id)
         {
-            int count = IDAL.DataSource.drones.RemoveAll(st => st.Id == id);
+            int count = IDAL.DataSource.drones.RemoveAll(st => st.id == id);
 
             if (count == 0)
                 throw new MissingIdException(id, "Drone");
@@ -57,7 +57,7 @@ namespace DalObject
             if (!CheckDrone(id))
                 throw new MissingIdException(id, "Drone");
 
-            Drone st = IDAL.DataSource.drones.Find(st => st.Id == id);
+            Drone st = IDAL.DataSource.drones.Find(st => st.id == id);
             return st;
         }
         public IEnumerable<Drone> GetALLDrones()
