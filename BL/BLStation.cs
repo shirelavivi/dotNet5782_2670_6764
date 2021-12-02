@@ -25,6 +25,7 @@ namespace IBL
                     stationDo.ChargeSlots = station.ChargingAvailable;
 
                     dl.AddStation(stationDo);
+                    //need add in BL too?
                 }
                 catch (IDAL.DO.DuplicateIdException ex)
                 {
@@ -52,7 +53,9 @@ namespace IBL
 
                         }
                         else
-                            throw new NotImplementedExceptin(ex, "ERROR");
+                            //throw new NotImplementedExceptin(ex, "ERROR");
+                           throw new ArgumentOutOfRangeException("id", "The drone number must be greater or equal to 0");//אפשר את זה במקום העליונה?
+                        
                     }
                     dl.DelStation(numStation);
                     dl.AddStation(station);
@@ -97,6 +100,28 @@ namespace IBL
                 return station;
                 throw new CanNotSentForCharging();//אין עמדות טעינה פנויות
             }
+            //public Drone GetStation(int stationId)
+            //{
+            //    try
+            //    {
+            //        //DroneToList droneToList = dronesBl.Find(i => i.Idnumber == stationId);
+
+            //    }
+            public BaseStation GetBaseStation(int id)
+            {
+                if (id < 0)
+                    throw new ArgumentOutOfRangeException("id", "The station number must be greater or equal to 0");
+
+                try
+                {
+                    var station = dl.GetStation(id);
+                    return stationToBaseStation(station);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
             public IEnumerable<BO.BaseStationToList> GetALLbaseStationToList()
             {
                 BaseStationToList station = new BaseStationToList();
@@ -109,6 +134,40 @@ namespace IBL
                     basStationBl.Add(station);
                 }
                 return basStationBl;
+            }
+            /// <summary>
+            /// help function
+            /// </summary>
+            /// <param name="station"></param>
+            /// <returns></returns>
+
+            private BaseStation stationToBaseStation(IDAL.DO.Station station)
+            {
+                try
+                {
+                    return new BaseStation
+                    {
+                        Idnumber = station.Id,
+                        NameStation = station.Name,
+                        locationOfStation = new Location
+                        {
+                            Lattitude = station.Lattitude,
+                            Longitude = station.Longitude
+                        },
+                        ChargingAvailable = station.ChargeSlots,
+                        droneInCharging = (from DronesCharge in dl.GetDroneCharge(station.Id)//אכךןס רשימת הרחפנים בטעינה
+                                           select new DroneInCharging
+                                           {
+                                               IdNumber = DronesCharge.DroneId,
+                                               ButerryStatus = IDAL.DataSource.drones.Find(d => d.id == DronesCharge.DroneId).BatteryStatus
+                                           }).ToList()
+                    };                 
+                }
+                catch (Exception e)
+                {
+
+                    throw e;
+                }
             }
         }
     }

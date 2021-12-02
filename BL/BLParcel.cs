@@ -39,6 +39,52 @@ namespace IBL
                     throw new UnsuitableDroneMode(GetDroneToList(droneid).DroneStatuses, "Drone");
 
             }
+            public Parcel GetParcel(int id)
+            {
+                try
+                {
+                    var parcel = dl.GetParcel(id);
+                    Parcel myParcel = new Parcel
+                    {
+                        Id = parcel.Id,
+                        Sender = new CustomerAtParcels
+                        {
+                            Id = parcel.SenderId,
+                            Name = dl.GetCustomer(parcel.SenderId).Name
+                        },
+                        Target = new CustomerAtParcels
+                        {
+                            Id = parcel.TargetId,
+                            Name = dl.GetCustomer(parcel.TargetId).Name
+                        },
+                        Weight = (Weightcategories)parcel.Weight,
+                        Priority = (Priorities)parcel.Priority,
+                        Requested = parcel.Requested,
+                        droneAtParcel = (parcel.DroneId == 0 ? null : new DroneInParcel
+                        {
+                            IdNumber = parcel.DroneId
+                        }),
+                        Scheduled = parcel.Scheduled,
+                        PickedUp = parcel.PickedUp,
+                        Delivered = parcel.Delivered
+                    };
+
+                    if (parcel.Id != 0)
+                    {
+                        var drone = dronesBl.Find(d => d.Idnumber == parcel.DroneId);
+                        if (drone == default(DroneToList))
+                            throw new ArgumentException("The drone the package is assign to doesn't exist");
+                        myParcel.droneAtParcel.ButerryStatus = drone.ButerryStatus;
+                        myParcel.droneAtParcel.ThisLocation = drone.ThisLocation;
+                    }
+
+                    return myParcel;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
             //public bool IfItPossible(BO.DroneToList drone,BO.Parcel parcel)
             //{
 

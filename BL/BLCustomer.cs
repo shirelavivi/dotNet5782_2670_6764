@@ -56,6 +56,61 @@ namespace IBL
                     throw new MissingIdException(ex.ID, ex.EntityName);
                 }
             }
+            public Customer GetCustomer(int id)
+            {
+                try
+                {
+                    var customer = dl.GetCustomer(id);
+                    Customer myCustomer = new Customer
+                    {
+                        Id = id,
+                        Name = customer.Name,
+                        Phone = customer.Phone,
+                        location = new Location
+                        {
+                            Lattitude = customer.Lattitude,
+                            Longitude = customer.Longitude
+                        },
+                        parcelfromCustomer = (from p in dalObject.GetPackages()
+                                                where p.SenderId == id
+                                                select getPackageInCustomer(p, p.TargetId)).ToList(),
+                        parcelsToCustomer = (from p in dalObject.GetPackages()
+                                              where p.TargetId == id
+                                              select getPackageInCustomer(p, p.SenderId)).ToList()
+                    };
+                    return myCustomer;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+
+            //private ParcelAtCustomer getPackageInCustomer(IDAL.DO.Parcel p, int customerId)//לעשות
+            //{
+            //    try
+            //    {
+            //        return new ParcelAtCustomer
+            //        {
+            //            Idnumber = p.Id,
+            //            Weightcategories = (Weightcategories)p.Weight,
+            //            Priorities = (Priorities)p.Priority,
+            //            PacketStatuses = (p.Scheduled == default(DateTime) ? PackageStatuses.REQUESTED :
+            //                                                p.PickedUp == default(DateTime) ? PackageStatuses.SCHEDULED :
+            //                                                p.Delivered == default(DateTime) ? PackageStatuses.PICKEDUP :
+            //                                                PackageStatuses.DELIVERED),
+            //            CustomerAtParcels = new CustomerInPackage
+            //            {
+            //                Id = customerId,
+            //                CustomerName = dl.GetCustomer(customerId).Name
+            //            }
+            //        };
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        throw e;
+            //    }
+            //}
             public IEnumerable<BO.CustomerToList> GetALLCostumerToList()
             {
                 CustomerToList customer = new CustomerToList();

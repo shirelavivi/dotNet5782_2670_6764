@@ -11,7 +11,7 @@ namespace IDAL
     public class DataSource
     {
         static Random Rand = new Random(DateTime.Now.Millisecond);
-        internal static List<Drone> drones = new List<Drone>();
+        public static List<Drone> drones = new List<Drone>();
         internal static List< Station> Stations = new List<Station>();
         internal static List<Customer> customers = new List<Customer>();
         internal static List<Parcel> packets = new List<Parcel>();
