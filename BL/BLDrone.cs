@@ -182,38 +182,38 @@ namespace IBL
                 }
             }
 
-            //public Drone GetDrone(int droneId)// נראה לי הפונקציה מיותרת כי יש את הפונקציה getdronetolist
-            //{
-            //    try
-            //    {
-            //        DroneToList droneToList = dronesBl.Find(i => i.Idnumber == droneId);
-            //        if (droneToList.Idnumber == 0)
-            //            throw new NotImplementedException();
-            //        Drone drone = new()
-            //        {
-            //            IdDrone = droneToList.Idnumber,
-            //            ButerryStatus = droneToList.ButerryStatus,
-            //            DroneStatuses = droneToList.DroneStatuses,
-            //            ThisLocation = droneToList.ThisLocation,
-            //            Weightcategories = droneToList.Weightcategories,
-            //            Model = droneToList.Model
-            //        };
+            public Drone GetDrone(int droneId)
+            {
+                try
+                {
+                    DroneToList droneToList = dronesBl.Find(i => i.Idnumber == droneId);
+                    if (droneToList.Idnumber == 0)
+                        throw new NotImplementedException();
+                    Drone drone = new()
+                    {
+                        IdDrone = droneToList.Idnumber,
+                        ButerryStatus = droneToList.ButerryStatus,
+                        DroneStatuses = droneToList.DroneStatuses,
+                        ThisLocation = droneToList.ThisLocation,
+                        Weightcategories = droneToList.Weightcategories,
+                        Model = droneToList.Model
+                    };
 
-            //        if (droneToList.DroneStatuses == DroneStatuses.transport)
-            //            drone.PackageInTransfer = ;
+                    if (droneToList.DroneStatuses == DroneStatuses.transport)
+                        drone.PackageInTransfer = ;
 
 
-            //        return drone;
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        throw e;
-            //    }
+                    return drone;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
 
-            //}
-             
+            }
 
-        }
+
+    }
     }
 }
 
