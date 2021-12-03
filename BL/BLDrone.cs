@@ -34,7 +34,7 @@ namespace IBL
 
             public void SendingDroneforCharging(int droneId)
             {
-                
+
                 double kilometer, battery = 0;
                 int stationId = 0;
                 BaseStationToList minstation;
@@ -69,7 +69,7 @@ namespace IBL
 
             }
 
-            
+
             public IEnumerable<BO.DroneToList> GetALLDroneToList()//הצגת רשימת רחפנים
             {
                 DroneToList drone = new DroneToList();
@@ -83,7 +83,7 @@ namespace IBL
                 }
                 return dronesBl;
             }
-            public void AddDrone(BO.Drone drone, int stationId)//הוספת רחפן
+            public void AddDrone(BO.Drone drone, int stationId)
             {
                 if (drone.IdDrone < 0)
                     throw new ArgumentOutOfRangeException("drone.Id", "The drone number must be greater or equal to 0");
@@ -163,7 +163,7 @@ namespace IBL
 
                 try
                 {
-                    
+
                     var sender = dl.GetCustomer(parcel.SenderId);
                     double distance = DistanceTo(drone.ThisLocation.Lattitude, sender.Lattitude,
                         drone.ThisLocation.Longitude, sender.Longitude);//לקרוא לפונ חישוב מרחק
@@ -174,7 +174,7 @@ namespace IBL
                     };
                     drone.ButerryStatus -= BatteryConsumption(distance, drone.Weightcategories);
                     dl.collection(parcel.Id);
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -182,10 +182,11 @@ namespace IBL
                 }
             }
 
-            public Drone GetDrone(int droneId)
+            public Drone GetDrone(int droneId)//צריך לעשות
             {
                 try
                 {
+                    ParcelInTransfer parcel = new ParcelInTransfer();
                     DroneToList droneToList = dronesBl.Find(i => i.Idnumber == droneId);
                     if (droneToList.Idnumber == 0)
                         throw new NotImplementedException();
@@ -200,21 +201,74 @@ namespace IBL
                     };
 
                     if (droneToList.DroneStatuses == DroneStatuses.transport)
-                        drone.PackageInTransfer = ;
-
-
+                        drone.PackageInTransfer = getPackageInDelivery(droneToList.PackageNumberTransferred);
                     return drone;
+
                 }
                 catch (Exception e)
                 {
                     throw e;
                 }
 
+
+            }
+            private ParcelInTransfer getPackageInDelivery(int packageId)
+            {
+                var pac = dl.GetParcel(packageId);
+
+                ParcelInTransfer pacInDalivery = new ParcelInTransfer
+                {
+                    IdPacket = pac.DroneId,
+                    PackageMode = pac.PickedUp != default(DateTime),
+                    Weightcategories = (Weightcategories)pac.Weight,
+                    Priorities = (Priorities)pac.Priority
+                };
+
+                var sender = dl.GetCustomer(pac.SenderId);
+                var target = dl.GetCustomer(pac.TargetId);
+                pacInDalivery.TransportDistance = DistanceTo(sender.Lattitude, target.Lattitude, sender.Longitude, target.Longitude);
+
+                pacInDalivery.CustomerInPackageGeting = new CustomerAtParcels
+                {
+                    Id = target.Id,
+                    Name = target.Name
+                };
+
+                pacInDalivery.CustomerInPackageSender = new CustomerAtParcels
+                {
+                    Id = sender.Id,
+                    Name = sender.Name
+                };
+
+                pacInDalivery.DeliveryLocation = new Location
+                {
+                    Lattitude = sender.Lattitude,
+                    Longitude = sender.Longitude
+                };
+
+                pacInDalivery.CollectionLocation = new Location
+                {
+                    Lattitude = target.Lattitude,
+                    Longitude = target.Longitude
+                };
+                return pacInDalivery;
             }
 
 
-    }
+
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
