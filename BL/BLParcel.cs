@@ -85,58 +85,61 @@ namespace IBL
                 }
                 catch (Exception ex)//לבדוק מה לתפוס כאן
                 {
+                    throw new Exception(); 
+                }
             }
-            public Parcel GetParcel(int id)
-            {
-                try
+            
+                public Parcel GetParcel(int id)
                 {
-                    var parcel = dl.GetParcel(id);
-                    Parcel myParcel = new Parcel
+                    try
                     {
-                        Id = parcel.Id,
-                        Sender = new CustomerAtParcels
+                        var parcel = dl.GetParcel(id);
+                        Parcel myParcel = new Parcel
                         {
-                            Id = parcel.SenderId,
-                            Name = dl.GetCustomer(parcel.SenderId).Name
-                        },
-                        Target = new CustomerAtParcels
-                        {
-                            Id = parcel.TargetId,
-                            Name = dl.GetCustomer(parcel.TargetId).Name
-                        },
-                        Weight = (Weightcategories)parcel.Weight,
-                        Priority = (Priorities)parcel.Priority,
-                        Requested = parcel.Requested,
-                        droneAtParcel = (parcel.DroneId == 0 ? null : new DroneInParcel
-                        {
-                            IdNumber = parcel.DroneId
-                        }),
-                        Scheduled = parcel.Scheduled,
-                        PickedUp = parcel.PickedUp,
-                        Delivered = parcel.Delivered
-                    };
+                            Id = parcel.Id,
+                            Sender = new CustomerAtParcels
+                            {
+                                Id = parcel.SenderId,
+                                Name = dl.GetCustomer(parcel.SenderId).Name
+                            },
+                            Target = new CustomerAtParcels
+                            {
+                                Id = parcel.TargetId,
+                                Name = dl.GetCustomer(parcel.TargetId).Name
+                            },
+                            Weight = (Weightcategories)parcel.Weight,
+                            Priority = (Priorities)parcel.Priority,
+                            Requested = parcel.Requested,
+                            droneAtParcel = (parcel.DroneId == 0 ? null : new DroneInParcel
+                            {
+                                IdNumber = parcel.DroneId
+                            }),
+                            Scheduled = parcel.Scheduled,
+                            PickedUp = parcel.PickedUp,
+                            Delivered = parcel.Delivered
+                        };
 
-                    if (parcel.Id != 0)
-                    {
-                        var drone = dronesBl.Find(d => d.Idnumber == parcel.DroneId);
-                        if (drone == default(DroneToList))
-                            throw new ArgumentException("The drone the package is assign to doesn't exist");
-                        myParcel.droneAtParcel.ButerryStatus = drone.ButerryStatus;
-                        myParcel.droneAtParcel.ThisLocation = drone.ThisLocation;
+                        if (parcel.Id != 0)
+                        {
+                            var drone = dronesBl.Find(d => d.Idnumber == parcel.DroneId);
+                            if (drone == default(DroneToList))
+                                throw new ArgumentException("The drone the package is assign to doesn't exist");
+                            myParcel.droneAtParcel.ButerryStatus = drone.ButerryStatus;
+                            myParcel.droneAtParcel.ThisLocation = drone.ThisLocation;
+                        }
+
+                        return myParcel;
                     }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+                //public bool IfItPossible(BO.DroneToList drone,BO.Parcel parcel)
+                //{
 
-                    return myParcel;
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-            //public bool IfItPossible(BO.DroneToList drone,BO.Parcel parcel)
-            //{
+            
 
-                }
-            }
             public bool IfDronCanGoTo(Location a, Location b, Weightcategories weightcategories, int dronid)//פונקצית עזר שבודקת אם לרחפן יש מספיק סוללה בין ללכת בין הנקודה A ל B
             {
                 double x = DistanceTo(a.Lattitude, a.Longitude, b.Lattitude, a.Longitude);
@@ -172,22 +175,22 @@ namespace IBL
                 }
                 return parcelBl;
             }
-            public IEnumerable <ParcelToList> GetALLParcelsNotConnectToDrone()//רשימת חבילות שעדיין לא שוייכו לרחפן
+            public IEnumerable<ParcelToList> GetALLParcelsNotConnectToDrone()//רשימת חבילות שעדיין לא שוייכו לרחפן
             {
-                List<ParcelToList> st= new List<ParcelToList>();
-               foreach (ParcelToList item in  GetALLParcelToList())
-               {
-                    if (dl.GetParcel(item.Id).DroneId==default(int))
+                List<ParcelToList> st = new List<ParcelToList>();
+                foreach (ParcelToList item in GetALLParcelToList())
+                {
+                    if (dl.GetParcel(item.Id).DroneId == default(int))
                     {
-                             st.Add(item);
+                        st.Add(item);
                     }
-               }
+                }
                 //if (st == null)
-                    //throw לראות איזה חריגה לעשות כאן
+                //throw לראות איזה חריגה לעשות כאן
                 return st;
             }
+    }   }
+}        
 
-        }
+    
 
-    }
-}
