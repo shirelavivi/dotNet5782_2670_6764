@@ -45,14 +45,14 @@ namespace IBL
                     {
                         if (countChargingSlots >= station.ChargeSlots)
                         {
-                            
+
                             List<IDAL.DO.DroneCharge> d = IDAL.DataSource.DronesCharge.FindAll(item => item.StationId == numStation);
                             station.ChargeSlots = countChargingSlots - d.Count;
 
 
                         }
-                        else
-                            throw new NotImplementedExceptin(ex, "ERROR");
+                       /* else;*///לבדוק מה לעשות עם החריגה הזאת
+                            //throw new NotImplementedExceptin(ex, "ERROR");
                     }
                     dl.DelStation(numStation);
                     dl.AddStation(station);
@@ -69,31 +69,22 @@ namespace IBL
                 BaseStationToList station = new BaseStationToList();
                 double MinDistanc = 1000000;// צריך לאתחל במרחק כלשהו גדול מאוד כך שכל מרחק יהיה קטן ממנו
                 double temp;
-                foreach (IDAL.DO.Station item in dl.GetALLStations())//מיוי הנתונים ב BL מתוך DAL
-                {
-                    station.idnumber = item.Id;
-                    station.nameStation = item.Name;
-                    station.chargingAvailable = item.ChargeSlots;
-                    station.chargingNotAvailable = 0;
-                    basStationBl.Add(station);
-                }
-                IDAL.DO.Station stationDO = new IDAL.DO.Station();
-                foreach (BO.BaseStationToList itemStation in basStationBl)
+               //מיוי הנתונים ב BL מתוך DAL
+                 
+                foreach (BO.BaseStationToList item in GetALLbaseStationToList())
                 {
 
-                    stationDO = dl.GetStation(itemStation.idnumber);//התחנה מתוך שכבת הנתונים כדי לקבל את המיקום
-                    if (itemStation.chargingAvailable > 0)// אם יש עמדות טעינה פנויות? 
+                    if (item.chargingAvailable > 0)// אם יש עמדות טעינה פנויות? 
                     {
-                        temp = DistanceTo(stationDO.Lattitude, stationDO.Longitude, location.Lattitude, location.Longitude);
+                        temp = DistanceTo(dl.GetStation(item.idnumber).Lattitude, dl.GetStation(item.idnumber).Longitude, location.Lattitude, location.Longitude);
                         if (temp < MinDistanc)
                         {
                             MinDistanc = temp;//שמירת המרחק הקטן עד עכשיו
-                            station = itemStation;
+                            station = item;
                         }
 
                     }
                 }
-
                 return station;
                 throw new CanNotSentForCharging();//אין עמדות טעינה פנויות
             }
@@ -104,11 +95,26 @@ namespace IBL
                 {
                     station.idnumber = item.Id;
                     station.nameStation = item.Name;
-                    station.chargingAvailable = item.ChargeSlots;
+                    List < IDAL.DO.DroneCharge > d = IDAL.DataSource.DronesCharge.FindAll(itemDrone => itemDrone.Droneld == item.Id);
+                    station.chargingAvailable = item.ChargeSlots - d.Count; ;
                     station.chargingNotAvailable = 0;
                     basStationBl.Add(station);
                 }
                 return basStationBl;
+            }
+            public IEnumerable<BO.BaseStationToList> GetALLStationWithFreeStation()
+            {
+                List<BaseStationToList> st = new List<BaseStationToList>();
+                List<BaseStationToList> newst = new List<BaseStationToList>();
+                st = GetALLbaseStationToList().ToList();
+                foreach(BaseStationToList item in st)
+                {
+                    if (item.chargingAvailable > 0)
+                        newst.Add(item);
+                }
+                //if(newst==null)
+                //    throw  // לבדוק איזה חריגה לעשות כאן
+                return newst;
             }
         }
     }

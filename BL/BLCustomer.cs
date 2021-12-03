@@ -13,7 +13,7 @@ namespace IBL
     {
         public partial class BL : IBL
         {
-            public void AddCustomer(BO.Customer customer)
+            public void AddCustomer(BO.Customer customer)//הוספת לקוח לשכבת הנתונים
             {
                 try
                 {
@@ -31,7 +31,7 @@ namespace IBL
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
             }
-            public void UpdCustomer(int idCustomer, string nameCustomer = "", string newNumPhone = "")
+            public void UpdCustomer(int idCustomer, string nameCustomer = "", string newNumPhone = "")//עידכון לקוח
             {
                 try
                 {
@@ -51,7 +51,7 @@ namespace IBL
                     dl.DelCustomer(idCustomer);
                     dl.AddCustomer(customer);
                 }
-                catch (IDAL.DO.MissingIdException ex)
+                catch (IDAL.DO.MissingIdException ex)//חריגה לא טובה !!!!!!!!!
                 {
                     throw new MissingIdException(ex.ID, ex.EntityName);
                 }
@@ -64,19 +64,35 @@ namespace IBL
                     customer.Id = item.Id;
                     customer.Name = item.Name;
                     customer.Phone = item.Phone;
-                    customer.numOfParcelDontProvided = ;// איך אני ממלא אותם
-                    customer.numOfParcelGet = ;
-                    customer.numOfParcelOnTheWay =;
-                    customer.numOfParcelProvided =;
+                    customer.numOfParcelDontProvided =0 ;//מספר החבילות שלא סופקו
+                    customer.numOfParcelOnTheWay =0;//מספר החבילות במשלוח
+                    customer.numOfParcelGet = 0;//מספר החבילות שהתקבלו
+                    customer.numOfParcelProvided =0;//מספר החבילות שסופקו
+                    foreach (IDAL.DO.Parcel itemParcel in dl.GetALLParcel() )
+                    {
+                        if (itemParcel.SenderId == item.Id)//אם זאת חבילה שנשלחה עי הלקוח 
+                        { 
+                            if (itemParcel.Delivered != default(DateTime))//החבילה כבר סופקה
+                                customer.numOfParcelProvided++;
+                            else
+                                 if (itemParcel.PickedUp != default(DateTime))//החבילה באמצע משלוח
+                                customer.numOfParcelDontProvided++;
+                        }
+                        if (itemParcel.TargetId == item.Id)//חבילה שהתקבלה על ידי הלקוח
+                        {
+                            if (itemParcel.Delivered != default(DateTime))//החבילה כבר סופקה לו
+                                customer.numOfParcelGet++;
+                            else
+                                 if (itemParcel.PickedUp != default(DateTime))// אליו החבילה באמצע משלוח
+                                customer.numOfParcelOnTheWay++;
+                        }
+                    }
+        
                     customerBl.Add(customer);
                 }
                 return customerBl;
             }
 
-        }
-      
-
-
-            }
+        }      
     } 
 }

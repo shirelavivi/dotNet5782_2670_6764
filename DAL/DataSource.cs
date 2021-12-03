@@ -141,10 +141,10 @@ namespace IDAL
                         default:
                             break;
                     }
-                    a.Requested = DateTime.Now;
-                    a.Scheduled = DateTime.Now;
-                    a.PickedUp = DateTime.Now;
-                    a.Delivered = DateTime.Now;
+                    a.Requested = new DateTime(0, 0, 0); 
+                    a.Scheduled = new DateTime(0, 0, 0); 
+                    a.PickedUp = new DateTime(0, 0, 0); 
+                    a.Delivered = new DateTime(0, 0, 0);
                     a.DroneId = 0;
                     CounterPackets++;
                     packets.Add(a);

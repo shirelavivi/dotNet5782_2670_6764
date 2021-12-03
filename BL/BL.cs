@@ -22,7 +22,7 @@ namespace IBL
             internal static double Free ;
             internal static double Light ;
             internal static double Medium;
-            internal static double Heavy ;
+            internal static double Heavy ; 
             internal static double ChargingRate;//אחוז טעינה לשעה
 
             public BL()
@@ -32,6 +32,9 @@ namespace IBL
                 Light=dl.batteryArr()[1];
                 Medium = dl.batteryArr()[2];
                 Heavy = dl.batteryArr()[3];
+                ChargingRate = 25;
+                dronesBl = GetALLDroneToList().ToList();// מילוי רשימת הרחפנים
+
                 foreach (DroneToList item in dronesBl)
                 {
                     if(item.DroneStatuses!= (DroneStatuses)2)//אם הרחפן לא מבצע משלוח

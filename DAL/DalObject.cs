@@ -32,20 +32,17 @@ namespace DalObject
        
         public void ConnectParcelToDron(int ParcelId, int DronId)// (מעודכן(קישור חבילה לרחפן
         {
-            //    List<Drone> runOfDrone = IDAL.DataSource.drones;
-            //    List<Parcel> runOfParcel = IDAL.DataSource.packets;
+           
             Parcel p = new Parcel();
             Drone d = new Drone();
             int  i = IDAL.DataSource.packets.Count() + 1;
             p = GetParcel(ParcelId);
             d =GetDrone(DronId);     
-            if (d.MaxWeight == p.Weight)//צריך לבדוק לא רק אם הרחפן יכול לשאת משקל זהה ....
-            {
-                p.DroneId = d.id;
-                p.Scheduled = DateTime.Now;
-                IDAL.DataSource.packets[IDAL.DataSource.packets.FindIndex(ParcelId)] = p;//לבדוק איך עושים את הפיינד אינדקס
+            p.DroneId = d.id;
+            p.Scheduled = DateTime.Now;
+            IDAL.DataSource.packets[IDAL.DataSource.packets.FindIndex(x => x.Id == p.Id)] = p;//לבדוק איך עושים את הפיינד אינדקס
 
-            }
+            
         }
         /// <summary>
         /// If the package ID number matches the drone's ID number then it will collect the package,
@@ -56,25 +53,10 @@ namespace DalObject
 
         {
             Parcel p = new Parcel();
-            int i;
             p = GetParcel(ParcelId);
-            List<Drone> run = IDAL.DataSource.drones;
-
-            for (int j = 0; j < run.Count(); j++)
-            {
-                if (run[j].id == p.DroneId)
-                {
-                    Drone temp = new Drone();
-                    //temp.status = DroneStatuses.transport;
-                    run[j] = temp;
-                    Parcel temp2 = IDAL.DataSource.packets[i];
-                    temp2.PickedUp = DateTime.Now;
-                    IDAL.DataSource.packets[i] = temp2;
-                    return;
-
-                }
-
-            }
+            IDAL.DataSource.packets.Remove(p); 
+            p.PickedUp= DateTime.Now;
+            IDAL.DataSource.packets.Add(p);
         }
         public void SendDroneTpCharge(int StationId, int DroneId)///)מעודכן)שליחת רחפן לטעינה
         {

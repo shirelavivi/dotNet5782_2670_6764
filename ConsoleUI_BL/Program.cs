@@ -14,6 +14,7 @@ namespace ConsoleUI_BL
 
 
         static void Main(string[] args)
+            
         {
             Customer GetingCustomer()
             {
@@ -81,6 +82,7 @@ namespace ConsoleUI_BL
                                             bl.AddBaseStation(baseStation);
                                         }
                                         break;
+                                    }
                                 case Addition.AddDrone:
                                     {
                                         IBL.BO.Drone drone = new IBL.BO.Drone();
@@ -88,7 +90,7 @@ namespace ConsoleUI_BL
                                         int droneId;
                                         int maxweight;
                                         int available;
-                                        double temp;
+                                        
                                         Console.WriteLine(" Please type a drone id:");
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         drone.IdDrone = droneId;
@@ -155,7 +157,7 @@ namespace ConsoleUI_BL
 
                             break;
                         }
-
+                        
                     case Options.Update:
                         {
                             UpDate up;
@@ -241,16 +243,75 @@ namespace ConsoleUI_BL
                                         num = 0;
 
 
-                                        
-                                    break;
+
+                                        break;
                                     }
                                 default:
                                     break;
 
                             }
-
+                        }
+                        break;
+                    case Options.Display:
+                        {
 
                         }
+                        break;
+                    case Options.ShowLists:
+                        {
+                            ShowList ShowListOf;
+                            Console.WriteLine("Please type one of the following options:");
+                            Console.WriteLine("0: Station\n 1: Drone \n 2:Customer \n 3:Parcel \n4: Exit ");
+                            ShowListOf = (ShowList)int.Parse(Console.ReadLine());
+                            switch (ShowListOf)
+                            {
+                                case ShowList.Station:
+                                    {
+
+                                        bl.GetALLbaseStationToList().ToString();
+                                        Console.WriteLine("\n\n");
+                                        
+                                    }
+                                    break;
+                                case ShowList.Drone:
+                                    {
+                                        bl.GetALLDroneToList().ToString();
+                                        Console.WriteLine("\n\n");
+                                        
+                                    }
+                                    break;
+                                case ShowList.Customer:
+                                    {
+                                        bl.GetALLCostumerToList().ToString(); ;
+                                            Console.WriteLine("\n\n");
+                                        
+                                    }
+                                    break;
+                                case ShowList.Parcel:
+                                    {
+                                        bl.GetALLParcelToList().ToString();
+                                        Console.WriteLine("\n\n");
+                                        
+                                    }
+                                    break;
+                                case ShowList.Exit:
+                                    {
+                                        num = 0;
+
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                            break;
+                        }
+                    case Options.Exit:
+                        {
+                            num = 0;
+                        }
+                        break;
+
                 }
             }
         }

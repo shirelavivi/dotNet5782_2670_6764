@@ -13,18 +13,15 @@ namespace IBL
 
             public void UpdateDrone(int id, string model)
             {
-                //IDAL.DO.Drone drone= dl.GetDrone(id);
-                //drone.Model = model;
-                //dl.DelDrone(id);
-                //dl.AddDrone(drone);
-
+                if (id < 0)
+                    throw new ArgumentOutOfRangeException("id", "The drone number must be greater or equal to 0");
                 try
                 {
                     IDAL.DO.Drone drone = dl.GetDrone(id);
                     drone.Model = model;
                     dl.DelDrone(id);
                     dl.AddDrone(drone);
-                    DroneToList droneToList = dronesBl.Find(d => d.Idnumber == id);//צריך גם לעדכן כאן?
+                    DroneToList droneToList = dronesBl.Find(d => d.Idnumber == id);
                     dronesBl.Remove(droneToList);
                     droneToList.Model = model;
                     dronesBl.Add(droneToList);
@@ -37,38 +34,23 @@ namespace IBL
 
             public void SendingDroneforCharging(int droneId)
             {
-                double MinDistanc = 1000000;// צריך לאתחל במרחק כלשהו גדול מאוד כך שכל מרחק יהיה קטן ממנו
-                double temp, battery = 0;
+                
+                double kilometer, battery = 0;
                 int stationId = 0;
-
-                if (GetDroneToList(droneId).DroneStatuses != (DroneStatuses)0)//אם הסטטוס שונה מפנוי יש חריגה
-                    throw new UnsuitableDroneMode(GetDroneToList(droneId).DroneStatuses, "Drone");
-                else
+                BaseStationToList minstation;
+                try
                 {
-                    foreach (IDAL.DO.Station itemStation in dl.GetALLStations())
-                    {
-                        if (itemStation.ChargeSlots > 0)// אם יש עמדות טעינה פנויות? 
-                        {
-                            temp = DistanceTo(itemStation.Lattitude, itemStation.Longitude, GetDroneToList(droneId).ThisLocation.Lattitude, GetDroneToList(droneId).ThisLocation.Longitude);// המרחק בין התחנה לרחפן 
-                            if (temp < MinDistanc)
-                            {
-                                if (GetDroneToList(droneId).ButerryStatus > BatteryConsumption(temp, GetDroneToList(droneId).Weightcategories))// האם כמות הבטריה ברחפן גדולה מהכמות הנדרשת כדי להגיע לתחנה 
-                                    MinDistanc = temp;//שמירת המרחק הקטן עד עכשיו
-                                stationId = itemStation.Id;//שמירת מזהה התחנה
-                                battery = BatteryConsumption(temp, GetDroneToList(droneId).Weightcategories);//שמירת כמות הבטריה שמתבזבזת
-                            }
-
-                        }
-
-                    }
-                    if (MinDistanc != 1000000 && stationId == 0)
-                        throw new NotEnoughBattery(GetDroneToList(droneId).ButerryStatus, "Drone");
-                    if (MinDistanc == 1000000 && stationId == 0)
-                        throw new CanNotSentForCharging(); // מזהה תחנה אני שלולחת לחריגה ?)אין עמדות טעינה פנויות (איזה 
-
+                    if (GetDroneToList(droneId).DroneStatuses != DroneStatuses.available)//אם הסטטוס שונה מפנוי יש חריגה
+                        throw new UnsuitableDroneMode(GetDroneToList(droneId).DroneStatuses, "Drone");
                     else
                     {
-                        dl.SendDroneTpCharge(stationId, droneId);
+
+                        minstation = MinFarToStation(GetDroneToList(droneId).ThisLocation);
+                        //חישוב מרחק בין התחנה לרחפן
+                        kilometer = DistanceTo(dl.GetStation(minstation.idnumber).Lattitude, dl.GetStation(minstation.idnumber).Longitude, GetDroneToList(droneId).ThisLocation.Lattitude, GetDroneToList(droneId).ThisLocation.Longitude);
+                        battery = BatteryConsumption(kilometer, GetDroneToList(droneId).Weightcategories);//שמירת כמות הבטריה שמתבזבזת
+                        if (battery < GetDroneToList(droneId).ButerryStatus)//צריך לבדוק אם הסוללה הנדרשת מספיקה לסוללה שיש לי ברחפן
+                            dl.SendDroneTpCharge(stationId, droneId);
                         DroneToList drone = GetDroneToList(droneId);//מכאן נשנה את המצב של הרחפן והבטריה ברשימה של ה bl
                         drone.ButerryStatus -= battery;
                         drone.DroneStatuses = DroneStatuses.maintenance;
@@ -78,13 +60,17 @@ namespace IBL
                         drone.ThisLocation = l;
                         dronesBl.Add(drone);
                         dronesBl.Remove(GetDroneToList(droneId));
-
                     }
-
+                }
+                catch (IDAL.DO.MissingIdException ex)//  חריגה לא נכונה !!!!!!!!! לעשות חדשה
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
                 }
 
             }
-            public IEnumerable<BO.DroneToList> GetALLDroneToList()
+
+            
+            public IEnumerable<BO.DroneToList> GetALLDroneToList()//הצגת רשימת רחפנים
             {
                 DroneToList drone = new DroneToList();
                 foreach (IDAL.DO.Drone item in dl.GetALLDrones())//מיוי הנתונים ב BL מתוך DAL
@@ -97,7 +83,7 @@ namespace IBL
                 }
                 return dronesBl;
             }
-            public void AddDrone(BO.Drone drone, int stationId)
+            public void AddDrone(BO.Drone drone, int stationId)//הוספת רחפן
             {
                 if (drone.IdDrone < 0)
                     throw new ArgumentOutOfRangeException("drone.Id", "The drone number must be greater or equal to 0");
@@ -132,7 +118,7 @@ namespace IBL
 
 
             }
-            public void ReleaseDroneFromChargeStation(int droneId, int timeInCharging)
+            public void ReleaseDroneFromChargeStation(int droneId, int timeInCharging)//שחרור רחפן מטעינה
             {
                 if (droneId < 0)
                     throw new ArgumentOutOfRangeException("id", "The drone number must be greater or equal to 0");
@@ -159,7 +145,7 @@ namespace IBL
                     throw e;
                 }
             }
-            public void PickUpPackage(int id)
+            public void PickUpPackage(int id)//איסוף חבילה על ידי רחפן
             {
                 if (id < 0)
                     throw new ArgumentOutOfRangeException("id", "The drone number must be greater or equal to 0");
@@ -168,7 +154,7 @@ namespace IBL
                 if (drone == default(DroneToList))
                     throw new ArgumentException("Drone with the given ID number doesn't exist");
 
-                if (drone.DroneStatuses != DroneStatuses.)
+                if (drone.DroneStatuses != DroneStatuses.transport)
                     throw new InvalidOperationException("The drone is not assigned to any package");
 
                 var parcel = dl.GetParcel(drone.PackageNumberTransferred);
@@ -177,7 +163,7 @@ namespace IBL
 
                 try
                 {
-                    dronesBl.Remove(drone);
+                    
                     var sender = dl.GetCustomer(parcel.SenderId);
                     double distance = DistanceTo(drone.ThisLocation.Lattitude, sender.Lattitude,
                         drone.ThisLocation.Longitude, sender.Longitude);//לקרוא לפונ חישוב מרחק
@@ -188,8 +174,7 @@ namespace IBL
                     };
                     drone.ButerryStatus -= BatteryConsumption(distance, drone.Weightcategories);
                     dl.collection(parcel.Id);
-                    dronesBl.Add(drone);
-
+                    
                 }
                 catch (Exception e)
                 {
@@ -197,36 +182,36 @@ namespace IBL
                 }
             }
 
-            public Drone GetDrone(int droneId)
-            {
-                try
-                {
-                    DroneToList droneToList = dronesBl.Find(i => i.Idnumber == droneId);
-                    if (droneToList.Idnumber == 0)
-                        throw new NotImplementedException();
-                    Drone drone = new()
-                    {
-                        IdDrone = droneToList.Idnumber,
-                        ButerryStatus = droneToList.ButerryStatus,
-                        DroneStatuses = droneToList.DroneStatuses,
-                        ThisLocation = droneToList.ThisLocation,
-                        Weightcategories = droneToList.Weightcategories,
-                        Model = droneToList.Model
-                    };
+            //public Drone GetDrone(int droneId)// נראה לי הפונקציה מיותרת כי יש את הפונקציה getdronetolist
+            //{
+            //    try
+            //    {
+            //        DroneToList droneToList = dronesBl.Find(i => i.Idnumber == droneId);
+            //        if (droneToList.Idnumber == 0)
+            //            throw new NotImplementedException();
+            //        Drone drone = new()
+            //        {
+            //            IdDrone = droneToList.Idnumber,
+            //            ButerryStatus = droneToList.ButerryStatus,
+            //            DroneStatuses = droneToList.DroneStatuses,
+            //            ThisLocation = droneToList.ThisLocation,
+            //            Weightcategories = droneToList.Weightcategories,
+            //            Model = droneToList.Model
+            //        };
 
-                    if (droneToList.DroneStatuses == DroneStatuses.transport)
-                        drone.PackageInTransfer = ;
+            //        if (droneToList.DroneStatuses == DroneStatuses.transport)
+            //            drone.PackageInTransfer = ;
 
 
-                    return drone;
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+            //        return drone;
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        throw e;
+            //    }
 
-            }
-
+            //}
+             
 
         }
     }
