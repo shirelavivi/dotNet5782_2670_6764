@@ -155,11 +155,11 @@ namespace IBL
                             Longitude = station.Longitude
                         },
                         ChargingAvailable = station.ChargeSlots,
-                        droneInCharging = (from DronesCharge in dl.GetDroneCharge(station.Id)//אכךןס רשימת הרחפנים בטעינה
+                        droneInCharging = (from DronesCharge in dl.GetALLDroneCharge()//אכךןס רשימת הרחפנים בטעינה
                                            select new DroneInCharging
                                            {
-                                               IdNumber = DronesCharge.DroneId,
-                                               ButerryStatus = IDAL.DataSource.drones.Find(d => d.id == DronesCharge.DroneId).BatteryStatus
+                                               IdNumber = DronesCharge.Droneld,
+                                               ButerryStatus = dronesBl.Find(d => d.Idnumber == DronesCharge.Droneld).ButerryStatus
                                            }).ToList()
                     };                 
                 }

@@ -1,71 +1,71 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//using IDAL.DO;
-//namespace DalObject
-//{
-//    public partial class DalObject : Idal
-//    {
+using IDAL.DO;
+namespace DalObject
+{
+    public partial class DalObject : Idal
+    {
 
-//        public void AddDroneCharging(Station c)
-//        {
+        public void AddDroneCharging(DroneCharge c)
+        {
 
-//            if (CheckStation(c.Id))
+            if (CheckDroneCharging(c.StationId))
 
-//                throw new IDAL.DO.DuplicateIdException(c.Id, "Station");
-
-
-//            IDAL.DataSource.Stations.Add(c);
-
-//        }
-
-//        public bool CheckDroneCharging(int id)
-//        {
-//            return IDAL.DataSource.Stations.Any(st => st.Id == id);
-//        }
+                throw new IDAL.DO.DuplicateIdException(c.StationId, "DroneCharge");
 
 
-//        public void UpdSDroneCharging(DroneCharge st)
-//        {
-//            int count = IDAL.DataSource.Stations.RemoveAll(st => st.Id == st.Id);
+            IDAL.DataSource.DronesCharge.Add(c);
 
-//            if (count == 0)
-//                throw new MissingIdException(st.Id, "Station");
+        }
 
-//            IDAL.DataSource.Stations.Add(st);
-//        }
+        public bool CheckDroneCharging(int id)
+        {
+            return IDAL.DataSource.DronesCharge.Any(st => st.StationId == id);
+        }
 
-//        public void DelStation(int id)
-//        {
-//            int count = IDAL.DataSource.Stations.RemoveAll(st => st.Id == id);
 
-//            if (count == 0)
-//                throw new MissingIdException(id, "DroneCharge");
-//        }
+        public void UpdDroneCharging(DroneCharge st)
+        {
+            int count = IDAL.DataSource.DronesCharge.RemoveAll(st => st.Droneld == st.Droneld);
 
-//        public IEnumerable<DroneCharge> GetStationByPerdicate(Predicate<DroneCharge> predicate)
-//        {
-//            return from st in IDAL.DataSource.DroneCharge
-//                   where predicate(st)
-//                   select st;
-//        }
-//        public Station GetDroneCharge(int s)
-//        {
-//            if (!CheckStation(s))
-//                throw new MissingIdException(s, "DroneCharge");
+            if (count == 0)
+                throw new MissingIdException(st.Droneld, "DroneCharge");
 
-//            Station st = IDAL.DataSource.Stations.Find(st => st.Id == s);
-//            return st;
+            IDAL.DataSource.DronesCharge.Add(st);
+        }
 
-//        }
-//        public IEnumerable<Station> GetALLStations()
-//        {
+        public void DelDroneCharge(int droneId)
+        {
+            int count = IDAL.DataSource.DronesCharge.RemoveAll(st => st.Droneld == droneId);
 
-//            return from st in IDAL.DataSource.Stations select st;
-//        }
-//    }
-//}
+            if (count == 0)
+                throw new MissingIdException(droneId, "DroneCharge");
+        }
+
+        public IEnumerable<DroneCharge> GetStationByPerdicate(Predicate<DroneCharge> predicate)
+        {
+            return from st in IDAL.DataSource.DronesCharge
+                   where predicate(st)
+                   select st;
+        }
+        public DroneCharge GetDroneCharge(int stationId)
+        {
+            if (!CheckDroneCharging(stationId))
+                throw new MissingIdException(stationId, "DroneCharge");
+
+          DroneCharge st = IDAL.DataSource.DronesCharge.Find(st => st.StationId  == stationId);
+            return st;
+
+        }
+        public IEnumerable<DroneCharge> GetALLDroneCharge()
+        {
+
+            return from st in IDAL.DataSource.DronesCharge select st;
+        }
+    }
+}
 
