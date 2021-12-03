@@ -85,7 +85,7 @@ namespace IBL
                 }
                 catch (Exception ex)//לבדוק מה לתפוס כאן
                 {
-                    throw new Exception(); 
+                    throw ex; 
                 }
             }
             
