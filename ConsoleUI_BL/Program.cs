@@ -254,7 +254,65 @@ namespace ConsoleUI_BL
                         break;
                     case Options.Display:
                         {
+                            Show ShowSomthing;
+                            Console.WriteLine("Please type one of the following options:");
+                            Console.WriteLine("0: Station\n 1: Drone \n 2:Customer \n 3:Parcel \n4: Exit ");
+                            ShowSomthing = (Show)int.Parse(Console.ReadLine());
+                            switch (ShowSomthing)
+                            {
+                                case Show.Station:
+                                    {
+                                        BaseStation stationToShow;
+                                        Console.WriteLine("Type a station ID:");
+                                        int stationlID;
+                                        int.TryParse(Console.ReadLine(), out stationlID);
+                                        stationToShow =bl.GetBaseStation(stationlID);
+                                        stationToShow.ToString();
 
+                                    }
+                                    break;
+                                case Show.Drone:
+                                    {
+                                        Drone droneToShow;
+                                        Console.WriteLine("Type Drone ID:");
+                                        int dronelID;
+                                        int.TryParse(Console.ReadLine(), out dronelID);
+                                        droneToShow = bl.GetDrone(dronelID);
+                                        droneToShow.ToString();
+
+                                    }
+                                    break;
+                                case Show.Customer:
+                                    {
+                                        Customer customerToShow;
+                                        Console.WriteLine("Type Customer ID:");
+                                        int customerID;
+                                        int.TryParse(Console.ReadLine(), out customerID);
+                                        customerToShow = bl.GetCustomer(customerID);
+                                        customerToShow.ToString();
+                                    }
+                                    break;
+                                case Show.Parcel:
+                                    {
+                                        Parcel parcelToShow;
+                                        Console.WriteLine("Type Parcel ID:");
+                                        int parcelID;
+                                        int.TryParse(Console.ReadLine(), out parcelID);
+                                        parcelToShow = bl.GetParcel(parcelID);
+                                        parcelToShow.ToString();
+                                    }
+                                    break;
+                                case Show.Exit:
+                                    {
+                                        num = 0;
+
+                                    }
+
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
                         }
                         break;
                     case Options.ShowLists:

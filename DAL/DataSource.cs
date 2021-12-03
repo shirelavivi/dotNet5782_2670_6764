@@ -79,21 +79,7 @@ namespace IDAL
                             break;
 
                     }
-                    //t = Rand.Next(3);
-                    //switch (t)
-                    //{
-                    //    case 0:
-                    //        d.status = DroneStatuses.available;
-                    //        break;
-                    //    case 1:
-                    //        d.status = DroneStatuses.maintenance;
-                    //        break;
-                    //    case 2:
-                    //        d.status = DroneStatuses.transport;
-                    //        break;
 
-                    //}
-                    //d.Battery = Rand.Next();
                     drones.Add(d);
                 }
                 for (int i = 0; i < 11; i++)
@@ -141,10 +127,10 @@ namespace IDAL
                         default:
                             break;
                     }
-                    a.Requested = new DateTime(0, 0, 0); 
-                    a.Scheduled = new DateTime(0, 0, 0); 
-                    a.PickedUp = new DateTime(0, 0, 0); 
-                    a.Delivered = new DateTime(0, 0, 0);
+                    a.Requested = new DateTime(0); 
+                    a.Scheduled = new DateTime(0); 
+                    a.PickedUp = new DateTime(0); 
+                    a.Delivered = new DateTime(0);
                     a.DroneId = 0;
                     CounterPackets++;
                     packets.Add(a);
