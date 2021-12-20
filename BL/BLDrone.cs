@@ -32,12 +32,12 @@ namespace IBL
                 }
             }
 
-            public void SendingDroneforCharging(int droneId)
+            public void SendingDroneforCharging(int droneId)// שליחת רחפן לטעינה
             {
 
                 double kilometer, battery = 0;
                 int stationId = 0;
-                BaseStationToList minstation;
+                IDAL.DO.Station minstation;
                 try
                 {
                     if (GetDroneToList(droneId).DroneStatuses != DroneStatuses.available)//אם הסטטוס שונה מפנוי יש חריגה
@@ -47,7 +47,7 @@ namespace IBL
 
                         minstation = MinFarToStation(GetDroneToList(droneId).ThisLocation);
                         //חישוב מרחק בין התחנה לרחפן
-                        kilometer = DistanceTo(dl.GetStation(minstation.idnumber).Lattitude, dl.GetStation(minstation.idnumber).Longitude, GetDroneToList(droneId).ThisLocation.Lattitude, GetDroneToList(droneId).ThisLocation.Longitude);
+                        kilometer = DistanceTo(minstation.Lattitude, minstation.Longitude, GetDroneToList(droneId).ThisLocation.Lattitude, GetDroneToList(droneId).ThisLocation.Longitude);
                         battery = BatteryConsumption(kilometer, GetDroneToList(droneId).Weightcategories);//שמירת כמות הבטריה שמתבזבזת
                         if (battery < GetDroneToList(droneId).ButerryStatus)//צריך לבדוק אם הסוללה הנדרשת מספיקה לסוללה שיש לי ברחפן
                             dl.SendDroneTpCharge(stationId, droneId);
@@ -58,8 +58,9 @@ namespace IBL
                         l.Lattitude = dl.GetStation(stationId).Lattitude;
                         l.Longitude = dl.GetStation(stationId).Longitude;
                         drone.ThisLocation = l;
-                        dronesBl.Add(drone);
                         dronesBl.Remove(GetDroneToList(droneId));
+                        dronesBl.Add(drone);
+                        
                     }
                 }
                 catch (IDAL.DO.MissingIdException ex)//  חריגה לא נכונה !!!!!!!!! לעשות חדשה
@@ -72,18 +73,23 @@ namespace IBL
 
             public IEnumerable<BO.DroneToList> GetALLDroneToList()//הצגת רשימת רחפנים
             {
-                DroneToList drone = new DroneToList();
-                foreach (IDAL.DO.Drone item in dl.GetALLDrones())//מיוי הנתונים ב BL מתוך DAL
-                {
 
-                    drone.Idnumber = item.id;
-                    drone.Model = item.Model;
-                    drone.Weightcategories = (Weightcategories)item.MaxWeight;
-                    dronesBl.Add(drone);
-                }
+                //foreach (IDAL.DO.Drone item in dl.GetALLDrones())//מיוי הנתונים ב BL מתוך DAL
+                //{
+                //    Drone drone = GetDrone(item.id);
+                //    DroneToList drone1 = new DroneToList();
+                //    drone1.Idnumber = drone.IdDrone;
+                //    drone1.Model = drone.Model;
+                //    drone1.ThisLocation =new Location();
+                //    drone1.ThisLocation.Lattitude = drone.ThisLocation.Lattitude;
+                //    drone1.ThisLocation.Longitude = drone.ThisLocation.Longitude;
+                //    drone1.Weightcategories = drone.Weightcategories;
+                //    drone1.PackageNumberTransferred = drone.PackageInTransfer[drone.PackageInTransfer.Count()].IdPacket;    
+                //    dronesBl.Add(drone1);
+                //}
                 return dronesBl;
             }
-            public void AddDrone(BO.Drone drone, int stationId)
+            public void AddDrone(BO.Drone drone, int stationId)// הוספת רחפן
             {
                 if (drone.IdDrone < 0)
                     throw new ArgumentOutOfRangeException("drone.Id", "The drone number must be greater or equal to 0");
@@ -110,6 +116,10 @@ namespace IBL
                     IDAL.DO.Station st = dl.GetStation(stationId);
                     droneToListBL.ThisLocation = new Location() { Lattitude = st.Lattitude, Longitude = st.Longitude };
                     dronesBl.Add(droneToListBL);
+                }
+                catch(IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
                 }
                 catch (IDAL.DO.DuplicateIdException ex)
                 {
@@ -140,9 +150,9 @@ namespace IBL
                     droneToList.DroneStatuses = DroneStatuses.available;
                     dronesBl.Add(droneToList);
                 }
-                catch (Exception e)
+                catch (IDAL.DO.DuplicateIdException ex)
                 {
-                    throw e;
+                    throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
             }
             public void PickUpPackage(int id)//איסוף חבילה על ידי רחפן
@@ -176,20 +186,20 @@ namespace IBL
                     dl.collection(parcel.Id);
 
                 }
-                catch (Exception e)
+                catch (IDAL.DO.DuplicateIdException ex)
                 {
-                    throw e;
+                    throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
             }
 
-            public Drone GetDrone(int droneId)//צריך לעשות
+            public Drone GetDrone(int droneId)
             {
                 try
                 {
                     ParcelInTransfer parcel = new ParcelInTransfer();
                     DroneToList droneToList = dronesBl.Find(i => i.Idnumber == droneId);
                     if (droneToList.Idnumber == 0)
-                        throw new NotImplementedException();
+                        throw new ErorrValueExceptin(droneId, "ERROR VALUE");
                     Drone drone = new()
                     {
                         IdDrone = droneToList.Idnumber,
@@ -201,13 +211,13 @@ namespace IBL
                     };
 
                     if (droneToList.DroneStatuses == DroneStatuses.transport)
-                        drone.PackageInTransfer = getPackageInDelivery(droneToList.PackageNumberTransferred);
+                        drone.PackageInTransfer.Add(getPackageInDelivery(droneToList.PackageNumberTransferred));
                     return drone;
 
                 }
-                catch (Exception e)
+                catch (IDAL.DO.MissingIdException ex)
                 {
-                    throw e;
+                    throw new MissingIdException(ex.ID, ex.EntityName);
                 }
 
 

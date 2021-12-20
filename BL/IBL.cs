@@ -32,7 +32,7 @@ namespace IBL
 
         public void AddBaseStation(BO.BaseStation station);
         public void UpdStation(int numStation, string nameStation = "", int countChargingSlots = 0);
-        public BO.BaseStationToList MinFarToStation(BO.Location location);
+        public IDAL.DO.Station MinFarToStation(BO.Location location);
         public IEnumerable<BO.BaseStationToList> GetALLbaseStationToList();
 
         #endregion

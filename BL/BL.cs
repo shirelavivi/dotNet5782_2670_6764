@@ -14,11 +14,8 @@ namespace IBL
         public partial class BL :IBL
         {
             static Random Rand = new Random(DateTime.Now.Millisecond);
-            List<DroneToList> dronesBl = new List<DroneToList>();
-            List<ParcelToList> parcelBl = new List<ParcelToList>();
-            List<CustomerToList> customerBl = new List<CustomerToList>();
-            List<BaseStationToList> basStationBl = new List<BaseStationToList>();
-            DalObject.DalObject dl = new DalObject.DalObject();
+            public List<DroneToList> dronesBl = new List<DroneToList>();
+            public DalObject.Idal dl = new DalObject.DalObject();
             internal static double Free ;
             internal static double Light ;
             internal static double Medium;
@@ -27,44 +24,102 @@ namespace IBL
 
             public BL()
             {
-                
-                Free = dl.batteryArr()[0];
-                Light=dl.batteryArr()[1];
-                Medium = dl.batteryArr()[2];
-                Heavy = dl.batteryArr()[3];
-                ChargingRate = 25;
-                dronesBl = GetALLDroneToList().ToList();// מילוי רשימת הרחפנים
-
-                foreach (DroneToList item in dronesBl)
+                try
                 {
-                    if(item.DroneStatuses!= (DroneStatuses)2)//אם הרחפן לא מבצע משלוח
+                    
+                    Location l = new Location();
+                    Free = dl.batteryArr()[0];
+                    Light = dl.batteryArr()[1];
+                    Medium = dl.batteryArr()[2];
+                    Heavy = dl.batteryArr()[3];
+                    ChargingRate = 25;// קצב טעינה לשעה
+
+                    foreach (IDAL.DO.Drone item in IDAL.DataSource.drones)
                     {
-                        item.DroneStatuses = (DroneStatuses)Rand.Next(1,2);
+                        DroneToList drone = new DroneToList();
+                        drone.Idnumber = item.id;
+                        drone.Model = item.Model;
+                        drone.Weightcategories = (Weightcategories)item.MaxWeight;
+                        dronesBl.Add(drone);
                     }
-                
-                
-                    if (item.DroneStatuses != (DroneStatuses)1)//אם הרחפן בתחזוקה 
+                    foreach (DroneToList item in dronesBl)
                     {
-                        Location l = new Location();
-                        int ran= Rand.Next(0, (dl.GetALLStations()).Count());
-                        l.Lattitude = (dl.GetALLStations().ToList())[ran].Lattitude;
-                        l.Longitude = (dl.GetALLStations().ToList())[ran].Longitude;
-                        item.ThisLocation = l;
-                        item.ButerryStatus = Rand.Next(0, 20);
+
+                        foreach (IDAL.DO.Parcel parcel in dl.GetALLParcel())
+                        {
+                            if (parcel.DroneId == item.Idnumber)// אם הרחפן שובץ לחבילה והרחפן הנוכחי זההים אז....
+                            {
+                                if (parcel.Delivered == new DateTime() && parcel.Scheduled != new DateTime())//אם החבילה שויכה אבל לא סופקה
+                                {
+                                    item.DroneStatuses = DroneStatuses.transport;
+                                    if (parcel.PickedUp == new DateTime() && parcel.Scheduled != new DateTime())//אם החבילה שויכה אבל לא נאספה
+                                    {
+
+                                        l.Lattitude = dl.GetCustomer(parcel.SenderId).Lattitude;// מיקום השולח
+                                        l.Longitude = dl.GetCustomer(parcel.SenderId).Longitude;
+                                        IDAL.DO.Station station = MinFarToStation(l);// התחנה הקרובה לשלוח
+                                        l.Lattitude = station.Lattitude;// מיקום התחנה הקרובה לשלוח
+                                        l.Longitude = station.Longitude;
+                                        item.ThisLocation = l;
+                                    }
+                                    if (parcel.PickedUp != new DateTime() && parcel.Delivered == new DateTime())//אם החבילה נאספה אבל עוד לא סופקה
+                                    {
+
+                                        l.Lattitude = dl.GetCustomer(parcel.SenderId).Lattitude;// מיקום השולח
+                                        l.Longitude = dl.GetCustomer(parcel.SenderId).Longitude;
+                                        item.ThisLocation = l;
+                                    }
+
+                                }
+                                l.Lattitude = dl.GetCustomer(parcel.TargetId).Lattitude;// מיקום המקבל
+                                l.Longitude = dl.GetCustomer(parcel.TargetId).Longitude;
+                                IDAL.DO.Station s = MinFarToStation(item.ThisLocation);//התחנה הקרובה ביותר למיקום של היעד
+                                double howMuchBatrry = BatteryConsumption(DistanceTo(s.Lattitude, s.Longitude, l.Lattitude, l.Longitude), item.Weightcategories);
+                                howMuchBatrry += BatteryConsumption(DistanceTo(l.Lattitude, l.Longitude, item.ThisLocation.Lattitude, item.ThisLocation.Longitude), item.Weightcategories);
+                                item.ButerryStatus = Rand.Next((int)howMuchBatrry, 100);
+
+                            }
+
+                        }
+
+                        if (item.DroneStatuses != DroneStatuses.transport)//אם הרחפן לא מבצע משלוח
+                        {
+                            item.DroneStatuses = (DroneStatuses)Rand.Next(0, 2);
+                        }
+                        if (item.DroneStatuses == DroneStatuses.maintenance)//אם הרחפן בתחזוקה 
+                        {
+
+                            int ran = Rand.Next(0, (dl.GetALLStations()).Count());
+                            l.Lattitude = (dl.GetALLStations().ToList())[ran].Lattitude;
+                            l.Longitude = (dl.GetALLStations().ToList())[ran].Longitude;
+                            item.ThisLocation = l;
+                            item.ButerryStatus = Rand.Next(0, 20);
+                        }
+
+                        if (item.DroneStatuses == DroneStatuses.available)//אם הרחפןפנוי
+                        {
+
+                            int ran = Rand.Next(0, (dl.GetALLParcel()).Count());
+                            int targetId = (dl.GetALLParcel().ToList())[ran].TargetId;//מגריל מתוך החבילות חבילה כלשהי ולוקח את תץז של המקבל
+                            l.Lattitude = dl.GetCustomer(targetId).Lattitude;
+                            l.Longitude = dl.GetCustomer(targetId).Longitude;
+                            item.ThisLocation = l;
+                            IDAL.DO.Station s = MinFarToStation(item.ThisLocation);//התחנה הקרובה ביותר למיקום של הרחפן
+                            int howMuchBatrry =(int) BatteryConsumption(DistanceTo(s.Lattitude, s.Longitude, item.ThisLocation.Lattitude, item.ThisLocation.Longitude), item.Weightcategories);
+                            if (howMuchBatrry < 100)
+                                item.ButerryStatus = Rand.Next(howMuchBatrry, 100);
+                            else
+                            {
+                                throw new NotEnoughBattery(howMuchBatrry, "error buttery");
+                            }
+                            
+                        }
+
                     }
-               
-                    if (item.DroneStatuses != (DroneStatuses)0)//אם הרחפןפנוי
-                    {
-                        Location l = new Location();
-                        int ran = Rand.Next(0, (dl.GetALLParcel()).Count());
-                        int targetId = (dl.GetALLParcel().ToList())[ran].TargetId;//מגריל מתוך החבילות חבילה כלשהי ולוקח את תץז של המקבל
-                        l.Lattitude = dl.GetCustomer(targetId).Lattitude;
-                        l.Longitude = dl.GetCustomer(targetId).Longitude;
-                        item.ThisLocation = l;
-                        //item.ButerryStatus = Rand.Next(, 100); לסיים את הפונקציה 
-                        
-                    }
-                   
+                }
+                catch(IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
                 }
             }
             public static double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K')
@@ -94,7 +149,7 @@ namespace IBL
             }//פונקציה שמחשבת מרחק בין שתי מיקומים 
             public DroneToList GetDroneToList(int dronId)
             {
-                foreach(DroneToList item in dronesBl)
+                foreach (DroneToList item in dronesBl)
                 {
                     if (item.Idnumber == dronId)
                         return item;

@@ -14,7 +14,7 @@ namespace IBL
             public Weightcategories Weightcategories { get; set; }
             public double ButerryStatus { get; set; }
             public DroneStatuses DroneStatuses { get; set; }
-            public ParcelInTransfer PackageInTransfer { get; set; }//זה אמור להיות רשימת חבילות אצל..
+            public List <ParcelInTransfer> PackageInTransfer { get; set; }
             public Location ThisLocation { get; set; }
             public override string ToString()
             {

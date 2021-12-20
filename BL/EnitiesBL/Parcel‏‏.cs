@@ -14,12 +14,8 @@ namespace IBL
             public int Id { get; set; }
             public CustomerAtParcels Sender;
             public CustomerAtParcels Target;
-            //public enum Weightcategories { easy, middle, weighty }
-
-            //public enum Priorities { Standard, fast, emergency }
             public Weightcategories Weight { get; set; }
             public Priorities Priority { get; set; }
-
             public DroneInParcel droneAtParcel;//רחפן בחבילה
             public DateTime Requested { get; set; }
             public DateTime Scheduled { get; set; }

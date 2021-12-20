@@ -21,7 +21,7 @@ namespace IBL
                     IDAL.DO.Customer customer_do = new IDAL.DO.Customer();
                     customer_do.Id = customer.Id;
                     customer_do.Name = customer.Name;
-                    customer_do.Name = customer.Phone;
+                    customer_do.Phone = customer.Phone;
                     customer_do.Lattitude = customer.location.Lattitude;
                     customer_do.Longitude = customer.location.Longitude;
                     dl.AddCustomer(customer_do);
@@ -51,7 +51,7 @@ namespace IBL
                     dl.DelCustomer(idCustomer);
                     dl.AddCustomer(customer);
                 }
-                catch (IDAL.DO.MissingIdException ex)//חריגה לא טובה !!!!!!!!!
+                catch (IDAL.DO.MissingIdException ex)
                 {
                     throw new MissingIdException(ex.ID, ex.EntityName);
                 }
@@ -80,13 +80,13 @@ namespace IBL
                     };
                     return myCustomer;
                 }
-                catch (Exception e)
+                catch (IDAL.DO.MissingIdException ex)
                 {
-                    throw e;
+                    throw new MissingIdException(ex.ID, ex.EntityName);
                 }
             }
 
-            private ParcelAtCustomer getPackageInCustomer(IDAL.DO.Parcel p, int customerId)//לבדוק
+            private ParcelAtCustomer getPackageInCustomer(IDAL.DO.Parcel p, int customerId)//פונקצית עזר למילוי חבילה בלקוח
             {
                 try
                 {
@@ -106,16 +106,18 @@ namespace IBL
                         }
                     };
                 }
-                catch (Exception e)
+                catch (IDAL.DO.MissingIdException ex)
                 {
-                    throw e;
+                    throw new MissingIdException(ex.ID, ex.EntityName);
                 }
             }
-            public IEnumerable<BO.CustomerToList> GetALLCostumerToList()
+            public IEnumerable<BO.CustomerToList> GetALLCostumerToList()//הצגת רשימת הלקוחות
             {
-                CustomerToList customer = new CustomerToList();
+                List<CustomerToList> customerBl = new List<CustomerToList>();
+               
                 foreach (IDAL.DO.Customer item in dl.GetALLCustomers())//מיוי הנתונים ב BL מתוך DAL
                 {
+                    CustomerToList customer = new CustomerToList();
                     customer.Id = item.Id;
                     customer.Name = item.Name;
                     customer.Phone = item.Phone;
@@ -127,18 +129,18 @@ namespace IBL
                     {
                         if (itemParcel.SenderId == item.Id)//אם זאת חבילה שנשלחה עי הלקוח 
                         { 
-                            if (itemParcel.Delivered != default(DateTime))//החבילה כבר סופקה
+                            if (itemParcel.Delivered != new DateTime())//החבילה כבר סופקה
                                 customer.numOfParcelProvided++;
                             else
-                                 if (itemParcel.PickedUp != default(DateTime))//החבילה באמצע משלוח
+                                 if (itemParcel.PickedUp != new DateTime())//החבילה באמצע משלוח
                                 customer.numOfParcelDontProvided++;
                         }
                         if (itemParcel.TargetId == item.Id)//חבילה שהתקבלה על ידי הלקוח
                         {
-                            if (itemParcel.Delivered != default(DateTime))//החבילה כבר סופקה לו
+                            if (itemParcel.Delivered != new DateTime())//החבילה כבר סופקה לו
                                 customer.numOfParcelGet++;
                             else
-                                 if (itemParcel.PickedUp != default(DateTime))// אליו החבילה באמצע משלוח
+                                 if (itemParcel.PickedUp != new DateTime())// אליו החבילה באמצע משלוח
                                 customer.numOfParcelOnTheWay++;
                         }
                     }

@@ -83,8 +83,8 @@ namespace ConsoleUI
                                         Weightcategories.TryParse(Console.ReadLine(), out tempWeight);
                                         temp.MaxWeight = tempWeight;
                                         Console.WriteLine("Please type DroneStatuses: 0: available, 1: maintenance, 2: transport");
-                                        DroneStatuses tempstatus;
-                                        DroneStatuses.TryParse(Console.ReadLine(), out tempstatus);
+                                        //DroneStatuses tempstatus;
+                                        //DroneStatuses.TryParse(Console.ReadLine(), out tempstatus);
                                         //temp.status = tempstatus;
                                         //Console.WriteLine("Please type a Percent Battery :");
                                         //double.TryParse(Console.ReadLine(), out tempBattery);

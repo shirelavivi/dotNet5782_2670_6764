@@ -34,7 +34,6 @@ namespace DalObject
 
         #endregion
 
-
         #region drone
         public void AddDrone(Drone c);
         public void ConnectParcelToDron(int ParcelId, int DronId);
@@ -46,6 +45,8 @@ namespace DalObject
         public void DelDrone(int id);
         public IEnumerable<Drone> GetDronetsByPerdicate(Predicate<Drone> predicate);
         public double[] batteryArr();
+        public IEnumerable<DroneCharge> GetALLDroneCharge();
+       
         #endregion
 
         #region parcel

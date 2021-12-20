@@ -18,11 +18,11 @@ namespace IDAL
             public int TargetId { get; set; } 
             public Weightcategories Weight { get; set; }
             public Priorities Priority { get; set; }
-            public DateTime Requested  { get; set; }
             public int DroneId { get; set; }
-            public DateTime Scheduled { get; set; }
-            public DateTime PickedUp { get; set; }
-            public DateTime Delivered { get; set; }
+            public DateTime Requested { get; set; }//יצירה
+            public DateTime Scheduled { get; set; }//שיוך
+            public DateTime PickedUp { get; set; }//איסוף
+            public DateTime Delivered { get; set; }//אספקה
             public override string ToString()
             {
                 return this.ToStringProperty();

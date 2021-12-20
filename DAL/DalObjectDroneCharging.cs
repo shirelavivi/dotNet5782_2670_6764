@@ -46,7 +46,8 @@ namespace DalObject
                 throw new MissingIdException(droneId, "DroneCharge");
         }
 
-        public IEnumerable<DroneCharge> GetStationByPerdicate(Predicate<DroneCharge> predicate)
+        public IEnumerable<DroneCharge> 
+            ByPerdicate(Predicate<DroneCharge> predicate)
         {
             return from st in IDAL.DataSource.DronesCharge
                    where predicate(st)
