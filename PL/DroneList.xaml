@@ -8,9 +8,9 @@
         Title="DroneList" Height="640" Width="800">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="400*"/>
-            </Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
 VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
@@ -20,6 +20,7 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
         </Grid>
+        <ComboBox Width="120" Margin="184,134,496,175" Grid.Row="1"/>
 
     </Grid>
 
