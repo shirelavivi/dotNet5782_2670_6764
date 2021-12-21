@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DroneList.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DroneList : Window
     {
-        IBL.BO.BL bl = new IBL.BO.BL();
-        public MainWindow()
+        public DroneList()
         {
             InitializeComponent();
-            
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
