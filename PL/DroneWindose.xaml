@@ -6,5 +6,103 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Drone" Height="640" Width="800">
-    <Grid />
+    <Window.Background>
+        <ImageBrush ImageSource="/drone.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+    <Grid Opacity="0.99" Margin="0,0,0,7">
+
+        <Grid x:Name="GridAddDrone" Height="auto" Grid.Row="0" Width="auto" Margin="10,0,-10,10" Grid.RowSpan="2">
+            <Label Content="Type YOUR Data:" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
+                <Label.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA7D3D8" Offset="0"/>
+                        <GradientStop Color="#FF0F27B9" Offset="1"/>
+                        <GradientStop Color="#FF678BCB" Offset="0.418"/>
+                    </LinearGradientBrush>
+                </Label.Background>
+            </Label>
+            <TextBlock HorizontalAlignment="Left" Margin="10,92,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.258,0.67" Width="53" Foreground="#FFF8F2F2" FontStyle="Normal" FontStretch="Normal" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,144,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,196,0,0" Text="Buterry:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,248,0,0" Text="MaxWheight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="130" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,300,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="68" FontSize="18" Grid.Row="1" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,352,0,0" Text="Status:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="70" FontSize="18" Grid.Row="1" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,402,0,0" Text="Delivery:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="88" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,452,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" RenderTransformOrigin="0.545,-0.27" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBox x:Name="TextID" HorizontalAlignment="Left" Margin="147,94,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,502,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="106" FontSize="18" Foreground="#FFFCF5F7" FontFamily="Arial Black"/>
+            <TextBox x:Name="TextName" HorizontalAlignment="Left" Margin="147,141,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBox x:Name="TextButtery" HorizontalAlignment="Left" Margin="147,188,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <!--<TextBox x:Name="TextMaxWheigt" HorizontalAlignment="Left" Margin="147,235,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>-->
+            <TextBox x:Name="TextModel" HorizontalAlignment="Left" Margin="147,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" TextChanged="TextModel_TextChanged"/>
+            <ComboBox x:Name="ComboBoxStatus" HorizontalAlignment="Left" Margin="147,343,0,0"  VerticalAlignment="Top" Width="120" Height="33" SelectionChanged="ComboBoxS_SelectionChanged"/>
+            <TextBox x:Name="TextDelivery" HorizontalAlignment="Left" Margin="147,393,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBox x:Name="TextLatitude" HorizontalAlignment="Left" Margin="147,443,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBox x:Name="TextLongitude" HorizontalAlignment="Left" Margin="147,497,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <Button x:Name="ButtonUpDate" Content="Add Drone" HorizontalAlignment="Left" Margin="558,513,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="170" Click="Button_ClickAddDrone" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold"/>
+            <ComboBox x:Name="ComboBoxMaxWeight" HorizontalAlignment="Left" Margin="147,239,0,0" VerticalAlignment="Top" Width="120" Height="33" RenderTransformOrigin="0.454,0.89" SelectionChanged="ComboBoxMaxWeight_SelectionChanged">
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="#FFF7F3F3" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+                <ComboBoxItem Content="Easy" />
+                <ComboBoxItem Content="Middle" />
+                <ComboBoxItem Content="Weighty" />
+                <GradientStop Color="#FFFBFAF2" Offset="0.64"/>
+                <GradientStop Color="#FFFCF6F6" Offset="1"/>
+            </ComboBox>
+            <Image HorizontalAlignment="Left" Height="100" Margin="368,245,0,0" VerticalAlignment="Top" Width="100"/>
+          
+
+        </Grid>
+        <Grid x:Name="GridUpdateDrone" Height="auto" Grid.Row="0" Width="auto" Margin="10,0,-10,10" Grid.RowSpan="2" d:IsHidden="True">
+            <Label Content="Update YOUR Model:" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
+                <Label.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA7D3D8" Offset="0"/>
+                        <GradientStop Color="#FF0F27B9" Offset="1"/>
+                        <GradientStop Color="#FF678BCB" Offset="0.418"/>
+                    </LinearGradientBrush>
+                </Label.Background>
+            </Label>
+            <TextBlock HorizontalAlignment="Left" Margin="10,92,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.258,0.67" Width="53" Foreground="#FFF8F2F2" FontStyle="Normal" FontStretch="Normal" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,144,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,196,0,0" Text="Buterry:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,248,0,0" Text="MaxWheight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="130" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,300,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="68" FontSize="18" Grid.Row="1" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,352,0,0" Text="Status:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="70" FontSize="18" Grid.Row="1" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,402,0,0" Text="Delivery:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="88" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,452,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" RenderTransformOrigin="0.545,-0.27" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBox x:Name="TextIDUpdateDrone" HorizontalAlignment="Left" Margin="147,94,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,502,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="106" FontSize="18" Foreground="#FFFCF5F7" FontFamily="Arial Black"/>
+            <TextBox x:Name="TextNameUpdateDrone" HorizontalAlignment="Left" Margin="147,141,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBox x:Name="TextButteryUpdateDrone" HorizontalAlignment="Left" Margin="147,188,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <!--<TextBox x:Name="TextMaxWheigt" HorizontalAlignment="Left" Margin="147,235,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>-->
+            <TextBox x:Name="TextModelUpdateDrone" HorizontalAlignment="Left" Margin="147,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" TextChanged="TextModel_TextChanged"/>
+            <ComboBox x:Name="ComboBoxStatusUpdateDrone" HorizontalAlignment="Left" Margin="147,343,0,0"  VerticalAlignment="Top" Width="120" Height="33" SelectionChanged="ComboBoxS_SelectionChanged"/>
+            <TextBox x:Name="TextDeliveryUpdateDrone" HorizontalAlignment="Left" Margin="147,393,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBox x:Name="TextLatitudeUpdateDrone" HorizontalAlignment="Left" Margin="147,443,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBox x:Name="TextLongitudeUpdateDrone" HorizontalAlignment="Left" Margin="147,497,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <Button Content="UpDate Drone" HorizontalAlignment="Left" Margin="558,513,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="170" Click="Button_ClikUpdateDrone" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold"/>
+            <ComboBox x:Name="ComboBoxMaxWeightUpdateDrone" HorizontalAlignment="Left" Margin="147,239,0,0" VerticalAlignment="Top" Width="120" Height="33" RenderTransformOrigin="0.454,0.89" SelectionChanged="ComboBoxMaxWeight_SelectionChanged">
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="#FFF7F3F3" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+                <ComboBoxItem Content="Easy" />
+                <ComboBoxItem Content="Middle" />
+                <ComboBoxItem Content="Weighty" />
+                <GradientStop Color="#FFFBFAF2" Offset="0.64"/>
+                <GradientStop Color="#FFFCF6F6" Offset="1"/>
+            </ComboBox>
+            <Image HorizontalAlignment="Left" Height="100" Margin="368,245,0,0" VerticalAlignment="Top" Width="100"/>
+
+
+        </Grid>
+
+    </Grid>
 </Window>
