@@ -7,16 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="141*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רחפן.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="אישור" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="31" Margin="112,353,0,0" VerticalAlignment="Top" Width="136"/>
-        <Grid Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="346" Margin="359,38,0,0" VerticalAlignment="Top" Width="385"/>
-        <RadioButton Content="RadioButton" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="55,238,0,0" VerticalAlignment="Top" Width="90"/>
-        <RadioButton Content="RadioButton" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="55,278,0,0" VerticalAlignment="Top" Width="90"/>
-        <Label Content=":בחר מבין השניים הבאים" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="111,199,0,0" VerticalAlignment="Top" Width="139"/>
-        <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="25" Margin="55,148,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Button Content="Drones" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="33" Margin="598,356,0,0" VerticalAlignment="Top" Width="136" Background="{x:Null}" FontSize="16" FontWeight="Bold" Click="Button_Click" Grid.Row="1"/>
+        <Label Content="Welcom to drone system:" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="81" Margin="162,25,0,0" VerticalAlignment="Top" Width="544" FontSize="30" FontWeight="Bold" FontFamily="Elephant" Grid.Row="1"/>
 
     </Grid>
 </Window>

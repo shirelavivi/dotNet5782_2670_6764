@@ -17,13 +17,24 @@ namespace PL
     /// <summary>
     /// Interaction logic for DroneList.xaml
     /// </summary>
-    public partial class DroneList : Window
+    public partial class DroneListWindose : Window
     {
-        public DroneList()
+        public DroneListWindose(IBL.BO.BL bl)
         {
             InitializeComponent();
+            int i = 0;
+            foreach (IBL.BO.DroneToList item in bl.GetALLDroneToList()) ;
+               DataGridListDrone.data
+
+
+
+        }
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         
     }
+
 }

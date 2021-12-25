@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace PL
 {
     /// <summary>
@@ -24,12 +25,19 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-            
+           
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DroneListWindose droneListWindow = new DroneListWindose(bl);
+            droneListWindow.Show();
+        }
+
     }
 }

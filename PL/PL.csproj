@@ -7,7 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="g27ea533bd9264fb03b8b1facb967b56601c09c9082b32eddfa5574f7f2f9609de65f96f0a27451b747ef0e4c4a48aa2229fdaf1882e8c20ce0b65673b7f7b927_1280.jpg" />
+    <None Remove="רחפן.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="g27ea533bd9264fb03b8b1facb967b56601c09c9082b32eddfa5574f7f2f9609de65f96f0a27451b747ef0e4c4a48aa2229fdaf1882e8c20ce0b65673b7f7b927_1280.jpg" />
+    <Resource Include="רחפן.jpg" />
+  </ItemGroup>
+
 </Project>
+
