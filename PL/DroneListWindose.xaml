@@ -48,21 +48,20 @@ VerticalAlignment="Stretch" Width="auto">
                 <ComboBoxItem Content="weighty" />
             </ComboBox>
         </Grid>
-        <DataGrid x:Name="DataGridListDrone" HorizontalAlignment="Center" Height="555" VerticalAlignment="Center" Width="800" Grid.Row="1" Background="{x:Null}" Grid.IsSharedSizeScope="True">
-            <DataGrid.RowHeaderStyle>
-                <Style/>
-            </DataGrid.RowHeaderStyle>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id:" HeaderStringFormat="" MinWidth="100"/>
-                <DataGridTextColumn Header="Model:" MinWidth="100"/>
-                <DataGridTextColumn Header="Weight categories:" MinWidth="100"/>
-                <DataGridTextColumn Header="Buttry status:" MinWidth="100"/>
-                <DataGridTextColumn Header="Drone status:" MinWidth="100"/>
-                <DataGridTextColumn Header="Parcel  in transfer:" MinWidth="100"/>
-                <DataGridTextColumn Header="Location:" MinWidth="100"/>
-            </DataGrid.Columns>
-            <BO:DroneToList/>
-        </DataGrid>
+        <Grid HorizontalAlignment="Left" Margin="0,0,-0.4,0" Width="794">
+
+            <DataGrid x:Name="droneToListDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="69,99,96,-414" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Background="{x:Null}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="buterryStatusColumn" Width="SizeToHeader" Header="Buterry Status" Binding="{Binding ButerryStatus}"/>
+                    <DataGridTextColumn x:Name="droneStatusesColumn" Width="SizeToHeader" Header="Drone Statuses" Binding="{Binding DroneStatuses}"/>
+                    <DataGridTextColumn x:Name="idnumberColumn" Width="SizeToHeader" Header="Id" Binding="{Binding Idnumber}"/>
+                    <DataGridTextColumn x:Name="modelColumn" Width="SizeToHeader" Header="Model" Binding="{Binding Model}"/>
+                    <DataGridTextColumn x:Name="packageNumberTransferredColumn" Width="SizeToHeader" Header="Parcel in Transfer" Binding="{Binding PackageNumberTransferred}"/>
+                    <DataGridTextColumn x:Name="weightcategoriesColumn" Width="SizeToHeader" Header="Weight categories" Binding="{Binding Weightcategories}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
 
 
     </Grid>

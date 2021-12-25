@@ -22,11 +22,7 @@ namespace PL
         public DroneListWindose(IBL.BO.BL bl)
         {
             InitializeComponent();
-            int i = 0;
-            foreach (IBL.BO.DroneToList item in bl.GetALLDroneToList()) ;
-               DataGridListDrone.data
-
-
+            droneToListDataGrid.DataContext = bl.GetALLDroneToList();
 
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

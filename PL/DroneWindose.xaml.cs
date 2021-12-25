@@ -21,7 +21,7 @@ namespace PL
     {
         IBL.BO.BL bl;
         
-        public Drone(IBL.BO.BL bldrone)//הוספה
+        public DroneWindose(IBL.BO.BL bldrone)//הוספה
         {
             InitializeComponent();
             bl = bldrone;
@@ -29,7 +29,7 @@ namespace PL
             GridUpdateDrone.Visibility = Visibility.Hidden;
 
         }
-        public Drone(IBL.BO.DroneToList drone,IBL.BO.BL bldrone)//עדכון 
+        public DroneWindose(IBL.BO.DroneToList drone,IBL.BO.BL bldrone)//עדכון 
         {
             bl = bldrone;
             InitializeComponent();
@@ -102,9 +102,9 @@ namespace PL
             drone.ThisLocation.Longitude = double.Parse(TextLongitude.Text);
             drone.ThisLocation.Lattitude = double.Parse(TextLatitude.Text);
             drone.Weightcategories = (IBL.BO.Weightcategories)ComboBoxMaxWeight.SelectedItem;//weight
-            bl.
+            
            
-            //להוסיף אחר כך add
+           
             //TextID.IsEnabled = false;
         }
     }
