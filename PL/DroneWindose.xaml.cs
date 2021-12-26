@@ -100,13 +100,13 @@ namespace PL
             IBL.BO.Drone drone = new IBL.BO.Drone();
             drone.IdDrone = int.Parse(TextID.Text);
             drone.Model = TextModel.Text;
-            //drone.ButerryStatus = double.Parse(TextButtery.Text);
+           // drone.ButerryStatus = double.Parse(TextButtery.Text);
             //drone.ThisLocation.Longitude = double.Parse(TextLongitude.Text);
             //drone.ThisLocation.Lattitude = double.Parse(TextLatitude.Text);
             drone.Weightcategories = (IBL.BO.Weightcategories)Convert.ToInt32(ComboBoxMaxWeight.SelectedItem);//weight
-            
-            //drone.DroneStatuses = (IBL.BO.DroneStatuses)ComboBoxStatus.SelectedItem;
 
+            //drone.DroneStatuses = (IBL.BO.DroneStatuses)ComboBoxStatus.SelectedItem;
+            bl.AddDrone(drone,Convert.ToInt32(comboboxstion.SelectedItem));
             //TextID.IsEnabled = false;
         } 
        

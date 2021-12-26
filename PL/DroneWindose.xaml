@@ -50,11 +50,12 @@
                         <GradientStop Color="#FFF0F0F0"/>
                         <GradientStop Color="#FFF7F3F3" Offset="1"/>
                     </LinearGradientBrush>
-                </ComboBox.Background>
+                </ComboBox.Background>     
+               
+               
                 <ComboBoxItem Content="Easy"/>
                 <ComboBoxItem Content="Middle" />
                 <ComboBoxItem Content="Weighty" />
-                
             </ComboBox>
             <Image HorizontalAlignment="Left" Height="100" Margin="368,175,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" d:IsHidden="True"/>
             <ComboBox x:Name="comboboxstion" HorizontalAlignment="Left" Height="32" Margin="147,70,0,0" Grid.Row="1" VerticalAlignment="Top" Width="117"/>
