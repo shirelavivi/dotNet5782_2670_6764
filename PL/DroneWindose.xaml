@@ -51,8 +51,8 @@
                         <GradientStop Color="#FFF7F3F3" Offset="1"/>
                     </LinearGradientBrush>
                 </ComboBox.Background>     
-                <GradientStop Color="#FFFBFAF2" Offset="0.64"/>
-                <GradientStop Color="#FFFCF6F6" Offset="1"/>
+               
+               
                 <ComboBoxItem Content="Easy"/>
                 <ComboBoxItem Content="Middle" />
                 <ComboBoxItem Content="Weighty" />
