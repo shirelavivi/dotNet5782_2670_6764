@@ -60,7 +60,7 @@ namespace IBL
                         drone.ThisLocation = l;
                         dronesBl.Remove(GetDroneToList(droneId));
                         dronesBl.Add(drone);
-                        
+
                     }
                 }
                 catch (IDAL.DO.MissingIdException ex)//  חריגה לא נכונה !!!!!!!!! לעשות חדשה
@@ -117,7 +117,7 @@ namespace IBL
                     droneToListBL.ThisLocation = new Location() { Lattitude = st.Lattitude, Longitude = st.Longitude };
                     dronesBl.Add(droneToListBL);
                 }
-                catch(IDAL.DO.MissingIdException ex)
+                catch (IDAL.DO.MissingIdException ex)
                 {
                     throw new MissingIdException(ex.ID, ex.EntityName);
                 }
@@ -263,13 +263,18 @@ namespace IBL
                 };
                 return pacInDalivery;
             }
+            public IEnumerable<DroneToList> GetALLDroneToList(Predicate<DroneToList> predicate=null)
+            {
+                return dronesBl.FindAll(predicate); 
+                //return from dron in dronesBl
+                //       where predicate(dron)
+                //       select dron;
 
-
-
+            }
         }
     }
-}
 
+}
 
 
 

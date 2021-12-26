@@ -132,10 +132,10 @@ namespace IDAL
                     default:
                         break;
                 }
-                a.Requested = new DateTime();
-                a.Scheduled = new DateTime();
-                a.PickedUp = new DateTime();
-                a.Delivered = new DateTime();
+                a.Requested =null;
+                a.Scheduled = null;
+                a.PickedUp = null;
+                a.Delivered = null;
                 a.DroneId = 0;
                 
                packets.Add(a);

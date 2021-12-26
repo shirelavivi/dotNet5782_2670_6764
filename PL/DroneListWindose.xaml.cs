@@ -19,18 +19,43 @@ namespace PL
     /// </summary>
     public partial class DroneListWindose : Window
     {
+        IBL.BO.BL blDroneList;
         public DroneListWindose(IBL.BO.BL bl)
         {
+            blDroneList = bl;
             InitializeComponent();
             droneToListDataGrid.DataContext = bl.GetALLDroneToList();
-
         }
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void comboBoxWeightstatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (IBL.BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex);
+        
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DroneWindose droneListWindow = new DroneWindose(blDroneList);
+            droneListWindow.Show();
+        }
+
+        private void droneToListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListViewItem item = sender as ListViewItem;
+            IBL.BO.DroneToList dr = droneToListDataGrid.SelectedItem as IBL.BO.DroneToList;
+            if (dr != null)
+            {
+                DroneWindose droneListWindow = new DroneWindose(dr, blDroneList);
+                droneListWindow.Show();
+            }
+        }
+
+
+        private void comboBoxWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.Weightcategories == (IBL.BO.Weightcategories)comboBoxWeight.SelectedIndex);
         }
-
-        
     }
 
 }

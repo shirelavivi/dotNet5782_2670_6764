@@ -22,10 +22,10 @@ namespace IBL
                     parcel_do.TargetId = parcel.Target.Id;
                     parcel_do.Weight = (IDAL.DO.Weightcategories)parcel.Weight;
                     parcel_do.Priority = (IDAL.DO.Priorities)parcel.Priority;
-                    parcel_do.Requested =new DateTime();
-                    parcel_do.Scheduled = new DateTime();
+                    parcel_do.Requested =null;
+                    parcel_do.Scheduled = null;
                     parcel_do.PickedUp = DateTime.Now;
-                    parcel_do.Delivered = new DateTime();
+                    parcel_do.Delivered = null;
                     dl.AddParcel(parcel_do);
                 }
                 catch (IDAL.DO.DuplicateIdException ex)

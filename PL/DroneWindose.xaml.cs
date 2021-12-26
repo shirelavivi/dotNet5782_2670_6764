@@ -27,19 +27,24 @@ namespace PL
             bl = bldrone;
             GridAddDrone.Visibility = Visibility.Visible;
             GridUpdateDrone.Visibility = Visibility.Hidden;
+            ComboBoxStatus.Text = IBL.BO.DroneStatuses.available.ToString();
+            ComboBoxStatus.IsEnabled = false;
+           
 
         }
         public DroneWindose(IBL.BO.DroneToList drone,IBL.BO.BL bldrone)//עדכון 
         {
-            bl = bldrone;
             InitializeComponent();
+            bl = bldrone;
+            GridAddDrone.Visibility = Visibility.Hidden;
+            GridUpdateDrone.Visibility = Visibility.Visible;
             TextIDUpdateDrone.Text = drone.Idnumber.ToString();
             TextIDUpdateDrone.IsEnabled = false;
             TextButteryUpdateDrone.Text = drone.ButerryStatus.ToString();
             TextButteryUpdateDrone.IsEnabled = false;
-            ComboBoxMaxWeightUpdateDrone.SelectedItem = drone.Weightcategories;
+            ComboBoxMaxWeightUpdateDrone.Text = drone.Weightcategories.ToString();
             ComboBoxMaxWeightUpdateDrone.IsEnabled = false;
-            ComboBoxStatusUpdateDrone.SelectedItem = drone.DroneStatuses;
+            ComboBoxStatusUpdateDrone.Text = drone.DroneStatuses.ToString();
             ComboBoxStatusUpdateDrone.IsEnabled = false;
             TextLatitudeUpdateDrone.Text = drone.ThisLocation.Lattitude.ToString();
             TextLatitudeUpdateDrone.IsEnabled = false;
@@ -47,11 +52,7 @@ namespace PL
             TextLongitudeUpdateDrone.IsEnabled = false;
             TextModelUpdateDrone.Text = "";
             TextModelUpdateDrone.IsEnabled = true;
-            GridAddDrone.Visibility = Visibility.Hidden;
-            GridUpdateDrone.Visibility = Visibility.Visible;
-
-
-
+           
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,20 +74,13 @@ namespace PL
 
         private void ComboBoxMaxWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                MessageBox.Show((string)ComboBoxMaxWeight.SelectedItem);
+              
         }
 
         private void TextModel_TextChanged(object sender, TextChangedEventArgs e)
         {
 
-        }
-
-        private void ComboBoxStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MessageBox.Show((string)ComboBoxStatus.SelectedItem);
-        }
-
-        
+        }     
 
         private void Button_ClikUpdateDrone(object sender, RoutedEventArgs e)
         {
@@ -102,10 +96,14 @@ namespace PL
             drone.ThisLocation.Longitude = double.Parse(TextLongitude.Text);
             drone.ThisLocation.Lattitude = double.Parse(TextLatitude.Text);
             drone.Weightcategories = (IBL.BO.Weightcategories)ComboBoxMaxWeight.SelectedItem;//weight
-            
-           
-           
+            drone.DroneStatuses =(IBL.BO.DroneStatuses)ComboBoxStatus.SelectedItem;
+
             //TextID.IsEnabled = false;
+        }
+
+        private void ComboBoxS_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          
         }
     }
 }

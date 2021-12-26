@@ -46,11 +46,11 @@ namespace IBL
         public IEnumerable<BO.DroneToList> GetALLDroneToList();
         public void AddDrone(BO.Drone drone, int stationId);
 
-
+        public IEnumerable<DroneToList> GetALLDroneToList(Predicate<DroneToList> predicate = null);
         // public Drone GetDrone(int droneId);
 
         #endregion
-       
+
     }
 
 

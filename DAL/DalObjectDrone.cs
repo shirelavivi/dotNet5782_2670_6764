@@ -66,5 +66,12 @@ namespace DalObject
             return from st in IDAL.DataSource.drones select st;
             //return DataSource.Customers;
         }
+        public IEnumerable<Drone> GetALLDroneToList(Predicate<Drone> predicate)
+        {
+            return from dron in IDAL.DataSource.drones
+                   where predicate(dron)
+                   select dron;
+
+        }
     }
 }
