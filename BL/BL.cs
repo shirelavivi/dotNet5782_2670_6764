@@ -54,17 +54,18 @@ namespace IBL
                                     item.DroneStatuses = DroneStatuses.transport;
                                     if (parcel.PickedUp == new DateTime() && parcel.Scheduled != new DateTime())//אם החבילה שויכה אבל לא נאספה
                                     {
-
+                                        item.PackageNumberTransferred = 0;
                                         l.Lattitude = dl.GetCustomer(parcel.SenderId).Lattitude;// מיקום השולח
                                         l.Longitude = dl.GetCustomer(parcel.SenderId).Longitude;
                                         IDAL.DO.Station station = MinFarToStation(l);// התחנה הקרובה לשלוח
                                         l.Lattitude = station.Lattitude;// מיקום התחנה הקרובה לשלוח
                                         l.Longitude = station.Longitude;
                                         item.ThisLocation = l;
+
                                     }
                                     if (parcel.PickedUp != new DateTime() && parcel.Delivered == new DateTime())//אם החבילה נאספה אבל עוד לא סופקה
                                     {
-
+                                        item.PackageNumberTransferred = parcel.Id;
                                         l.Lattitude = dl.GetCustomer(parcel.SenderId).Lattitude;// מיקום השולח
                                         l.Longitude = dl.GetCustomer(parcel.SenderId).Longitude;
                                         item.ThisLocation = l;
@@ -88,7 +89,7 @@ namespace IBL
                         }
                         if (item.DroneStatuses == DroneStatuses.maintenance)//אם הרחפן בתחזוקה 
                         {
-
+                            item.PackageNumberTransferred =0;
                             int ran = Rand.Next(0, (dl.GetALLStations()).Count());
                             l.Lattitude = (dl.GetALLStations().ToList())[ran].Lattitude;
                             l.Longitude = (dl.GetALLStations().ToList())[ran].Longitude;
