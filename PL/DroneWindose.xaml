@@ -54,8 +54,7 @@
                 <ComboBoxItem Content="Easy"/>
                 <ComboBoxItem Content="Middle" />
                 <ComboBoxItem Content="Weighty" />
-                <GradientStop Color="#FFFBFAF2" Offset="0.64"/>
-                <GradientStop Color="#FFFCF6F6" Offset="1"/>
+                
             </ComboBox>
             <Image HorizontalAlignment="Left" Height="100" Margin="368,175,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" d:IsHidden="True"/>
             <ComboBox x:Name="comboboxstion" HorizontalAlignment="Left" Height="32" Margin="147,70,0,0" Grid.Row="1" VerticalAlignment="Top" Width="117"/>
