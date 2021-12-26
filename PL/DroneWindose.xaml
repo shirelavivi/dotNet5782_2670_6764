@@ -25,29 +25,26 @@
                     </LinearGradientBrush>
                 </Label.Background>
             </Label>
-            <TextBlock HorizontalAlignment="Left" Margin="10,22,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.258,0.67" Width="53" Foreground="#FFF8F2F2" FontStyle="Normal" FontStretch="Normal" FontFamily="Arial Black" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,74,0,0" Text="station:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,126,0,0" Text="Buterry:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,178,0,0" Text="MaxWheight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="130" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,230,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="68" FontSize="18" Grid.Row="1" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,282,0,0" Text="Status:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="70" FontSize="18" Grid.Row="1" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="18,31,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.258,0.67" Width="52" Foreground="#FFF8F2F2" FontStyle="Normal" FontStretch="Normal" FontFamily="Arial Black" Grid.Row="1"/>
+            <!--<TextBlock HorizontalAlignment="Left" Margin="10,74,0,0" Text="station:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="67" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>
+            -->
+            <!--<TextBlock HorizontalAlignment="Left" Margin="10,126,0,0" Text="Buterry:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>-->
+            <TextBlock HorizontalAlignment="Left" Margin="10,74,0,0" Text="station:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="130" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="0,125,0,0" Text="MaxWheight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="130" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,175,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="68" FontSize="18" Grid.Row="1" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
+            <!--<TextBlock HorizontalAlignment="Left" Margin="10,282,0,0" Text="Status:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="70" FontSize="18" Grid.Row="1" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,332,0,0" Text="Delivery:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="88" FontSize="18" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,382,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" RenderTransformOrigin="0.545,-0.27" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>
-            <TextBox x:Name="TextID" HorizontalAlignment="Left" Margin="147,24,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,432,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="106" FontSize="18" Foreground="#FFFCF5F7" FontFamily="Arial Black" Grid.Row="1"/>
-            <TextBox x:Name="TextButtery" HorizontalAlignment="Left" Margin="147,118,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,382,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" RenderTransformOrigin="0.545,-0.27" Foreground="#FFF8F2F2" FontFamily="Arial Black" Grid.Row="1"/>-->
+            <TextBox x:Name="TextID" HorizontalAlignment="Left" Margin="147,22,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="30" Grid.Row="1"/>
+            <!--<TextBlock HorizontalAlignment="Left" Margin="10,432,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="106" FontSize="18" Foreground="#FFFCF5F7" FontFamily="Arial Black" Grid.Row="1"/>
+            <TextBox x:Name="TextButtery" HorizontalAlignment="Left" Margin="147,118,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" Grid.Row="1"/>-->
             <!--<TextBox x:Name="TextMaxWheigt" HorizontalAlignment="Left" Margin="147,235,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>-->
-            <TextBox x:Name="TextModel" HorizontalAlignment="Left" Margin="147,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" TextChanged="TextModel_TextChanged" Grid.Row="1"/>
-            <ComboBox x:Name="ComboBoxStatus" HorizontalAlignment="Left" Margin="147,273,0,0"  VerticalAlignment="Top" Width="120" Height="33" SelectionChanged="ComboBoxS_SelectionChanged" Grid.Row="1">
-                <ComboBoxItem Content="available"/>
-                <ComboBoxItem Content="maintenance" />
-                <ComboBoxItem Content="transport" />
-            </ComboBox>
-            <TextBox x:Name="TextDelivery" HorizontalAlignment="Left" Margin="147,323,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" Grid.Row="1"/>
+            <TextBox x:Name="TextModel" HorizontalAlignment="Left" Margin="146,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="30" TextChanged="TextModel_TextChanged" Grid.Row="1" RenderTransformOrigin="0.442,-0.302"/>
+            <!--<TextBox x:Name="TextDelivery" HorizontalAlignment="Left" Margin="147,323,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" Grid.Row="1"/>
             <TextBox x:Name="TextLatitude" HorizontalAlignment="Left" Margin="147,373,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" Grid.Row="1"/>
-            <TextBox x:Name="TextLongitude" HorizontalAlignment="Left" Margin="147,427,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" Grid.Row="1"/>
-            <Button x:Name="ButtonUpDate" Content="Add Drone" HorizontalAlignment="Left" Margin="558,443,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="170" Click="Button_ClickAddDrone" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Row="1"/>
-            <ComboBox x:Name="ComboBoxMaxWeight" HorizontalAlignment="Left" Margin="147,169,0,0" VerticalAlignment="Top" Width="120" Height="33" RenderTransformOrigin="0.454,0.89" SelectionChanged="ComboBoxMaxWeight_SelectionChanged" Grid.Row="1">
+            <TextBox x:Name="TextLongitude" HorizontalAlignment="Left" Margin="147,427,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" Grid.Row="1"/>-->
+            <Button x:Name="ButtonAddDrone" Content="Add Drone" HorizontalAlignment="Left" Margin="558,443,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="170" Click="Button_ClickAddDrone" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Row="1"/>
+            <ComboBox x:Name="ComboBoxMaxWeight" HorizontalAlignment="Left" Margin="146,122,0,0" VerticalAlignment="Top" Width="120" Height="30" RenderTransformOrigin="0.474,1.348" SelectionChanged="ComboBoxMaxWeight_SelectionChanged" Grid.Row="1">
                 <ComboBox.Background>
                     <LinearGradientBrush EndPoint="0,1">
                         <GradientStop Color="#FFF0F0F0"/>
