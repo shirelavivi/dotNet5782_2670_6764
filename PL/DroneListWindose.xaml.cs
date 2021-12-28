@@ -49,12 +49,31 @@ namespace PL
                 droneListWindow.Show();
             }
         }
+        public void help_function()
+        {
+            if (comboBoxWeight.SelectedItem == null && comboBoxWeightstatus.SelectedItem == null)
+                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList();
+            if (comboBoxWeight.SelectedItem != null && comboBoxWeightstatus.SelectedItem == null)
+                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.Weightcategories == (IBL.BO.Weightcategories)comboBoxWeight.SelectedIndex);
+            if (comboBoxWeight.SelectedItem == null && comboBoxWeightstatus.SelectedItem != null)
+                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (IBL.BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex);
+            if (comboBoxWeight.SelectedItem != null && comboBoxWeightstatus.SelectedItem != null)
+            {
+                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (IBL.BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex && dro.Weightcategories == (IBL.BO.Weightcategories)comboBoxWeight.SelectedIndex);
 
+            }
+        }
 
         private void comboBoxWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            help_function();
 
-            droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.Weightcategories == (IBL.BO.Weightcategories)comboBoxWeight.SelectedIndex);
+            //droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.Weightcategories == (IBL.BO.Weightcategories)comboBoxWeight.SelectedIndex);
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            help_function();
         }
     }
 

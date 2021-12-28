@@ -21,6 +21,7 @@ namespace PL
     {
 
         IBL.BO.BL bl;
+        IBL.BO.DroneToList droneWind;
         public DroneWindose(IBL.BO.BL bldrone)//הוספה
         {
             InitializeComponent();
@@ -31,25 +32,15 @@ namespace PL
             comboboxstion.ItemsSource = bldrone.GetALLStationWithFreeStation().Select(x => x.idnumber);
             //ComboBoxMaxWeight.ItemsSource =IBL.BO.Weightcategories;
 
-
-
-
         }
-
-
-
-        public DroneWindose(IBL.BO.DroneToList drone, IBL.BO.BL bldrone)//עדכון 
+        private void FullDrone(IBL.BO.DroneToList drone)
         {
-            InitializeComponent();
-            bl = bldrone;
-            GridAddDrone.Visibility = Visibility.Hidden;
-            GridUpdateDrone.Visibility = Visibility.Visible;
             TextIDUpdateDrone.Text = drone.Idnumber.ToString();
             TextIDUpdateDrone.IsEnabled = false;
             TextButteryUpdateDrone.Text = drone.ButerryStatus.ToString();
             TextButteryUpdateDrone.IsEnabled = false;
-            ComboBoxMaxWeightUpdateDrone.Text = drone.Weightcategories.ToString();
-            ComboBoxMaxWeightUpdateDrone.IsEnabled = false;
+            comboboxUpDate.SelectedValue = drone.Weightcategories.ToString();
+            comboboxUpDate.IsEnabled = false;
             ComboBoxStatusUpdateDrone.Text = drone.DroneStatuses.ToString();
             ComboBoxStatusUpdateDrone.IsEnabled = false;
             TextLatitudeUpdateDrone.Text = drone.ThisLocation.Lattitude.ToString();
@@ -58,6 +49,23 @@ namespace PL
             TextLongitudeUpdateDrone.IsEnabled = false;
             TextModelUpdateDrone.Text = "";
             TextModelUpdateDrone.IsEnabled = true;
+            TextDeliveryUpdateDrone.Text = drone.PackageNumberTransferred.ToString();
+            TextDeliveryUpdateDrone.IsEnabled = false;
+        }
+
+
+        public DroneWindose(IBL.BO.DroneToList drone, IBL.BO.BL bldrone)//עדכון 
+        {
+            InitializeComponent();
+            droneWind = drone;
+            bl = bldrone;
+            if (drone.DroneStatuses != IBL.BO.DroneStatuses.maintenance)
+                btnSendingDroneForCharging.Content = "Sending Drone For Charging";
+            else
+                btnSendingDroneForCharging.Content = "Out From Charge";
+            GridAddDrone.Visibility = Visibility.Hidden;
+            GridUpdateDrone.Visibility = Visibility.Visible;
+            FullDrone(drone);
 
         }
             
@@ -91,10 +99,18 @@ namespace PL
 
         private void Button_ClikUpdateDrone(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                bl.UpdateDrone(Convert.ToInt32(TextIDUpdateDrone.Text), TextModelUpdateDrone.Text);
+                MessageBox.Show("The modles drone is update");
+                this.Close();
+            }
+            catch(IBL.BO.MissingIdException)
+            {
+                MessageBox.Show("Erorr ID");
+            }
 
         }
-
-
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
             IBL.BO.Drone drone = new IBL.BO.Drone();
@@ -113,6 +129,30 @@ namespace PL
         private void ComboBoxS_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
           
+        }
+
+        private void btnSendingDroneForCharging_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnSendingDroneForCharging.Content.ToString() == "Sending Drone For Charging")
+            {
+                try
+                {
+                    bl.SendingDroneforCharging(droneWind.Idnumber);
+                    MessageBox.Show("The drone sending for charge");
+                    btnSendingDroneForCharging.Content = "Out From Charge";
+                    FullDrone(bl.GetDroneToList(droneWind.Idnumber));
+
+                }
+                catch(IBL.BO.MissingIdException)
+                {
+                    MessageBox.Show("Erorr");
+                }
+                
+            }
+            else
+            {
+
+            }
         }
     }
 }

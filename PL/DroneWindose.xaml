@@ -11,7 +11,7 @@
     </Window.Background>
     <Grid Opacity="0.99" Margin="0,0,0,7">
 
-        <Grid x:Name="GridAddDrone" Height="auto" Grid.Row="0" Width="auto" Margin="10,0,-10,10" Grid.RowSpan="2">
+        <Grid x:Name="GridAddDrone" Height="auto" Grid.Row="0" Width="auto" Margin="10,0,-10,10" Grid.RowSpan="2" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70*"/>
                 <RowDefinition Height="537*"/>
@@ -50,9 +50,9 @@
                         <GradientStop Color="#FFF0F0F0"/>
                         <GradientStop Color="#FFF7F3F3" Offset="1"/>
                     </LinearGradientBrush>
-                </ComboBox.Background>     
-               
-               
+                </ComboBox.Background>
+
+
                 <ComboBoxItem Content="Easy"/>
                 <ComboBoxItem Content="Middle" />
                 <ComboBoxItem Content="Weighty" />
@@ -62,7 +62,7 @@
 
 
         </Grid>
-        <Grid x:Name="GridUpdateDrone" Height="auto" Grid.Row="0" Width="auto" Margin="10,0,-10,10" Grid.RowSpan="2" d:IsHidden="True">
+        <Grid x:Name="GridUpdateDrone" Height="auto" Grid.Row="0" Width="auto" Margin="10,0,-10,10" Grid.RowSpan="2">
             <Label Content="Update YOUR Model:" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -93,22 +93,17 @@
             <TextBox x:Name="TextLatitudeUpdateDrone" HorizontalAlignment="Left" Margin="147,443,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
             <TextBox x:Name="TextLongitudeUpdateDrone" HorizontalAlignment="Left" Margin="147,497,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
             <Button Content="UpDate Drone" HorizontalAlignment="Left" Margin="558,513,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="170" Click="Button_ClikUpdateDrone" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold"/>
-            <ComboBox x:Name="ComboBoxMaxWeightUpdateDrone" HorizontalAlignment="Left" Margin="147,239,0,0" VerticalAlignment="Top" Width="120" Height="33" RenderTransformOrigin="0.454,0.89" SelectionChanged="ComboBoxMaxWeight_SelectionChanged" d:IsHidden="True">
-                <ComboBox.Background>
-                    <LinearGradientBrush EndPoint="0,1">
-                        <GradientStop Color="#FFF0F0F0"/>
-                        <GradientStop Color="#FFF7F3F3" Offset="1"/>
-                    </LinearGradientBrush>
-                </ComboBox.Background>
-                <ComboBoxItem Content="Easy" />
-                <ComboBoxItem Content="Middle" />
-                <ComboBoxItem Content="Weighty" />
-                <!--<GradientStop Color="#FFFBFAF2" Offset="0.64"/>
-                <GradientStop Color="#FFFCF6F6" Offset="1"/>-->
-            </ComboBox>
             <Image HorizontalAlignment="Left" Height="100" Margin="368,245,0,0" VerticalAlignment="Top" Width="100"/>
-
-
+            <ComboBox x:Name="comboboxUpDate" HorizontalAlignment="Left" Margin="147,244,0,0" VerticalAlignment="Top" Width="120" Height="28" IsEnabled="False">
+                <ComboBoxItem Content="easy"/>
+                <ComboBoxItem Content="middel" />
+                <ComboBoxItem Content="weighty" />
+            </ComboBox>
+            <Button x:Name="btnSendingDroneForCharging" Content="" HorizontalAlignment="Left" Height="52" Margin="558,438,0,0" VerticalAlignment="Top" Width="170" FontSize="20" FontFamily="Segoe UI Black" FlowDirection="LeftToRight" FontStretch="Medium" FontStyle="Normal" FontWeight="UltraBlack" Click="btnSendingDroneForCharging_Click">
+                <Button.Style>
+                    <Style/>
+                </Button.Style>
+            </Button>
         </Grid>
 
     </Grid>
