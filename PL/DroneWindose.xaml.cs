@@ -97,22 +97,39 @@ namespace PL
 
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-            IBL.BO.Drone drone = new IBL.BO.Drone();
-            drone.IdDrone = int.Parse(TextID.Text);
-            drone.Model = TextModel.Text;
-           // drone.ButerryStatus = double.Parse(TextButtery.Text);
-            //drone.ThisLocation.Longitude = double.Parse(TextLongitude.Text);
-            //drone.ThisLocation.Lattitude = double.Parse(TextLatitude.Text);
-            drone.Weightcategories = (IBL.BO.Weightcategories)Convert.ToInt32(ComboBoxMaxWeight.SelectedItem);//weight
-
-            //drone.DroneStatuses = (IBL.BO.DroneStatuses)ComboBoxStatus.SelectedItem;
-            bl.AddDrone(drone,Convert.ToInt32(comboboxstion.SelectedItem));
-            //TextID.IsEnabled = false;
+            try
+            {
+                IBL.BO.Drone drone = new IBL.BO.Drone();
+                drone.IdDrone = int.Parse(TextID.Text);
+                drone.Model = TextModel.Text;
+                //drone.Weightcategories = (IBL.BO.Weightcategories)ComboBoxMaxWeight.SelectedItem;
+                drone.ThisLocation = new IBL.BO.Location();
+                //drone.PackageInTransfer = new IBL.BO.ParcelInTransfer();//לא נותן
+                //drone.DroneStatuses = (IBL.BO.DroneStatuses)ComboBoxStatus.SelectedItem;
+                bl.AddDrone(drone, Convert.ToInt32(comboboxstion.SelectedItem));
+                MessageBox.Show("The Drone Was Successfully Added");
+                this.Close();//זה בסדר?
+            }
+            //לגבי התז של תחנה בחרנו מתחנות פנויות אז לא אמורה להיות בעיה
+            //catch (IBL.BO.MissingIdException ex)
+            //{
+            //     MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            catch (IBL.BO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         } 
        
         private void ComboBoxS_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
           
+        }
+
+        private void Click_ButtonCancel(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
