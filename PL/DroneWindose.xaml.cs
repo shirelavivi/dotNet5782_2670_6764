@@ -39,7 +39,7 @@ namespace PL
             TextIDUpdateDrone.IsEnabled = false;
             TextButteryUpdateDrone.Text = drone.ButerryStatus.ToString();
             TextButteryUpdateDrone.IsEnabled = false;
-            comboboxUpDate.SelectedValue = drone.Weightcategories.ToString();
+            comboboxUpDate.Text = drone.Weightcategories.ToString();
             comboboxUpDate.IsEnabled = false;
             ComboBoxStatusUpdateDrone.Text = drone.DroneStatuses.ToString();
             ComboBoxStatusUpdateDrone.IsEnabled = false;
@@ -51,6 +51,7 @@ namespace PL
             TextModelUpdateDrone.IsEnabled = true;
             TextDeliveryUpdateDrone.Text = drone.PackageNumberTransferred.ToString();
             TextDeliveryUpdateDrone.IsEnabled = false;
+            TextModelUpdateDrone.Text = drone.Model.ToString();
         }
 
 
@@ -101,9 +102,16 @@ namespace PL
         {
             try
             {
-                bl.UpdateDrone(Convert.ToInt32(TextIDUpdateDrone.Text), TextModelUpdateDrone.Text);
-                MessageBox.Show("The modles drone is update");
-                this.Close();
+                if (TextModelUpdateDrone.Text != "")
+                {
+                    bl.UpdateDrone(Convert.ToInt32(TextIDUpdateDrone.Text), TextModelUpdateDrone.Text);
+                    MessageBox.Show("The modles drone is update");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("pleas typ the drone modle");
+                }
             }
             catch(IBL.BO.MissingIdException)
             {
@@ -133,25 +141,26 @@ namespace PL
 
         private void btnSendingDroneForCharging_Click(object sender, RoutedEventArgs e)
         {
-            if (btnSendingDroneForCharging.Content.ToString() == "Sending Drone For Charging")
+
+            try
             {
-                try
+                if (btnSendingDroneForCharging.Content.ToString() == "Sending Drone For Charging")
                 {
                     bl.SendingDroneforCharging(droneWind.Idnumber);
                     MessageBox.Show("The drone sending for charge");
                     btnSendingDroneForCharging.Content = "Out From Charge";
                     FullDrone(bl.GetDroneToList(droneWind.Idnumber));
-
                 }
-                catch(IBL.BO.MissingIdException)
+                else
                 {
-                    MessageBox.Show("Erorr");
-                }
-                
-            }
-            else
-            {
 
+                    //bl.ReleaseDroneFromChargeStation(droneWind.Idnumber,);
+
+                }
+            }
+            catch (IBL.BO.MissingIdException)
+            {
+                MessageBox.Show("Erorr");
             }
         }
     }

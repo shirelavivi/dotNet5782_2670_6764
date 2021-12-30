@@ -12,6 +12,7 @@ namespace DalObject
     {
         IDAL.DataSource ds;
         IDAL.DataSource.config ds1;
+        //DalObject dl;/*= new DalObject();*/
         public DalObject()
         {
             ds = new IDAL.DataSource();
@@ -63,16 +64,15 @@ namespace DalObject
         public void SendDroneTpCharge(int StationId, int DroneId)///)מעודכן)שליחת רחפן לטעינה
         {
             try
-            {
-                DalObject dl = new DalObject();
-                Station tempStation = dl.GetStation(StationId);
-                Drone tempDrone = dl.GetDrone(DroneId);
+            { 
+                Station tempStation = GetStation(StationId);
+                Drone tempDrone = GetDrone(DroneId);
                 //tempDrone.status = DroneStatuses.maintenance;
                 tempStation.ChargeSlots--;///עידכון עמדות טעינה
                 IDAL.DataSource.drones.Add(tempDrone);
-                IDAL.DataSource.drones.Remove(dl.GetDrone(DroneId));
+                IDAL.DataSource.drones.Remove(GetDrone(DroneId));
                 IDAL.DataSource.Stations.Add(tempStation);///הוספת התחנה המעודכנת
-                IDAL.DataSource.Stations.Remove(dl.GetStation(StationId));
+                IDAL.DataSource.Stations.Remove(GetStation(StationId));
                 DroneCharge tempDronecharge = new DroneCharge();
                 tempDronecharge.Droneld = DroneId;
                 tempDronecharge.StationId = StationId;
@@ -87,11 +87,11 @@ namespace DalObject
         {
             try
             {
-                DalObject dl = new DalObject();
-                Drone tempDrone1 = dl.GetDrone(DroneId);
+                //DalObject dl = new DalObject();
+                Drone tempDrone1 = GetDrone(DroneId);
                 //tempDrone1.status = DroneStatuses.available;
                 IDAL.DataSource.drones.Add(tempDrone1);
-                IDAL.DataSource.drones.Remove(dl.GetDrone(DroneId));
+                IDAL.DataSource.drones.Remove(GetDrone(DroneId));
                 //List<DroneCharge> runDronesCharge = IDAL.DataSource.DronesCharge;
                 int save = 0;
                 for (int i = 0; i < IDAL.DataSource.DronesCharge.Count; i++)
@@ -103,10 +103,10 @@ namespace DalObject
 
                     }
                 }
-                Station s = dl.GetStation(save);
+                Station s = GetStation(save);
                 s.ChargeSlots++;
                 IDAL.DataSource.Stations.Add(s);
-                IDAL.DataSource.Stations.Remove(dl.GetStation(save));
+                IDAL.DataSource.Stations.Remove(GetStation(save));
             }
             catch (IDAL.DO.MissingIdException ex)
             {

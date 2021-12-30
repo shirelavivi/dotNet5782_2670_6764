@@ -36,7 +36,7 @@ namespace IBL
             {
 
                 double kilometer, battery = 0;
-                int stationId = 0;
+                
                 IDAL.DO.Station minstation;
                 try
                 {
@@ -50,13 +50,13 @@ namespace IBL
                         kilometer = DistanceTo(minstation.Lattitude, minstation.Longitude, GetDroneToList(droneId).ThisLocation.Lattitude, GetDroneToList(droneId).ThisLocation.Longitude);
                         battery = BatteryConsumption(kilometer, GetDroneToList(droneId).Weightcategories);//שמירת כמות הבטריה שמתבזבזת
                         if (battery < GetDroneToList(droneId).ButerryStatus)//צריך לבדוק אם הסוללה הנדרשת מספיקה לסוללה שיש לי ברחפן
-                            dl.SendDroneTpCharge(stationId, droneId);
+                            dl.SendDroneTpCharge(minstation.Id, droneId);
                         DroneToList drone = GetDroneToList(droneId);//מכאן נשנה את המצב של הרחפן והבטריה ברשימה של ה bl
                         drone.ButerryStatus -= battery;
                         drone.DroneStatuses = DroneStatuses.maintenance;
                         Location l = new Location();
-                        l.Lattitude = dl.GetStation(stationId).Lattitude;
-                        l.Longitude = dl.GetStation(stationId).Longitude;
+                        l.Lattitude = dl.GetStation(minstation.Id).Lattitude;
+                        l.Longitude = dl.GetStation(minstation.Id).Longitude;
                         drone.ThisLocation = l;
                         dronesBl.Remove(GetDroneToList(droneId));
                         dronesBl.Add(drone);
