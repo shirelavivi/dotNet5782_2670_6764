@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:BO="clr-namespace:IBL.BO;assembly=BL" x:Class="PL.DroneListWindose"
         mc:Ignorable="d"
-        Title="DroneList" Height="640" Width="800">
+        Title="DroneList" Height="640" Width="800" Activated="Window_Activated">
     <Grid x:Name="Grid">
         <Grid.Background>
             <ImageBrush ImageSource="/רחפן.jpg" Opacity="0.7"/>
