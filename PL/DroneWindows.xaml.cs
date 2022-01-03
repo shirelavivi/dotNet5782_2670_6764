@@ -222,6 +222,8 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
+            btnCollectionParcel.Visibility = Visibility.Visible;
         }
 
         private void btnCollectionParcel_Click(object sender, RoutedEventArgs e)//איסוף חבילה על ידי רחפן
