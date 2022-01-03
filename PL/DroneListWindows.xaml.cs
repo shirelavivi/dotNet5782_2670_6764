@@ -17,10 +17,10 @@ namespace PL
     /// <summary>
     /// Interaction logic for DroneList.xaml
     /// </summary>
-    public partial class DroneListWindose : Window
+    public partial class DroneListWindows : Window
     {
         IBL.BO.BL blDroneList;
-        public DroneListWindose(IBL.BO.BL bl)
+        public DroneListWindows(IBL.BO.BL bl)
         {
             blDroneList = bl;
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DroneWindose droneListWindow = new DroneWindose(blDroneList);
+            DroneWindows droneListWindow = new DroneWindows(blDroneList);
             droneListWindow.Show();
         }
 
@@ -45,7 +45,7 @@ namespace PL
             IBL.BO.DroneToList dr = droneToListDataGrid.SelectedItem as IBL.BO.DroneToList;
             if (dr != null)
             {
-                DroneWindose droneListWindow = new DroneWindose(dr, blDroneList);
+                DroneWindows droneListWindow = new DroneWindows(dr, blDroneList);
                 droneListWindow.Show();
             }
         }

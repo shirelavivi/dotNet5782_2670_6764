@@ -17,12 +17,12 @@ namespace PL
     /// <summary>
     /// Interaction logic for Drone.xaml
     /// </summary>
-    public partial class DroneWindose : Window
+    public partial class DroneWindows : Window
     {
 
         IBL.BO.BL bl;
         IBL.BO.DroneToList droneWind;
-        public DroneWindose(IBL.BO.BL bldrone)//הוספה
+        public DroneWindows(IBL.BO.BL bldrone)//הוספה
         {
             InitializeComponent();
             bl = bldrone;
@@ -55,9 +55,11 @@ namespace PL
             TextModelUpdateDrone.Text = drone.Model.ToString();
         }
 
-        public DroneWindose(IBL.BO.DroneToList drone, IBL.BO.BL bldrone)//עדכון 
+        public DroneWindows(IBL.BO.DroneToList drone, IBL.BO.BL bldrone)//עדכון 
         {
             InitializeComponent();
+            GridAddDrone.Visibility = Visibility.Hidden;
+            GridUpdateDrone.Visibility = Visibility.Visible;
             droneWind = drone;
             bl = bldrone;
             if (drone.DroneStatuses != IBL.BO.DroneStatuses.maintenance)
@@ -77,13 +79,12 @@ namespace PL
                 lablTimer.Visibility = Visibility.Hidden;
 
             }
-            GridAddDrone.Visibility = Visibility.Hidden;
-            GridUpdateDrone.Visibility = Visibility.Visible;
+          
             if (drone.DroneStatuses != IBL.BO.DroneStatuses.transport)
-                btnCollectionParcel.Content = "Supply Parcel";
+                btnCollectionParcel.Content = "Collection Parce";
             else
             {
-                btnCollectionParcel.Content = "Collection Parce";
+                btnCollectionParcel.Content = "Supply Parcel";
             }  
             FullDrone(drone);
 
