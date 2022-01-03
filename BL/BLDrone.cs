@@ -130,7 +130,9 @@ namespace IBL
             }
             public void ReleaseDroneFromChargeStation(int droneId, int timeInCharging)//שחרור רחפן מטעינה
             {
-                if (droneId < 0)
+                try
+                {
+                    if (droneId < 0)
                     throw new ArgumentOutOfRangeException("id", "The drone number must be greater or equal to 0");
                 if (timeInCharging < 0)
                     throw new ArgumentOutOfRangeException("chargingTime", "The charging time must be greater or equal to 0");
@@ -142,8 +144,7 @@ namespace IBL
                 if (droneToList.DroneStatuses != DroneStatuses.maintenance)
                     throw new InvalidOperationException("The drone is not charging");
 
-                try
-                {
+               
                     dl.ReleaseDroneFromChargeStation(droneId);
                     dronesBl.Remove(droneToList);
                     droneToList.ButerryStatus += (timeInCharging * ChargingRate);//קצב טעינה
@@ -153,6 +154,10 @@ namespace IBL
                 catch (IDAL.DO.DuplicateIdException ex)
                 {
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
+                }
+                catch (IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
                 }
             }
             public void PickUpPackage(int id)//איסוף חבילה על ידי רחפן
