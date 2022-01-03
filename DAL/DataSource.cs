@@ -65,7 +65,7 @@ namespace IDAL
                 Drone d = new Drone();
                 d.id = i;
                 d.Model = "drone" + i;
-                t = Rand.Next(0,3);
+                t = Rand.Next(0, 3);
                 switch (t)
                 {
                     case 0:
@@ -86,7 +86,7 @@ namespace IDAL
             for (int i = 1; i <= 11; i++)
             {
                 Customer c = new Customer();
-                c.Id =i;
+                c.Id = i;
                 c.Name = "customer" + i;
                 c.Phone = "05" + Rand.Next(4) + Rand.Next(9) + Rand.Next(9) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10) + Rand.Next(10);
                 c.Longitude = Rand.Next(0, 100) / 10;
@@ -100,8 +100,8 @@ namespace IDAL
                 Parcel a = new Parcel();
                 config.CounterPackets++;
                 a.Id = config.CounterPackets;
-                a.SenderId = Rand.Next(1,12) ;
-                a.TargetId = Rand.Next(1, 12) ;
+                a.SenderId = Rand.Next(1, 12);
+                a.TargetId = Rand.Next(1, 12);
                 t = Rand.Next(3);
                 switch (t)
                 {
@@ -132,15 +132,21 @@ namespace IDAL
                     default:
                         break;
                 }
-                a.Requested =null;
+                a.Requested = null;
                 a.Scheduled = null;
                 a.PickedUp = null;
                 a.Delivered = null;
                 a.DroneId = 0;
-                
-               packets.Add(a);
-            }
 
+                packets.Add(a);
+            }
+            for (int i = 0; i < 11; i++)
+            {
+                DroneCharge d = new DroneCharge();
+                d.Droneld = Rand.Next(1, 8);
+                d.StationId = Rand.Next(1, 4);
+                DronesCharge.Add(d);
+            }
         }
     }
 }

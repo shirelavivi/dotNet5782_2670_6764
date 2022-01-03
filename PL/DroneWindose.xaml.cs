@@ -38,7 +38,7 @@ namespace PL
         {
             TextIDUpdateDrone.Text = drone.Idnumber.ToString();
             TextIDUpdateDrone.IsEnabled = false;
-            TextButteryUpdateDrone.Text = drone.ButerryStatus.ToString();
+            TextButteryUpdateDrone.Text = drone.ButerryStatus.ToString()+"%";
             TextButteryUpdateDrone.IsEnabled = false;
             comboboxUpDate.Text = drone.Weightcategories.ToString();
             comboboxUpDate.IsEnabled = false;
@@ -179,13 +179,19 @@ namespace PL
                     bl.SendingDroneforCharging(droneWind.Idnumber);
                     MessageBox.Show("The drone sending for charge");
                     btnSendingDroneForCharging.Content = "Out From Charge";
-                    FullDrone(bl.GetDroneToList(droneWind.Idnumber));
+                   
                 }
                 else
                 {
 
                     bl.ReleaseDroneFromChargeStation(droneWind.Idnumber,Convert.ToInt32(saildTaimer.Value));
-
+                    MessageBox.Show("The drone realse form charge");
+                    btnSendingDroneForCharging.Content = "Sending Drone For Charging";
+                    FullDrone(bl.GetDroneToList(droneWind.Idnumber));
+                    btnSentDrone.Visibility = Visibility.Visible;
+                    btnCollectionParcel.Visibility = Visibility.Visible;
+                    saildTaimer.Visibility = Visibility.Visible;
+                    lablTimer.Visibility = Visibility.Visible;
                 }
                 
             }
@@ -197,6 +203,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            //this.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)//שליחת רחפן למשלוח
