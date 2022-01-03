@@ -22,7 +22,7 @@ namespace IDAL
             /// <summary>
             /// A serial number for packages that will be updated each time a new package is created
             /// </summary>
-            public static int CounterPackets = 0;
+            public static int CounterPackets = 10;
             public static double Free = 0.01;
             public static double Light = 0.04;
             public static double Medium = 0.08;
@@ -99,7 +99,7 @@ namespace IDAL
             {
                 Parcel a = new Parcel();
                 config.CounterPackets++;
-                a.Id =config.CounterPackets;
+                a.Id = config.CounterPackets;
                 a.SenderId = Rand.Next(1,12) ;
                 a.TargetId = Rand.Next(1, 12) ;
                 t = Rand.Next(3);

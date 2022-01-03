@@ -222,7 +222,7 @@ namespace IBL
 
 
             }
-            private ParcelInTransfer getPackageInDelivery(int packageId)
+            private ParcelInTransfer getPackageInDelivery(int packageId)//פונקצית עזר 
             {
                 var pac = dl.GetParcel(packageId);
 
@@ -265,11 +265,7 @@ namespace IBL
             }
             public IEnumerable<DroneToList> GetALLDroneToList(Predicate<DroneToList> predicate=null)
             {
-                return dronesBl.FindAll(predicate); 
-                //return from dron in dronesBl
-                //       where predicate(dron)
-                //       select dron;
-
+                return dronesBl.FindAll(predicate);
             }
         }
     }

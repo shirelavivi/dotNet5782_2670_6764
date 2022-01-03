@@ -302,6 +302,15 @@ namespace ConsoleUI_BL
                                             break;
                                         case UpDate.SupplyParcelByDrone:
                                             {
+                                                int droneID;
+                                                Console.WriteLine("Type drone ID from the next list :");
+                                                foreach (DroneToList item in bl.GetALLDroneToList(x=>x.DroneStatuses==IBL.BO.DroneStatuses.transport))
+                                                {
+                                                    Console.WriteLine(item.Idnumber);
+                                                }
+                                                int.TryParse(Console.ReadLine(), out droneID);
+                                                bl.SupplyParcelByDrone(droneID);
+                                                Console.WriteLine("The drone comming to destination!");
                                                 break;
                                             }
 

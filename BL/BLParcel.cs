@@ -22,7 +22,7 @@ namespace IBL
                     parcel_do.TargetId = parcel.Target.Id;
                     parcel_do.Weight = (IDAL.DO.Weightcategories)parcel.Weight;
                     parcel_do.Priority = (IDAL.DO.Priorities)parcel.Priority;
-                    parcel_do.Requested =null;
+                    parcel_do.Requested = null;
                     parcel_do.Scheduled = null;
                     parcel_do.PickedUp = DateTime.Now;
                     parcel_do.Delivered = null;
@@ -54,13 +54,13 @@ namespace IBL
                                     Location targetId = new Location();
                                     Location statin = new Location();
                                     double battary = GetDroneToList(droneid).ButerryStatus;// הבטריה שיש לרחפן
-                                    senderId.Lattitude = dl.GetCustomer(dl.GetParcel(keepParclId).SenderId).Lattitude;// המיקום של החבילה שאנחנו רוצים לשייך לה רחפן
-                                    senderId.Longitude = dl.GetCustomer(dl.GetParcel(keepParclId).SenderId).Longitude;
+                                    senderId.Lattitude = dl.GetCustomer(dl.GetParcel(item.Id).SenderId).Lattitude;// המיקום של החבילה שאנחנו רוצים לשייך לה רחפן
+                                    senderId.Longitude = dl.GetCustomer(dl.GetParcel(item.Id).SenderId).Longitude;
                                     battary -= BatteryConsumption(DistanceTo(senderId.Lattitude, senderId.Longitude, GetDroneToList(droneid).ThisLocation.Lattitude, GetDroneToList(droneid).ThisLocation.Longitude));
-                                    if (battary>0)//אם יש מספיק סוללה כדי להגיע לקחת את החבילה מהשולח
+                                    if (battary > 0)//אם יש מספיק סוללה כדי להגיע לקחת את החבילה מהשולח
                                     {
-                                        targetId.Lattitude = dl.GetCustomer(dl.GetParcel(keepParclId).TargetId).Lattitude;// המיקום של הלקוח שאמור לקבל את החבילה
-                                        targetId.Longitude = dl.GetCustomer(dl.GetParcel(keepParclId).TargetId).Longitude;
+                                        targetId.Lattitude = dl.GetCustomer(dl.GetParcel(item.Id).TargetId).Lattitude;// המיקום של הלקוח שאמור לקבל את החבילה
+                                        targetId.Longitude = dl.GetCustomer(dl.GetParcel(item.Id).TargetId).Longitude;
                                         battary -= BatteryConsumption(DistanceTo(targetId.Lattitude, targetId.Longitude, senderId.Lattitude, senderId.Longitude), GetDroneToList(droneid).Weightcategories);
                                         if (battary > 0)//אם הרחפן לרחפן יש מספיק בטריה בין בשולח למקבל
                                         {
@@ -74,79 +74,79 @@ namespace IBL
                                                 {
                                                     minFar = distance;
                                                     keepParclId = item.Id;
-                                                   
+
                                                 }
                                             }
-                                            
+
                                         }
 
-                                        
+
                                     }
-                                   
+
                                 }
                             }
-                           
+
                         }
                         dl.ConnectParcelToDron(keepParclId, droneid);// רק לאחר שנמצאה החבילה המתאימה נבצעה עליה את הפעולה של שכבת ה dal
 
                     }
-               
+
                 }
                 catch (IDAL.DO.DuplicateIdException ex)
                 {
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
             }
-            
-                public Parcel GetParcel(int id)
+
+            public Parcel GetParcel(int id)
+            {
+                try
                 {
-                    try
+                    var parcel = dl.GetParcel(id);
+                    Parcel myParcel = new Parcel
                     {
-                        var parcel = dl.GetParcel(id);
-                        Parcel myParcel = new Parcel
+                        Id = parcel.Id,
+                        Sender = new CustomerAtParcels
                         {
-                            Id = parcel.Id,
-                            Sender = new CustomerAtParcels
-                            {
-                                Id = parcel.SenderId,
-                                Name = dl.GetCustomer(parcel.SenderId).Name
-                            },
-                            Target = new CustomerAtParcels
-                            {
-                                Id = parcel.TargetId,
-                                Name = dl.GetCustomer(parcel.TargetId).Name
-                            },
-                           
-                            Weight = (Weightcategories)parcel.Weight,
-                            Priority = (Priorities)parcel.Priority,
-                            Requested = parcel.Requested,
-                            droneAtParcel = (parcel.DroneId == 0 ? null : new DroneInParcel
-                            {
-                                IdNumber = parcel.DroneId
-                            }),
-                            Scheduled = parcel.Scheduled,
-                            PickedUp = parcel.PickedUp,
-                            Delivered = parcel.Delivered
-                        };
-
-                        if (parcel.Id != 0)
+                            Id = parcel.SenderId,
+                            Name = dl.GetCustomer(parcel.SenderId).Name
+                        },
+                        Target = new CustomerAtParcels
                         {
-                            var drone = dronesBl.Find(d => d.Idnumber == parcel.DroneId);
-                            if (drone == null)
-                                 throw new MissingIdException(drone.Idnumber,"drone");
-                            myParcel.droneAtParcel.ButerryStatus = drone.ButerryStatus;
-                            myParcel.droneAtParcel.ThisLocation = drone.ThisLocation;
-                        }
+                            Id = parcel.TargetId,
+                            Name = dl.GetCustomer(parcel.TargetId).Name
+                        },
 
-                        return myParcel;
-                    }
-                    catch (IDAL.DO.MissingIdException ex)
+                        Weight = (Weightcategories)parcel.Weight,
+                        Priority = (Priorities)parcel.Priority,
+                        Requested = parcel.Requested,
+                        droneAtParcel = (parcel.DroneId == 0 ? null : new DroneInParcel
+                        {
+                            IdNumber = parcel.DroneId
+                        }),
+                        Scheduled = parcel.Scheduled,
+                        PickedUp = parcel.PickedUp,
+                        Delivered = parcel.Delivered
+                    };
+
+                    if (parcel.Id != 0)
                     {
-                    throw new MissingIdException(ex.ID, ex.EntityName);
+                        var drone = dronesBl.Find(d => d.Idnumber == parcel.DroneId);
+                        if (drone == null)
+                            throw new MissingIdException(drone.Idnumber, "drone");
+                        myParcel.droneAtParcel.ButerryStatus = drone.ButerryStatus;
+                        myParcel.droneAtParcel.ThisLocation = drone.ThisLocation;
                     }
+
+                    return myParcel;
                 }
-               
-            
+                catch (IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
+                }
+            }
+
+
 
             public bool IfDronCanGoTo(Location a, Location b, Weightcategories weightcategories, int dronid)//פונקצית עזר שבודקת אם לרחפן יש מספיק סוללה בין ללכת בין הנקודה A ל B
             {
@@ -170,8 +170,8 @@ namespace IBL
             }
             public IEnumerable<BO.ParcelToList> GetALLParcelToList()
             {
-                
-                List<ParcelToList> parcelToLists = new List< ParcelToList >();
+
+                List<ParcelToList> parcelToLists = new List<ParcelToList>();
                 foreach (IDAL.DO.Parcel item in dl.GetALLParcel())//מיוי הנתונים ב BL מתוך DAL
                 {
                     ParcelToList parcel = new ParcelToList();
@@ -203,9 +203,14 @@ namespace IBL
                 {
                     throw new MissingIdException(ex.ID, ex.EntityName);
                 }
-              
+
             }
-    }   }
+           public void  SupplyParcelByDrone(int droneID)// אספקת חבילה על ידי רחפן
+            {
+
+            }
+        }
+    }
 }        
 
     

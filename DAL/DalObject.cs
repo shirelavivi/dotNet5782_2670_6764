@@ -52,22 +52,13 @@ namespace DalObject
         /// The drone's status changes for transpot and we will delete the old drone from the list
         /// </summary>
         /// <param name="p"></param>
-        public void collection(int ParcelId)//(מעודכן)איסוף חבילה על ידי רחפן
-
-        {
-            Parcel p = new Parcel();
-            p = GetParcel(ParcelId);
-            IDAL.DataSource.packets.Remove(p); 
-            p.PickedUp= DateTime.Now;
-            IDAL.DataSource.packets.Add(p);
-        }
-        public void SendDroneTpCharge(int StationId, int DroneId)///)מעודכן)שליחת רחפן לטעינה
+        
+        public void SendDroneTpCharge(int StationId, int DroneId)///)מעודכן)שליחת  רחפן לטעינה
         {
             try
             { 
                 Station tempStation = GetStation(StationId);
-                Drone tempDrone = GetDrone(DroneId);
-                //tempDrone.status = DroneStatuses.maintenance;
+                Drone tempDrone = GetDrone(DroneId);   
                 tempStation.ChargeSlots--;///עידכון עמדות טעינה
                 IDAL.DataSource.drones.Add(tempDrone);
                 IDAL.DataSource.drones.Remove(GetDrone(DroneId));
@@ -83,15 +74,16 @@ namespace DalObject
                 throw new MissingIdException(ex.ID, ex.EntityName);
             }
         }
-        public void ReleaseDroneFromChargeStation(int DroneId)//(מעודכן) ניתוק רחפן מעמדת טעינה
+        public void ReleaseDroneFromChargeStation(int DroneId)//(שחרור רחפן לטעינה
         {
             try
             {
+
                 //DalObject dl = new DalObject();
                 Drone tempDrone1 = GetDrone(DroneId);
                 //tempDrone1.status = DroneStatuses.available;
-                IDAL.DataSource.drones.Add(tempDrone1);
-                IDAL.DataSource.drones.Remove(GetDrone(DroneId));
+                //IDAL.DataSource.drones.Add(tempDrone1);
+                //IDAL.DataSource.drones.Remove(GetDrone(DroneId));
                 //List<DroneCharge> runDronesCharge = IDAL.DataSource.DronesCharge;
                 int save = 0;
                 for (int i = 0; i < IDAL.DataSource.DronesCharge.Count; i++)
@@ -114,34 +106,24 @@ namespace DalObject
             }
         }
 
-        public void PackageDalvery(int ParcelId)//)מעודכן) איסוף חבילה עך ידי רחפן
+        public void collection(int ParcelId)//(מעודכן)איסוף חבילה על ידי רחפן
+
         {
-            int i, j;
             Parcel p = new Parcel();
-            List<Parcel> runOfParcel = IDAL.DataSource.packets;
-            for (i = 0; i < runOfParcel.Count(); i++)
-            {
-                if (runOfParcel[i].Id == ParcelId)
-                {
-                    p = runOfParcel[i];
-                    break;
-                }
-            }
-            List<Drone> run = IDAL.DataSource.drones;
-
-            for (j = 0; j < run.Count(); j++)
-            {
-                if (run[j].id == p.DroneId)
-                {
-                    Drone temp = run[j];
-                    //temp.status = DroneStatuses.available;
-                    run[j] = temp;
-                    Parcel temp2 = runOfParcel[i];
-                    temp2.Delivered = DateTime.Now;
-                    runOfParcel[i] = temp2;
-
-                }
-            }
+            p = GetParcel(ParcelId);
+            IDAL.DataSource.packets.Remove(p);
+            p.PickedUp = DateTime.Now;
+            IDAL.DataSource.packets.Add(p);
+        }
+        public void PackageDalvery(int ParcelId)//אספקת חבילה על ידי רחפן
+        {
+           
+            Parcel p = new Parcel();
+            p = GetParcel(ParcelId);
+            IDAL.DataSource.packets.Remove(p);
+            p.Delivered = DateTime.Now;
+            IDAL.DataSource.packets.Add(p);
+            
         }
        
 

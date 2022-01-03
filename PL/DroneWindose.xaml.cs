@@ -61,11 +61,30 @@ namespace PL
             droneWind = drone;
             bl = bldrone;
             if (drone.DroneStatuses != IBL.BO.DroneStatuses.maintenance)
+            {
                 btnSendingDroneForCharging.Content = "Sending Drone For Charging";
+                btnSentDrone.Visibility = Visibility.Visible;
+                btnCollectionParcel.Visibility = Visibility.Visible;
+                saildTaimer.Visibility = Visibility.Visible;
+                lablTimer.Visibility = Visibility.Visible;
+            }
             else
+            {
                 btnSendingDroneForCharging.Content = "Out From Charge";
+                btnSentDrone.Visibility = Visibility.Hidden;
+                btnCollectionParcel.Visibility = Visibility.Hidden;
+                saildTaimer.Visibility = Visibility.Hidden;
+                lablTimer.Visibility = Visibility.Hidden;
+
+            }
             GridAddDrone.Visibility = Visibility.Hidden;
             GridUpdateDrone.Visibility = Visibility.Visible;
+            if (drone.DroneStatuses != IBL.BO.DroneStatuses.transport)
+                btnCollectionParcel.Content = "Supply Parcel";
+            else
+            {
+                btnCollectionParcel.Content = "Collection Parce";
+            }  
             FullDrone(drone);
 
         }
@@ -165,17 +184,53 @@ namespace PL
                 else
                 {
 
-                    //bl.ReleaseDroneFromChargeStation(droneWind.Idnumber,);
+                    bl.ReleaseDroneFromChargeStation(droneWind.Idnumber,Convert.ToInt32(saildTaimer.Value));
 
                 }
                 
             }
-            catch (IBL.BO.MissingIdException)
+            catch (IBL.BO.MissingIdException ex)
             {
-                MessageBox.Show("Erorr");
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-       
+        private void Button_Click(object sender, RoutedEventArgs e)//שליחת רחפן למשלוח
+        {
+            try
+            {
+                bl.ConnectParcelToDrone(Convert.ToInt32(TextIDUpdateDrone.Text));
+                FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+            }
+            catch (IBL.BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnCollectionParcel_Click(object sender, RoutedEventArgs e)//איסוף חבילה על ידי רחפן
+        {
+            try
+            {
+                bl.PickUpPackage(Convert.ToInt32(TextIDUpdateDrone.Text));
+                FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+            }
+            catch (IBL.BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
