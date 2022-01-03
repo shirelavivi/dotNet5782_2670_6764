@@ -106,7 +106,7 @@
                 </Button.Style>
             </Button>
             <Button x:Name="btnSentDrone" Content="Connect Drone " HorizontalAlignment="Left" Height="50" Margin="558,364,0,0" VerticalAlignment="Top" Width="170" FontSize="15" FontFamily="Aharoni" Click="Button_Click"/>
-            <Button x:Name="btnCollectionParcel" Content="Collection Parcel" HorizontalAlignment="Left" Height="46" Margin="558,300,0,0" VerticalAlignment="Top" Width="170" FontSize="15" FontFamily="Aharoni" Click="btnCollectionParcel_Click"/>
+            <Button x:Name="btnCollectionParcel" Content="Collection Parcel" HorizontalAlignment="Left" Height="46" Margin="558,300,0,0" VerticalAlignment="Top" Width="170" FontSize="15" FontFamily="Aharoni" Click="btnCollectionParcel_Click" Visibility="Hidden"/>
             <Slider x:Name="saildTaimer" HorizontalAlignment="Left" Height="33" Margin="174,564,0,0" VerticalAlignment="Top" Width="93" RenderTransformOrigin="0.933,-0.998" Minimum="1" Maximum="24"/>
             <TextBlock x:Name="lablTimer" HorizontalAlignment="Left" Margin="10,562,0,0" Text="time chargeing:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="164" FontSize="18" Foreground="#FFFCF5F7" FontFamily="Arial Black"/>
 

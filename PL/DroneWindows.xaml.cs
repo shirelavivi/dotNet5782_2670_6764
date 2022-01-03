@@ -66,7 +66,10 @@ namespace PL
             {
                 btnSendingDroneForCharging.Content = "Sending Drone For Charging";
                 btnSentDrone.Visibility = Visibility.Visible;
-                btnCollectionParcel.Visibility = Visibility.Visible;
+                if (TextDeliveryUpdateDrone.Text == "0")
+                    btnCollectionParcel.Visibility = Visibility.Hidden;
+                else
+                    btnCollectionParcel.Visibility = Visibility.Visible;
                 saildTaimer.Visibility = Visibility.Visible;
                 lablTimer.Visibility = Visibility.Visible;
             }
@@ -81,7 +84,7 @@ namespace PL
             }
           
             if (drone.DroneStatuses != IBL.BO.DroneStatuses.transport)
-                btnCollectionParcel.Content = "Collection Parce";
+                btnCollectionParcel.Content = "Collection Parcel";
             else
             {
                 btnCollectionParcel.Content = "Supply Parcel";
@@ -180,7 +183,11 @@ namespace PL
                     bl.SendingDroneforCharging(droneWind.Idnumber);
                     MessageBox.Show("The drone sending for charge");
                     btnSendingDroneForCharging.Content = "Out From Charge";
-                   
+                    btnSentDrone.Visibility = Visibility.Hidden;
+                    btnCollectionParcel.Visibility = Visibility.Hidden;
+                    saildTaimer.Visibility = Visibility.Hidden;
+                    lablTimer.Visibility = Visibility.Hidden;
+
                 }
                 else
                 {
@@ -222,14 +229,25 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            btnCollectionParcel.Visibility = Visibility.Visible;
         }
 
         private void btnCollectionParcel_Click(object sender, RoutedEventArgs e)//איסוף חבילה על ידי רחפן
         {
             try
             {
-                bl.PickUpPackage(Convert.ToInt32(TextIDUpdateDrone.Text));
-                FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+                if (btnCollectionParcel.Content.ToString() == "Collection Parcel")
+                {
+                    bl.PickUpPackage(Convert.ToInt32(TextIDUpdateDrone.Text));
+                    FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+                    btnCollectionParcel.Content = "Supply Parcel";
+                }
+                else
+                {
+                    bl.SupplyParcelByDrone(Convert.ToInt32(TextIDUpdateDrone.Text));
+                    FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+                    btnCollectionParcel.Content = "Collection Parcel";
+                }
             }
             catch (IBL.BO.MissingIdException ex)
             {
