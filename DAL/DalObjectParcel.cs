@@ -66,7 +66,7 @@ namespace DalObject
         public IEnumerable<Parcel> GetALLParcel()
         {
 
-            return from st in IDAL.DataSource.packets select st;
+            return IDAL.DataSource.packets;
             
         }
     }

@@ -22,9 +22,9 @@ namespace IBL
                     parcel_do.TargetId = parcel.Target.Id;
                     parcel_do.Weight = (IDAL.DO.Weightcategories)parcel.Weight;
                     parcel_do.Priority = (IDAL.DO.Priorities)parcel.Priority;
-                    parcel_do.Requested = null;
+                    parcel_do.Requested = DateTime.Now;
                     parcel_do.Scheduled = null;
-                    parcel_do.PickedUp = DateTime.Now;
+                    parcel_do.PickedUp = null;
                     parcel_do.Delivered = null;
                     dl.AddParcel(parcel_do);
                 }
@@ -35,6 +35,7 @@ namespace IBL
             }
             public void ConnectParcelToDrone(int droneid)//שייוך חבילה לרחפן
             {
+               int i = 0;
                 double minFar = 10000000;//המרחק המינימלי של החבילה מהרחפן
                 int keepParclId = 0;
                 try
@@ -44,51 +45,65 @@ namespace IBL
 
                     else
                     {
-                        foreach (IDAL.DO.Parcel item in dl.GetALLParcel())
+                        while (i != 3)
                         {
-                            if (item.Priority == IDAL.DO.Priorities.emergency)//אם החבילה היא חירום
+                            foreach (IDAL.DO.Parcel item in dl.GetALLParcel())
                             {
-                                if (IfDronCanTakeParcel(item, droneid))//אם הרחפן יכול לשאת את המשקל
+                                if (item.Scheduled == null)
                                 {
-                                    Location senderId = new Location();// האם הוא יכולה לעשות את כל הדרך עם הבטריה שיש לה
-                                    Location targetId = new Location();
-                                    Location statin = new Location();
-                                    double battary = GetDroneToList(droneid).ButerryStatus;// הבטריה שיש לרחפן
-                                    senderId.Lattitude = dl.GetCustomer(dl.GetParcel(item.Id).SenderId).Lattitude;// המיקום של החבילה שאנחנו רוצים לשייך לה רחפן
-                                    senderId.Longitude = dl.GetCustomer(dl.GetParcel(item.Id).SenderId).Longitude;
-                                    battary -= BatteryConsumption(DistanceTo(senderId.Lattitude, senderId.Longitude, GetDroneToList(droneid).ThisLocation.Lattitude, GetDroneToList(droneid).ThisLocation.Longitude));
-                                    if (battary > 0)//אם יש מספיק סוללה כדי להגיע לקחת את החבילה מהשולח
+                                    if (item.Priority == (IDAL.DO.Priorities)i)//אם החבילה היא חירום
                                     {
-                                        targetId.Lattitude = dl.GetCustomer(dl.GetParcel(item.Id).TargetId).Lattitude;// המיקום של הלקוח שאמור לקבל את החבילה
-                                        targetId.Longitude = dl.GetCustomer(dl.GetParcel(item.Id).TargetId).Longitude;
-                                        battary -= BatteryConsumption(DistanceTo(targetId.Lattitude, targetId.Longitude, senderId.Lattitude, senderId.Longitude), GetDroneToList(droneid).Weightcategories);
-                                        if (battary > 0)//אם הרחפן לרחפן יש מספיק בטריה בין בשולח למקבל
+                                        if (IfDronCanTakeParcel(item, droneid))//אם הרחפן יכול לשאת את המשקל
                                         {
-                                            statin.Lattitude = dl.GetStation(MinFarToStation(targetId).Id).Lattitude;// המיקום של התחנה טעינה הקרובה 
-                                            statin.Longitude = dl.GetStation(MinFarToStation(targetId).Id).Longitude;
-                                            battary -= BatteryConsumption(DistanceTo(targetId.Lattitude, targetId.Longitude, statin.Lattitude, statin.Longitude));
-                                            if (battary >= 0)//האם אתה יכול להגיע לעמדת טעינה הקרובה 
+                                            Location senderId = new Location();// האם הוא יכולה לעשות את כל הדרך עם הבטריה שיש לה
+                                            Location targetId = new Location();
+                                            Location statin = new Location();
+                                            double battary = GetDroneToList(droneid).ButerryStatus;// הבטריה שיש לרחפן
+                                            senderId.Lattitude = dl.GetCustomer(dl.GetParcel(item.Id).SenderId).Lattitude;// המיקום של החבילה שאנחנו רוצים לשייך לה רחפן
+                                            senderId.Longitude = dl.GetCustomer(dl.GetParcel(item.Id).SenderId).Longitude;
+                                            battary -= BatteryConsumption(DistanceTo(senderId.Lattitude, senderId.Longitude, GetDroneToList(droneid).ThisLocation.Lattitude, GetDroneToList(droneid).ThisLocation.Longitude));
+                                            if (battary > 0)//אם יש מספיק סוללה כדי להגיע לקחת את החבילה מהשולח
                                             {
-                                                double distance = DistanceTo(dl.GetCustomer(item.SenderId).Lattitude, dl.GetCustomer(item.SenderId).Longitude, GetDroneToList(droneid).ThisLocation.Lattitude, GetDroneToList(droneid).ThisLocation.Longitude);
-                                                if (distance < minFar)
+                                                targetId.Lattitude = dl.GetCustomer(dl.GetParcel(item.Id).TargetId).Lattitude;// המיקום של הלקוח שאמור לקבל את החבילה
+                                                targetId.Longitude = dl.GetCustomer(dl.GetParcel(item.Id).TargetId).Longitude;
+                                                battary -= BatteryConsumption(DistanceTo(targetId.Lattitude, targetId.Longitude, senderId.Lattitude, senderId.Longitude), GetDroneToList(droneid).Weightcategories);
+                                                if (battary > 0)//אם הרחפן לרחפן יש מספיק בטריה בין בשולח למקבל
                                                 {
-                                                    minFar = distance;
-                                                    keepParclId = item.Id;
+                                                    statin.Lattitude = dl.GetStation(MinFarToStation(targetId).Id).Lattitude;// המיקום של התחנה טעינה הקרובה 
+                                                    statin.Longitude = dl.GetStation(MinFarToStation(targetId).Id).Longitude;
+                                                    battary -= BatteryConsumption(DistanceTo(targetId.Lattitude, targetId.Longitude, statin.Lattitude, statin.Longitude));
+                                                    if (battary >= 0)//האם אתה יכול להגיע לעמדת טעינה הקרובה 
+                                                    {
+                                                        double distance = DistanceTo(dl.GetCustomer(item.SenderId).Lattitude, dl.GetCustomer(item.SenderId).Longitude, GetDroneToList(droneid).ThisLocation.Lattitude, GetDroneToList(droneid).ThisLocation.Longitude);
+                                                        if (distance < minFar)
+                                                        {
+                                                            minFar = distance;
+                                                            keepParclId = item.Id;
+
+                                                        }
+                                                    }
 
                                                 }
+
+
                                             }
 
                                         }
-
-
                                     }
 
                                 }
                             }
-
+                            i++;
                         }
-                        dl.ConnectParcelToDron(keepParclId, droneid);// רק לאחר שנמצאה החבילה המתאימה נבצעה עליה את הפעולה של שכבת ה dal
-
+                        if (keepParclId != 0)
+                        {
+                            dl.ConnectParcelToDron(keepParclId, droneid);// רק לאחר שנמצאה החבילה המתאימה נבצעה עליה את הפעולה של שכבת ה dal
+                            DroneToList d = dronesBl.Find(x => x.Idnumber == droneid);
+                            d.PackageNumberTransferred = keepParclId;
+                            d.DroneStatuses = DroneStatuses.transport;
+                            dronesBl.Remove(GetDroneToList(droneid));
+                            dronesBl.Add(d);
+                        }
                     }
 
                 }
@@ -96,8 +111,12 @@ namespace IBL
                 {
                     throw new DuplicateIdException(ex.ID, ex.EntityName);
                 }
+                catch (IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
+                }
             }
-
+            
             public Parcel GetParcel(int id)
             {
                 try
@@ -208,6 +227,10 @@ namespace IBL
            public void  SupplyParcelByDrone(int droneID)// אספקת חבילה על ידי רחפן
             {
 
+            }
+            public IEnumerable<ParcelToList> GetALLParce(Predicate<ParcelToList> predicate = null)
+            {
+                return  GetALLParcelToList().ToList().FindAll(predicate);
             }
         }
     }
