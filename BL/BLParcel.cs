@@ -227,6 +227,7 @@ namespace IBL
            public void  SupplyParcelByDrone(int droneID)// אספקת חבילה על ידי רחפן
             {
 
+
             }
             public IEnumerable<ParcelToList> GetALLParce(Predicate<ParcelToList> predicate = null)
             {

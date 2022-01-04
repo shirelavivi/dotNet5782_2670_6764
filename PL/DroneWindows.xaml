@@ -59,7 +59,7 @@
             </ComboBox>
             <Image HorizontalAlignment="Left" Height="100" Margin="368,175,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" d:IsHidden="True"/>
             <ComboBox x:Name="comboboxstion" HorizontalAlignment="Left" Height="32" Margin="147,70,0,0" Grid.Row="1" VerticalAlignment="Top" Width="117"/>
-            <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="338,443,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="170"  FontStyle="Oblique" FontWeight="UltraBold" FontSize="20" />
+            <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="338,443,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="170"  FontStyle="Oblique" FontWeight="UltraBold" FontSize="20" Click="ButtonCancel_Click" />
 
 
         </Grid>
@@ -109,6 +109,11 @@
             <Button x:Name="btnCollectionParcel" Content="Collection Parcel" HorizontalAlignment="Left" Height="46" Margin="558,300,0,0" VerticalAlignment="Top" Width="170" FontSize="15" FontFamily="Aharoni" Click="btnCollectionParcel_Click" Visibility="Hidden"/>
             <Slider x:Name="saildTaimer" HorizontalAlignment="Left" Height="33" Margin="174,564,0,0" VerticalAlignment="Top" Width="93" RenderTransformOrigin="0.933,-0.998" Minimum="1" Maximum="24"/>
             <TextBlock x:Name="lablTimer" HorizontalAlignment="Left" Margin="10,562,0,0" Text="time chargeing:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="164" FontSize="18" Foreground="#FFFCF5F7" FontFamily="Arial Black"/>
+            <Button Content="finish" HorizontalAlignment="Left" Height="74" Margin="588,33,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click_1" FontSize="16" FontFamily="Arial Black">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Navigation_Right_Arrow.svg.png"/>
+                </Button.Background>
+            </Button>
 
         </Grid>
 

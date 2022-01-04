@@ -157,7 +157,9 @@ namespace PL
                 bl.AddDrone(drone, Convert.ToInt32(comboboxstion.SelectedItem));
                 MessageBox.Show("The Drone Was Successfully Added");
                 this.Close();
-                //help_function();לשאול את שיראל 
+                DroneListWindows droneListWindow = new DroneListWindows(bl);
+                droneListWindow.Show();
+               
             }
             //לגבי התז של תחנה בחרנו מתחנות פנויות אז לא אמורה להיות בעיה
             //catch (IBL.BO.MissingIdException ex)
@@ -233,8 +235,8 @@ namespace PL
                 else
                 {
                     btnCollectionParcel.Visibility = Visibility.Visible;
-                    saildTaimer.Visibility = Visibility.Visible;
-                    lablTimer.Visibility = Visibility.Visible;
+                    saildTaimer.Visibility = Visibility.Hidden;
+                    lablTimer.Visibility = Visibility.Hidden;
                     btnSentDrone.Visibility = Visibility.Hidden;
                 }
             }
@@ -289,6 +291,18 @@ namespace PL
         {
             //if (Convert.ToInt32(TextButteryUpdateDrone.Text) - (int)'0' - (int)'%' < 15)
             //    TextButteryUpdateDrone.Background.g
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            DroneListWindows droneListWindow = new DroneListWindows(bl);
+            droneListWindow.Show();
         }
     }
 }
