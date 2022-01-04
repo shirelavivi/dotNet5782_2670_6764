@@ -226,8 +226,33 @@ namespace IBL
             }
            public void  SupplyParcelByDrone(int droneID)// אספקת חבילה על ידי רחפן
             {
-
-              
+                try
+                {
+                    DroneToList drone = dronesBl.FirstOrDefault(x => x.Idnumber == droneID);
+                    IDAL.DO.Parcel parcel = dl.GetALLParcel().ToList().Find(x => x.DroneId == droneID);
+                    if (parcel.Delivered != null || parcel.PickedUp != null)
+                        throw new BO.ErorrValueExceptin(droneID, "Parcel Exeption", "Parcel can't be delivered. Time Problem");
+                    IDAL.DO.Customer customer = dl.GetALLCustomers().ToList().Find(x => x.Id == parcel.TargetId);
+                    double distance = DistanceTo(drone.ThisLocation.Lattitude, drone.ThisLocation.Longitude, customer.Lattitude, customer.Longitude);
+                    double buttery = BatteryConsumption(distance, (Weightcategories)parcel.Weight);
+                    if(buttery > drone.ButerryStatus)
+                        throw new ErorrValueExceptin(droneID, "Parcel Exeption", "Not enough battery left");
+                    drone.ThisLocation.Lattitude = customer.Lattitude;
+                    drone.ThisLocation.Longitude = customer.Longitude;
+                    drone.DroneStatuses = DroneStatuses.available;
+                    dl.PackageDalvery(parcel.Id);
+                    drone.PackageNumberTransferred = 0;
+                    dronesBl.Remove(GetDroneToList(droneID));
+                    dronesBl.Add(drone);
+                }
+                catch (IDAL.DO.MissingIdException ex)
+                {
+                    throw new MissingIdException(ex.ID, ex.EntityName);
+                }
+                catch (IDAL.DO.DuplicateIdException ex)
+                {
+                    throw new DuplicateIdException(ex.ID, ex.EntityName);
+                }
             }
             public IEnumerable<ParcelToList> GetALLParce(Predicate<ParcelToList> predicate = null)
             {
@@ -236,6 +261,5 @@ namespace IBL
         }
     }
 }        
-
     
 
