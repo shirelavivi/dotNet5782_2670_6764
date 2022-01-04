@@ -78,13 +78,14 @@ namespace IBL
                 //{
                 //    Drone drone = GetDrone(item.id);
                 //    DroneToList drone1 = new DroneToList();
-                //    drone1.Idnumber = drone.IdDrone;
-                //    drone1.Model = drone.Model;
-                //    drone1.ThisLocation =new Location();
-                //    drone1.ThisLocation.Lattitude = drone.ThisLocation.Lattitude;
-                //    drone1.ThisLocation.Longitude = drone.ThisLocation.Longitude;
-                //    drone1.Weightcategories = drone.Weightcategories;
-                //    drone1.PackageNumberTransferred = drone.PackageInTransfer[drone.PackageInTransfer.Count()].IdPacket;    
+                //    //drone1.Idnumber = drone.IdDrone;
+                //    //drone1.Model = drone.Model;
+                //    //drone1.ThisLocation = new Location();
+                //    //drone1.ThisLocation.Lattitude = drone.ThisLocation.Lattitude;
+                //    //drone1.ThisLocation.Longitude = drone.ThisLocation.Longitude;
+                //    //drone1.Weightcategories = drone.Weightcategories;
+                //    drone1.PackageNumberTransferred = drone.PackageInTransfer[drone.PackageInTransfer.Count()].IdPacket;
+                //    dronesBl.Remove(GetDroneToList(item.id));
                 //    dronesBl.Add(drone1);
                 //}
                 return dronesBl;
@@ -147,7 +148,10 @@ namespace IBL
                
                     dl.ReleaseDroneFromChargeStation(droneId);
                     dronesBl.Remove(droneToList);
-                    droneToList.ButerryStatus += (timeInCharging * ChargingRate);//קצב טעינה
+                    if (droneToList.ButerryStatus +timeInCharging * ChargingRate > 100)
+                        droneToList.ButerryStatus = 100;
+                    else
+                       droneToList.ButerryStatus +=(int) (timeInCharging * ChargingRate);//קצב טעינה
                     droneToList.DroneStatuses = DroneStatuses.available;
                     dronesBl.Add(droneToList);
                 }
@@ -162,23 +166,21 @@ namespace IBL
             }
             public void PickUpPackage(int id)//איסוף חבילה על ידי רחפן
             {
-                if (id < 0)
-                    throw new ArgumentOutOfRangeException("id", "The drone number must be greater or equal to 0");
+                
 
                 DroneToList drone = dronesBl.Find(d => d.Idnumber == id);
-                if (drone == default(DroneToList))
-                    throw new ArgumentException("Drone with the given ID number doesn't exist");
+                //if (drone == default(DroneToList))
+                //    throw new ArgumentException("Drone with the given ID number doesn't exist");
 
                 if (drone.DroneStatuses != DroneStatuses.transport)
                     throw new InvalidOperationException("The drone is not assigned to any package");
 
                 var parcel = dl.GetParcel(drone.PackageNumberTransferred);
-                if (parcel.Scheduled == default(DateTime) || parcel.PickedUp != default(DateTime))//ביקשתי את החריגה הזאת
+                if (parcel.Scheduled == default(DateTime))
                     throw new InvalidOperationException("The package is not ready to pick up");
 
                 try
                 {
-
                     var sender = dl.GetCustomer(parcel.SenderId);
                     double distance = DistanceTo(drone.ThisLocation.Lattitude, sender.Lattitude,
                         drone.ThisLocation.Longitude, sender.Longitude);//לקרוא לפונ חישוב מרחק
@@ -187,9 +189,11 @@ namespace IBL
                         Lattitude = sender.Lattitude,
                         Longitude = sender.Longitude
                     };
-                    drone.ButerryStatus -= BatteryConsumption(distance, drone.Weightcategories);
-                    dl.collection(parcel.Id);
-
+                    //if (drone.ButerryStatus - BatteryConsumption(distance, drone.Weightcategories) < 0)
+                    //{
+                        drone.ButerryStatus -=(int) BatteryConsumption(distance, drone.Weightcategories);
+                        dl.collection(parcel.Id);
+                      
                 }
                 catch (IDAL.DO.DuplicateIdException ex)
                 {
@@ -215,7 +219,7 @@ namespace IBL
                         Model = droneToList.Model
                     };
 
-                    if (droneToList.DroneStatuses == DroneStatuses.transport)
+                    //if (droneToList.DroneStatuses == DroneStatuses.transport)
                         drone.PackageInTransfer.Add(getPackageInDelivery(droneToList.PackageNumberTransferred));
                     return drone;
 

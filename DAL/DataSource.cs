@@ -95,11 +95,10 @@ namespace IDAL
 
             }
 
-            for (int i = 0; i < 11; i++)
+            for (int i = 1; i < 11; i++)
             {
                 Parcel a = new Parcel();
-                config.CounterPackets++;
-                a.Id = config.CounterPackets;
+                a.Id =i;
                 a.SenderId = Rand.Next(1, 12);
                 a.TargetId = Rand.Next(1, 12);
                 t = Rand.Next(3);
@@ -140,10 +139,11 @@ namespace IDAL
 
                 packets.Add(a);
             }
-            for (int i = 0; i < 11; i++)
+            config.CounterPackets = 12;
+            for (int i = 1; i <= 7; i++)
             {
                 DroneCharge d = new DroneCharge();
-                d.Droneld = Rand.Next(1, 8);
+                d.Droneld =i;
                 d.StationId = Rand.Next(1, 4);
                 DronesCharge.Add(d);
             }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="drone.jpg" />
+    <None Remove="Navigation_Right_Arrow.svg.png" />
     <None Remove="רחפן.jpg" />
   </ItemGroup>
 
@@ -17,6 +18,7 @@
 
   <ItemGroup>
     <Resource Include="drone.jpg" />
+    <Resource Include="Navigation_Right_Arrow.svg.png" />
     <Resource Include="רחפן.jpg" />
   </ItemGroup>
 

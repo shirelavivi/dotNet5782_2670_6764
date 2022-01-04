@@ -59,7 +59,7 @@
             </ComboBox>
             <Image HorizontalAlignment="Left" Height="100" Margin="368,175,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" d:IsHidden="True"/>
             <ComboBox x:Name="comboboxstion" HorizontalAlignment="Left" Height="32" Margin="147,70,0,0" Grid.Row="1" VerticalAlignment="Top" Width="117"/>
-            <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="338,443,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="170"  FontStyle="Oblique" FontWeight="UltraBold" FontSize="20" />
+            <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="338,443,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="170"  FontStyle="Oblique" FontWeight="UltraBold" FontSize="20" Click="ButtonCancel_Click" />
 
 
         </Grid>
@@ -82,7 +82,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="10,452,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="90" FontSize="18" RenderTransformOrigin="0.545,-0.27" Foreground="#FFF8F2F2" FontFamily="Arial Black"/>
             <TextBox x:Name="TextIDUpdateDrone" HorizontalAlignment="Left" Margin="147,129,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,502,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="106" FontSize="18" Foreground="#FFFCF5F7" FontFamily="Arial Black"/>
-            <TextBox x:Name="TextButteryUpdateDrone" HorizontalAlignment="Left" Margin="147,188,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
+            <TextBox x:Name="TextButteryUpdateDrone" HorizontalAlignment="Left" Margin="147,188,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" TextChanged="TextButteryUpdateDrone_TextChanged"/>
             <!--<TextBox x:Name="TextMaxWheigt" HorizontalAlignment="Left" Margin="147,235,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>-->
             <TextBox x:Name="TextModelUpdateDrone" HorizontalAlignment="Left" Margin="147,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" TextChanged="TextModel_TextChanged"/>
             <ComboBox x:Name="ComboBoxStatusUpdateDrone" HorizontalAlignment="Left" Margin="147,343,0,0"  VerticalAlignment="Top" Width="120" Height="33" SelectionChanged="ComboBoxS_SelectionChanged">
@@ -95,9 +95,9 @@
             <TextBox x:Name="TextLongitudeUpdateDrone" HorizontalAlignment="Left" Margin="147,497,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33"/>
             <Button Content="UpDate Drone" HorizontalAlignment="Left" Margin="558,513,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="170" Click="Button_ClikUpdateDrone" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="368,245,0,0" VerticalAlignment="Top" Width="100"/>
-            <ComboBox x:Name="comboboxUpDate" HorizontalAlignment="Left" Margin="147,244,0,0" VerticalAlignment="Top" Width="120" Height="28" IsEnabled="False">
+            <ComboBox x:Name="comboboxUpDate" HorizontalAlignment="Left" Margin="147,244,0,0" VerticalAlignment="Top" Width="120" Height="28" IsEnabled="False" SelectionChanged="comboboxUpDate_SelectionChanged">
                 <ComboBoxItem Content="easy"/>
-                <ComboBoxItem Content="middel" />
+                <ComboBoxItem Content="middel"/>
                 <ComboBoxItem Content="weighty" />
             </ComboBox>
             <Button x:Name="btnSendingDroneForCharging" Content="" HorizontalAlignment="Left" Height="52" Margin="558,438,0,0" VerticalAlignment="Top" Width="170" FontSize="16" FontFamily="Segoe UI Black" FlowDirection="LeftToRight" FontStretch="Medium" FontStyle="Normal" FontWeight="UltraBlack" Click="btnSendingDroneForCharging_Click">
@@ -109,7 +109,11 @@
             <Button x:Name="btnCollectionParcel" Content="Collection Parcel" HorizontalAlignment="Left" Height="46" Margin="558,300,0,0" VerticalAlignment="Top" Width="170" FontSize="15" FontFamily="Aharoni" Click="btnCollectionParcel_Click" Visibility="Hidden"/>
             <Slider x:Name="saildTaimer" HorizontalAlignment="Left" Height="33" Margin="174,564,0,0" VerticalAlignment="Top" Width="93" RenderTransformOrigin="0.933,-0.998" Minimum="1" Maximum="24"/>
             <TextBlock x:Name="lablTimer" HorizontalAlignment="Left" Margin="10,562,0,0" Text="time chargeing:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="164" FontSize="18" Foreground="#FFFCF5F7" FontFamily="Arial Black"/>
-
+            <Button Content="finish" HorizontalAlignment="Left" Height="74" Margin="588,33,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click_1" FontSize="16" FontFamily="Arial Black">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Navigation_Right_Arrow.svg.png"/>
+                </Button.Background>
+            </Button>
 
         </Grid>
 

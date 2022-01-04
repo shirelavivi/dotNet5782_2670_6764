@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +37,7 @@ namespace PL
         {
             DroneWindows droneListWindow = new DroneWindows(blDroneList);
             droneListWindow.Show();
+            this.Close();
         }
 
         private void droneToListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -47,6 +48,7 @@ namespace PL
             {
                 DroneWindows droneListWindow = new DroneWindows(dr, blDroneList);
                 droneListWindow.Show();
+                this.Close();
             }
         }
         public void help_function()
@@ -60,7 +62,6 @@ namespace PL
             if (comboBoxWeight.SelectedItem != null && comboBoxWeightstatus.SelectedItem != null)
             {
                 droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (IBL.BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex && dro.Weightcategories == (IBL.BO.Weightcategories)comboBoxWeight.SelectedIndex);
-
             }
         }
 

@@ -39,7 +39,7 @@ namespace PL
             TextIDUpdateDrone.Text = drone.Idnumber.ToString();
             TextIDUpdateDrone.IsEnabled = false;
             TextButteryUpdateDrone.Text = drone.ButerryStatus.ToString()+"%";
-            TextButteryUpdateDrone.IsEnabled = false;
+            TextButteryUpdateDrone.IsEnabled = false;      
             comboboxUpDate.Text = drone.Weightcategories.ToString();
             comboboxUpDate.IsEnabled = false;
             ComboBoxStatusUpdateDrone.Text = drone.DroneStatuses.ToString();
@@ -66,23 +66,25 @@ namespace PL
             {
                 btnSendingDroneForCharging.Content = "Sending Drone For Charging";
                 btnSentDrone.Visibility = Visibility.Visible;
-                if (TextDeliveryUpdateDrone.Text == "0")
-                    btnCollectionParcel.Visibility = Visibility.Hidden;
+                if (drone.PackageNumberTransferred == 0)
+                
+                    btnCollectionParcel.Visibility = Visibility.Hidden;          
                 else
                     btnCollectionParcel.Visibility = Visibility.Visible;
-                saildTaimer.Visibility = Visibility.Visible;
-                lablTimer.Visibility = Visibility.Visible;
+                saildTaimer.Visibility = Visibility.Hidden;
+                lablTimer.Visibility = Visibility.Hidden;
             }
             else
             {
                 btnSendingDroneForCharging.Content = "Out From Charge";
                 btnSentDrone.Visibility = Visibility.Hidden;
                 btnCollectionParcel.Visibility = Visibility.Hidden;
-                saildTaimer.Visibility = Visibility.Hidden;
-                lablTimer.Visibility = Visibility.Hidden;
+                saildTaimer.Visibility = Visibility.Visible;
+                lablTimer.Visibility = Visibility.Visible;
+
 
             }
-          
+
             if (drone.DroneStatuses != IBL.BO.DroneStatuses.transport)
                 btnCollectionParcel.Content = "Collection Parcel";
             else
@@ -155,6 +157,9 @@ namespace PL
                 bl.AddDrone(drone, Convert.ToInt32(comboboxstion.SelectedItem));
                 MessageBox.Show("The Drone Was Successfully Added");
                 this.Close();
+                DroneListWindows droneListWindow = new DroneListWindows(bl);
+                droneListWindow.Show();
+               
             }
             //לגבי התז של תחנה בחרנו מתחנות פנויות אז לא אמורה להיות בעיה
             //catch (IBL.BO.MissingIdException ex)
@@ -165,7 +170,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+           
         } 
        
         private void ComboBoxS_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -184,9 +189,9 @@ namespace PL
                     MessageBox.Show("The drone sending for charge");
                     btnSendingDroneForCharging.Content = "Out From Charge";
                     btnSentDrone.Visibility = Visibility.Hidden;
-                    btnCollectionParcel.Visibility = Visibility.Hidden;
-                    saildTaimer.Visibility = Visibility.Hidden;
-                    lablTimer.Visibility = Visibility.Hidden;
+                    btnCollectionParcel.Visibility = Visibility.Hidden;          
+                    saildTaimer.Visibility = Visibility.Visible;
+                    lablTimer.Visibility = Visibility.Visible;
 
                 }
                 else
@@ -197,11 +202,14 @@ namespace PL
                     btnSendingDroneForCharging.Content = "Sending Drone For Charging";
                     FullDrone(bl.GetDroneToList(droneWind.Idnumber));
                     btnSentDrone.Visibility = Visibility.Visible;
-                    btnCollectionParcel.Visibility = Visibility.Visible;
-                    saildTaimer.Visibility = Visibility.Visible;
-                    lablTimer.Visibility = Visibility.Visible;
+                    saildTaimer.Visibility = Visibility.Hidden;
+                    lablTimer.Visibility = Visibility.Hidden;
                 }
                 
+            }
+            catch (IBL.BO.UnsuitableDroneMode)
+            {
+                MessageBox.Show("Can not be shipped for loading in the middle of making a shipment!", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (IBL.BO.MissingIdException ex)
             {
@@ -211,15 +219,26 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            //this.Close();
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)//שליחת רחפן למשלוח
         {
             try
             {
-                bl.ConnectParcelToDrone(Convert.ToInt32(TextIDUpdateDrone.Text));
+                bl.ConnectParcelToDrone(Convert.ToInt32(TextIDUpdateDrone.Text));//אם נזרקת כאן חריגה זה אומר שאין חבילה מתאימה
                 FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+                if (TextDeliveryUpdateDrone.Text.ToString() == "0")
+                {
+                    MessageBox.Show("No suitable package was found for example by this skimmer!");
+                }
+                else
+                {
+                    btnCollectionParcel.Visibility = Visibility.Visible;
+                    saildTaimer.Visibility = Visibility.Hidden;
+                    lablTimer.Visibility = Visibility.Hidden;
+                    btnSentDrone.Visibility = Visibility.Hidden;
+                }
             }
             catch (IBL.BO.MissingIdException ex)
             {
@@ -229,8 +248,11 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
-            btnCollectionParcel.Visibility = Visibility.Visible;
+            catch (IBL.BO .UnsuitableDroneMode ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void btnCollectionParcel_Click(object sender, RoutedEventArgs e)//איסוף חבילה על ידי רחפן
@@ -258,6 +280,29 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void comboboxUpDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void TextButteryUpdateDrone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //if (Convert.ToInt32(TextButteryUpdateDrone.Text) - (int)'0' - (int)'%' < 15)
+            //    TextButteryUpdateDrone.Background.g
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            DroneListWindows droneListWindow = new DroneListWindows(bl);
+            droneListWindow.Show();
         }
     }
 }

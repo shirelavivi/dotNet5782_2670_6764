@@ -35,16 +35,21 @@ namespace DalObject
        
         public void ConnectParcelToDron(int ParcelId, int DronId)// (מעודכן(קישור חבילה לרחפן
         {
-           
-            Parcel p = new Parcel();
-            Drone d = new Drone();
-            int  i = IDAL.DataSource.packets.Count() + 1;
-            p = GetParcel(ParcelId);
-            d =GetDrone(DronId);     
-            p.DroneId = d.id;
-            p.Scheduled = DateTime.Now;
-            IDAL.DataSource.packets[IDAL.DataSource.packets.FindIndex(x => x.Id == p.Id)] = p;//לבדוק איך עושים את הפיינד אינדקס
-
+            try
+            {
+                Parcel p = new Parcel();
+                Drone d = new Drone();
+                int i = IDAL.DataSource.packets.Count() + 1;
+                p = GetParcel(ParcelId);
+                d = GetDrone(DronId);
+                p.DroneId = d.id;
+                p.Scheduled = DateTime.Now;
+                IDAL.DataSource.packets[IDAL.DataSource.packets.FindIndex(x => x.Id == p.Id)] = p;//לבדוק איך עושים את הפיינד אינדקס
+            }
+            catch(MissingIdException)
+            {
+                throw new MissingIdException(ParcelId, "parcel");
+            }
             
         }
         /// <summary>

@@ -94,7 +94,7 @@ namespace IBL
                             l.Lattitude = (dl.GetALLStations().ToList())[ran].Lattitude;
                             l.Longitude = (dl.GetALLStations().ToList())[ran].Longitude;
                             item.ThisLocation = l;
-                            item.ButerryStatus = Rand.Next(0, 20);
+                            item.ButerryStatus =(int) Rand.Next(0, 20);
                         }
 
                         if (item.DroneStatuses == DroneStatuses.available)//אם הרחפןפנוי
@@ -108,7 +108,7 @@ namespace IBL
                             IDAL.DO.Station s = MinFarToStation(item.ThisLocation);//התחנה הקרובה ביותר למיקום של הרחפן
                             int howMuchBatrry =(int) BatteryConsumption(DistanceTo(s.Lattitude, s.Longitude, item.ThisLocation.Lattitude, item.ThisLocation.Longitude), item.Weightcategories);
                             if (howMuchBatrry < 100)
-                                item.ButerryStatus = Rand.Next(howMuchBatrry, 100);
+                                item.ButerryStatus =(int) Rand.Next(howMuchBatrry, 100);
                             else
                             {
                                 throw new NotEnoughBattery(howMuchBatrry, "error buttery");
@@ -153,17 +153,21 @@ namespace IBL
                 foreach (DroneToList item in dronesBl)
                 {
                     if (item.Idnumber == dronId)
+                    
+                        
                         return item;
+                    
+                        
                 }
                 throw new MissingIdException(dronId, "DroneToList");
             }
             public double BatteryConsumption(double kilometrs, Weightcategories weightcategories)// פונקציה שמקבלת קליומטר ומחשבת כמה בטריה צריך כדי להגיע לשם
             {
                 if (weightcategories == (Weightcategories)0)
-                    return (kilometrs * Light);
+                    return (100/kilometrs * Light);
                 if (weightcategories == (Weightcategories)1)
-                    return (kilometrs * Medium);
-                    return (kilometrs * Heavy);
+                    return (100/kilometrs* Medium);
+                    return (100 / kilometrs * Heavy);
                 
             }
             public double BatteryConsumption(double kilometrs)// דורסת את הפונקציה הקודמת במקרה והרחפן פנוי ולא נכנס שום קטגורית משקל
