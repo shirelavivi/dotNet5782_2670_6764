@@ -230,8 +230,8 @@ namespace IBL
                 {
                     DroneToList drone = dronesBl.FirstOrDefault(x => x.Idnumber == droneID);
                     IDAL.DO.Parcel parcel = dl.GetALLParcel().ToList().Find(x => x.DroneId == droneID);
-                    if (parcel.Delivered != null || parcel.PickedUp != null)
-                        throw new BO.ErorrValueExceptin(droneID, "Parcel Exeption", "Parcel can't be delivered. Time Problem");
+                    //if (parcel.Delivered != null || parcel.PickedUp != null)
+                    //    throw new BO.ErorrValueExceptin(droneID, "Parcel Exeption", "Parcel can't be delivered. Time Problem");
                     IDAL.DO.Customer customer = dl.GetALLCustomers().ToList().Find(x => x.Id == parcel.TargetId);
                     double distance = DistanceTo(drone.ThisLocation.Lattitude, drone.ThisLocation.Longitude, customer.Lattitude, customer.Longitude);
                     double buttery = BatteryConsumption(distance, (Weightcategories)parcel.Weight);
@@ -240,6 +240,7 @@ namespace IBL
                     drone.ThisLocation.Lattitude = customer.Lattitude;
                     drone.ThisLocation.Longitude = customer.Longitude;
                     drone.DroneStatuses = DroneStatuses.available;
+                    drone.ButerryStatus -= buttery;
                     dl.PackageDalvery(parcel.Id);
                     drone.PackageNumberTransferred = 0;
                     dronesBl.Remove(GetDroneToList(droneID));

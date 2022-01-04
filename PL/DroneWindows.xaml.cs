@@ -31,6 +31,7 @@ namespace PL
             //ComboBoxStatus.Text = IBL.BO.DroneStatuses.available.ToString();
             comboboxstion.ItemsSource = bldrone.GetALLStationWithFreeStation().Select(x => x.idnumber);
             //ComboBoxMaxWeight.ItemsSource =IBL.BO.Weightcategories;
+           
 
         }
 
@@ -65,32 +66,46 @@ namespace PL
             if (drone.DroneStatuses != IBL.BO.DroneStatuses.maintenance)
             {
                 btnSendingDroneForCharging.Content = "Sending Drone For Charging";
-                btnSentDrone.Visibility = Visibility.Visible;
-                if (drone.PackageNumberTransferred == 0)
-                
-                    btnCollectionParcel.Visibility = Visibility.Hidden;          
-                else
-                    btnCollectionParcel.Visibility = Visibility.Visible;
+               
                 saildTaimer.Visibility = Visibility.Hidden;
+                if (drone.PackageNumberTransferred == 0)
+                {
+                    btnSentDrone.Visibility = Visibility.Visible;
+                    btnCollectionParcel.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    btnCollectionParcel.Visibility = Visibility.Visible;
+
+                }
                 lablTimer.Visibility = Visibility.Hidden;
             }
             else
             {
                 btnSendingDroneForCharging.Content = "Out From Charge";
-                btnSentDrone.Visibility = Visibility.Hidden;
-                btnCollectionParcel.Visibility = Visibility.Hidden;
                 saildTaimer.Visibility = Visibility.Visible;
+                if (drone.PackageNumberTransferred == 0)
+                {
+                    btnSentDrone.Visibility = Visibility.Visible;
+                    btnCollectionParcel.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    btnSentDrone.Visibility = Visibility.Visible;
+                }
                 lablTimer.Visibility = Visibility.Visible;
 
 
             }
-
+           
             if (drone.DroneStatuses != IBL.BO.DroneStatuses.transport)
                 btnCollectionParcel.Content = "Collection Parcel";
             else
             {
                 btnCollectionParcel.Content = "Supply Parcel";
-            }  
+            }
+            
+
             FullDrone(drone);
 
         }
