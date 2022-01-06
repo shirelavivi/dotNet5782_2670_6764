@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DAL.DataSource;
+using DO;
 
-using DAL.DO;
-namespace DalObject
+namespace Dal
 {
-
-    public partial class DalObject : Idal
+    sealed partial class DalObject : Idal
     {
        
         public void AddCustomer(Customer c)
@@ -16,7 +16,7 @@ namespace DalObject
 
             if (CheckCusromer(c.Id))
 
-                throw new DAL.DO.DuplicateIdException(c.Id, "Customer");
+                throw new DO.DuplicateIdException(c.Id, "Customer");
 
 
             DAL.DataSource.customers.Add(c);

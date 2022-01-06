@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.DO;
+using BlApi;
+using BL;
+using IBL;
+using DO;
 
-namespace DAL
-{
-    namespace DO
+namespace BO
     {
-        public struct Drone
+        public class CustomerAtParcels
         {
-
-            public int id { get; set; }
-            public string Model { get; set; } 
-            public Weightcategories MaxWeight { get; set; }
-          
+            public int Id { get; set; }
+            public string Name { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();
             }
-
         }
-
     }
-}
+

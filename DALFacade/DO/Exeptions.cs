@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace DAL
-{
     namespace DO
     {
         [Serializable]
@@ -41,5 +39,5 @@ namespace DAL
             public override string ToString() => base.ToString() + $", {EntityName} - duplicate id: {ID}";
         }
     }
-}
+
 

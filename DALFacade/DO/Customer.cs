@@ -1,9 +1,8 @@
 ﻿using System;
-using DAL.DO;
+using DO;
 
-namespace DAL
-{
-    namespace DO
+
+namespace DO
     {
         public struct Customer
         {
@@ -19,4 +18,4 @@ namespace DAL
              
         }
     }
-}
+

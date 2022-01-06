@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DAL.DO;
 
-namespace IDAL
+namespace DAL
 {
     namespace DO
     {

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DAL.DataSource;
+using DO;
 
-using DAL.DO;
+
 namespace DalObject
 {
-    public partial class DalObject : Idal
+    sealed partial class DalObject : Idal
     {
        
         public void AddStation(Station c)
@@ -15,7 +17,7 @@ namespace DalObject
 
             if (CheckStation(c.Id))
 
-                throw new DAL.DO.DuplicateIdException(c.Id, "Station");
+                throw new DO.DuplicateIdException(c.Id, "Station");
 
 
             DAL.DataSource.Stations.Add(c);

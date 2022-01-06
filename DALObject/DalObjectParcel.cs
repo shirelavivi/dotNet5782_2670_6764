@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DAL.DataSource;
+using DO;
 
-using DAL.DO;
 namespace DalObject
 {
-    
-    public partial class DalObject : Idal
+
+    sealed partial class DalObject : Idal
     {
        
         public void AddParcel(Parcel p)
@@ -16,7 +17,7 @@ namespace DalObject
 
             if (CheckParcel(p.Id))
 
-                throw new DAL.DO.DuplicateIdException(p.Id, "Parcel");
+                throw new DO.DuplicateIdException(p.Id, "Parcel");
 
 
             DAL.DataSource.packets.Add(p);

@@ -2,13 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace />
+    <RootNamespace>Dal</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DALFacade\DALFacade.csproj" />
-    <ProjectReference Include="..\DALObject\DALObject.csproj" />
-    <ProjectReference Include="..\DALXML\DALXML.csproj" />
   </ItemGroup>
 
 </Project>

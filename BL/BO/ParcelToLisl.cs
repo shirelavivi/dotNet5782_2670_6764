@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlApi;
+using BL;
+using IBL;
+using DO;
 
-namespace DAL
-{
-    namespace DO
+namespace BO
     {
-       public struct Station
+        public class ParcelToList
         {
             public int Id { get; set; }
-            public string Name { get; set; }
-            public double Longitude { get; set; }
-            public double Lattitude { get; set; }
-            public int ChargeSlots { get; set; }
+            public string SenderName { get; set; }
+            public string TargetName { get; set; }
+            public Weightcategories Weight { get; set; }
+            public Priorities Priority { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();
@@ -22,4 +24,5 @@ namespace DAL
 
         }
     }
-}
+
+

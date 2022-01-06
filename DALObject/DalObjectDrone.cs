@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DAL.DataSource;
+using DO;
 
-using DAL.DO;
 namespace DalObject
 {
+    sealed partial class DalObject : Idal
 
-    public partial class DalObject : Idal
     {
-        
         public void AddDrone(Drone c)
         {
 
             if (CheckDrone(c.id))
 
-                throw new DAL.DO.DuplicateIdException(c.id, "Drone");
+                throw new DO.DuplicateIdException(c.id, "Drone");
 
 
             DAL.DataSource.drones.Add(c);

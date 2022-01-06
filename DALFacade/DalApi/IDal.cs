@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.DO;
+using DO;
 
-namespace DalObject
+namespace DalApi
 {
-    public interface Idal
+    public interface IDal
     {
+
         #region customer
-       
+
         public void AddCustomer(Customer c);
         public IEnumerable<Customer> ShowCustomerList();
         public Customer GetCustomer(int id);
@@ -23,7 +24,7 @@ namespace DalObject
 
         #region station
         public void AddStation(Station s);
-        public List< Station> ShowStationAvailable();
+        public List<Station> ShowStationAvailable();
         public IEnumerable<Station> GetALLStations();
         public bool CheckStation(int id);
         public void UpdStation(Station st);
@@ -46,25 +47,27 @@ namespace DalObject
         public IEnumerable<Drone> GetDronetsByPerdicate(Predicate<Drone> predicate);
         public double[] batteryArr();
         public IEnumerable<DroneCharge> GetALLDroneCharge();
-       
+
         #endregion
 
         #region parcel
         public int runNumber();
-        public void AddParcel(Parcel p); 
+        public void AddParcel(Parcel p);
         public void collection(int ParcelId);
         public void ReleaseDroneFromChargeStation(int DroneId);
-        public void PackageDalvery(int ParcelId); 
-        
-         public bool CheckParcel(int id);
+        public void PackageDalvery(int ParcelId);
+
+        public bool CheckParcel(int id);
         public IEnumerable<Parcel> GetALLParcel();
         public void UpdParcel(Parcel st);
-         public void DelParcel(int id);
-         public IEnumerable<Parcel> GetParcelByPerdicate(Predicate<Parcel> predicate);
-         public Parcel GetParcel(int s);
-        
+        public void DelParcel(int id);
+        public IEnumerable<Parcel> GetParcelByPerdicate(Predicate<Parcel> predicate);
+        public Parcel GetParcel(int s);
+
         #endregion
 
     }
-
 }
+
+
+

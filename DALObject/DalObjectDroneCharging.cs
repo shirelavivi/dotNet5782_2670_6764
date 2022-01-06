@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DAL.DataSource;
+using DO;
 
-using DAL.DO;
 namespace DalObject
 {
-    public partial class DalObject : Idal
+    sealed partial class DalObject : Idal
     {
 
         public void AddDroneCharging(DroneCharge c)
@@ -15,7 +16,7 @@ namespace DalObject
 
             if (CheckDroneCharging(c.StationId))
 
-                throw new DAL.DO.DuplicateIdException(c.StationId, "DroneCharge");
+                throw new DO.DuplicateIdException(c.StationId, "DroneCharge");
 
 
             DAL.DataSource.DronesCharge.Add(c);

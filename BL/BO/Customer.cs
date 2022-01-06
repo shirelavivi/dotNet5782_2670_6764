@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlApi;
+using BL;
+using IBL;
+using DO;
 
-namespace DAL
-{
-    namespace DO
+namespace BO
     {
-       public struct Station
+        public class Customer
         {
             public int Id { get; set; }
             public string Name { get; set; }
-            public double Longitude { get; set; }
-            public double Lattitude { get; set; }
-            public int ChargeSlots { get; set; }
+            public string Phone { get; set; }
+            public Location location { get; set; }
+            public List<ParcelAtCustomer> parcelfromCustomer { get; set; }/*לשנות*/
+            public List<ParcelAtCustomer> parcelsToCustomer { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();
             }
-
         }
     }
-}
+
+
