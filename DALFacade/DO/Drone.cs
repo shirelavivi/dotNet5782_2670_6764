@@ -8,19 +8,20 @@ using DO;
 
     namespace DO
     {
-        public struct Drone
+    public struct Drone
+    {
+
+        public int id { get; set; }
+        public string Model { get; set; }
+        public Weightcategories MaxWeight { get; set; }
+
+        public override string ToString()
         {
-
-            public int id { get; set; }
-            public string Model { get; set; } 
-            public Weightcategories MaxWeight { get; set; }
-          
-            public override string ToString()
-            {
-                return this.ToStringProperty();
-            }
-
+            return this.ToStringProperty();
         }
+    }
 
     }
+
+    
 

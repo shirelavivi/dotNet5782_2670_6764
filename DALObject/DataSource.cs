@@ -4,20 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 using DO;
 
-namespace DAL
+namespace Dal
 {
-    internal static class DataSource//static?
+   internal static class DataSource
     {
         static Random Rand = new Random(DateTime.Now.Millisecond);
-        public static List<Drone> drones = new List<Drone>();
+        internal static List<Drone> drones = new List<Drone>();
         internal static List<Station> Stations = new List<Station>();
         internal static List<Customer> customers = new List<Customer>();
         internal static List<Parcel> packets = new List<Parcel>();
-        public static List<DroneCharge> DronesCharge = new List<DroneCharge>();
-       static DataSource() { Initialize(); }
+        internal static List<DroneCharge> DronesCharge = new List<DroneCharge>();
+         static DataSource() { Initialize(); }
 
         internal class config
         {
@@ -31,7 +30,7 @@ namespace DAL
             public static double Heavy = 0.1;
             public static int ChargingRate = 25;
 
-            public double[] returnArrBattery()
+            public static double[] returnArrBattery()
             {
                 double[] arr = new double[4];
                 arr[0] = Free;
@@ -40,7 +39,7 @@ namespace DAL
                 arr[3] = Heavy;
                 return arr;
             }
-            public int runCounterPackets()
+            public static int runCounterPackets()
             {
                 CounterPackets++;
                 return CounterPackets;
@@ -81,7 +80,6 @@ namespace DAL
                         break;
 
                 }
-
                 drones.Add(d);
 
             }

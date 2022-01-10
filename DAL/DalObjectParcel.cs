@@ -4,45 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DAL.DO;
+using IDAL.DO;
 namespace DalObject
 {
-    
+
     public partial class DalObject : Idal
     {
-       
+
         public void AddParcel(Parcel p)
         {
 
             if (CheckParcel(p.Id))
 
-                throw new DAL.DO.DuplicateIdException(p.Id, "Parcel");
+                throw new IDAL.DO.DuplicateIdException(p.Id, "Parcel");
 
 
-            DAL.DataSource.packets.Add(p);
+            IDAL.DataSource.packets.Add(p);
 
         }
 
         public bool CheckParcel(int id)
         {
-            return DAL.DataSource.packets.Any(st => st.Id == id);
+            return IDAL.DataSource.packets.Any(st => st.Id == id);
         }
 
 
 
         public void UpdParcel(Parcel st)
         {
-            int count = DAL.DataSource.packets.RemoveAll(st => st.Id == st.Id);
+            int count = IDAL.DataSource.packets.RemoveAll(st => st.Id == st.Id);
 
             if (count == 0)
                 throw new MissingIdException(st.Id, "Parcel");
 
-            DAL.DataSource.packets.Add(st);
+            IDAL.DataSource.packets.Add(st);
         }
 
         public void DelParcel(int id)
         {
-            int count = DAL.DataSource.packets.RemoveAll(st => st.Id == id);
+            int count = IDAL.DataSource.packets.RemoveAll(st => st.Id == id);
 
             if (count == 0)
                 throw new MissingIdException(id, "Parcel");
@@ -50,7 +50,7 @@ namespace DalObject
 
         public IEnumerable<Parcel> GetParcelByPerdicate(Predicate<Parcel> predicate)
         {
-            return from st in DAL.DataSource.packets
+            return from st in IDAL.DataSource.packets
                    where predicate(st)
                    select st;
         }
@@ -59,15 +59,15 @@ namespace DalObject
             if (!CheckParcel(s))
                 throw new MissingIdException(s, "Parcel");
 
-            Parcel st = DAL.DataSource.packets.Find(st => st.Id == s);
+            Parcel st = IDAL.DataSource.packets.Find(st => st.Id == s);
             return st;
 
         }
         public IEnumerable<Parcel> GetALLParcel()
         {
 
-            return DAL.DataSource.packets;
-            
+            return IDAL.DataSource.packets;
+
         }
     }
 }

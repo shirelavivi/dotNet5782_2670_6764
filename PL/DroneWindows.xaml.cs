@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
+using BlApi;
 
 namespace PL
 {
@@ -19,13 +21,13 @@ namespace PL
     /// </summary>
     public partial class DroneWindows : Window
     {
-
-        IBL.BO.BL bl;
-        IBL.BO.DroneToList droneWind;
-        public DroneWindows(IBL.BO.BL bldrone)//הוספה
+        
+        IBL blDrone;
+        BO.DroneToList droneWind;
+        public DroneWindows(IBL bldrone)//הוספה
         {
             InitializeComponent();
-            bl = bldrone;
+            blDrone = bldrone;
             GridAddDrone.Visibility = Visibility.Visible;
             GridUpdateDrone.Visibility = Visibility.Hidden;
             //ComboBoxStatus.Text = IBL.BO.DroneStatuses.available.ToString();
@@ -35,7 +37,7 @@ namespace PL
 
         }
 
-        private void FullDrone(IBL.BO.DroneToList drone)
+        private void FullDrone(BO.DroneToList drone)
         {
             TextIDUpdateDrone.Text = drone.Idnumber.ToString();
             TextIDUpdateDrone.IsEnabled = false;
@@ -56,14 +58,14 @@ namespace PL
             TextModelUpdateDrone.Text = drone.Model.ToString();
         }
 
-        public DroneWindows(IBL.BO.DroneToList drone, IBL.BO.BL bldrone)//עדכון 
+        public DroneWindows(BO.DroneToList drone, IBL bldrone)//עדכון 
         {
             InitializeComponent();
             GridAddDrone.Visibility = Visibility.Hidden;
             GridUpdateDrone.Visibility = Visibility.Visible;
             droneWind = drone;
-            bl = bldrone;
-            if (drone.DroneStatuses != IBL.BO.DroneStatuses.maintenance)
+            blDrone = bldrone;
+            if (drone.DroneStatuses != BO.DroneStatuses.maintenance)
             {
                 btnSendingDroneForCharging.Content = "Sending Drone For Charging";
                
@@ -98,7 +100,7 @@ namespace PL
 
             }
            
-            if (drone.DroneStatuses != IBL.BO.DroneStatuses.transport)
+            if (drone.DroneStatuses != BO.DroneStatuses.transport)
                 btnCollectionParcel.Content = "Collection Parcel";
             else
             {
@@ -143,7 +145,7 @@ namespace PL
             {
                 if (TextModelUpdateDrone.Text != "")
                 {
-                    bl.UpdateDrone(Convert.ToInt32(TextIDUpdateDrone.Text), TextModelUpdateDrone.Text);
+                    blDrone.UpdateDrone(Convert.ToInt32(TextIDUpdateDrone.Text), TextModelUpdateDrone.Text);
                     MessageBox.Show("The modles drone is update");
                     this.Close();
                 }
@@ -152,7 +154,7 @@ namespace PL
                     MessageBox.Show("pleas typ the drone modle");
                 }
             }
-            catch(IBL.BO.MissingIdException)
+            catch(BO.MissingIdException)
             {
                 MessageBox.Show("Erorr ID");
             }
@@ -162,17 +164,17 @@ namespace PL
         {
             try
             {
-                IBL.BO.Drone drone = new IBL.BO.Drone();
+                BO.Drone drone = new BO.Drone();
                 drone.IdDrone = int.Parse(TextID.Text);
                 drone.Model = TextModel.Text;
                 //drone.Weightcategories = (IBL.BO.Weightcategories)ComboBoxMaxWeight.SelectedItem;
-                drone.ThisLocation = new IBL.BO.Location();
+                drone.ThisLocation = new BO.Location();
                 //drone.PackageInTransfer = new IBL.BO.ParcelInTransfer();//לא נותן
                 //drone.DroneStatuses = (IBL.BO.DroneStatuses)ComboBoxStatus.SelectedItem;
-                bl.AddDrone(drone, Convert.ToInt32(comboboxstion.SelectedItem));
+                blDrone.AddDrone(drone, Convert.ToInt32(comboboxstion.SelectedItem));
                 MessageBox.Show("The Drone Was Successfully Added");
                 this.Close();
-                DroneListWindows droneListWindow = new DroneListWindows(bl);
+                DroneListWindows droneListWindow = new DroneListWindows(blDrone);
                 droneListWindow.Show();
                
             }
@@ -181,7 +183,7 @@ namespace PL
             //{
             //     MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             //}
-            catch (IBL.BO.DuplicateIdException ex)
+            catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -200,7 +202,7 @@ namespace PL
             {
                 if (btnSendingDroneForCharging.Content.ToString() == "Sending Drone For Charging")
                 {
-                    bl.SendingDroneforCharging(droneWind.Idnumber);
+                    blDrone.SendingDroneforCharging(droneWind.Idnumber);
                     MessageBox.Show("The drone sending for charge");
                     btnSendingDroneForCharging.Content = "Out From Charge";
                     btnSentDrone.Visibility = Visibility.Hidden;
@@ -212,25 +214,25 @@ namespace PL
                 else
                 {
 
-                    bl.ReleaseDroneFromChargeStation(droneWind.Idnumber,Convert.ToInt32(saildTaimer.Value));
+                    blDrone.ReleaseDroneFromChargeStation(droneWind.Idnumber,Convert.ToInt32(saildTaimer.Value));
                     MessageBox.Show("The drone realse form charge");
                     btnSendingDroneForCharging.Content = "Sending Drone For Charging";
-                    FullDrone(bl.GetDroneToList(droneWind.Idnumber));
+                    FullDrone(blDrone.GetDroneToList(droneWind.Idnumber));
                     btnSentDrone.Visibility = Visibility.Visible;
                     saildTaimer.Visibility = Visibility.Hidden;
                     lablTimer.Visibility = Visibility.Hidden;
                 }
                 
             }
-            catch (IBL.BO.UnsuitableDroneMode)
+            catch (BO.UnsuitableDroneMode)
             {
                 MessageBox.Show("Can not be shipped for loading in the middle of making a shipment!", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.MissingIdException ex)
+            catch (BO.MissingIdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.DuplicateIdException ex)
+            catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -241,8 +243,8 @@ namespace PL
         {
             try
             {
-                bl.ConnectParcelToDrone(Convert.ToInt32(TextIDUpdateDrone.Text));//אם נזרקת כאן חריגה זה אומר שאין חבילה מתאימה
-                FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+                blDrone.ConnectParcelToDrone(Convert.ToInt32(TextIDUpdateDrone.Text));//אם נזרקת כאן חריגה זה אומר שאין חבילה מתאימה
+                FullDrone(blDrone.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
                 if (TextDeliveryUpdateDrone.Text.ToString() == "0")
                 {
                     MessageBox.Show("No suitable package was found for example by this skimmer!");
@@ -255,15 +257,15 @@ namespace PL
                     btnSentDrone.Visibility = Visibility.Hidden;
                 }
             }
-            catch (IBL.BO.MissingIdException ex)
+            catch (BO.MissingIdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.DuplicateIdException ex)
+            catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO .UnsuitableDroneMode ex)
+            catch (BO .UnsuitableDroneMode ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -276,22 +278,22 @@ namespace PL
             {
                 if (btnCollectionParcel.Content.ToString() == "Collection Parcel")
                 {
-                    bl.PickUpPackage(Convert.ToInt32(TextIDUpdateDrone.Text));
-                    FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+                    blDrone.PickUpPackage(Convert.ToInt32(TextIDUpdateDrone.Text));
+                    FullDrone(blDrone.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
                     btnCollectionParcel.Content = "Supply Parcel";
                 }
                 else
                 {
-                    bl.SupplyParcelByDrone(Convert.ToInt32(TextIDUpdateDrone.Text));
-                    FullDrone(bl.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
+                    blDrone.SupplyParcelByDrone(Convert.ToInt32(TextIDUpdateDrone.Text));
+                    FullDrone(blDrone.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
                     btnCollectionParcel.Content = "Collection Parcel";
                 }
             }
-            catch (IBL.BO.MissingIdException ex)
+            catch (BO.MissingIdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.DuplicateIdException ex)
+            catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -316,7 +318,7 @@ namespace PL
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
-            DroneListWindows droneListWindow = new DroneListWindows(bl);
+            DroneListWindows droneListWindow = new DroneListWindows(blDrone);
             droneListWindow.Show();
         }
     }

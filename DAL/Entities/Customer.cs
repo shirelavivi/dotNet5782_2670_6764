@@ -1,7 +1,7 @@
 ﻿using System;
-using DAL.DO;
+using IDAL.DO;
 
-namespace DAL
+namespace IDAL
 {
     namespace DO
     {

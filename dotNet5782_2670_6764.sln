@@ -28,6 +28,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALObject", "DALObject\DALO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALXML", "DALXML\DALXML.csproj", "{8614470F-D59B-4B8E-941C-E77D68A556B9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{671C4C22-1821-42C7-86CD-9FCE742A4706}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\dotNet5782-3Tier\xml\dal-config.xml = ..\..\dotNet5782-3Tier\xml\dal-config.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -160,6 +165,7 @@ Global
 		{8C86EC13-274C-4758-89D1-9C7113117D87} = {DF4E7761-F4BC-4AD9-A76C-C0A42249A4B1}
 		{509560B4-DA02-49FF-BBB7-6DCCA680E831} = {DF4E7761-F4BC-4AD9-A76C-C0A42249A4B1}
 		{8614470F-D59B-4B8E-941C-E77D68A556B9} = {DF4E7761-F4BC-4AD9-A76C-C0A42249A4B1}
+		{671C4C22-1821-42C7-86CD-9FCE742A4706} = {DF4E7761-F4BC-4AD9-A76C-C0A42249A4B1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1ABF6C87-B69C-4C4B-91D1-EFAD9DDE0A2A}

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -19,8 +20,8 @@ namespace PL
     /// </summary>
     public partial class DroneListWindows : Window
     {
-        IBL.BO.BL blDroneList;
-        public DroneListWindows(IBL.BO.BL bl)
+        IBL blDroneList;
+        public DroneListWindows(IBL bl)
         {
             blDroneList = bl;
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace PL
 
         private void comboBoxWeightstatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (IBL.BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex);
+            droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex);
         
         }
 
@@ -43,7 +44,7 @@ namespace PL
         private void droneToListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListViewItem item = sender as ListViewItem;
-            IBL.BO.DroneToList dr = droneToListDataGrid.SelectedItem as IBL.BO.DroneToList;
+            BO.DroneToList dr = droneToListDataGrid.SelectedItem as BO.DroneToList;
             if (dr != null)
             {
                 DroneWindows droneListWindow = new DroneWindows(dr, blDroneList);
@@ -56,12 +57,12 @@ namespace PL
             if (comboBoxWeight.SelectedItem == null && comboBoxWeightstatus.SelectedItem == null)
                 droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList();
             if (comboBoxWeight.SelectedItem != null && comboBoxWeightstatus.SelectedItem == null)
-                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.Weightcategories == (IBL.BO.Weightcategories)comboBoxWeight.SelectedIndex);
+                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.Weightcategories == (BO.Weightcategories)comboBoxWeight.SelectedIndex);
             if (comboBoxWeight.SelectedItem == null && comboBoxWeightstatus.SelectedItem != null)
-                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (IBL.BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex);
+                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex);
             if (comboBoxWeight.SelectedItem != null && comboBoxWeightstatus.SelectedItem != null)
             {
-                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (IBL.BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex && dro.Weightcategories == (IBL.BO.Weightcategories)comboBoxWeight.SelectedIndex);
+                droneToListDataGrid.DataContext = blDroneList.GetALLDroneToList(dro => dro.DroneStatuses == (BO.DroneStatuses)comboBoxWeightstatus.SelectedIndex && dro.Weightcategories == (BO.Weightcategories)comboBoxWeight.SelectedIndex);
             }
         }
 

@@ -10,7 +10,7 @@ using DO;
 
 namespace BL
 {
-    public sealed partial class BLCustomer:IBL
+    sealed partial class BL : IBL
     {
         public void AddCustomer(BO.Customer customer)//הוספת לקוח לשכבת הנתונים
         {
@@ -23,19 +23,18 @@ namespace BL
                 customer_do.Phone = customer.Phone;
                 customer_do.Lattitude = customer.location.Lattitude;
                 customer_do.Longitude = customer.location.Longitude;
-                dl.AddCustomer(customer_do);
+                dal.AddCustomer(customer_do);
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
         }
         public void UpdCustomer(int idCustomer, string nameCustomer = "", string newNumPhone = "")//עידכון לקוח
         {
             try
             {
-                object dl = null;
-                DO.Customer customer = dl.GetCustomer(idCustomer);
+                DO.Customer customer = dal.GetCustomer(idCustomer);
                 customer.Id = idCustomer;
 
                 if (nameCustomer != "")
@@ -48,19 +47,19 @@ namespace BL
                     customer.Phone = newNumPhone;
                 }
 
-                dl.DelCustomer(idCustomer);
-                dl.AddCustomer(customer);
+                dal.DelCustomer(idCustomer);
+                dal.AddCustomer(customer);
             }
-            catch (DAL.DO.MissingIdException ex)
+            catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
         public BO.Customer GetCustomer(int id)
         {
             try
             {
-                var customer = dl.GetCustomer(id);
+                var customer = dal.GetCustomer(id);
                 BO.Customer myCustomer = new BO.Customer
                 {
                     Id = id,
@@ -71,10 +70,10 @@ namespace BL
                         Lattitude = customer.Lattitude,
                         Longitude = customer.Longitude
                     },
-                    parcelfromCustomer = (from p in dl.GetALLParcel()
+                    parcelfromCustomer = (from p in dal.GetALLParcel()
                                           where p.SenderId == id
                                           select getPackageInCustomer(p, p.TargetId)).ToList(),
-                    parcelsToCustomer = (from p in dl.GetALLParcel()
+                    parcelsToCustomer = (from p in dal.GetALLParcel()
                                          where p.TargetId == id
                                          select getPackageInCustomer(p, p.SenderId)).ToList()
                 };
@@ -82,7 +81,7 @@ namespace BL
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
 
@@ -93,8 +92,8 @@ namespace BL
                 return new ParcelAtCustomer
                 {
                     Idnumber = p.Id,
-                    Weightcategories = (Weightcategories)p.Weight,
-                    Priorities = (Priorities)p.Priority,
+                    Weightcategories = (BO.Weightcategories)p.Weight,
+                    Priorities = (BO.Priorities)p.Priority,
                     PacketStatuses = (p.Scheduled == default(DateTime) ? PacketStatuses.Created :
                                                         p.PickedUp == default(DateTime) ? PacketStatuses.associated :
                                                         p.Delivered == default(DateTime) ? PacketStatuses.collected :
@@ -102,20 +101,20 @@ namespace BL
                     CustomerInPackage = new CustomerAtParcels
                     {
                         Id = customerId,
-                        Name = dl.GetCustomer(customerId).Name
+                        Name = dal.GetCustomer(customerId).Name
                     }
                 };
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
         public IEnumerable<BO.CustomerToList> GetALLCostumerToList()//הצגת רשימת הלקוחות
         {
             List<CustomerToList> customerBl = new List<CustomerToList>();
 
-            foreach (DO.Customer item in dl.GetALLCustomers())//מיוי הנתונים ב BL מתוך DAL
+            foreach (DO.Customer item in dal.GetALLCustomers())//מיוי הנתונים ב BL מתוך DAL
             {
                 CustomerToList customer = new CustomerToList();
                 customer.Id = item.Id;
@@ -125,7 +124,7 @@ namespace BL
                 customer.numOfParcelOnTheWay = 0;//מספר החבילות במשלוח
                 customer.numOfParcelGet = 0;//מספר החבילות שהתקבלו
                 customer.numOfParcelProvided = 0;//מספר החבילות שסופקו
-                foreach (DO.Parcel itemParcel in dl.GetALLParcel())
+                foreach (DO.Parcel itemParcel in dal.GetALLParcel())
                 {
                     if (itemParcel.SenderId == item.Id)//אם זאת חבילה שנשלחה עי הלקוח 
                     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DAL.DO;
+using IDAL.DO;
 namespace DalObject
 {
     public partial class DalObject : Idal
@@ -15,41 +15,41 @@ namespace DalObject
 
             if (CheckDroneCharging(c.StationId))
 
-                throw new DAL.DO.DuplicateIdException(c.StationId, "DroneCharge");
+                throw new IDAL.DO.DuplicateIdException(c.StationId, "DroneCharge");
 
 
-            DAL.DataSource.DronesCharge.Add(c);
+            IDAL.DataSource.DronesCharge.Add(c);
 
         }
 
         public bool CheckDroneCharging(int id)
         {
-            return DAL.DataSource.DronesCharge.Any(st => st.StationId == id);
+            return IDAL.DataSource.DronesCharge.Any(st => st.StationId == id);
         }
 
 
         public void UpdDroneCharging(DroneCharge st)
         {
-            int count = DAL.DataSource.DronesCharge.RemoveAll(st => st.Droneld == st.Droneld);
+            int count = IDAL.DataSource.DronesCharge.RemoveAll(st => st.Droneld == st.Droneld);
 
             if (count == 0)
                 throw new MissingIdException(st.Droneld, "DroneCharge");
 
-            DAL.DataSource.DronesCharge.Add(st);
+            IDAL.DataSource.DronesCharge.Add(st);
         }
 
         public void DelDroneCharge(int droneId)
         {
-            int count = DAL.DataSource.DronesCharge.RemoveAll(st => st.Droneld == droneId);
+            int count = IDAL.DataSource.DronesCharge.RemoveAll(st => st.Droneld == droneId);
 
             if (count == 0)
                 throw new MissingIdException(droneId, "DroneCharge");
         }
 
-        public IEnumerable<DroneCharge> 
+        public IEnumerable<DroneCharge>
             ByPerdicate(Predicate<DroneCharge> predicate)
         {
-            return from st in DAL.DataSource.DronesCharge
+            return from st in IDAL.DataSource.DronesCharge
                    where predicate(st)
                    select st;
         }
@@ -58,15 +58,14 @@ namespace DalObject
             if (!CheckDroneCharging(stationId))
                 throw new MissingIdException(stationId, "DroneCharge");
 
-          DroneCharge st = DAL.DataSource.DronesCharge.Find(st => st.StationId  == stationId);
+            DroneCharge st = IDAL.DataSource.DronesCharge.Find(st => st.StationId == stationId);
             return st;
 
         }
         public IEnumerable<DroneCharge> GetALLDroneCharge()
         {
 
-            return from st in DAL.DataSource.DronesCharge select st;
+            return from st in IDAL.DataSource.DronesCharge select st;
         }
     }
 }
-

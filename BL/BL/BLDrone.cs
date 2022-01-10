@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using BO;
 using BlApi;
-using DalApi;
 using DO;
+
+
+
 
 
 namespace BL
 {
-    public sealed partial class BLDrone:IBL
+     sealed partial class BL:IBL
     {
         public void UpdateDrone(int id, string model)
         {
@@ -19,10 +21,10 @@ namespace BL
                 throw new ArgumentOutOfRangeException("id", "The drone number must be greater or equal to 0");
             try
             {
-                DO.Drone drone = dl.GetDrone(id);
+                DO.Drone drone = dal.GetDrone(id);
                 drone.Model = model;
-                dl.DelDrone(id);
-                dl.AddDrone(drone);
+                dal.DelDrone(id);
+                dal.AddDrone(drone);
                 DroneToList droneToList = dronesBl.Find(d => d.Idnumber == id);
                 dronesBl.Remove(droneToList);
                 droneToList.Model = model;
@@ -30,7 +32,7 @@ namespace BL
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
 
@@ -47,18 +49,18 @@ namespace BL
                 else
                 {
 
-                    minstation = dl.MinFarToStation.(GetDroneToList(droneId).ThisLocation);
+                    minstation = MinFarToStation(GetDroneToList(droneId).ThisLocation);
                     //חישוב מרחק בין התחנה לרחפן
                     kilometer = DistanceTo(minstation.Lattitude, minstation.Longitude, GetDroneToList(droneId).ThisLocation.Lattitude, GetDroneToList(droneId).ThisLocation.Longitude);
                     battery = BatteryConsumption(kilometer, GetDroneToList(droneId).Weightcategories);//שמירת כמות הבטריה שמתבזבזת
                     if (battery < GetDroneToList(droneId).ButerryStatus)//צריך לבדוק אם הסוללה הנדרשת מספיקה לסוללה שיש לי ברחפן
-                        dl.SendDroneTpCharge(minstation.Id, droneId);
+                        dal.SendDroneTpCharge(minstation.Id, droneId);
                     DroneToList drone = GetDroneToList(droneId);//מכאן נשנה את המצב של הרחפן והבטריה ברשימה של ה bl
                     drone.ButerryStatus -= battery;
                     drone.DroneStatuses = DroneStatuses.maintenance;
                     Location l = new Location();
-                    l.Lattitude = dl.GetStation(minstation.Id).Lattitude;
-                    l.Longitude = dl.GetStation(minstation.Id).Longitude;
+                    l.Lattitude = dal.GetStation(minstation.Id).Lattitude;
+                    l.Longitude = dal.GetStation(minstation.Id).Longitude;
                     drone.ThisLocation = l;
                     dronesBl.Remove(GetDroneToList(droneId));
                     dronesBl.Add(drone);
@@ -67,7 +69,7 @@ namespace BL
             }
             catch (DO.MissingIdException ex)//  חריגה לא נכונה !!!!!!!!! לעשות חדשה
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new  BO.MissingIdException(ex.ID, ex.EntityName);
             }
 
         }
@@ -105,28 +107,28 @@ namespace BL
                 droneDo.id = drone.IdDrone;
                 droneDo.Model = drone.Model;
                 droneDo.MaxWeight = (DO.Weightcategories)drone.Weightcategories;
-                dl.AddDrone(droneDo);
+                dal.AddDrone(droneDo);
 
                 //BL:
                 Random rand = new Random();
                 DroneToList droneToListBL = new DroneToList();
                 droneToListBL.Idnumber = drone.IdDrone;
                 droneToListBL.Model = drone.Model;
-                droneToListBL.Weightcategories = (Weightcategories)drone.Weightcategories;
+                droneToListBL.Weightcategories = (BO.Weightcategories)drone.Weightcategories;
                 droneToListBL.ButerryStatus = rand.Next(20, 41);
                 droneToListBL.DroneStatuses = DroneStatuses.maintenance;
                 droneToListBL.PackageNumberTransferred = 0;
-                DO.Station st = dl.GetStation(stationId);
+                DO.Station st = dal.GetStation(stationId);
                 droneToListBL.ThisLocation = new Location() { Lattitude = st.Lattitude, Longitude = st.Longitude };
                 dronesBl.Add(droneToListBL);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
 
 
@@ -148,7 +150,7 @@ namespace BL
                     throw new InvalidOperationException("The drone is not charging");
 
 
-                dl.ReleaseDroneFromChargeStation(droneId);
+                dal.ReleaseDroneFromChargeStation(droneId);
                 dronesBl.Remove(droneToList);
                 if (droneToList.ButerryStatus + timeInCharging * ChargingRate > 100)
                     droneToList.ButerryStatus = 100;
@@ -159,11 +161,11 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
         public void PickUpPackage(int id)//איסוף חבילה על ידי רחפן
@@ -177,13 +179,13 @@ namespace BL
             if (drone.DroneStatuses != DroneStatuses.transport)
                 throw new InvalidOperationException("The drone is not assigned to any package");
 
-            var parcel = dl.GetParcel(drone.PackageNumberTransferred);
+            var parcel = dal.GetParcel(drone.PackageNumberTransferred);
             if (parcel.Scheduled == default(DateTime))
                 throw new InvalidOperationException("The package is not ready to pick up");
 
             try
             {
-                var sender = dl.GetCustomer(parcel.SenderId);
+                var sender = dal.GetCustomer(parcel.SenderId);
                 double distance = DistanceTo(drone.ThisLocation.Lattitude, sender.Lattitude,
                     drone.ThisLocation.Longitude, sender.Longitude);//לקרוא לפונ חישוב מרחק
                 drone.ThisLocation = new Location//עדכון מיקום למיקום שולח
@@ -194,16 +196,16 @@ namespace BL
                 //if (drone.ButerryStatus - BatteryConsumption(distance, drone.Weightcategories) < 0)
                 //{
                 drone.ButerryStatus -= (int)BatteryConsumption(distance, drone.Weightcategories);
-                dl.collection(parcel.Id);
+                dal.collection(parcel.Id);
 
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
         }
 
-        public Drone GetDrone(int droneId)
+        public BO.Drone GetDrone(int droneId)
         {
             try
             {
@@ -211,7 +213,7 @@ namespace BL
                 DroneToList droneToList = dronesBl.Find(i => i.Idnumber == droneId);
                 if (droneToList.Idnumber == 0)
                     throw new ErorrValueExceptin(droneId, "ERROR VALUE");
-                Drone drone = new()
+                BO.Drone drone = new()
                 {
                     IdDrone = droneToList.Idnumber,
                     ButerryStatus = droneToList.ButerryStatus,
@@ -228,25 +230,25 @@ namespace BL
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
 
 
         }
         private ParcelInTransfer getPackageInDelivery(int packageId)//פונקצית עזר 
         {
-            var pac = dl.GetParcel(packageId);
+            var pac = dal.GetParcel(packageId);
 
             ParcelInTransfer pacInDalivery = new ParcelInTransfer
             {
                 IdPacket = pac.DroneId,
                 PackageMode = pac.PickedUp != default(DateTime),
-                Weightcategories = (Weightcategories)pac.Weight,
-                Priorities = (Priorities)pac.Priority
+                Weightcategories = (BO.Weightcategories)pac.Weight,
+                Priorities = (BO.Priorities)pac.Priority
             };
 
-            var sender = dl.GetCustomer(pac.SenderId);
-            var target = dl.GetCustomer(pac.TargetId);
+            var sender = dal.GetCustomer(pac.SenderId);
+            var target = dal.GetCustomer(pac.TargetId);
             pacInDalivery.TransportDistance = DistanceTo(sender.Lattitude, target.Lattitude, sender.Longitude, target.Longitude);
 
             pacInDalivery.CustomerInPackageGeting = new CustomerAtParcels
@@ -279,15 +281,15 @@ namespace BL
             return dronesBl.FindAll(predicate);
         }
 
-        public bool IfDronCanTakeParcel(DO.Parcel parcel, int droneid)
-        {
-            throw new NotImplementedException();
-        }
+        //public bool IfDronCanTakeParcel(DO.Parcel parcel, int droneid)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        DO.Station MinFarToStation(Location location)
-        {
-            throw new NotImplementedException();
-        }
+        //DO.Station MinFarToStation(Location location)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
 

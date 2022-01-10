@@ -13,15 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
+using BO;
+
+
+
 
 namespace PL
 {
+   
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        IBL.BO.BL bl = new IBL.BO.BL();
+        internal readonly IBL bl = BlFactory.GetBl();
+
         public MainWindow()
         {
             InitializeComponent();

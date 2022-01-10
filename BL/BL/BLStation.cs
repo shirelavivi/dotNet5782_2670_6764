@@ -10,7 +10,7 @@ using DO;
 
 namespace BL
 {
-    public sealed partial class BLStation:IBL
+     sealed partial class BL:IBL
     {
         public void AddBaseStation(BO.BaseStation station)
         {
@@ -24,19 +24,19 @@ namespace BL
                 stationDo.Longitude = station.locationOfStation.Longitude;
                 stationDo.ChargeSlots = station.ChargingAvailable;
 
-                dl.AddStation(stationDo);
+                dal.AddStation(stationDo);
 
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
         }
         public void UpdStation(int numStation, string nameStation = "", int countChargingSlots = 0)
         {
             try
             {
-                DO.Station station = dl.GetStation(numStation);
+                DO.Station station = dal.GetStation(numStation);
                 station.Id = numStation;
                 station.Name = nameStation;
 
@@ -44,18 +44,18 @@ namespace BL
                 if (countChargingSlots >= station.ChargeSlots)
                 {
 
-                    List<DO.DroneCharge> d = DAL.DataSource.DronesCharge.FindAll(item => item.StationId == numStation);
+                    List<DO.DroneCharge> d = dal.GetALLDroneCharge().ToList().FindAll(item => item.StationId == numStation);
                     station.ChargeSlots = countChargingSlots - d.Count;
 
 
                 }
 
-                dl.DelStation(numStation);
-                dl.AddStation(station);
+                dal.DelStation(numStation);
+                dal.AddStation(station);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
 
@@ -68,9 +68,9 @@ namespace BL
             int counter = 0;
             //מיוי הנתונים ב BL מתוך DAL
 
-            foreach (DO.Station item in dl.GetALLStations())
+            foreach (DO.Station item in dal.GetALLStations())
             {
-                foreach (DO.DroneCharge itemDroneCharge in dl.GetALLDroneCharge())// כמה עמדות טעינה תפוסות יש בתחנה הזאת?
+                foreach (DO.DroneCharge itemDroneCharge in dal.GetALLDroneCharge())// כמה עמדות טעינה תפוסות יש בתחנה הזאת?
                 {
                     if (itemDroneCharge.StationId == item.Id)
                         counter++;
@@ -98,23 +98,23 @@ namespace BL
 
             try
             {
-                var station = dl.GetStation(id);
+                var station = dal.GetStation(id);
                 return stationToBaseStation(station);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
         public IEnumerable<BO.BaseStationToList> GetALLbaseStationToList()
         {
             List<BO.BaseStationToList> basStationBl = new List<BO.BaseStationToList>();
-            foreach (DO.Station item in dl.GetALLStations())//מיוי הנתונים ב BL מתוך DAL
+            foreach (DO.Station item in dal.GetALLStations())//מיוי הנתונים ב BL מתוך DAL
             {
                 BaseStationToList station = new BaseStationToList();
                 station.idnumber = item.Id;
                 station.nameStation = item.Name;
-                List<DO.DroneCharge> d = DAL.DataSource.DronesCharge.FindAll(itemstation => itemstation.StationId == item.Id);
+                List<DO.DroneCharge> d = dal.GetALLDroneCharge().ToList().FindAll(itemstation => itemstation.StationId == item.Id);
                 station.chargingAvailable = item.ChargeSlots - d.Count;
                 station.chargingNotAvailable = d.Count;
                 basStationBl.Add(station);
@@ -141,7 +141,7 @@ namespace BL
                     Longitude = station.Longitude
                 };
                 baseStation.ChargingAvailable = station.ChargeSlots;
-                baseStation.droneInCharging = (from DronesCharge in dl.GetALLDroneCharge()//אכלוס רשימת הרחפנים בטעינה
+                baseStation.droneInCharging = (from DronesCharge in dal.GetALLDroneCharge()//אכלוס רשימת הרחפנים בטעינה
                                                select new DroneInCharging
                                                {
                                                    IdNumber = DronesCharge.Droneld,
@@ -150,7 +150,7 @@ namespace BL
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
             return baseStation;
         }
@@ -171,4 +171,4 @@ namespace BL
         }
     }
 }
-}
+

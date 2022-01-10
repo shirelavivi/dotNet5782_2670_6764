@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DAL.DO;
+using IDAL.DO;
 
-namespace DAL
+namespace IDAL
 {
     public class DataSource
     {
@@ -98,7 +98,7 @@ namespace DAL
             for (int i = 1; i < 11; i++)
             {
                 Parcel a = new Parcel();
-                a.Id =i;
+                a.Id = i;
                 a.SenderId = Rand.Next(1, 12);
                 a.TargetId = Rand.Next(1, 12);
                 t = Rand.Next(3);
@@ -143,12 +143,13 @@ namespace DAL
             for (int i = 1; i <= 7; i++)
             {
                 DroneCharge d = new DroneCharge();
-                d.Droneld =i;
+                d.Droneld = i;
                 d.StationId = Rand.Next(1, 4);
                 DronesCharge.Add(d);
             }
         }
     }
 }
+
 
 

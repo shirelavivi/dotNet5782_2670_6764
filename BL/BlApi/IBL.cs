@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using BO;
 using BL;
-using IBL;
 using DO;
 using DalApi;
 
 namespace BlApi
 {
-    interface IBL
+   public interface IBL
     {
         #region Customer
         public void AddCustomer(BO.Customer customer);
@@ -22,11 +21,12 @@ namespace BlApi
         #region parcel
         public void AddrParcel(BO.Parcel parcel);
         public void ConnectParcelToDrone(int droneid);
-        public bool IfDronCanGoTo(Location a, Location b, Weightcategories weightcategories, int dronid);
+        public bool IfDronCanGoTo(Location a, Location b,BO.Weightcategories weightcategories, int dronid);
         public bool IfDronCanGoTo(Location a, Location b, int dronid);
-        public bool IfDronCanTakeParcel(DAL.DO.Parcel parcel, int droneid);
+        public bool IfDronCanTakeParcel(DO.Parcel parcel, int droneid);
         public IEnumerable<BO.ParcelToList> GetALLParcelToList();
         public IEnumerable<ParcelToList> GetALLParcelsNotConnectToDrone();
+        public void SupplyParcelByDrone(int droneID);
 
         #endregion
 
@@ -35,8 +35,9 @@ namespace BlApi
 
         public void AddBaseStation(BO.BaseStation station);
         public void UpdStation(int numStation, string nameStation = "", int countChargingSlots = 0);
-        public DAL.DO.Station MinFarToStation(BO.Location location);
+        public DO.Station MinFarToStation(BO.Location location);
         public IEnumerable<BO.BaseStationToList> GetALLbaseStationToList();
+        public IEnumerable<BO.BaseStationToList> GetALLStationWithFreeStation();
 
         #endregion
 
@@ -47,8 +48,8 @@ namespace BlApi
         public void PickUpPackage(int id);
         public void SendingDroneforCharging(int droneId);
         public IEnumerable<BO.DroneToList> GetALLDroneToList();
-        public void AddDrone(BO.Drone drone, int stationId);
-
+        public void AddDrone(BO.Drone drone, int stationId);     
+        public DroneToList GetDroneToList(int dronId);
         public IEnumerable<DroneToList> GetALLDroneToList(Predicate<DroneToList> predicate = null);
         // public Drone GetDrone(int droneId);
 

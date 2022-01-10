@@ -10,16 +10,15 @@ using BlApi;
 
 namespace BL
 {
-    internal sealed partial class BL : IBL
+    sealed partial class BL : IBL
     {
-        static readonly BL instance = new BL();
-        public static BL Instance { get => instance; }
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
 
         internal IDal dal = DalFactory.GetDal();
-        //BL() { }
         static Random Rand = new Random(DateTime.Now.Millisecond);
         public List<DroneToList> dronesBl = new List<DroneToList>();
-        public DalObject.Idal dl = new DalObject.DalObject();
+        //public  dl = new DalObject.DalObject();
         internal static double Free;
         internal static double Light;
         internal static double Medium;
@@ -32,24 +31,24 @@ namespace BL
             {
 
                 Location l = new Location();
-                Free = dl.batteryArr()[0];
-                Light = dl.batteryArr()[1];
-                Medium = dl.batteryArr()[2];
-                Heavy = dl.batteryArr()[3];
+                Free = dal.batteryArr()[0];
+                Light = dal.batteryArr()[1];
+                Medium = dal.batteryArr()[2];
+                Heavy = dal.batteryArr()[3];
                 ChargingRate = 25;// קצב טעינה לשעה
 
-                foreach (DO.Drone item in DAL.DataSource.drones)
+                foreach (DO.Drone item in dal.GetALLDrones())
                 {
                     DroneToList drone = new DroneToList();
                     drone.Idnumber = item.id;
                     drone.Model = item.Model;
-                    drone.Weightcategories = (Weightcategories)item.MaxWeight;
+                    drone.Weightcategories = (BO.Weightcategories)item.MaxWeight;
                     dronesBl.Add(drone);
                 }
                 foreach (DroneToList item in dronesBl)
                 {
 
-                    foreach (DO.Parcel parcel in dl.GetALLParcel())
+                    foreach (DO.Parcel parcel in dal.GetALLParcel())
                     {
                         if (parcel.DroneId == item.Idnumber)// אם הרחפן שובץ לחבילה והרחפן הנוכחי זההים אז....
                         {
@@ -59,9 +58,9 @@ namespace BL
                                 if (parcel.PickedUp == new DateTime() && parcel.Scheduled != new DateTime())//אם החבילה שויכה אבל לא נאספה
                                 {
                                     item.PackageNumberTransferred = 0;
-                                    l.Lattitude = dl.GetCustomer(parcel.SenderId).Lattitude;// מיקום השולח
-                                    l.Longitude = dl.GetCustomer(parcel.SenderId).Longitude;
-                                    DO.Station station = dl.MinFarToStation(l);// התחנה הקרובה לשלוח
+                                    l.Lattitude = dal.GetCustomer(parcel.SenderId).Lattitude;// מיקום השולח
+                                    l.Longitude = dal.GetCustomer(parcel.SenderId).Longitude;
+                                    DO.Station station = MinFarToStation(l);// התחנה הקרובה לשלוח
                                     l.Lattitude = station.Lattitude;// מיקום התחנה הקרובה לשלוח
                                     l.Longitude = station.Longitude;
                                     item.ThisLocation = l;
@@ -70,15 +69,15 @@ namespace BL
                                 if (parcel.PickedUp != new DateTime() && parcel.Delivered == new DateTime())//אם החבילה נאספה אבל עוד לא סופקה
                                 {
                                     item.PackageNumberTransferred = parcel.Id;
-                                    l.Lattitude = dl.GetCustomer(parcel.SenderId).Lattitude;// מיקום השולח
-                                    l.Longitude = dl.GetCustomer(parcel.SenderId).Longitude;
+                                    l.Lattitude = dal.GetCustomer(parcel.SenderId).Lattitude;// מיקום השולח
+                                    l.Longitude = dal.GetCustomer(parcel.SenderId).Longitude;
                                     item.ThisLocation = l;
                                 }
 
                             }
-                            l.Lattitude = dl.GetCustomer(parcel.TargetId).Lattitude;// מיקום המקבל
-                            l.Longitude = dl.GetCustomer(parcel.TargetId).Longitude;
-                            DO.Station s = dl.MinFarToStation(item.ThisLocation);//התחנה הקרובה ביותר למיקום של היעד
+                            l.Lattitude = dal.GetCustomer(parcel.TargetId).Lattitude;// מיקום המקבל
+                            l.Longitude = dal.GetCustomer(parcel.TargetId).Longitude;
+                            DO.Station s = MinFarToStation(item.ThisLocation);//התחנה הקרובה ביותר למיקום של היעד
                             double howMuchBatrry = BatteryConsumption(DistanceTo(s.Lattitude, s.Longitude, l.Lattitude, l.Longitude), item.Weightcategories);
                             howMuchBatrry += BatteryConsumption(DistanceTo(l.Lattitude, l.Longitude, item.ThisLocation.Lattitude, item.ThisLocation.Longitude), item.Weightcategories);
                             item.ButerryStatus = Rand.Next((int)howMuchBatrry, 100);
@@ -94,9 +93,9 @@ namespace BL
                     if (item.DroneStatuses == DroneStatuses.maintenance)//אם הרחפן בתחזוקה 
                     {
                         item.PackageNumberTransferred = 0;
-                        int ran = Rand.Next(0, (dl.GetALLStations()).Count());
-                        l.Lattitude = (dl.GetALLStations().ToList())[ran].Lattitude;
-                        l.Longitude = (dl.GetALLStations().ToList())[ran].Longitude;
+                        int ran = Rand.Next(0, (dal.GetALLStations()).Count());
+                        l.Lattitude = (dal.GetALLStations().ToList())[ran].Lattitude;
+                        l.Longitude = (dal.GetALLStations().ToList())[ran].Longitude;
                         item.ThisLocation = l;
                         item.ButerryStatus = (int)Rand.Next(0, 20);
                     }
@@ -104,12 +103,12 @@ namespace BL
                     if (item.DroneStatuses == DroneStatuses.available)//אם הרחפןפנוי
                     {
 
-                        int ran = Rand.Next(0, (dl.GetALLParcel()).Count());
-                        int targetId = (dl.GetALLParcel().ToList())[ran].TargetId;//מגריל מתוך החבילות חבילה כלשהי ולוקח את תץז של המקבל
-                        l.Lattitude = dl.GetCustomer(targetId).Lattitude;
-                        l.Longitude = dl.GetCustomer(targetId).Longitude;
+                        int ran = Rand.Next(0, (dal.GetALLParcel()).Count());
+                        int targetId = (dal.GetALLParcel().ToList())[ran].TargetId;//מגריל מתוך החבילות חבילה כלשהי ולוקח את תץז של המקבל
+                        l.Lattitude = dal.GetCustomer(targetId).Lattitude;
+                        l.Longitude = dal.GetCustomer(targetId).Longitude;
                         item.ThisLocation = l;
-                        DO.Station s = dl.MinFarToStation(item.ThisLocation);//התחנה הקרובה ביותר למיקום של הרחפן
+                        DO.Station s = MinFarToStation(item.ThisLocation);//התחנה הקרובה ביותר למיקום של הרחפן
                         int howMuchBatrry = (int)BatteryConsumption(DistanceTo(s.Lattitude, s.Longitude, item.ThisLocation.Lattitude, item.ThisLocation.Longitude), item.Weightcategories);
                         if (howMuchBatrry < 100)
                             item.ButerryStatus = (int)Rand.Next(howMuchBatrry, 100);
@@ -124,7 +123,7 @@ namespace BL
             }
             catch (DO.MissingIdException ex)
             {
-                throw new MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
         public static double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K')
@@ -163,13 +162,13 @@ namespace BL
 
 
             }
-            throw new MissingIdException(dronId, "DroneToList");
+            throw new BO.MissingIdException(dronId, "DroneToList");
         }
-        public double BatteryConsumption(double kilometrs, Weightcategories weightcategories)// פונקציה שמקבלת קליומטר ומחשבת כמה בטריה צריך כדי להגיע לשם
+        public double BatteryConsumption(double kilometrs,BO.Weightcategories weightcategories)// פונקציה שמקבלת קליומטר ומחשבת כמה בטריה צריך כדי להגיע לשם
         {
-            if (weightcategories == (Weightcategories)0)
+            if (weightcategories == (BO.Weightcategories)0)
                 return (100 / kilometrs * Light);
-            if (weightcategories == (Weightcategories)1)
+            if (weightcategories == (BO.Weightcategories)1)
                 return (100 / kilometrs * Medium);
             return (100 / kilometrs * Heavy);
 

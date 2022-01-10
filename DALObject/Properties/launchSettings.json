@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DALObject": {
+      "commandName": "Project",
+      "workingDirectory": " $(SolutionDir)"
+    }
+  }
+}

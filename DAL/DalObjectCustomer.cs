@@ -4,33 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DAL.DO;
+using IDAL.DO;
 namespace DalObject
 {
 
     public partial class DalObject : Idal
     {
-       
+
         public void AddCustomer(Customer c)
         {
 
             if (CheckCusromer(c.Id))
 
-                throw new DAL.DO.DuplicateIdException(c.Id, "Customer");
+                throw new IDAL.DO.DuplicateIdException(c.Id, "Customer");
 
 
-            DAL.DataSource.customers.Add(c);
+            IDAL.DataSource.customers.Add(c);
 
         }
 
         public bool CheckCusromer(int id)
         {
-            return DAL.DataSource.customers.Any(st => st.Id == id);
+            return IDAL.DataSource.customers.Any(st => st.Id == id);
         }
 
         public IEnumerable<Customer> GetALLCustomers()
         {
-            return from st in DAL.DataSource.customers select st;
+            return from st in IDAL.DataSource.customers select st;
             //return DataSource.Customers;
         }
 
@@ -38,17 +38,17 @@ namespace DalObject
 
         public void UpdCustomer(Customer st)
         {
-            int count = DAL.DataSource.customers.RemoveAll(st => st.Id == st.Id);
+            int count = IDAL.DataSource.customers.RemoveAll(st => st.Id == st.Id);
 
             if (count == 0)
                 throw new MissingIdException(st.Id, "Customer");
 
-            DAL.DataSource.customers.Add(st);
+            IDAL.DataSource.customers.Add(st);
         }
 
         public void DelCustomer(int id)
         {
-            int count = DAL.DataSource.customers.RemoveAll(st => st.Id == id);
+            int count = IDAL.DataSource.customers.RemoveAll(st => st.Id == id);
 
             if (count == 0)
                 throw new MissingIdException(id, "Customer");
@@ -56,7 +56,7 @@ namespace DalObject
 
         public IEnumerable<Customer> GetCustomertsByPerdicate(Predicate<Customer> predicate)
         {
-            return from st in DAL.DataSource.customers
+            return from st in IDAL.DataSource.customers
                    where predicate(st)
                    select st;
         }
@@ -65,7 +65,7 @@ namespace DalObject
             if (!CheckCusromer(s))
                 throw new MissingIdException(s, "Customer");
 
-            Customer st = DAL.DataSource.customers.Find(st => st.Id == s);
+            Customer st = IDAL.DataSource.customers.Find(st => st.Id == s);
             return st;
 
         }
@@ -73,7 +73,7 @@ namespace DalObject
         {
 
             List<Customer> temp = new List<Customer>();
-            foreach (Customer item in DAL.DataSource.customers)
+            foreach (Customer item in IDAL.DataSource.customers)
             {
                 temp.Add(item);
             }

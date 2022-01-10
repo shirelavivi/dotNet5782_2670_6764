@@ -1,11 +1,11 @@
 ﻿using System;
 
-using DAL.DO;
+using IDAL.DO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
+using IDAL;
 using DalObject;
 
 
@@ -23,7 +23,7 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            Options op; 
+            Options op;
             Console.WriteLine("Please press the one of the options you want:");
             Console.WriteLine(" 0: Addition \n 1: Update \n 2: Display \n 3: ShowLists \n 4: Exit");
             op = (Options)int.Parse(Console.ReadLine());    //User input to go through the options
@@ -89,7 +89,7 @@ namespace ConsoleUI
                                         //Console.WriteLine("Please type a Percent Battery :");
                                         //double.TryParse(Console.ReadLine(), out tempBattery);
                                         //temp.Battery = tempBattery;
-                                       dl.AddDrone(temp);   // Adding the new object to the list of that object
+                                        dl.AddDrone(temp);   // Adding the new object to the list of that object
 
                                     }
                                     break;
@@ -154,7 +154,7 @@ namespace ConsoleUI
                             }
                             break;
                         }
-                       
+
 
                     case Options.Update:
                         {
@@ -202,7 +202,7 @@ namespace ConsoleUI
                                             Console.WriteLine(s[i].Id + "\n");
                                         }
                                         int.TryParse(Console.ReadLine(), out stationID);
-                                       dl.SendDroneTpCharge(stationID, droneID);
+                                        dl.SendDroneTpCharge(stationID, droneID);
                                     }
                                     break;
                                 case UpDate.release_from_loading:
@@ -211,7 +211,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Type drone ID:");
                                         int droneID;
                                         int.TryParse(Console.ReadLine(), out droneID);
-                                       dl.ReleaseDroneFromChargeStation(droneID);
+                                        dl.ReleaseDroneFromChargeStation(droneID);
 
                                     }
                                     break;
@@ -303,11 +303,11 @@ namespace ConsoleUI
                             {
                                 case ShowList.Station:
                                     {
-                                       
+
                                         foreach (Station item in dl.GetALLStations())
                                         {
-                                           item.ToString();
-                                           Console.WriteLine("\n\n");
+                                            item.ToString();
+                                            Console.WriteLine("\n\n");
                                         }
 
                                     }
