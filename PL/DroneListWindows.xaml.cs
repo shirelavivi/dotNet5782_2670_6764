@@ -22,9 +22,9 @@ namespace PL
     {
         IBL blDroneList;
         public DroneListWindows(IBL bl)
-        {
-            blDroneList = bl;
+        {           
             InitializeComponent();
+            blDroneList = bl;
             droneToListDataGrid.DataContext = bl.GetALLDroneToList();
         }
 

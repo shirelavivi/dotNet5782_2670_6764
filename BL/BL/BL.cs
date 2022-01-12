@@ -12,8 +12,7 @@ namespace BL
 {
     sealed partial class BL : IBL
     {
-        static readonly IBL instance = new BL();
-        public static IBL Instance { get => instance; }
+
 
         internal IDal dal = DalFactory.GetDal();
         static Random Rand = new Random(DateTime.Now.Millisecond);
@@ -24,6 +23,10 @@ namespace BL
         internal static double Medium;
         internal static double Heavy;
         internal static double ChargingRate;//אחוז טעינה לשעה
+
+
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
 
         public BL()
         {
