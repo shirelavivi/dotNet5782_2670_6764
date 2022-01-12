@@ -1,0 +1,35 @@
+﻿<Window x:Class="PL.DroneToListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="DroneToListWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רחפן.jpg"/>
+        </Grid.Background>
+        <DataGrid x:Name="parcelToListDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="446,121,69,40" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Background="{x:Null}" RenderTransformOrigin="0.5,0.5" FontSize="12">
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.304"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.595"/>
+                </TransformGroup>
+            </DataGrid.RenderTransform>
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Width="SizeToHeader" Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn x:Name="priorityColumn" Width="SizeToHeader" Header="Priority" Binding="{Binding Priority}"/>
+                <DataGridTextColumn x:Name="senderNameColumn" Width="SizeToHeader" Header="Sender Name" Binding="{Binding SenderName}"/>
+                <DataGridTextColumn x:Name="targetNameColumn" Width="SizeToHeader" Header="Target Name" Binding="{Binding TargetName}"/>
+                <DataGridTextColumn x:Name="weightColumn" Width="SizeToHeader" Header="Weight" Binding="{Binding Weight}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox HorizontalAlignment="Left" Height="30" Margin="104,69,0,0" VerticalAlignment="Top" Width="151"/>
+        <ComboBox HorizontalAlignment="Left" Height="30" Margin="104,121,0,0" VerticalAlignment="Top" Width="151"/>
+        <ComboBox HorizontalAlignment="Left" Height="30" Margin="104,171,0,0" VerticalAlignment="Top" Width="151"/>
+       
+    </Grid>
+</Window>

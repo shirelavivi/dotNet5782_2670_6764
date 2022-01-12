@@ -20,6 +20,7 @@
         </Grid.ColumnDefinitions>
         <Button Content="Drones" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="33" Margin="598,356,0,0" VerticalAlignment="Top" Width="136" Background="{x:Null}" FontSize="16" FontWeight="Bold" Click="Button_Click" Grid.Row="1"/>
         <Label Content="Welcom to drone system:" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="81" Margin="162,25,0,0" VerticalAlignment="Top" Width="544" FontSize="30" FontWeight="Bold" FontFamily="Elephant" Grid.Row="1"/>
+        <Button Content="Parcels" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="33" Margin="434,356,0,0" VerticalAlignment="Top" Width="136" Background="{x:Null}" FontSize="16" FontWeight="Bold"  Grid.Row="1" Click="Button_Click_1"/>
 
     </Grid>
 </Window>
