@@ -11,17 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
+
+
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ParceloListWindwo.xaml
+    /// Interaction logic for DroneToListWindow.xaml
     /// </summary>
-    public partial class ParceloListWindwo : Window
+    public partial class DroneToListWindow : Window
     {
-        public ParceloListWindwo()
+         IBL blParcelList; 
+        public DroneToListWindow(IBL bl)
         {
+            blParcelList = bl;
+            parcelToListDataGrid.DataContext = blParcelList.GetALLParcelToList();
             InitializeComponent();
+           
         }
     }
 }
