@@ -6,22 +6,25 @@
         xmlns:BO="clr-namespace:BO"
         mc:Ignorable="d"
         Title="CustomerToListWindow" Height="450" Width="800">
-    <Window.Resources>
+    
+    <!--<Window.Resources>
         <CollectionViewSource x:Key="customerToListViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:CustomerToList}, CreateList=True}"/>
-    </Window.Resources>
-    <Grid DataContext="{StaticResource customerToListViewSource}">
-        <DataGrid x:Name="customerToListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="75,65,36.333,25.667" RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="numOfParcelDontProvidedColumn" Binding="{Binding numOfParcelDontProvided}" Header="num Of Parcel Dont Provided" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="numOfParcelGetColumn" Binding="{Binding numOfParcelGet}" Header="num Of Parcel Get" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="numOfParcelOnTheWayColumn" Binding="{Binding numOfParcelOnTheWay}" Header="num Of Parcel On The Way" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="numOfParcelProvidedColumn" Binding="{Binding numOfParcelProvided}" Header="num Of Parcel Provided" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding Phone}" Header="Phone" Width="SizeToHeader"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+    </Window.Resources>-->
+    <!--<Grid DataContext="{StaticResource customerToListViewSource}">-->
+  
+    <DataGrid x:Name="customerToListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="75,65,36.333,25.667" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid.Columns>
+            <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="numOfParcelDontProvidedColumn" Binding="{Binding numOfParcelDontProvided}" Header="num Of Parcel Dont Provided" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="numOfParcelGetColumn" Binding="{Binding numOfParcelGet}" Header="num Of Parcel Get" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="numOfParcelOnTheWayColumn" Binding="{Binding numOfParcelOnTheWay}" Header="num Of Parcel On The Way" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="numOfParcelProvidedColumn" Binding="{Binding numOfParcelProvided}" Header="num Of Parcel Provided" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding Phone}" Header="Phone" Width="SizeToHeader"/>
+        </DataGrid.Columns>
+    </DataGrid>
+    
+    <!--</Grid>-->
    </Window>
    
         
