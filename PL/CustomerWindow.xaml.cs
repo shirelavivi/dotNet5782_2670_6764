@@ -23,5 +23,10 @@ namespace PL
         {
             InitializeComponent();
         }
+
+        private void Button_ClikUpdateDrone(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
