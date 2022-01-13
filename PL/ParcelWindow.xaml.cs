@@ -26,15 +26,19 @@ namespace PL
         public ParcelWindow(BO.ParcelToList parcel, IBL blParcel)//עדכון
         {
             InitializeComponent();
-            blparcel = blParcel;
-            btnAdd.Visibility = Visibility.Hidden;
-            idTextBox.Text = parcel.Id.ToString();
-            priorityComboBox.SelectedItem = (BO.Priorities)parcel.Priority;
-            parcel1 = blParcel.GetParcel(parcel.Id);
-            deliveredDatePicker.SelectedDate = parcel1.Delivered;
-            scheduledDatePicker.SelectedDate = parcel1.Scheduled;
-            requestedDatePicker.SelectedDate = parcel1.Requested;
-            pickedUpDatePicker.SelectedDate = parcel1.PickedUp;
+            try
+            {            
+                blparcel = blParcel;
+                btnAdd.Visibility = Visibility.Hidden;
+                parcel1 = blParcel.GetParcel(parcel.Id);
+                if (parcel1.PickedUp == null)
+                    btnUpDate.Content = "Delivered";
+             
+            }
+            catch (BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.EntityName,ex.Message);
+            }
         }
         public ParcelWindow(IBL blParcel)//הוספה
         {

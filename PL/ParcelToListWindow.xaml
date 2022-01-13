@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneToListWindow" Height="450" Width="800">
+        Title="DroneToListWindow" Height="450" Width="800" Activated="Window_Activated">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/רחפן.jpg"/>
@@ -28,21 +28,21 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Add new parcel" HorizontalAlignment="Left" Height="33" Margin="620,298,0,0" VerticalAlignment="Top" Width="132" Click="Button_Click" FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}"/>
-        <ComboBox x:Name="comboBoxSender" HorizontalAlignment="Left" Height="30" Margin="602,54,0,0" VerticalAlignment="Top" Width="151"/>
-        <ComboBox x:Name="conboBoxTarget" HorizontalAlignment="Left" Height="30" Margin="602,118,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Sender Id:" HorizontalAlignment="Left" Margin="509,56,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
-        <Label Content="Target Id:" HorizontalAlignment="Left" Margin="509,120,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
+        <Label Content="Sender Name:" HorizontalAlignment="Left" Margin="509,56,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
+        <Label Content="Target Name:" HorizontalAlignment="Left" Margin="509,120,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
         <Label Content="Weight categories:" HorizontalAlignment="Left" Height="43" Margin="464,174,0,0" VerticalAlignment="Top" Width="157" FontSize="14" FontFamily="Arial Black"/>
-        <ComboBox HorizontalAlignment="Left" Height="30" Margin="626,171,0,0" VerticalAlignment="Top" Width="127">
-           <ComboBoxItem Content="easy " />
+        <ComboBox x:Name="comboweight" HorizontalAlignment="Left" Height="30" Margin="626,171,0,0" VerticalAlignment="Top" Width="127" SelectionChanged="comboweight_SelectionChanged">
+            <ComboBoxItem Content="easy " />
             <ComboBoxItem Content=" middle" />
             <ComboBoxItem Content="weighty" />
         </ComboBox>
         <Label Content=" Priority:" HorizontalAlignment="Left" Height="43" Margin="516,222,0,0" VerticalAlignment="Top" Width="89" FontSize="14" FontFamily="Arial Black"/>
-        <ComboBox HorizontalAlignment="Left" Height="30" Margin="605,222,0,0" VerticalAlignment="Top" Width="151">
+        <ComboBox x:Name="comboPriority" HorizontalAlignment="Left" Height="30" Margin="605,222,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="comboPriority_SelectionChanged">
             <ComboBoxItem Content="Standard" />
             <ComboBoxItem Content="fast" />
             <ComboBoxItem Content="emergency" />
         </ComboBox>
+        <TextBox x:Name="txtSender" HorizontalAlignment="Left" Margin="626,61,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="23" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="txtTarget" HorizontalAlignment="Left" Margin="626,120,0,0" Text=""  TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="23" TextChanged="txtTarget_TextChanged"/>
     </Grid>
 </Window>

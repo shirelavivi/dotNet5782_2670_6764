@@ -28,6 +28,7 @@ namespace BlApi
         public IEnumerable<ParcelToList> GetALLParcelsNotConnectToDrone();
         public void SupplyParcelByDrone(int droneID);
         public BO.Parcel GetParcel(int id);
+        public IEnumerable<ParcelToList> GetALLParce(Predicate<ParcelToList> predicate = null);
 
         #endregion
 

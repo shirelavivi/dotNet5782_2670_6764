@@ -10,47 +10,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="/drone.jpg"/>
         </Grid.Background>
-        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="55,103,0,0" VerticalAlignment="Top" Height="243" Width="298">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Delivered:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Black" Background="{x:Null}" FontWeight="Normal" Foreground="White"/>
-            <DatePicker x:Name="deliveredDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" SelectedDate="{Binding Delivered, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Historic"/>
-            <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Black" Background="{x:Null}" FontWeight="Normal" Foreground="White"/>
-            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Picked Up:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Black" Background="{x:Null}" FontWeight="Normal" Foreground="White"/>
-            <DatePicker x:Name="pickedUpDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" SelectedDate="{Binding PickedUp, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Historic"/>
-            <Label Content="Priority:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Black" Background="{x:Null}" FontWeight="Normal" Foreground="White"/>
-            <ComboBox x:Name="priorityComboBox" Grid.Column="1" DisplayMemberPath="Priority" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
-            <Label Content="Requested:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Black" Background="{x:Null}" FontWeight="Normal" Foreground="White"/>
-            <DatePicker x:Name="requestedDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" SelectedDate="{Binding Requested, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Historic"/>
-            <Label Content="Scheduled:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Black" Background="{x:Null}" FontWeight="Normal" Foreground="White"/>
-            <DatePicker x:Name="scheduledDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" SelectedDate="{Binding Scheduled, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Historic"/>
-            <Label Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Black" Background="{x:Null}" FontWeight="Normal" Foreground="White"/>
-            <ComboBox x:Name="weightComboBox" Grid.Column="1" DisplayMemberPath="Weight" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="6" VerticalAlignment="Center" Width="120">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
-        </Grid>
         <Label Content="Update YOUR Parcel:" HorizontalAlignment="Left" Margin="57,27,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
             <Label.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -65,9 +24,9 @@
                 <ImageBrush ImageSource="/Navigation_Right_Arrow.svg.png"/>
             </Button.Background>
         </Button>
-       
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="23,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black" Click="btnAdd_Click"/>
-        <Button x:Name="btnUpDate" Content="UpDate" HorizontalAlignment="Left" Margin="166,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
-        <Button x:Name="btnDelet" Content="Delet" HorizontalAlignment="Left" Margin="307,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
+
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="653,334,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black" Click="btnAdd_Click"/>
+        <Button x:Name="btnUpDate" Content="UpDate" HorizontalAlignment="Left" Margin="653,272,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
+        <Button x:Name="btnDelet" Content="Delet" HorizontalAlignment="Left" Margin="653,207,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
     </Grid>
 </Window>
