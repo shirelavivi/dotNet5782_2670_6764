@@ -14,7 +14,7 @@
     </Window.Resources>-->
     <Grid DataContext="">
 
-        <DataGrid x:Name="baseStationToListDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="50,39,343,370" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+        <DataGrid x:Name="baseStationToListDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="20,54,400,355" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="chargingAvailableColumn" Width="SizeToHeader" Header="charging Available" Binding="{Binding chargingAvailable}"/>
                 <DataGridTextColumn x:Name="chargingNotAvailableColumn" Width="SizeToHeader" Header="charging Not Available" Binding="{Binding chargingNotAvailable}"/>
@@ -22,9 +22,10 @@
                 <DataGridTextColumn x:Name="nameStationColumn" Width="SizeToHeader" Header="name Station" Binding="{Binding nameStation}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="Charging Available:" HorizontalAlignment="Left" Height="49" VerticalAlignment="Top" Width="780" RenderTransformOrigin="0.449,0.577" FontSize="20" FontWeight="Heavy" Margin="10,0,0,0"/>
         <Button Content="Add new station" HorizontalAlignment="Left" Height="33" Margin="615,346,0,0" VerticalAlignment="Top" Width="132" Click="Button_Click" FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}"/>
         <Grid.Background>
-            <ImageBrush ImageSource="/drone.jpg" Opacity="0.7"/>
+            <ImageBrush ImageSource="/drone.jpg" Opacity="0.95"/>
         </Grid.Background>
 
     </Grid>

@@ -23,5 +23,15 @@ namespace PL
         {
             InitializeComponent();
         }
+
+        private void Button_ClikUpdateDrone(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void IdnumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

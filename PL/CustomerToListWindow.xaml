@@ -6,27 +6,30 @@
         xmlns:BO="clr-namespace:BO"
         mc:Ignorable="d"
         Title="CustomerToListWindow" Height="450" Width="800">
-    
+
     <!--<Window.Resources>
         <CollectionViewSource x:Key="customerToListViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:CustomerToList}, CreateList=True}"/>
     </Window.Resources>-->
-    <!--<Grid DataContext="{StaticResource customerToListViewSource}">-->
-  
-    <DataGrid x:Name="customerToListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="75,65,36.333,25.667" RowDetailsVisibilityMode="VisibleWhenSelected">
-        <DataGrid.Columns>
-            <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="numOfParcelDontProvidedColumn" Binding="{Binding numOfParcelDontProvided}" Header="num Of Parcel Dont Provided" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="numOfParcelGetColumn" Binding="{Binding numOfParcelGet}" Header="num Of Parcel Get" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="numOfParcelOnTheWayColumn" Binding="{Binding numOfParcelOnTheWay}" Header="num Of Parcel On The Way" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="numOfParcelProvidedColumn" Binding="{Binding numOfParcelProvided}" Header="num Of Parcel Provided" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding Phone}" Header="Phone" Width="SizeToHeader"/>
-        </DataGrid.Columns>
-    </DataGrid>
-   
+    <Grid DataContext="">
 
-    <!--</Grid>-->
-   </Window>
+        <DataGrid x:Name="customerToListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="56,35,56,370" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numOfParcelDontProvidedColumn" Binding="{Binding numOfParcelDontProvided}" Header="num Of Parcel Dont Provided" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numOfParcelGetColumn" Binding="{Binding numOfParcelGet}" Header="num Of Parcel Get" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numOfParcelOnTheWayColumn" Binding="{Binding numOfParcelOnTheWay}" Header="num Of Parcel On The Way" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numOfParcelProvidedColumn" Binding="{Binding numOfParcelProvided}" Header="num Of Parcel Provided" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding Phone}" Header="Phone" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Add new customer" HorizontalAlignment="Left" Height="33" Margin="625,346,0,0" VerticalAlignment="Top" Width="165" Click="Button_Click" FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/drone.jpg" Opacity="0.95"/>
+        </Grid.Background>
+
+    </Grid>
+</Window>
    
         
     
