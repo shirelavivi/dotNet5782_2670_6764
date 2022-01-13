@@ -12,7 +12,7 @@
     <Window.Background>
         <ImageBrush ImageSource="drone.jpg" Stretch="UniformToFill"/>
     </Window.Background>
-   
+
     <Grid DataContext="">
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="35,62,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
             <Label Content="Phone:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center" Foreground="#FFFCF7F7" FontSize="18" FontFamily="Arial Black"/>
             <TextBox x:Name="PhoneTextBox" Style="{ StaticResource myTextBoxStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="6" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
             <Button x:Name="AddCustomer" Content="Add Customer" HorizontalAlignment="Left" Margin="241,38,0,0" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Width="185" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Click="AddCustomer_Click" Height="54" VerticalAlignment="Top"/>
-            <Button x:Name="UpdateCustomer" Content="UpDate Customer" HorizontalAlignment="Left" Margin="241.333,30.333,-299.667,-6.667" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="185" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="1" Grid.Row="5" Grid.RowSpan="2" Click="UpdateCustomer_Click"/>
+            <Button x:Name="UpdateCustomer" Content="UpDate Customer" HorizontalAlignment="Left" Margin="241,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="185" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="1" Grid.Row="6" Click="UpdateCustomer_Click"/>
 
         </Grid>
     </Grid>
