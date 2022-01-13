@@ -38,6 +38,7 @@ namespace BlApi
         public DO.Station MinFarToStation(BO.Location location);
         public IEnumerable<BO.BaseStationToList> GetALLbaseStationToList();
         public IEnumerable<BO.BaseStationToList> GetALLStationWithFreeStation();
+        public IEnumerable<BaseStationToList> GetAllStation(Predicate<BaseStationToList> predicate = null);
 
         #endregion
 

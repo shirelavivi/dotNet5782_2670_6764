@@ -169,6 +169,11 @@ namespace BL
                 throw new NoFreeCharging();
             return newst;
         }
+        public IEnumerable<BaseStationToList> GetAllStation(Predicate<BaseStationToList> predicate = null)
+        {
+            return GetALLbaseStationToList().ToList().FindAll(predicate);
+        }
+
     }
 }
 

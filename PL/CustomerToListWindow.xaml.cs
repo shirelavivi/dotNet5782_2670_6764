@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -19,9 +20,36 @@ namespace PL
     /// </summary>
     public partial class CustomerToListWindow : Window
     {
-        public CustomerToListWindow()
+        IBL blCustomerList;
+        public CustomerToListWindow(IBL bl)
         {
             InitializeComponent();
+            blCustomerList = bl;
+            customerToListDataGrid.DataContext = bl.GetALLCostumerToList();
         }
+       
+       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerWindow customerListWindow = new CustomerWindow(blCustomerList);
+            customerListWindow.Show();
+            this.Close();
+        }
+
+        private void droneToListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListViewItem item = sender as ListViewItem;
+            BO.CustomerToList customer = customerToListDataGrid.SelectedItem as BO.CustomerToList;
+            if (customer != null)
+            {
+                CustomerWindow customerListWindow = new CustomerWindow(customer, blCustomerList);
+                customerListWindow.Show();
+                this.Close();
+            }
+        }
+
     }
+
 }
+    
+
