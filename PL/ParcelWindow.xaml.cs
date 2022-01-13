@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
+using BO;
 
 namespace PL
 {
@@ -21,7 +22,6 @@ namespace PL
     public partial class ParcelWindow : Window
     {
         IBL blparcel;
-        //BO.ParcelToList parcelWind;
         public ParcelWindow(BO.ParcelToList parcel, IBL blParcel)//עדכון
         {
             InitializeComponent();
