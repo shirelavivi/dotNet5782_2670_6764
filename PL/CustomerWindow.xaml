@@ -25,7 +25,7 @@
     <Window.Background>
         <ImageBrush ImageSource="drone.jpg" Stretch="UniformToFill"/>
     </Window.Background>
-    <Grid DataContext="">
+    <Grid DataContext="" d:IsHidden="True">
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="35,62,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
