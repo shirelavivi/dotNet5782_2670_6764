@@ -23,7 +23,8 @@
             <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding Phone}" Header="Phone" Width="SizeToHeader"/>
         </DataGrid.Columns>
     </DataGrid>
-    
+   
+
     <!--</Grid>-->
    </Window>
    
