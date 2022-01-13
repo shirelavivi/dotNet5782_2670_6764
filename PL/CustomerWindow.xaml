@@ -9,42 +9,44 @@
     <!--<Window.Resources>
     <CollectionViewSource x:Key="customerToListViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:CustomerToList}, CreateList=True}"/>
 </Window.Resources>-->
-<Window.Background>
-    <ImageBrush ImageSource="drone.jpg" Stretch="UniformToFill"/>
-</Window.Background>
-<Grid DataContext="">
-    <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="35,62,0,0" VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,3" Grid.Row="0" VerticalAlignment="Bottom" Foreground="#FFFCFAFA" FontSize="18" FontFamily="Arial Black"/>
-        <TextBox x:Name="IdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="3" Grid.Row="0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" Foreground="#FFFAF3F3" FontSize="18" FontFamily="Arial Black"/>
-        <TextBox x:Name="NameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="3" Grid.Row="1" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Num Of Parcel Dont Provided:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFF3EFEF" FontSize="18" FontFamily="Arial Black"/>
-        <TextBox x:Name="NumOfParcelDontProvidedTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="3" Grid.Row="2" Text="{Binding numOfParcelDontProvided, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Num Of Parcel Get:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" Foreground="#FFFCF7F7" FontSize="18" FontFamily="Arial Black"/>
-        <TextBox x:Name="NumOfParcelGetTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="3" Grid.Row="3" Text="{Binding numOfParcelGet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Num Of Parcel On The Way:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" Foreground="#FFFEFBFB" FontSize="18" FontFamily="Arial Black"/>
-        <TextBox x:Name="NumOfParcelOnTheWayTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="3" Grid.Row="4" Text="{Binding numOfParcelOnTheWay, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Num Of Parcel Provided:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center" Foreground="#FFFEFBFB" FontSize="18" FontFamily="Arial Black"/>
-        <TextBox x:Name="NumOfParcelProvidedTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="3" Grid.Row="5" Text="{Binding numOfParcelProvided, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Phone:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center" Foreground="#FFFCF7F7" FontSize="18" FontFamily="Arial Black"/>
-        <TextBox x:Name="PhoneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="3" Grid.Row="6" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Button x:Name="AddCustomer" Content="Add Customer" HorizontalAlignment="Left" Margin="241.333,38,-299.667,25" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Width="185" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="1" Grid.Row="3" Grid.RowSpan="3"/>
-        <Button x:Name="UpdateCustomer" Content="UpDate Customer" HorizontalAlignment="Left" Margin="241.333,30.333,-299.667,-6.667" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="185"  ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="1" Grid.Row="5" Grid.RowSpan="2"/>
+    <Window.Background>
+        <ImageBrush ImageSource="drone.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+   
+    <Grid DataContext="">
+        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="35,62,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
+            <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,3" Grid.Row="0" VerticalAlignment="Bottom" Foreground="#FFFCFAFA" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="IdTextBox" Style="{ StaticResource myTextBoxStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" />
+            <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" Foreground="#FFFAF3F3" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="NameTextBox" Style="{ StaticResource myTextBoxStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Content="Num Of Parcel Dont Provided:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFF3EFEF" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="NumOfParcelDontProvidedTextBox" Style="{ StaticResource myTextBoxStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" Text="{Binding numOfParcelDontProvided, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Content="Num Of Parcel Get:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" Foreground="#FFFCF7F7" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="NumOfParcelGetTextBox" Style="{ StaticResource myTextBoxStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding numOfParcelGet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Content="Num Of Parcel On The Way:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" Foreground="#FFFEFBFB" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="NumOfParcelOnTheWayTextBox" Style="{ StaticResource myTextBoxStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding numOfParcelOnTheWay, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Content="Num Of Parcel Provided:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center" Foreground="#FFFEFBFB" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="NumOfParcelProvidedTextBox" Style="{ StaticResource myTextBoxStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding numOfParcelProvided, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Content="Phone:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center" Foreground="#FFFCF7F7" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="PhoneTextBox" Style="{ StaticResource myTextBoxStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="6" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Button x:Name="AddCustomer" Content="Add Customer" HorizontalAlignment="Left" Margin="241,38,0,0" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Width="185" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Click="AddCustomer_Click" Height="54" VerticalAlignment="Top"/>
+            <Button x:Name="UpdateCustomer" Content="UpDate Customer" HorizontalAlignment="Left" Margin="241.333,30.333,-299.667,-6.667" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="55" Width="185" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="1" Grid.Row="5" Grid.RowSpan="2" Click="UpdateCustomer_Click"/>
+
+        </Grid>
     </Grid>
-</Grid>
 </Window>
 

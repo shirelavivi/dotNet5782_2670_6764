@@ -45,10 +45,10 @@ namespace PL
             droneListWindow.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Customers(object sender, RoutedEventArgs e)
         {
-            DroneToListWindow droneListWindow = new DroneToListWindow(bl);
-            droneListWindow.Show();
+            CustomerToListWindow customerToListWindow = new CustomerToListWindow(bl);
+            customerToListWindow.Show();
         }
     }
 }

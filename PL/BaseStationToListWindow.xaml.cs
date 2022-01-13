@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
+using BO;
 
 namespace PL
 {
@@ -19,9 +21,25 @@ namespace PL
     /// </summary>
     public partial class BaseStationToListWindow : Window
     {
-        public BaseStationToListWindow()
+        IBL blstationList;
+        public BaseStationToListWindow(IBL bl)
         {
             InitializeComponent();
+            blstationList = bl;
+            baseStationToListDataGrid.DataContext = bl.GetALLbaseStationToList();
+        }
+      
+        private void baseStationToListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListViewItem item = sender as ListViewItem;
+            BO.BaseStationToList station = baseStationToListDataGrid.SelectedItem as BO.BaseStationToList;
+            if (station != null)
+            {
+                BaseStationToListWindow baseStationToListWindow = new BaseStationToListWindow(blstationList);
+                baseStationToListWindow.Show();
+                this.Close();
+            }
         }
     }
 }
+
