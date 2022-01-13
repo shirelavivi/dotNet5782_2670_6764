@@ -66,8 +66,8 @@
             </Button.Background>
         </Button>
        
-        <Button Content="Add" HorizontalAlignment="Left" Margin="23,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
-        <Button Content="UpDate" HorizontalAlignment="Left" Margin="166,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
-        <Button Content="Delet" HorizontalAlignment="Left" Margin="307,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="23,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black" Click="btnAdd_Click"/>
+        <Button x:Name="btnUpDate" Content="UpDate" HorizontalAlignment="Left" Margin="166,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
+        <Button x:Name="btnDelet" Content="Delet" HorizontalAlignment="Left" Margin="307,356,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black"/>
     </Grid>
 </Window>

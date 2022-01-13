@@ -24,13 +24,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ex123", "Ex123", "{D86C4A67
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALFacade", "DALFacade\DALFacade.csproj", "{8C86EC13-274C-4758-89D1-9C7113117D87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALObject", "DALObject\DALObject.csproj", "{509560B4-DA02-49FF-BBB7-6DCCA680E831}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalObject", "DALObject\DalObject.csproj", "{509560B4-DA02-49FF-BBB7-6DCCA680E831}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALXML", "DALXML\DALXML.csproj", "{8614470F-D59B-4B8E-941C-E77D68A556B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{671C4C22-1821-42C7-86CD-9FCE742A4706}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\dotNet5782-3Tier\xml\dal-config.xml = ..\..\dotNet5782-3Tier\xml\dal-config.xml
+		xml\dal-config.xml = xml\dal-config.xml
 	EndProjectSection
 EndProject
 Global

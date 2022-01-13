@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -19,12 +20,29 @@ namespace PL
     /// </summary>
     public partial class ParcelWindow : Window
     {
-        public ParcelWindow()
+        IBL blparcel;
+        //BO.ParcelToList parcelWind;
+        public ParcelWindow(BO.ParcelToList parcel, IBL blParcel)//עדכון
         {
             InitializeComponent();
+            blparcel = blParcel;
+            btnAdd.Visibility = Visibility.Hidden;
+           
+        }
+        public ParcelWindow(IBL blParcel)//הוספה
+        {
+            InitializeComponent();
+            blparcel = blParcel;
+            btnDelet.Visibility = Visibility.Hidden;
+            btnUpDate.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/רחפן.jpg"/>
         </Grid.Background>
-        <DataGrid x:Name="parcelToListDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="446,121,69,40" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Background="{x:Null}" RenderTransformOrigin="0.5,0.5" FontSize="12">
+        <DataGrid x:Name="parcelToListDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="34,113,351,48" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Background="{x:Null}" RenderTransformOrigin="0.5,0.5" FontSize="12" IsReadOnly="True" MouseDoubleClick="parcelToListDataGrid_MouseDoubleClick">
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -27,9 +27,22 @@
                 <DataGridTextColumn x:Name="weightColumn" Width="SizeToHeader" Header="Weight" Binding="{Binding Weight}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox HorizontalAlignment="Left" Height="30" Margin="104,69,0,0" VerticalAlignment="Top" Width="151"/>
-        <ComboBox HorizontalAlignment="Left" Height="30" Margin="104,121,0,0" VerticalAlignment="Top" Width="151"/>
-        <ComboBox HorizontalAlignment="Left" Height="30" Margin="104,171,0,0" VerticalAlignment="Top" Width="151"/>
-       
+        <Button Content="Add new parcel" HorizontalAlignment="Left" Height="33" Margin="620,298,0,0" VerticalAlignment="Top" Width="132" Click="Button_Click" FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}"/>
+        <ComboBox x:Name="comboBoxSender" HorizontalAlignment="Left" Height="30" Margin="602,54,0,0" VerticalAlignment="Top" Width="151"/>
+        <ComboBox x:Name="conboBoxTarget" HorizontalAlignment="Left" Height="30" Margin="602,118,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Sender Id:" HorizontalAlignment="Left" Margin="509,56,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
+        <Label Content="Target Id:" HorizontalAlignment="Left" Margin="509,120,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
+        <Label Content="Weight categories:" HorizontalAlignment="Left" Height="43" Margin="464,174,0,0" VerticalAlignment="Top" Width="157" FontSize="14" FontFamily="Arial Black"/>
+        <ComboBox HorizontalAlignment="Left" Height="30" Margin="626,171,0,0" VerticalAlignment="Top" Width="127">
+           <ComboBoxItem Content="easy " />
+            <ComboBoxItem Content=" middle" />
+            <ComboBoxItem Content="weighty" />
+        </ComboBox>
+        <Label Content=" Priority:" HorizontalAlignment="Left" Height="43" Margin="516,222,0,0" VerticalAlignment="Top" Width="89" FontSize="14" FontFamily="Arial Black"/>
+        <ComboBox HorizontalAlignment="Left" Height="30" Margin="605,222,0,0" VerticalAlignment="Top" Width="151">
+            <ComboBoxItem Content="Standard" />
+            <ComboBoxItem Content="fast" />
+            <ComboBoxItem Content="emergency" />
+        </ComboBox>
     </Grid>
 </Window>
