@@ -91,6 +91,12 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
+    }
+
+        private void IdnumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

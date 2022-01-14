@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using DO;
+//***//
+
 
 namespace Dal
 {
@@ -16,7 +18,24 @@ namespace Dal
         internal static List<Customer> customers = new List<Customer>();
         internal static List<Parcel> packets = new List<Parcel>();
         internal static List<DroneCharge> DronesCharge = new List<DroneCharge>();
-         static DataSource() { Initialize(); }
+        /****/
+        //static string droneChargingPath = @"droneChargingPath.xml";
+        ///*למחוק אחכ זמני*/
+        //static string customerPath = @"customerPathXml.xml";
+        //static string stationPath = @"stationPathXml.xml";
+        //static string dronePath = @"dronePathXml.xml";
+        //static string parcelPath = @"parcelPathXml.xml";
+
+        static DataSource() { 
+            
+            Initialize();
+            //**//
+            //XMLTools.SaveListToXMLSerializer(customers, customerPath);
+            //XMLTools.SaveListToXMLSerializer(drones, dronePath);
+            //XMLTools.SaveListToXMLSerializer(packets, parcelPath);
+            ////XMLTools.SaveListToXMLElement(DronesCharge, droneChargingPath);
+            //XMLTools.SaveListToXMLSerializer(Stations, stationPath);
+        }
 
         internal class config
         {

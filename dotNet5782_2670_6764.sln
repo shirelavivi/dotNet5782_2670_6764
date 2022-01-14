@@ -30,7 +30,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALXML", "DALXML\DALXML.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{671C4C22-1821-42C7-86CD-9FCE742A4706}"
 	ProjectSection(SolutionItems) = preProject
+		xml\config.xml = xml\config.xml
+		xml\customerPathXml.xml = xml\customerPathXml.xml
 		xml\dal-config.xml = xml\dal-config.xml
+		xml\droneChargingPath.xml = xml\droneChargingPath.xml
+		xml\dronePathXml.xml = xml\dronePathXml.xml
+		xml\parcelPathXml.xml = xml\parcelPathXml.xml
+		xml\stationPathXml.xml = xml\stationPathXml.xml
 	EndProjectSection
 EndProject
 Global
