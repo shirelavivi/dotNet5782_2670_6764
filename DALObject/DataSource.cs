@@ -19,22 +19,22 @@ namespace Dal
         internal static List<Parcel> packets = new List<Parcel>();
         internal static List<DroneCharge> DronesCharge = new List<DroneCharge>();
         /****/
-        //static string droneChargingPath = @"droneChargingPath.xml";
+        static string droneChargingPath = @"droneChargingPath.xml";
         ///*למחוק אחכ זמני*/
-        //static string customerPath = @"customerPathXml.xml";
-        //static string stationPath = @"stationPathXml.xml";
-        //static string dronePath = @"dronePathXml.xml";
-        //static string parcelPath = @"parcelPathXml.xml";
+        static string customerPath = @"customerPathXml.xml";
+        static string stationPath = @"stationPathXml.xml";
+        static string dronePath = @"dronePathXml.xml";
+        static string parcelPath = @"parcelPathXml.xml";
 
         static DataSource() { 
             
             Initialize();
             //**//
-            //XMLTools.SaveListToXMLSerializer(customers, customerPath);
-            //XMLTools.SaveListToXMLSerializer(drones, dronePath);
-            //XMLTools.SaveListToXMLSerializer(packets, parcelPath);
-            ////XMLTools.SaveListToXMLElement(DronesCharge, droneChargingPath);
-            //XMLTools.SaveListToXMLSerializer(Stations, stationPath);
+            XMLTools.SaveListToXMLSerializer(customers, customerPath);
+            XMLTools.SaveListToXMLSerializer(drones, dronePath);
+            XMLTools.SaveListToXMLSerializer(packets, parcelPath);
+            XMLTools.SaveListToXMLSerializer(DronesCharge, droneChargingPath);
+            XMLTools.SaveListToXMLSerializer(Stations, stationPath);
         }
 
         internal class config

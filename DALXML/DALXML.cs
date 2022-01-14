@@ -465,7 +465,7 @@ namespace Dal
 
                 XElement dr = (from p in DroneChargingRootElem.Elements()//לשנות
                                where int.Parse(p.Element("ID").Value) == DroneId
-                               select p;
+                               select p).FirstOrDefault();
                 Station s = instance.GetStation(save);
                 s.ChargeSlots++;
                 listStation.Add(s);
@@ -525,12 +525,14 @@ namespace Dal
 
         public double[] batteryArr()
         {
-            return DataSource.config.returnArrBattery();
+            // return DataSource.config.returnArrBattery();
+            double [] arr = new double[5]{ 0.2, 0.1, 0.4, 0.4, 0.4 };
+            return arr;
         }
 
         public void GetrunNumberPackage()
         {
-            return Dal.DataSource.config.CounterPackets;
+            //return Dal.DataSource.config.CounterPackets;
         }
 
         #endregion
