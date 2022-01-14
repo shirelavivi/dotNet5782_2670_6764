@@ -4,41 +4,115 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        xmlns:BO="clr-namespace:BO"
         mc:Ignorable="d"
-        Title="BaseStationWindow" Height="450" Width="800">
-   
+        Title="BaseStationWindow" Height="672" Width="832">
+    <!--<Window.Resources>
+        -->
+    <!--<Style x:Key="myLabelStyle"  TargetType="Label">
+            <Setter Property="FontSize"  Value="18" />
+            <Setter Property="FontFamily" Value="Arial Black" />
+            <Setter Property="FontWeight"  Value="Bold" />
+            <Setter Property="Foreground"  Value="#FFFCF4F4" />
+            <Setter Property="HorizontalAlignment " Value="Left"/>
+        </Style>-->
+    <!--
+    </Window.Resources>-->
     <Window.Background>
         <ImageBrush ImageSource="drone.jpg" Stretch="UniformToFill"/>
     </Window.Background>
 
     <Grid>
-        <Grid x:Name="grid1" Margin="30,64,0,30" HorizontalAlignment="Left" DataContext="" Width="735">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="75*"/>
-                <ColumnDefinition Width="51*"/>
-                <ColumnDefinition Width="124*"/>
-            </Grid.ColumnDefinitions>
-            
-            <Label Style="{StaticResource myLabelStyle}" VerticalAlignment="Bottom" Margin="3,0,0,50"  Grid.Column="0" HorizontalAlignment="Left"  Content="Idnumber:" Height="40" Width="110" />
-            <Label Style="{StaticResource myLabelStyle}" Content="Charging Not Available:" Margin="-7,45,10,86" Grid.Row="3" RenderTransformOrigin="0.503,0.299"/>
-            <Label Style="{StaticResource myLabelStyle}" VerticalAlignment="Top"  Grid.Column="0" HorizontalAlignment="Left" Content="Charging Available:" Grid.Row="3" Height="31" Width="201"/>
-            <Label Style="{StaticResource myLabelStyle}" VerticalAlignment="Top" Margin="0,39,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="Name Station:" Height="31" Width="150"/>
-          
-            <TextBox x:Name="ChargingAvailableTextBox" Width="120" VerticalAlignment="Top" Text="{Binding chargingAvailable, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="245,0,0,0" Height="33" HorizontalAlignment="Left" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="ChargingNotAvailableTextBox" Width="120" VerticalAlignment="Top" Text="{Binding chargingNotAvailable, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="245,50,0,0" Height="33" HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="IdnumberTextBox" Width="120" VerticalAlignment="Top" Text="{Binding idnumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="244,0,0,0" Height="32" HorizontalAlignment="Left" RenderTransformOrigin="0.419,0.728" Grid.ColumnSpan="2" TextChanged="IdnumberTextBox_TextChanged"/>
-            <TextBox x:Name="NameStationTextBox" Width="120" VerticalAlignment="Top" Text="{Binding nameStation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="245,45,0,0" Height="32" HorizontalAlignment="Left" RenderTransformOrigin="0.497,-0.038" Grid.ColumnSpan="2"/>
-            <Button x:Name="AddStationButton" Content="Add Station" HorizontalAlignment="Left" Margin="53,175,0,-77" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Width="170" ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="3" Grid.Row="3" Click="AddStationButton_Click"/>
-            <Button x:Name="UpdateStationButton" Content="UpDate Station" HorizontalAlignment="Left" Margin="53,95,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.371,0.943" FontStyle="Oblique" Height="60" Width="170"  ClickMode="Release" FontSize="20" FontStretch="Medium" FontWeight="UltraBold" Grid.Column="3" Grid.Row="3"/>
+        <Grid x:Name="gridAdd" HorizontalAlignment="Left" Height="558" Margin="60,54,0,0" VerticalAlignment="Top" Width="732">
+            <Label Content="Add YOUR Station:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
+                <Label.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA7D3D8" Offset="0"/>
+                        <GradientStop Color="#FF0F27B9" Offset="1"/>
+                        <GradientStop Color="#FF678BCB" Offset="0.418"/>
+                    </LinearGradientBrush>
+                </Label.Background>
+            </Label>
+            <Grid x:Name="grid1" DataContext="" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Style="{StaticResource myLabelStyle}" Content="Charging Available:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="chargingAvailableTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding ChargingAvailable, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Style="{StaticResource myLabelStyle}" Content="Idnumber:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                <TextBox x:Name="idnumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Idnumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Style="{StaticResource myLabelStyle}" Content="Name Station:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                <TextBox x:Name="nameStationTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding NameStation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Style="{StaticResource myLabelStyle}" Content="Lattitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                <TextBox x:Name="lattitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding locationOfStation.Lattitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Style="{StaticResource myLabelStyle}" Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding locationOfStation.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+            </Grid>
+            <Button Content="Add" HorizontalAlignment="Left" Margin="522,347,0,0" VerticalAlignment="Top" Height="43" Width="165" FontSize="16" FontFamily="Arial Black" Click="Button_Click"/>
         </Grid>
+        <Grid x:Name="gridUodate" HorizontalAlignment="Center" Height="641" Margin="0,5,0,0" VerticalAlignment="Top" Width="814" d:IsHidden="True">
+            <Label Content="Update YOUR Station:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
+                <Label.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA7D3D8" Offset="0"/>
+                        <GradientStop Color="#FF0F27B9" Offset="1"/>
+                        <GradientStop Color="#FF678BCB" Offset="0.418"/>
+                    </LinearGradientBrush>
+                </Label.Background>
+            </Label>
+            <DataGrid x:Name="droneInChargingDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"  Margin="92,409,544,122" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="buterryStatusColumn" Header="Buterry Status" Width="SizeToHeader">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ButerryStatus}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="idNumberColumn" Header="Id Number" Width="SizeToHeader">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding IdNumber}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid x:Name="grid1_Copy" DataContext="" HorizontalAlignment="Left" Margin="74,176,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Style="{StaticResource myLabelStyle}" Content="Charging Available:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="chargingAvailableTextBoxUpDate" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding ChargingAvailable, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Style="{StaticResource myLabelStyle}" Content="Idnumber:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                <TextBox x:Name="idnumberTextBoxUpDate" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Idnumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsReadOnly="True"/>
+                <Label Style="{StaticResource myLabelStyle}" Content="Name Station:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                <TextBox x:Name="nameStationTextBoxUpDate" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding NameStation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Style="{StaticResource myLabelStyle}" Content="Lattitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                <TextBox x:Name="lattitudeTextBoxUpDate" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding locationOfStation.Lattitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsReadOnly="True"/>
+                <Label Style="{StaticResource myLabelStyle}" Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                <TextBox x:Name="longitudeTextBoxUpDate" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding locationOfStation.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsReadOnly="True"/>
+            </Grid>
+            <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="55" Margin="584,464,0,0" VerticalAlignment="Top" Width="162" FontFamily="Aharoni" FontSize="18" Click="btnUpdate_Click"/>
+        </Grid>
+
     </Grid>
 
    

@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="BaseStationToListWindow" Height="450" Width="800">
+        Title="BaseStationToListWindow" Height="450" Width="800" Activated="Window_Activated">
     <Window.Background>
-        <ImageBrush ImageSource="Drone.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="/רחפן.jpg" Stretch="UniformToFill"/>
     </Window.Background>
     <!--<Window.Resources>
         <CollectionViewSource x:Key="baseStationToListViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:BaseStationToList}, CreateList=True}"/>
     </Window.Resources>-->
     <Grid DataContext="">
 
-        <DataGrid x:Name="baseStationToListDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="20,54,400,355" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+        <DataGrid x:Name="baseStationToListDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="70,80,326,93" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Background="{x:Null}" IsReadOnly="True" MouseDoubleClick="baseStationToListDataGrid_MouseDoubleClick_1">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="chargingAvailableColumn" Width="SizeToHeader" Header="charging Available" Binding="{Binding chargingAvailable}"/>
                 <DataGridTextColumn x:Name="chargingNotAvailableColumn" Width="SizeToHeader" Header="charging Not Available" Binding="{Binding chargingNotAvailable}"/>
@@ -22,14 +22,16 @@
                 <DataGridTextColumn x:Name="nameStationColumn" Width="SizeToHeader" Header="name Station" Binding="{Binding nameStation}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add new station" HorizontalAlignment="Left" Height="33" Margin="615,346,0,0" VerticalAlignment="Top" Width="132"  FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}"/>
-        <CheckBox Content="ChargingAvailble" HorizontalAlignment="Left" Height="72" Margin="645,217,0,0" VerticalAlignment="Top" Width="120"/>
-        <ListBox HorizontalAlignment="Left" Height="40" Margin="660,139,0,0" VerticalAlignment="Top" Width="90"/>
-        <Grid.Background>
-            <ImageBrush ImageSource="/drone.jpg" Opacity="0.95"/>
-        </Grid.Background>
+        <Button Content="Add new station" HorizontalAlignment="Left" Height="33" Margin="618,353,0,0" VerticalAlignment="Top" Width="132"  FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}" Click="Button_Click"/>
+        <CheckBox x:Name="chekd" Content="ChargingAvailble" HorizontalAlignment="Left" Height="24" Margin="531,170,0,0" VerticalAlignment="Top" Width="171" FontSize="16" FontFamily="Aharoni" RenderTransformOrigin="0.563,4.436" Checked="chekd_Checked"   />
 
+        <TextBox x:Name="txtNumber" HorizontalAlignment="Left" Margin="697,211,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="22" RenderTransformOrigin="0.893,1.039"   IsEnabled="{Binding ElementName=chekd, Path=IsChecked}" TextChanged="TextBox_TextChanged" />
+        <Label Content="Typ Number of ststion avalibal:" HorizontalAlignment="Left" Margin="474,211,0,0" VerticalAlignment="Top" FontFamily="Aharoni" FontSize="14"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רחפן.jpg" Opacity="0.95"/>
+        </Grid.Background>
     </Grid>
+
 </Window>
 
 

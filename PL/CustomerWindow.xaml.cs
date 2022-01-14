@@ -18,7 +18,7 @@ namespace PL
     /// <summary>
     /// Interaction logic for CustomerWindow.xaml
     /// </summary>
-    
+
     public partial class CustomerWindow : Window
     {
         IBL blCustomer;
@@ -28,6 +28,7 @@ namespace PL
             InitializeComponent();
             blCustomer = blcustomer;
             UpdateCustomer.Visibility = Visibility.Hidden;
+            GridUpDate.Visibility = Visibility.Hidden;
         }
 
         public CustomerWindow(BO.CustomerToList customerToList, IBL blcustomer)//Update
@@ -35,39 +36,32 @@ namespace PL
             InitializeComponent();
             blCustomer = blcustomer;
             AddCustomer.Visibility = Visibility.Hidden;
+            gridAdd.Visibility = Visibility.Hidden;
+            grid1.DataContext = blCustomer.GetCustomer(customerToList.Id);
             customerWind = customerToList;
-            FullCustomer(customerToList);
-        }
-        private void FullCustomer(BO.CustomerToList customerToList)
-        {
-            IdTextBox.Text = customerToList.Id.ToString();
-            NameTextBox.Text = customerToList.Name.ToString();
-            NumOfParcelProvidedTextBox.Text = customerToList.numOfParcelProvided.ToString();
-            NumOfParcelGetTextBox.Text = customerToList.numOfParcelGet.ToString();
-            NumOfParcelOnTheWayTextBox.Text = customerToList.numOfParcelOnTheWay.ToString();
-            NumOfParcelProvidedTextBox.Text = customerToList.numOfParcelProvided.ToString();
-            PhoneTextBox.Text = customerToList.Phone.ToString();
-            //צריך לעשות isEnable?
+            parcelsToCustomerDataGrid.DataContext = blCustomer.GetCustomer(customerToList.Id).parcelsToCustomer;
+            parcelfromCustomerDataGrid.DataContext = blCustomer.GetCustomer(customerToList.Id).parcelfromCustomer;
+
+
         }
         private void AddCustomer_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 BO.Customer customer = new BO.Customer();
-                customer.Id= int.Parse(IdTextBox.Text);
-                customer.Name =NameTextBox.Text;
-                customer.Phone = PhoneTextBox.Text;
+                customer.Id = Convert.ToInt32(idTextBoxAdd.Text);
+                customer.Name = nameTextBoxAdd.Text;
+                customer.Phone = phoneTextBoxAdd.Text;
                 customer.location = new BO.Location();
-                customer.parcelfromCustomer = null;//??
+                customer.location.Lattitude = Convert.ToInt32(lattitudeTextBox.Text);
+                customer.location.Longitude = Convert.ToInt32(longitudeTextBox.Text);
+                customer.parcelfromCustomer = null;
                 customer.parcelsToCustomer = null;
-                //customer.numOfParcelOnTheWay =int.Parse(NumOfParcelOnTheWayTextBox.Text);
-                //customer.numOfParcelDontProvided = int.Parse(NumOfParcelDontProvidedTextBox.Text);
-                //customer.numOfParcelDontProvided = int.Parse(NumOfParcelDontProvidedTextBox.Text);
                 blCustomer.AddCustomer(customer);
                 MessageBox.Show("The Customer Was Successfully Added");
                 this.Close();
-                CustomerWindow customerWindow = new CustomerWindow(blCustomer);
-                customerWindow.Show();
+                CustomerToListWindow customerToList  = new CustomerToListWindow(blCustomer);
+                customerToList.Show();
 
             }
             catch (BO.DuplicateIdException ex)
@@ -78,25 +72,21 @@ namespace PL
 
         private void UpdateCustomer_Click(object sender, RoutedEventArgs e)
         {
-            
-                try
-                {
-                    if (NameTextBox.Text != "")
-                    {
-                        blCustomer.UpdCustomer(Convert.ToInt32(NameTextBox.Text), IdTextBox.Text);
-                        MessageBox.Show("The station is update");
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("please typ name of station");
-                    }
-                }
-                catch (BO.MissingIdException)
-                {
-                    MessageBox.Show("Erorr ID");
-                }
-            
+
+            try
+            {
+                blCustomer.UpdCustomer(int.Parse(idTextBox.Text), nameTextBox.Text, phoneTextBox.Text);
+                MessageBox.Show("The customer Was Successfully Update");
+                this.Close();
+                CustomerToListWindow customerToList = new CustomerToListWindow(blCustomer);
+                customerToList.Show();
+            }
+            catch (BO.MissingIdException)
+            {
+                MessageBox.Show("Erorr ID");
+            }
+
         }
     }
+    
 }

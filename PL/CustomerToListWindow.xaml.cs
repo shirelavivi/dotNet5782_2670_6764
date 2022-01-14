@@ -28,15 +28,14 @@ namespace PL
             customerToListDataGrid.DataContext = bl.GetALLCostumerToList();
         }
        
-       
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             CustomerWindow customerListWindow = new CustomerWindow(blCustomerList);
             customerListWindow.Show();
             this.Close();
         }
 
-        private void droneToListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void customerToListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListViewItem item = sender as ListViewItem;
             BO.CustomerToList customer = customerToListDataGrid.SelectedItem as BO.CustomerToList;
@@ -47,7 +46,6 @@ namespace PL
                 this.Close();
             }
         }
-
     }
 
 }

@@ -33,6 +33,18 @@ namespace BL
                 throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
         }
+        public void RemoveParcel(int id)
+        {
+            try 
+            { 
+                dal.DelParcel(id);  
+            }
+            catch (DO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+
+        }
         public void ConnectParcelToDrone(int droneid)//שייוך חבילה לרחפן
         {
             int i = 0;
@@ -141,25 +153,36 @@ namespace BL
                     Requested = parcel.Requested,
                     droneAtParcel = (parcel.DroneId == 0 ? null : new DroneInParcel
                     {
+                        
                         IdNumber = parcel.DroneId
                     }),
                     Scheduled = parcel.Scheduled,
                     PickedUp = parcel.PickedUp,
                     Delivered = parcel.Delivered
                 };
-
-                if (parcel.Id != 0)
+                if (parcel.DroneId == 0)
                 {
-                    var drone = dronesBl.Find(d => d.Idnumber == parcel.DroneId);
-                    if (drone == null)
-                        throw new BO.MissingIdException(drone.Idnumber, "drone");
-                    myParcel.droneAtParcel.ButerryStatus = drone.ButerryStatus;
-                    myParcel.droneAtParcel.ThisLocation = drone.ThisLocation;
+                    myParcel.droneAtParcel = null;
+                    
                 }
-
+                else
+                {
+                    if (parcel.Id != 0)
+                    {
+                        var drone = dronesBl.Find(d => d.Idnumber == parcel.DroneId);
+                        if (drone == null)
+                            throw new BO.MissingIdException(drone.Idnumber, "drone");
+                        if (drone != null)
+                        {
+                            myParcel.droneAtParcel.ButerryStatus = drone.ButerryStatus;
+                            myParcel.droneAtParcel.ThisLocation = drone.ThisLocation;
+                        }
+                    }
+                }
+               
                 return myParcel;
             }
-            catch (DO.MissingIdException ex)
+            catch (BO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
@@ -259,6 +282,7 @@ namespace BL
         {
             return GetALLParcelToList().ToList().FindAll(predicate);
         }
+       
     }
 }
 

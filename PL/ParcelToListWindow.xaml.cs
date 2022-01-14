@@ -20,23 +20,15 @@ namespace PL
     /// <summary>
     /// Interaction logic for DroneToListWindow.xaml
     /// </summary>
-    public partial class DroneToListWindow : Window
+    public partial class ParcelToListWindow : Window
     {
-         IBL blParcelList; 
-        public DroneToListWindow(IBL bl)
+        IBL blParcelList;
+        public ParcelToListWindow(IBL bl)
         {
             InitializeComponent();
             blParcelList = bl;
             parcelToListDataGrid.DataContext = blParcelList.GetALLParcelToList();
-            //IEnumerable<IGrouping<int, int>> result = from w in GetALLParcelToList()
-            //                                          group w by w into g
-            //                                          select new { FirstLetter = g.Key, Words = g };
-            ////var wordGroups = from w in GetALLParcelToList()
-            ////                 group w by w into g
-            ////                 select new { FirstLetter = g.Key, Words = g };
-
-
-            //comboBoxSender.ItemsSource= /*GetALLParcelToList().*/
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,6 +48,45 @@ namespace PL
                 parcelListWindow.Show();
                 this.Close();
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            parcelToListDataGrid.DataContext = blParcelList.GetALLParce(prcel => prcel.SenderName.StartsWith(txtSender.Text.ToString()));
+        }
+
+        private void txtTarget_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            parcelToListDataGrid.DataContext = blParcelList.GetALLParce(prcel => prcel.TargetName.StartsWith(txtTarget.Text.ToString()));
+        }
+
+        private void comboweight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            help_function();
+        }
+
+        private void comboPriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            help_function();
+        }
+        public void help_function()
+        {
+            if (comboweight.SelectedItem != null&& comboPriority.SelectedItem == null)
+                parcelToListDataGrid.DataContext = blParcelList.GetALLParce(prcel => prcel.Weight == (BO.Weightcategories)comboweight.SelectedIndex);
+            if (comboweight.SelectedItem == null && comboPriority.SelectedItem == null)
+                parcelToListDataGrid.DataContext = blParcelList.GetALLParcelToList();
+            if (comboweight.SelectedItem == null && comboPriority.SelectedItem != null)
+                parcelToListDataGrid.DataContext = blParcelList.GetALLParce(prcel => prcel.Priority == (BO.Priorities)comboPriority.SelectedIndex);
+            if (comboweight.SelectedItem != null && comboPriority.SelectedItem != null)
+                parcelToListDataGrid.DataContext = blParcelList.GetALLParce(prcel => prcel.Priority == (BO.Priorities)comboPriority.SelectedIndex && prcel.Weight == (BO.Weightcategories)comboweight.SelectedIndex);
+
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+             help_function();
         }
     }
 }

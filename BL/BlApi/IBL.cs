@@ -16,6 +16,7 @@ namespace BlApi
         public void AddCustomer(BO.Customer customer);
         public void UpdCustomer(int idCustomer, string nameCustomer = "", string newNumPhone = "");
         public IEnumerable<BO.CustomerToList> GetALLCostumerToList();
+        public BO.Customer GetCustomer(int id);
         #endregion
 
         #region parcel
@@ -27,12 +28,15 @@ namespace BlApi
         public IEnumerable<BO.ParcelToList> GetALLParcelToList();
         public IEnumerable<ParcelToList> GetALLParcelsNotConnectToDrone();
         public void SupplyParcelByDrone(int droneID);
+        public BO.Parcel GetParcel(int id);
+        public IEnumerable<ParcelToList> GetALLParce(Predicate<ParcelToList> predicate = null);
+        public void RemoveParcel(int id);
 
         #endregion
 
 
         #region BaseStation
-
+        public BaseStation GetBaseStation(int id);
         public void AddBaseStation(BO.BaseStation station);
         public void UpdStation(int numStation, string nameStation = "", int countChargingSlots = 0);
         public DO.Station MinFarToStation(BO.Location location);

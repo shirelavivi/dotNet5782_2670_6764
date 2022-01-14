@@ -51,9 +51,16 @@ namespace PL
             customerToListWindow.Show();
         }
 
+        private void btnParcels_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelToListWindow parcelListWindow = new ParcelToListWindow(bl);
+            parcelListWindow.Show();
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-           
+            BaseStationToListWindow stationListWindow = new BaseStationToListWindow(bl);
+            stationListWindow.Show();
         }
     }
 }
