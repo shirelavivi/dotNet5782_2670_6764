@@ -16,7 +16,7 @@ namespace BO
             public string NameStation { get; set; }
             public Location locationOfStation { get; set; }
             public int ChargingAvailable { get; set; }
-            public List<DroneInCharging> droneInCharging { get; set; }//לשנות
+            public List<DroneInCharging> droneInCharging { get; set; }
             public override string ToString()
             {
                 return this.ToStringProperty();

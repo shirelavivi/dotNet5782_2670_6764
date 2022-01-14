@@ -33,6 +33,18 @@ namespace BL
                 throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
         }
+        public void RemoveParcel(int id)
+        {
+            try 
+            { 
+                dal.DelParcel(id);  
+            }
+            catch (DO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+
+        }
         public void ConnectParcelToDrone(int droneid)//שייוך חבילה לרחפן
         {
             int i = 0;

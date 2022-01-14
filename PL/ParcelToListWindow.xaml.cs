@@ -20,23 +20,15 @@ namespace PL
     /// <summary>
     /// Interaction logic for DroneToListWindow.xaml
     /// </summary>
-    public partial class DroneToListWindow : Window
+    public partial class ParcelToListWindow : Window
     {
         IBL blParcelList;
-        public DroneToListWindow(IBL bl)
+        public ParcelToListWindow(IBL bl)
         {
             InitializeComponent();
             blParcelList = bl;
             parcelToListDataGrid.DataContext = blParcelList.GetALLParcelToList();
-            //IEnumerable<IGrouping<int, int>> result = from w in GetALLParcelToList()
-            //                                          group w by w into g
-            //                                          select new { FirstLetter = g.Key, Words = g };
-            ////var wordGroups = from w in GetALLParcelToList()
-            ////                 group w by w into g
-            ////                 select new { FirstLetter = g.Key, Words = g };
-
-
-            //comboBoxSender.ItemsSource= /*GetALLParcelToList().*/
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -94,7 +86,7 @@ namespace PL
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            help_function();
+             help_function();
         }
     }
 }

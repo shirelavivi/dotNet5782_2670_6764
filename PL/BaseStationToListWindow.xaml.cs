@@ -29,17 +29,48 @@ namespace PL
             baseStationToListDataGrid.DataContext = bl.GetALLbaseStationToList();
         }
       
-        private void baseStationToListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            help_function();
+        }
+
+        private void chekd_Checked(object sender, RoutedEventArgs e)
+        {
+            help_function();
+        }
+        public void help_function()
+        {
+            if(chekd.IsChecked==true&&txtNumber.Text=="")
+                baseStationToListDataGrid.DataContext = blstationList.GetAllStation(x => x.chargingAvailable > 0);
+            if(txtNumber.Text!="")
+               baseStationToListDataGrid.DataContext = blstationList.GetAllStation(x => x.chargingAvailable > Convert.ToInt32(txtNumber.Text));
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            help_function();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            BaseStationWindow baseStationToListWindow = new BaseStationWindow(blstationList);
+            baseStationToListWindow.Show();
+            this.Close();
+        }
+
+        private void baseStationToListDataGrid_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
             ListViewItem item = sender as ListViewItem;
             BO.BaseStationToList station = baseStationToListDataGrid.SelectedItem as BO.BaseStationToList;
             if (station != null)
             {
-                BaseStationToListWindow baseStationToListWindow = new BaseStationToListWindow(blstationList);
+                BaseStationWindow baseStationToListWindow = new BaseStationWindow(station, blstationList);
                 baseStationToListWindow.Show();
                 this.Close();
             }
         }
     }
 }
+
 

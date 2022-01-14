@@ -28,69 +28,51 @@ namespace PL
         {
             InitializeComponent();
             blStation = blstation;
-            UpdateStationButton.Visibility = Visibility.Hidden;
+            gridUodate.Visibility = Visibility.Hidden;
 
         }
         public BaseStationWindow(BO.BaseStationToList baseStation, IBL blstation)//update
         {
             InitializeComponent();
             blStation = blstation;
-            AddStationButton.Visibility = Visibility.Hidden;
+            gridAdd.Visibility = Visibility.Hidden;
             stationWind = baseStation;
-            FullStation(baseStation);
-        }
-        private void FullStation(BO.BaseStationToList basestation)
-        {
-            IdnumberTextBox.Text = basestation.idnumber.ToString();
-            NameStationTextBox.Text = basestation.nameStation.ToString();
-            ChargingAvailableTextBox.Text = basestation.chargingAvailable.ToString();
-            ChargingNotAvailableTextBox.Text = basestation.chargingNotAvailable.ToString();
-            //צריך לעשות isEnable?
-        }
+            grid1_Copy.DataContext = blStation.GetBaseStation(baseStation.idnumber);
+            droneInChargingDataGrid.DataContext = blStation.GetBaseStation(baseStation.idnumber).droneInCharging;
 
-        private void Button_ClikUpdateStation(object sender, RoutedEventArgs e)
+        }
+       
+
+        
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (NameStationTextBox.Text != "")
-                {
-                    blStation.UpdStation(Convert.ToInt32(NameStationTextBox.Text), ChargingAvailableTextBox.Text);
-                    MessageBox.Show("The station is update");
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("please typ name of station");
-                }
-            }
+            try { 
+            blStation.UpdStation(Convert.ToInt32(idnumberTextBoxUpDate.Text), nameStationTextBoxUpDate.Text,Convert.ToInt32( chargingAvailableTextBoxUpDate.Text));
+            MessageBox.Show("The Station Was Successfully Update");
+            this.Close();
+           BaseStationToListWindow customerToList = new BaseStationToListWindow(blStation);
+            customerToList.Show();
+           }
             catch (BO.MissingIdException)
             {
                 MessageBox.Show("Erorr ID");
             }
-        }
+}
 
-
-        private void AddStationButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                BO.BaseStation baseStation = new BO.BaseStation();
-                baseStation.Idnumber = int.Parse(IdnumberTextBox.Text);
-                baseStation.NameStation = NameStationTextBox.Text;
-                baseStation.ChargingAvailable = int.Parse(ChargingAvailableTextBox.Text);
-                //baseStation.droneInCharging = new BO.DroneInParcel();
-                baseStation.locationOfStation = new BO.Location();
-                blStation.AddBaseStation(baseStation);
-                MessageBox.Show("The Station Was Successfully Added");
-                this.Close();
-                BaseStationWindow baseStationtWindow = new BaseStationWindow(blStation);
-                baseStationtWindow.Show();
-
-            }
-            catch (BO.DuplicateIdException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            BO.BaseStation baseStation = new BO.BaseStation();
+            baseStation.Idnumber = Convert.ToInt32(idnumberTextBox.Text);
+            baseStation.NameStation = nameStationTextBox.Text;
+            baseStation.ChargingAvailable = Convert.ToInt32( chargingAvailableTextBox.Text);
+            baseStation.locationOfStation = new BO.Location();
+            baseStation.locationOfStation.Lattitude = Convert.ToInt32(lattitudeTextBox.Text);
+            baseStation.locationOfStation.Longitude = Convert.ToInt32(longitudeTextBox.Text);
+            blStation.AddBaseStation(baseStation);
+            MessageBox.Show("The Station Was Successfully Added");
+            this.Close();
+            BaseStationToListWindow customerToList = new BaseStationToListWindow(blStation);
+            customerToList.Show();
         }
     }
 }

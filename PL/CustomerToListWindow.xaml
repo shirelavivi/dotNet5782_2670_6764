@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerToListWindow" Height="450" Width="800">
+        Title="CustomerToListWindow" Height="600" Width="900">
 
     <!--<Window.Resources>
         <CollectionViewSource x:Key="customerToListViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:CustomerToList}, CreateList=True}"/>
     </Window.Resources>-->
     <Grid DataContext="">
 
-        <DataGrid x:Name="customerToListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="56,35,56,370" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="customerToListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="46,147,71,113" RowDetailsVisibilityMode="VisibleWhenSelected" Background="{x:Null}" MouseDoubleClick="customerToListDataGrid_MouseDoubleClick" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
@@ -23,9 +23,9 @@
                 <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding Phone}" Header="Phone" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add new customer" HorizontalAlignment="Left" Height="33" Margin="625,346,0,0" VerticalAlignment="Top" Width="165"  FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}"/>
+        <Button x:Name="btnAdd" Content="Add new customer" HorizontalAlignment="Left" Height="33" Margin="681,513,0,0" VerticalAlignment="Top" Width="165"  FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}" Click="btnAdd_Click"/>
         <Grid.Background>
-            <ImageBrush ImageSource="/drone.jpg" Opacity="0.95"/>
+            <ImageBrush ImageSource="/רחפן.jpg" Opacity="0.95"/>
         </Grid.Background>
 
     </Grid>
