@@ -20,16 +20,20 @@ using BO;
 
 namespace PL
 {
-   
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal readonly IBL bl = BlFactory.GetBl();
-
+        IBL bl;
         public MainWindow()
         {
+            try
+            {  bl = BlFactory.GetBl(); }//ככה?
+
+            catch (Exception e)
+            { MessageBox.Show(e.Message); }
             InitializeComponent();
            
         }

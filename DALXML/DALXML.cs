@@ -518,7 +518,7 @@ namespace Dal
 
         public int GetChargingRate()
         {
-             XElement aa = XMLTools.LoadListFromXMLElement(configPath);
+            XElement aa = XMLTools.LoadListFromXMLElement(configPath);
             int codd = XMLTools.LoadListFromXMLElement(configPath).Element("RowNumbers").Elements().Select(e => Convert.ToInt32(e.Value)).FirstOrDefault();//יש תמספר חבילה
             return codd;
         }
@@ -526,7 +526,7 @@ namespace Dal
         public double[] batteryArr()
         {
             // return DataSource.config.returnArrBattery();
-            double [] arr = new double[5]{ 0.2, 0.1, 0.4, 0.4, 0.4 };
+            double[] arr = new double[5] { 0.2, 0.1, 0.4, 0.4, 0.4 };
             return arr;
         }
 

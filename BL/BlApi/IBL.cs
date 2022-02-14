@@ -12,11 +12,13 @@ namespace BlApi
 {
    public interface IBL
     {
+     
         #region Customer
         public void AddCustomer(BO.Customer customer);
         public void UpdCustomer(int idCustomer, string nameCustomer = "", string newNumPhone = "");
         public IEnumerable<BO.CustomerToList> GetALLCostumerToList();
         public BO.Customer GetCustomer(int id);
+      
         #endregion
 
         #region parcel
