@@ -38,36 +38,36 @@ using System.Runtime.Serialization;
             { ID = id; EntityName = entity; }
             public override string ToString() => base.ToString() + $", {EntityName} - duplicate id: {ID}";
         }
-    [Serializable]
-    public class XMLFileLoadCreateException : Exception
-    {
-        private string filePath;
-        private string v;
-        private Exception ex;
+    //[Serializable]
+    //public class XMLFileLoadCreateException : Exception
+    //{
+    //    private string filePath;
+    //    private string v;
+    //    private Exception ex;
 
-        public XMLFileLoadCreateException()
-        {
-        }
+    //    public XMLFileLoadCreateException()
+    //    {
+    //    }
 
-        public XMLFileLoadCreateException(string message) : base(message)
-        {
-        }
+    //    public XMLFileLoadCreateException(string message) : base(message)
+    //    {
+    //    }
 
-        public XMLFileLoadCreateException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+    //    public XMLFileLoadCreateException(string message, Exception innerException) : base(message, innerException)
+    //    {
+    //    }
 
-        public XMLFileLoadCreateException(string filePath, string v, Exception ex)
-        {
-            this.filePath = filePath;
-            this.v = v;
-            this.ex = ex;
-        }
+    //    public XMLFileLoadCreateException(string filePath, string v, Exception ex)
+    //    {
+    //        this.filePath = filePath;
+    //        this.v = v;
+    //        this.ex = ex;
+    //    }
 
-        protected XMLFileLoadCreateException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-    }
+    //    protected XMLFileLoadCreateException(SerializationInfo info, StreamingContext context) : base(info, context)
+    //    {
+    //    }
+    //}
 }
 
 
