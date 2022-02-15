@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="bin %282%29.png" />
+    <None Remove="bin.png" />
+    <None Remove="cancel.png" />
     <None Remove="drone.jpg" />
+    <None Remove="exit %281%29.png" />
+    <None Remove="exit.png" />
     <None Remove="Navigation_Right_Arrow.svg.png" />
     <None Remove="רחפן.jpg" />
   </ItemGroup>
@@ -17,7 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="bin (2).png" />
+    <Resource Include="bin.png" />
+    <Resource Include="cancel.png" />
     <Resource Include="drone.jpg" />
+    <Resource Include="exit (1).png" />
+    <Resource Include="exit.png" />
     <Resource Include="Navigation_Right_Arrow.svg.png" />
     <Resource Include="רחפן.jpg" />
   </ItemGroup>

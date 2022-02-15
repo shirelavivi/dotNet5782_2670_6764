@@ -30,7 +30,7 @@ namespace PL
         public MainWindow()
         {
             try
-            {  bl = BlFactory.GetBl(); }//ככה?
+            {  bl = BlFactory.GetBl(); }
 
             catch (Exception e)
             { MessageBox.Show(e.Message); }

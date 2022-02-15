@@ -99,7 +99,7 @@ namespace DalApi
         public DroneCharge GetDroneCharge(int stationId);
 
         public IEnumerable<DroneCharge> GetALLDroneCharge();
-        public void GetrunNumberPackage();
+        public int GetrunNumberPackage();
 
         #endregion
 

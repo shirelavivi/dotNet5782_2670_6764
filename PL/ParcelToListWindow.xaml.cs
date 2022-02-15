@@ -88,5 +88,31 @@ namespace PL
         {
              help_function();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ListViewItem item = sender as ListViewItem;
+                BO.ParcelToList dr = parcelToListDataGrid.SelectedItem as BO.ParcelToList;
+                if (dr != null)
+                {
+                    blParcelList.RemoveParcel(Convert.ToInt32(dr.Id));
+                    MessageBox.Show("Removed");
+                    this.help_function();
+                }
+                else
+                {
+                    MessageBox.Show("Pleas select parcel");
+                }
+                //this.Close();
+                //ParcelToListWindow ParcelWindow = new ParcelToListWindow(blParcelList);
+                //ParcelWindow.Show();
+            }
+            catch (BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.EntityName, ex.Message);
+            }
+        }
     }
 }

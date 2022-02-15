@@ -13,11 +13,9 @@ namespace BL
     sealed partial class BL : IBL
     {
 
-        static readonly IBL instance = new BL();//לפני או אחרי?
+        static readonly IBL instance = new BL();
         public static IBL Instance { get => instance; }
-
-        internal IDal dal = DalFactory.GetDal();
-        static Random Rand = new Random(DateTime.Now.Millisecond);
+        internal IDal dal = DalFactory.GetDal();    
         public List<DroneToList> dronesBl = new List<DroneToList>();
         //public  dl = new DalObject.DalObject();
         internal static double Free;
@@ -30,6 +28,7 @@ namespace BL
 
         public BL()
         {
+            Random Rand = new Random(DateTime.Now.Millisecond);
             try
             {
 
@@ -88,10 +87,11 @@ namespace BL
                         }
 
                     }
-
+                    
                     if (item.DroneStatuses != DroneStatuses.transport)//אם הרחפן לא מבצע משלוח
                     {
-                        item.DroneStatuses = (DroneStatuses)Rand.Next(0, 2);
+                        int a = Rand.Next(0, 2);
+                        item.DroneStatuses =(DroneStatuses)a;
                     }
                     if (item.DroneStatuses == DroneStatuses.maintenance)//אם הרחפן בתחזוקה 
                     {
@@ -141,6 +141,7 @@ namespace BL
             dist = Math.Acos(dist);
             dist = dist * 180 / Math.PI;
             dist = dist * 60 * 1.1515;
+            
 
             switch (unit)
             {
