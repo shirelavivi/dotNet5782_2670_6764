@@ -6,11 +6,11 @@
   </DroneCharge>
   <DroneCharge>
     <Droneld>2</Droneld>
-    <StationId>3</StationId>
+    <StationId>2</StationId>
   </DroneCharge>
   <DroneCharge>
     <Droneld>3</Droneld>
-    <StationId>3</StationId>
+    <StationId>2</StationId>
   </DroneCharge>
   <DroneCharge>
     <Droneld>4</Droneld>
@@ -18,7 +18,7 @@
   </DroneCharge>
   <DroneCharge>
     <Droneld>5</Droneld>
-    <StationId>3</StationId>
+    <StationId>2</StationId>
   </DroneCharge>
   <DroneCharge>
     <Droneld>6</Droneld>
@@ -26,6 +26,6 @@
   </DroneCharge>
   <DroneCharge>
     <Droneld>7</Droneld>
-    <StationId>3</StationId>
+    <StationId>1</StationId>
   </DroneCharge>
 </ArrayOfDroneCharge>
