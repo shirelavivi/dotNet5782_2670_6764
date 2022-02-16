@@ -64,7 +64,7 @@ namespace Dal
                 return CounterPackets;
             }
         }
-        public static void Initialize()//static?
+      public static void Initialize()
         {
             int t;
 

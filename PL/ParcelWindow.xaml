@@ -22,15 +22,17 @@
             </Label.Background>
         </Label>
 
-        <Button Content="finish" HorizontalAlignment="Left" Height="74" Margin="568,27,0,0" VerticalAlignment="Top" Width="140" FontSize="16" FontFamily="Arial Black" Click="Button_Click">
+        <Button Content="" HorizontalAlignment="Left" Height="80" Margin="640,28,0,0" VerticalAlignment="Top" Width="117" FontSize="16" FontFamily="Arial Black" Click="Button_Click">
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
             <Button.Background>
-                <ImageBrush ImageSource="/Navigation_Right_Arrow.svg.png"/>
+                <ImageBrush ImageSource="/exit (1).png"/>
             </Button.Background>
         </Button>
 
         <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="653,334,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black" Click="btnAdd_Click"/>
         <Button x:Name="btnUpDate" Content="UpDate" HorizontalAlignment="Left" Margin="653,272,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black" Click="btnUpDate_Click"/>
-        <Button x:Name="btnDelet" Content="Delet" HorizontalAlignment="Left" Margin="653,207,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black" Click="btnDelet_Click"/>
         <Button x:Name="ShowDrone" Content="show" HorizontalAlignment="Left" Height="22" Margin="323,319,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="11" FontFamily="Arial" Click="ShowDrone_Click" d:IsHidden="True"/>
         <Button x:Name="ShowTraget" Content="show" HorizontalAlignment="Left" Height="21" Margin="323,397,0,0" VerticalAlignment="Top" Width="33" FontSize="11" FontFamily="Arial" Click="ShowTraget_Click" d:IsHidden="True"/>
         <Button x:Name="ShowSender" Content="show" HorizontalAlignment="Left" Height="21" Margin="323,360,0,0" VerticalAlignment="Top" Width="33" FontSize="11" FontFamily="Arial" Click="ShowSender_Click" d:IsHidden="True"/>

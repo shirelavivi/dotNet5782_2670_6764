@@ -46,6 +46,36 @@ namespace PL
                 this.Close();
             }
         }
+        public void  help_function()
+        {
+            customerToListDataGrid.DataContext = blCustomerList.GetALLCostumerToList(); 
+        }
+    
+    private void Button_Click_1(object sender, RoutedEventArgs e)//מחיקה
+        {
+            try
+            {
+                ListViewItem item = sender as ListViewItem;
+                BO.CustomerToList cs = customerToListDataGrid.SelectedItem as BO.CustomerToList;
+                if (cs != null)
+                {
+                    blCustomerList.RemoveParcel(Convert.ToInt32(cs.Id));
+                    MessageBox.Show("Removed");
+                    this.help_function();
+                }
+                else
+                {
+                    MessageBox.Show("Pleas select parcel");
+                }
+                //this.Close();
+                //ParcelToListWindow ParcelWindow = new ParcelToListWindow(blParcelList);
+                //ParcelWindow.Show();
+            }
+            catch (BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.EntityName, ex.Message);
+            }
+        }
     }
 
 }

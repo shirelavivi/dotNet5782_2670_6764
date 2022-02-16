@@ -53,7 +53,6 @@ namespace PL
         {
             InitializeComponent();
             blparcel = blParcel;
-            btnDelet.Visibility = Visibility.Hidden;
             btnUpDate.Visibility = Visibility.Hidden;
             gridUpDate.Visibility = Visibility.Hidden;
             ShowDrone.Visibility = Visibility.Hidden;
@@ -109,21 +108,7 @@ namespace PL
 
         }
 
-        private void btnDelet_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                blparcel.RemoveParcel(Convert.ToInt32(idTextBox.Text));
-                MessageBox.Show("Removed");
-                this.Close();
-                ParcelToListWindow ParcelWindow = new ParcelToListWindow(blparcel);
-                ParcelWindow.Show();
-            }
-            catch (BO.MissingIdException ex)
-            {
-                MessageBox.Show(ex.EntityName, ex.Message);
-            }
-        }
+       
 
         private void ShowDrone_Click(object sender, RoutedEventArgs e)
         {

@@ -27,22 +27,30 @@
                 <DataGridTextColumn x:Name="weightColumn" Width="SizeToHeader" Header="Weight" Binding="{Binding Weight}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add new parcel" HorizontalAlignment="Left" Height="33" Margin="620,298,0,0" VerticalAlignment="Top" Width="132" Click="Button_Click" FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}"/>
-        <Label Content="Sender Name:" HorizontalAlignment="Left" Margin="509,56,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
-        <Label Content="Target Name:" HorizontalAlignment="Left" Margin="509,120,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
+        <Button Content="Add new parcel" HorizontalAlignment="Left" Height="33" Margin="626,283,0,0" VerticalAlignment="Top" Width="130" Click="Button_Click" FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}"/>
+        <Label Content="Sender Name:" HorizontalAlignment="Left" Margin="464,55,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
+        <Label Content="Target Name:" HorizontalAlignment="Left" Margin="464,120,0,0" VerticalAlignment="Top" FontSize="14" Height="28" FontFamily="Arial Black"/>
         <Label Content="Weight categories:" HorizontalAlignment="Left" Height="43" Margin="464,174,0,0" VerticalAlignment="Top" Width="157" FontSize="14" FontFamily="Arial Black"/>
-        <ComboBox x:Name="comboweight" HorizontalAlignment="Left" Height="30" Margin="626,171,0,0" VerticalAlignment="Top" Width="127" SelectionChanged="comboweight_SelectionChanged">
+        <ComboBox x:Name="comboweight" HorizontalAlignment="Left" Height="30" Margin="626,171,0,0" VerticalAlignment="Top" Width="130" SelectionChanged="comboweight_SelectionChanged">
             <ComboBoxItem Content="easy " />
             <ComboBoxItem Content=" middle" />
             <ComboBoxItem Content="weighty" />
         </ComboBox>
-        <Label Content=" Priority:" HorizontalAlignment="Left" Height="43" Margin="516,222,0,0" VerticalAlignment="Top" Width="89" FontSize="14" FontFamily="Arial Black"/>
-        <ComboBox x:Name="comboPriority" HorizontalAlignment="Left" Height="30" Margin="605,222,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="comboPriority_SelectionChanged">
+        <Label Content=" Priority:" HorizontalAlignment="Left" Height="43" Margin="464,222,0,0" VerticalAlignment="Top" Width="89" FontSize="14" FontFamily="Arial Black"/>
+        <ComboBox x:Name="comboPriority" HorizontalAlignment="Left" Height="30" Margin="626,222,0,0" VerticalAlignment="Top" Width="130" SelectionChanged="comboPriority_SelectionChanged">
             <ComboBoxItem Content="Standard" />
             <ComboBoxItem Content="fast" />
             <ComboBoxItem Content="emergency" />
         </ComboBox>
-        <TextBox x:Name="txtSender" HorizontalAlignment="Left" Margin="626,61,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="23" TextChanged="TextBox_TextChanged"/>
-        <TextBox x:Name="txtTarget" HorizontalAlignment="Left" Margin="626,120,0,0" Text=""  TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="23" TextChanged="txtTarget_TextChanged"/>
+        <TextBox x:Name="txtSender" HorizontalAlignment="Left" Margin="626,59,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="25" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="txtTarget" HorizontalAlignment="Left" Margin="626,115,0,0" Text=""  TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="28" TextChanged="txtTarget_TextChanged"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="666,352,0,0" VerticalAlignment="Top" Height="54" Width="58" IsManipulationEnabled="True" Click="Button_Click_1">
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <ImageBrush ImageSource="/bin (2).png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

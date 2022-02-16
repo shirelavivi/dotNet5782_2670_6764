@@ -12,7 +12,7 @@
     </Window.Resources>-->
     <Grid DataContext="">
 
-        <DataGrid x:Name="customerToListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="46,147,71,113" RowDetailsVisibilityMode="VisibleWhenSelected" Background="{x:Null}" MouseDoubleClick="customerToListDataGrid_MouseDoubleClick" IsReadOnly="True">
+        <DataGrid x:Name="customerToListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="91,81,91,179" RowDetailsVisibilityMode="VisibleWhenSelected" Background="{x:Null}" MouseDoubleClick="customerToListDataGrid_MouseDoubleClick" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
@@ -23,7 +23,15 @@
                 <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding Phone}" Header="Phone" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnAdd" Content="Add new customer" HorizontalAlignment="Left" Height="33" Margin="681,513,0,0" VerticalAlignment="Top" Width="165"  FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}" Click="btnAdd_Click"/>
+        <Button x:Name="btnAdd" Content="Add new customer" HorizontalAlignment="Left" Height="47" Margin="626,428,0,0" VerticalAlignment="Top" Width="220"  FontSize="20" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}" Click="btnAdd_Click"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="707,496,0,0" VerticalAlignment="Top" Height="54" Width="58" IsManipulationEnabled="True" Click="Button_Click_1">
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <ImageBrush ImageSource="/bin (2).png"/>
+            </Button.Background>
+        </Button>
         <Grid.Background>
             <ImageBrush ImageSource="/רחפן.jpg" Opacity="0.95"/>
         </Grid.Background>

@@ -530,9 +530,9 @@ namespace Dal
             return arr;
         }
 
-        public void GetrunNumberPackage()
+        public int GetrunNumberPackage()
         {
-            //return Dal.DataSource.config.CounterPackets;
+            return 20;
         }
 
         #endregion

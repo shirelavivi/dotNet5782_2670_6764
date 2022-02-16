@@ -16,24 +16,11 @@ namespace Dal
     {
         static readonly IDal instance = new Dal.DalObject();
         public static IDal Instance { get => instance; }
-        //Dal.DataSource ds;
-        //Dal.DataSource.config ds1;
-        //DalObject dl;/*= new DalObject();*/
-        //static string droneChargingPath = @"droneChargingPath.xml";
-        ///*למחוק אחכ זמני*/
-        //static string customerPath = @"customerPathXml.xml";
-        //static string stationPath = @"stationPathXml.xml";
-        //static string dronePath = @"dronePathXml.xml";
-        //static string parcelPath = @"parcelPathXml.xml";
+       
         public DalObject()
         {
             DataSource.Initialize();
-            /**/
-            //XMLTools.SaveListToXMLSerializer(customers, customerPath);
-            //XMLTools.SaveListToXMLSerializer(drones, dronePath);
-            //XMLTools.SaveListToXMLSerializer(packets, parcelPath);
-            ////XMLTools.SaveListToXMLElement(DronesCharge, droneChargingPath);
-            //XMLTools.SaveListToXMLSerializer(Stations, stationPath);
+           
         }
         public double[] batteryArr()
         {
