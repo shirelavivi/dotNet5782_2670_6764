@@ -3,21 +3,21 @@
   <Station>
     <Id>1</Id>
     <Name>Station1</Name>
-    <Longitude>5</Longitude>
-    <Lattitude>7</Lattitude>
+    <Longitude>7</Longitude>
+    <Lattitude>6</Lattitude>
     <ChargeSlots>21</ChargeSlots>
   </Station>
   <Station>
     <Id>2</Id>
     <Name>Station2</Name>
-    <Longitude>4</Longitude>
-    <Lattitude>5</Lattitude>
+    <Longitude>5</Longitude>
+    <Lattitude>9</Lattitude>
     <ChargeSlots>22</ChargeSlots>
   </Station>
   <Station>
     <Id>3</Id>
     <Name>Station3</Name>
-    <Longitude>7</Longitude>
+    <Longitude>4</Longitude>
     <Lattitude>8</Lattitude>
     <ChargeSlots>23</ChargeSlots>
   </Station>

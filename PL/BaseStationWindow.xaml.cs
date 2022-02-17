@@ -41,23 +41,24 @@ namespace PL
             droneInChargingDataGrid.DataContext = blStation.GetBaseStation(baseStation.idnumber).droneInCharging;
 
         }
-       
 
-        
+
+
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            try { 
-            blStation.UpdStation(Convert.ToInt32(idnumberTextBoxUpDate.Text), nameStationTextBoxUpDate.Text,Convert.ToInt32( chargingAvailableTextBoxUpDate.Text));
-            MessageBox.Show("The Station Was Successfully Update");
-            this.Close();
-           BaseStationToListWindow customerToList = new BaseStationToListWindow(blStation);
-            customerToList.Show();
-           }
+            try
+            {
+                blStation.UpdStation(Convert.ToInt32(idnumberTextBoxUpDate.Text), nameStationTextBoxUpDate.Text, Convert.ToInt32(chargingAvailableTextBoxUpDate.Text));
+                MessageBox.Show("The Station Was Successfully Update");
+                this.Close();
+                BaseStationToListWindow customerToList = new BaseStationToListWindow(blStation);
+                customerToList.Show();
+            }
             catch (BO.MissingIdException)
             {
                 MessageBox.Show("Erorr ID");
             }
-}
+        } 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

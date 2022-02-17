@@ -50,16 +50,16 @@ namespace BlApi
 
         #region Drone
         public void UpdateDrone(int id, string model);
-        //public void AddDrone(BO.Drone drone);// למה אין את הפונקציה הזאת ????????????????????????????????????????????????????????????????????
+        //public void AddDrone(BO.Drone drone);
         public void ReleaseDroneFromChargeStation(int droneId, int timeInCharging);
         public void PickUpPackage(int id);
         public void SendingDroneforCharging(int droneId);
         public IEnumerable<BO.DroneToList> GetALLDroneToList();
         public void AddDrone(BO.Drone drone, int stationId);     
         public DroneToList GetDroneToList(int dronId);
+        public BO.Drone GetDrone(int droneId);
         public IEnumerable<DroneToList> GetALLDroneToList(Predicate<DroneToList> predicate = null);
         // public Drone GetDrone(int droneId);
-
         #endregion
 
     }

@@ -18,16 +18,18 @@ namespace Dal
         internal static List<Customer> customers = new List<Customer>();
         internal static List<Parcel> packets = new List<Parcel>();
         internal static List<DroneCharge> DronesCharge = new List<DroneCharge>();
+        internal static List<User> Users = new List<User>();
         /****/
         static string droneChargingPath = @"droneChargingPath.xml";
         ///*למחוק אחכ זמני*/
+        static string userPath = @"userPathXml.xml";
         static string customerPath = @"customerPathXml.xml";
         static string stationPath = @"stationPathXml.xml";
         static string dronePath = @"dronePathXml.xml";
         static string parcelPath = @"parcelPathXml.xml";
 
-        static DataSource() { 
-            
+        static DataSource()
+        { 
             Initialize();
             //**//
             XMLTools.SaveListToXMLSerializer(customers, customerPath);
@@ -35,6 +37,7 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer(packets, parcelPath);
             XMLTools.SaveListToXMLSerializer(DronesCharge, droneChargingPath);
             XMLTools.SaveListToXMLSerializer(Stations, stationPath);
+            XMLTools.SaveListToXMLSerializer(Users, userPath);
         }
 
         internal class config
@@ -67,7 +70,6 @@ namespace Dal
       public static void Initialize()
         {
             int t;
-
             Random rnd = new Random();
             for (int i = 1; i <= 3; i++)
             {
@@ -79,7 +81,6 @@ namespace Dal
                 s.ChargeSlots = i + 20;
                 Stations.Add(s);
             }
-
             for (int i = 1; i <= 7; i++)
             {
                 Drone d = new Drone();
@@ -113,7 +114,6 @@ namespace Dal
                 customers.Add(c);
 
             }
-
             for (int i = 1; i < 11; i++)
             {
                 Parcel a = new Parcel();
@@ -165,6 +165,14 @@ namespace Dal
                 d.Droneld =i;
                 d.StationId = Rand.Next(1, 4);
                 DronesCharge.Add(d);
+            }
+            for (int i = 1; i <= 11; i++)
+            {
+                User c = new User();
+                c.PassWord =Rand.Next(10000000,999999999);
+                c.Name = "user" + i;
+                Users.Add(c);
+
             }
         }
     }

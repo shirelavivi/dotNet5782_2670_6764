@@ -53,8 +53,8 @@ namespace PL
                 customer.Name = nameTextBoxAdd.Text;
                 customer.Phone = phoneTextBoxAdd.Text;
                 customer.location = new BO.Location();
-                customer.location.Lattitude = Convert.ToInt32(lattitudeTextBox.Text);
-                customer.location.Longitude = Convert.ToInt32(longitudeTextBox.Text);
+                customer.location.Lattitude = Convert.ToDouble(lattitudeTextBox.Text);
+                customer.location.Longitude = Convert.ToDouble(longitudeTextBox.Text);
                 customer.parcelfromCustomer = null;
                 customer.parcelsToCustomer = null;
                 blCustomer.AddCustomer(customer);

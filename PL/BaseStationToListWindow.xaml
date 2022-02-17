@@ -23,10 +23,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Add new station" HorizontalAlignment="Left" Height="33" Margin="618,353,0,0" VerticalAlignment="Top" Width="132"  FontSize="14" FontStyle="Italic" FontFamily="Arial Black" Background="{x:Null}" Click="Button_Click"/>
-        <CheckBox x:Name="chekd" Content="ChargingAvailble" HorizontalAlignment="Left" Height="24" Margin="531,170,0,0" VerticalAlignment="Top" Width="171" FontSize="16" FontFamily="Aharoni" RenderTransformOrigin="0.563,4.436" Checked="chekd_Checked"   />
+        <CheckBox x:Name="chekd" Content="ChargingAvailble" HorizontalAlignment="Left" Height="24" Margin="499,171,0,0" VerticalAlignment="Top" Width="171" FontSize="16" FontFamily="Aharoni" RenderTransformOrigin="0.563,4.436" Checked="chekd_Checked"   />
 
-        <TextBox x:Name="txtNumber" HorizontalAlignment="Left" Margin="697,211,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="22" RenderTransformOrigin="0.893,1.039"   IsEnabled="{Binding ElementName=chekd, Path=IsChecked}" TextChanged="TextBox_TextChanged" />
-        <Label Content="Typ Number of ststion avalibal:" HorizontalAlignment="Left" Margin="474,211,0,0" VerticalAlignment="Top" FontFamily="Aharoni" FontSize="14"/>
+        <TextBox x:Name="txtNumber" HorizontalAlignment="Left" Margin="722,211,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="22" RenderTransformOrigin="0.893,1.039"   IsEnabled="{Binding ElementName=chekd, Path=IsChecked}" TextChanged="TextBox_TextChanged" />
+        <Label Content="Typ Number of ststion avalibal:" HorizontalAlignment="Left" Margin="499,211,0,0" VerticalAlignment="Top" FontFamily="Aharoni" FontSize="14" Height="22"/>
         <Grid.Background>
             <ImageBrush ImageSource="/רחפן.jpg" Opacity="0.95"/>
         </Grid.Background>

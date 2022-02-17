@@ -21,7 +21,8 @@ namespace Dal
         DLXML() { } // default => private
 
         string droneChargingPath = @"droneChargingPath.xml"; //XElement
-        //XMLSerializer
+                                                             //XMLSerializer
+        string userPath = @"userPath.xml";
         string customerPath = @"customerPathXml.xml";
         string stationPath = @"stationPathXml.xml";
         string dronePath = @"dronePathXml.xml";
@@ -525,7 +526,7 @@ namespace Dal
 
         public double[] batteryArr()
         {
-            // return DataSource.config.returnArrBattery();
+            
             double[] arr = new double[5] { 0.2, 0.1, 0.4, 0.4, 0.4 };
             return arr;
         }
@@ -533,6 +534,38 @@ namespace Dal
         public int GetrunNumberPackage()
         {
             return 20;
+        }
+
+        public void AddUser(User c)
+        {
+            List<User> listUser = XMLTools.LoadListFromXMLSerializer<User>(stationPath);
+            if (CheckStation(c.PassWord))
+
+                throw new DO.DuplicateIdException(c.PassWord, "User");
+            listUser.Add(c);
+            XMLTools.SaveListToXMLSerializer(listUser, stationPath);
+        }
+
+        public bool CheckUser(int passWord)
+        {
+            List<User> listuser = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+            return listuser.Any(st => st.PassWord == passWord);
+        }
+
+        public User GetUser(int s)
+        {
+            List<User> listUser = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+            if (!CheckCusromer(s))
+                throw new MissingIdException(s, "User");
+
+            User st = listUser.Find(st => st.PassWord == s);
+            return st;
+        }
+
+        public IEnumerable<User> GetALLUsers()
+        {
+            List<User> listUser = XMLTools.LoadListFromXMLSerializer<User>(dronePath);
+            return from st in listUser select st; throw new NotImplementedException();
         }
 
         #endregion

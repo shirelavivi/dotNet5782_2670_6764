@@ -67,7 +67,7 @@ namespace BL
 
                 }
             }
-            catch (DO.MissingIdException ex)//  חריגה לא נכונה !!!!!!!!! לעשות חדשה
+            catch (DO.MissingIdException ex)
             {
                 throw new  BO.MissingIdException(ex.ID, ex.EntityName);
             }

@@ -12,22 +12,21 @@ namespace BL
 {
     sealed partial class BL : IBL
     {
-
+        internal IDal dal = DalFactory.GetDal();
         static readonly IBL instance = new BL();
         public static IBL Instance { get => instance; }
-        internal IDal dal = DalFactory.GetDal();    
         public List<DroneToList> dronesBl = new List<DroneToList>();
-        //public  dl = new DalObject.DalObject();
         internal static double Free;
         internal static double Light;
         internal static double Medium;
         internal static double Heavy;
         internal static double ChargingRate;//אחוז טעינה לשעה
 
-
+       
 
         public BL()
         {
+            
             Random Rand = new Random(DateTime.Now.Millisecond);
             try
             {

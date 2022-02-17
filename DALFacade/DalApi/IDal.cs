@@ -103,6 +103,14 @@ namespace DalApi
 
         #endregion
 
+        public void AddUser(User c);
+        public bool CheckUser(int passWord);
+        public User GetUser(int s);
+        public IEnumerable<User> GetALLUsers();
+       
+        
+
+
 
 
         public void SendDroneTpCharge(int StationId, int DroneId);

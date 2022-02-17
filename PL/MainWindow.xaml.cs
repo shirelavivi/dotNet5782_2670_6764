@@ -26,14 +26,10 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        IBL bl;
+       internal readonly IBL bl = BlFactory.GetBl();
         public MainWindow()
         {
-            try
-            {  bl = BlFactory.GetBl(); }
-
-            catch (Exception e)
-            { MessageBox.Show(e.Message); }
+           
             InitializeComponent();
            
         }

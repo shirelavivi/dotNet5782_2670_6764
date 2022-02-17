@@ -22,7 +22,7 @@
     </Window.Background>
 
     <Grid>
-        <Grid x:Name="gridAdd" HorizontalAlignment="Left" Height="558" Margin="60,54,0,0" VerticalAlignment="Top" Width="732">
+        <Grid x:Name="gridAdd" HorizontalAlignment="Left" Height="558" Margin="60,54,0,0" VerticalAlignment="Top" Width="732" d:IsHidden="True">
             <Label Content="Add YOUR Station:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -59,7 +59,7 @@
             </Grid>
             <Button Content="Add" HorizontalAlignment="Left" Margin="522,347,0,0" VerticalAlignment="Top" Height="43" Width="165" FontSize="16" FontFamily="Arial Black" Click="Button_Click"/>
         </Grid>
-        <Grid x:Name="gridUodate" HorizontalAlignment="Center" Height="641" Margin="0,5,0,0" VerticalAlignment="Top" Width="814" d:IsHidden="True">
+        <Grid x:Name="gridUodate" HorizontalAlignment="Center" Height="641" Margin="0,5,0,0" VerticalAlignment="Top" Width="814">
             <Label Content="Update YOUR Station:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

@@ -154,9 +154,9 @@ namespace PL
                     MessageBox.Show("pleas typ the drone modle");
                 }
             }
-            catch(BO.MissingIdException)
+            catch(BO.MissingIdException ex)
             {
-                MessageBox.Show("Erorr ID");
+                MessageBox.Show(ex.Message,"Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
