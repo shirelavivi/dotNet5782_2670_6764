@@ -8,7 +8,7 @@
   <Drone>
     <id>2</id>
     <Model>drone2</Model>
-    <MaxWeight>weighty</MaxWeight>
+    <MaxWeight>middle</MaxWeight>
   </Drone>
   <Drone>
     <id>3</id>
@@ -23,7 +23,7 @@
   <Drone>
     <id>5</id>
     <Model>drone5</Model>
-    <MaxWeight>weighty</MaxWeight>
+    <MaxWeight>middle</MaxWeight>
   </Drone>
   <Drone>
     <id>6</id>
