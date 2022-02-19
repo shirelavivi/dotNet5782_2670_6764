@@ -2,23 +2,23 @@
 <ArrayOfDroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DroneCharge>
     <Droneld>1</Droneld>
-    <StationId>2</StationId>
-  </DroneCharge>
-  <DroneCharge>
-    <Droneld>2</Droneld>
-    <StationId>2</StationId>
-  </DroneCharge>
-  <DroneCharge>
-    <Droneld>3</Droneld>
-    <StationId>2</StationId>
-  </DroneCharge>
-  <DroneCharge>
-    <Droneld>4</Droneld>
     <StationId>3</StationId>
   </DroneCharge>
   <DroneCharge>
+    <Droneld>2</Droneld>
+    <StationId>3</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <Droneld>3</Droneld>
+    <StationId>3</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <Droneld>4</Droneld>
+    <StationId>2</StationId>
+  </DroneCharge>
+  <DroneCharge>
     <Droneld>5</Droneld>
-    <StationId>1</StationId>
+    <StationId>3</StationId>
   </DroneCharge>
   <DroneCharge>
     <Droneld>6</Droneld>
@@ -26,6 +26,6 @@
   </DroneCharge>
   <DroneCharge>
     <Droneld>7</Droneld>
-    <StationId>2</StationId>
+    <StationId>3</StationId>
   </DroneCharge>
 </ArrayOfDroneCharge>
