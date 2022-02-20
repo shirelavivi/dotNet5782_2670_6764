@@ -30,17 +30,18 @@ namespace PL
             {  
                 blparcel = blParcel;
                 btnAdd.Visibility = Visibility.Hidden;
+                btnUpDate.Visibility = Visibility.Visible;
                 parcel1 = blParcel.GetParcel(parcel.Id);
                 gridUpDate.DataContext=blparcel.GetParcel(parcel.Id);
-                gridAdd.Visibility = Visibility.Hidden;
-                if (parcel1.Scheduled != null && parcel1.PickedUp == null)
+                gridAdd.Visibility = Visibility.Hidden;   
+                if (/*parcel1.Scheduled != null && */parcel1.PickedUp == null)
                     btnUpDate.Content = "Pick Up";
                 else
                 { 
                     if (parcel1.PickedUp != null && parcel1.Delivered==null)
                         btnUpDate.Content = "Deliverd";
-                    else
-                        btnUpDate.Visibility = Visibility.Hidden;
+                    //else
+                    //    btnUpDate.Visibility = Visibility.Hidden;
                 }
 
             }
@@ -103,7 +104,7 @@ namespace PL
             }
             catch (BO.MissingIdException ex)
             {
-                MessageBox.Show(ex.EntityName, ex.Message);
+                MessageBox.Show(ex.ToString(), "The sender or recipient ID was not found! ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -135,9 +136,11 @@ namespace PL
         {
             try
             {
+                if (parcel1.Scheduled == null)// אם החבילה לא שוייכה לאף רחפן תצא הודעה מתאימה
+                    throw new Exception("The parcel not conect to any drone");
                 if (btnUpDate.Content.ToString() == "Pick Up")
                 {
-                    blparcel.PickUpPackage(int.Parse(idTextBox.Text));
+                    blparcel.PickUpPackage(int.Parse(idNumberTextBox.Text));
                     MessageBox.Show("The drone go to way");
                     this.Close();
                     ParcelToListWindow ParcelWindow = new ParcelToListWindow(blparcel);
@@ -152,15 +155,17 @@ namespace PL
                     ParcelWindow.Show();
                 }
             }
+          
             catch (BO.MissingIdException ex)
             {
-                MessageBox.Show(ex.EntityName, ex.Message);
+                MessageBox.Show(ex.ToString(), "The sender or recipient ID was not found! ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void weightComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //weightComboBox.SelectedItem = weightComboBox.SelectedIndex;
-        }
+
     }
 }

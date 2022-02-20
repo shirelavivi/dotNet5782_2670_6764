@@ -54,26 +54,34 @@ namespace PL
                 BaseStationToListWindow customerToList = new BaseStationToListWindow(blStation);
                 customerToList.Show();
             }
-            catch (BO.MissingIdException)
+            catch (BO.MissingIdException ex)
             {
-                MessageBox.Show("Erorr ID");
+                MessageBox.Show(ex.ToString(), " ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         } 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            BO.BaseStation baseStation = new BO.BaseStation();
-            baseStation.Idnumber = Convert.ToInt32(idnumberTextBox.Text);
-            baseStation.NameStation = nameStationTextBox.Text;
-            baseStation.ChargingAvailable = Convert.ToInt32( chargingAvailableTextBox.Text);
-            baseStation.locationOfStation = new BO.Location();
-            baseStation.locationOfStation.Lattitude = Convert.ToInt32(lattitudeTextBox.Text);
-            baseStation.locationOfStation.Longitude = Convert.ToInt32(longitudeTextBox.Text);
-            blStation.AddBaseStation(baseStation);
-            MessageBox.Show("The Station Was Successfully Added");
-            this.Close();
-            BaseStationToListWindow customerToList = new BaseStationToListWindow(blStation);
-            customerToList.Show();
+            try
+            {
+                BO.BaseStation baseStation = new BO.BaseStation();
+                baseStation.Idnumber = Convert.ToInt32(idnumberTextBox.Text);
+                baseStation.NameStation = nameStationTextBox.Text;
+                baseStation.ChargingAvailable = Convert.ToInt32(chargingAvailableTextBox.Text);
+                baseStation.locationOfStation = new BO.Location();
+                baseStation.locationOfStation.Lattitude = Convert.ToInt32(lattitudeTextBox.Text);
+                baseStation.locationOfStation.Longitude = Convert.ToInt32(longitudeTextBox.Text);
+                blStation.AddBaseStation(baseStation);
+                MessageBox.Show("The Station Was Successfully Added");
+                this.Close();
+                BaseStationToListWindow customerToList = new BaseStationToListWindow(blStation);
+                customerToList.Show();
+            }
+            catch ( BO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.ToString()," ",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
         }
     }
 }
+

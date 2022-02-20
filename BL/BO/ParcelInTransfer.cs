@@ -20,7 +20,7 @@ namespace BO
             public Location CollectionLocation { get; set; }
             public Location DeliveryLocation { get; set; }
             public double TransportDistance { get; set; }
-            public override string ToString()
+        public override string ToString()
             {
                 return this.ToStringProperty();
             }

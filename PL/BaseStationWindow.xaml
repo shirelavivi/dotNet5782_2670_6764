@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="BaseStationWindow" Height="672" Width="832">
+        Title="BaseStationWindow" Height="591" Width="800">
     <!--<Window.Resources>
         -->
     <!--<Style x:Key="myLabelStyle"  TargetType="Label">
@@ -18,7 +18,7 @@
     <!--
     </Window.Resources>-->
     <Window.Background>
-        <ImageBrush ImageSource="drone.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="/הורדה (1).jpg" Stretch="UniformToFill"/>
     </Window.Background>
 
     <Grid>
@@ -59,7 +59,7 @@
             </Grid>
             <Button Content="Add" HorizontalAlignment="Left" Margin="522,347,0,0" VerticalAlignment="Top" Height="43" Width="165" FontSize="16" FontFamily="Arial Black" Click="Button_Click"/>
         </Grid>
-        <Grid x:Name="gridUodate" HorizontalAlignment="Center" Height="641" Margin="0,5,0,0" VerticalAlignment="Top" Width="814">
+        <Grid x:Name="gridUodate" HorizontalAlignment="Center" Height="607" Margin="0,5,0,0" VerticalAlignment="Top" Width="780">
             <Label Content="Update YOUR Station:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="313" VerticalContentAlignment="Stretch" FontSize="25" FontStyle="Italic" FontWeight="UltraBlack" Foreground="#FFF3F1F1">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -115,7 +115,7 @@
 
     </Grid>
 
-   
+
 </Window>
 
 

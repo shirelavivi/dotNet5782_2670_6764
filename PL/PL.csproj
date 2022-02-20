@@ -7,13 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="15897032512236_b.jpg" />
     <None Remove="bin %282%29.png" />
     <None Remove="bin.png" />
     <None Remove="cancel.png" />
     <None Remove="drone.jpg" />
     <None Remove="exit %281%29.png" />
     <None Remove="exit.png" />
+    <None Remove="images.jpg" />
     <None Remove="Navigation_Right_Arrow.svg.png" />
+    <None Remove="הורדה %281%29.jpg" />
+    <None Remove="הורדה %282%29.jpg" />
     <None Remove="רחפן.jpg" />
   </ItemGroup>
 
@@ -22,13 +26,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="15897032512236_b.jpg" />
     <Resource Include="bin (2).png" />
     <Resource Include="bin.png" />
     <Resource Include="cancel.png" />
     <Resource Include="drone.jpg" />
     <Resource Include="exit (1).png" />
     <Resource Include="exit.png" />
+    <Resource Include="images.jpg" />
     <Resource Include="Navigation_Right_Arrow.svg.png" />
+    <Resource Include="הורדה (1).jpg" />
+    <Resource Include="הורדה (2).jpg" />
     <Resource Include="רחפן.jpg" />
   </ItemGroup>
 

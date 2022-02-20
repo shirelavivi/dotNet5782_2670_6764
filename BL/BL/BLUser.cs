@@ -64,5 +64,10 @@ namespace BL
            
           
         }
+        public IEnumerable<BO.User> GetAllUsersByPredicat(Predicate<BO.User> predicate = null)
+        {
+            return GetALLusers().ToList().FindAll(predicate);
+        }
+
     }
 }

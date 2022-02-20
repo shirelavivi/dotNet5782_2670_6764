@@ -17,6 +17,7 @@ namespace Dal
         public void AddParcel(Parcel p)
         {
             p.Id = DataSource.config.runCounterPackets();
+            p.Requested = DateTime.Now;
             if (CheckParcel(p.Id))
 
                 throw new DO.DuplicateIdException(p.Id, "Parcel");

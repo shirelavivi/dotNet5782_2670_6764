@@ -33,16 +33,23 @@ namespace PL
 
         public CustomerWindow(BO.CustomerToList customerToList, IBL blcustomer)//Update
         {
-            InitializeComponent();
-            blCustomer = blcustomer;
-            AddCustomer.Visibility = Visibility.Hidden;
-            gridAdd.Visibility = Visibility.Hidden;
-            grid1.DataContext = blCustomer.GetCustomer(customerToList.Id);
-            customerWind = customerToList;
-            parcelsToCustomerDataGrid.DataContext = blCustomer.GetCustomer(customerToList.Id).parcelsToCustomer;
-            parcelfromCustomerDataGrid.DataContext = blCustomer.GetCustomer(customerToList.Id).parcelfromCustomer;
-
-
+            try
+            {
+                InitializeComponent();
+                idTextBox.IsEnabled = false;
+                blCustomer = blcustomer;
+                AddCustomer.Visibility = Visibility.Hidden;
+                gridAdd.Visibility = Visibility.Hidden;
+                grid1.DataContext = blCustomer.GetCustomer(customerToList.Id);
+                customerWind = customerToList;
+                IEnumerable<BO.ParcelAtCustomer> st= blCustomer.GetCustomer(customerToList.Id).parcelsToCustomer;
+                parcelsToCustomerDataGrid.DataContext = st; 
+                parcelfromCustomerDataGrid.DataContext = blCustomer.GetCustomer(customerToList.Id).parcelfromCustomer;
+            }
+            catch (BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.ToString(), " ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void AddCustomer_Click(object sender, RoutedEventArgs e)
         {
@@ -66,7 +73,7 @@ namespace PL
             }
             catch (BO.DuplicateIdException ex)
             {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -81,11 +88,10 @@ namespace PL
                 CustomerToListWindow customerToList = new CustomerToListWindow(blCustomer);
                 customerToList.Show();
             }
-            catch (BO.MissingIdException)
+            catch (BO.MissingIdException ex)
             {
-                MessageBox.Show("Erorr ID");
+                MessageBox.Show(ex.ToString(), " ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
     }
     

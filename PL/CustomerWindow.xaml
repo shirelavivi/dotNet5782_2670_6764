@@ -50,7 +50,7 @@
                 <Label Style="{StaticResource myLabelStyle}" Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
                 <TextBlock x:Name="longitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding location.Longitude}" VerticalAlignment="Center"/>
             </Grid>
-            <DataGrid x:Name="parcelfromCustomerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"  Margin="41,389,41,10" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid x:Name="parcelfromCustomerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"  Margin="41,414,41,-15" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="idnumberColumn" Binding="{Binding Idnumber}" Header="Idnumber" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="packetStatusesColumn" Binding="{Binding PacketStatuses}" Header="Packet Statuses" Width="SizeToHeader"/>
@@ -58,7 +58,7 @@
                     <DataGridTextColumn x:Name="weightcategoriesColumn" Binding="{Binding Weightcategories}" Header="Weightcategories" Width="SizeToHeader"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="parcelsToCustomerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="41,235,41,184" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid x:Name="parcelsToCustomerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="41,268,41,151" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="idnumberColumn1" Binding="{Binding Idnumber}" Header="Idnumber" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="packetStatusesColumn1" Binding="{Binding PacketStatuses}" Header="Packet Statuses" Width="SizeToHeader"/>
@@ -66,6 +66,8 @@
                     <DataGridTextColumn x:Name="weightcategoriesColumn1" Binding="{Binding Weightcategories}" Header="Weightcategories" Width="SizeToHeader"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <Label Style="{StaticResource myLabelStyle}" Content="Packages sent from this customer:" HorizontalAlignment="Left" Margin="9,383,0,0" VerticalAlignment="Top" Width="358"/>
+            <Label Style="{StaticResource myLabelStyle}" Content="Packages received by this customer:" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top"/>
         </Grid>
         <Grid x:Name="gridAdd" DataContext="" HorizontalAlignment="Left" Margin="66,156,0,0" VerticalAlignment="Top" Height="198" Width="259" d:IsHidden="True">
             <Grid.ColumnDefinitions>

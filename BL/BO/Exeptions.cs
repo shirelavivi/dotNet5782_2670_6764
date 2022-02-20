@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlApi;
-using BL;
-using DO;
 
 
 namespace BO
@@ -24,7 +17,7 @@ namespace BO
         public MissingIdException(int id, string entity, string message, Exception innerException) :
             base(message, innerException)
         { ID = id; EntityName = entity; }
-        public override string ToString() => base.ToString() + $", {EntityName} - missing id: {ID}";
+        public override string ToString() => /*base.ToString() +*/ $" {EntityName} - missing id: {ID}";
     }
 
     [Serializable]
@@ -40,7 +33,7 @@ namespace BO
         public DuplicateIdException(int id, string entity, string message, Exception innerException) :
             base(message, innerException)
         { ID = id; EntityName = entity; }
-        public override string ToString() => base.ToString() + $", {EntityName} - duplicate id: {ID}";
+        public override string ToString() => /*base.ToString() *//*+*/ $" {EntityName} - duplicate id: {ID}";
     }
 
     [Serializable]
@@ -56,7 +49,7 @@ namespace BO
         public UnsuitableDroneMode(DroneStatuses status, string entity, string message, Exception innerException) :
             base(message, innerException)
         { Status = status; EntityName = entity; }
-        public override string ToString() => base.ToString() + $", {EntityName} - Unsuitable Drone Mode: {Status}";
+        public override string ToString() => /*base.ToString() + */$" {EntityName} - Unsuitable Drone Mode: {Status}";
     }
     [Serializable]
     public class NotEnoughBattery : Exception// בעיה בסוללה
@@ -71,7 +64,7 @@ namespace BO
         public NotEnoughBattery(double baterry, string entity, string message, Exception innerException) :
             base(message, innerException)
         { Baterry = baterry; EntityName = entity; }
-        public override string ToString() => base.ToString() + $", {EntityName} - problem in  Battery: {Baterry}";
+        public override string ToString() => /*base.ToString() +*/ $" {EntityName} - problem in  Battery: {Baterry}";
     }
     [Serializable]
     public class NoFreeCharging : Exception// אין עמדות טעינה פנויות )
@@ -85,7 +78,7 @@ namespace BO
         public NoFreeCharging(string entity, string message, Exception innerException) :
             base(message, innerException)
         { EntityName = entity; }
-        public override string ToString() => base.ToString() + $", {EntityName} - There are no free charging stations ";
+        public override string ToString() => /*base.ToString() +*/ $"{EntityName} - There are no free charging stations ";
     }
 
     [Serializable]
@@ -101,21 +94,36 @@ namespace BO
         public ErorrValueExceptin(int id, string entity, string message, Exception innerException) :
             base(message, innerException)
         { ID = id; EntityName = entity; }
-        public override string ToString() => base.ToString() + $", {EntityName} - duplicate id: {ID}";
+        public override string ToString() =>/* base.ToString() +*/ $" {EntityName} - duplicate id: {ID}";
     }
+    //[Serializable]
+    //public class CanNotRelease : Exception//חריגה חרפן לא יכול להשתחרר מטעינה
+    //{
+    //    public int ID;
+
+    //    public string EntityName;
+    //    public CanNotRelease(int id, string entity) : base() { ID = id; EntityName = entity; }
+    //    public CanNotRelease(int id, string entity, string message) :
+    //        base(message)
+    //    { ID = id; EntityName = entity; }
+    //    public CanNotRelease(int id, string entity, string message, Exception innerException) :
+    //        base(message, innerException)
+    //    { ID = id; EntityName = entity; }
+    //}
+
     [Serializable]
-    public class CanNotRelease : Exception//חריגה חרפן לא יכול להשתחרר מטעינה
+    public class NoParcelsToDroneException : Exception//אין חבילה מתאימה לרחפן
     {
-        public int ID;
+       
 
         public string EntityName;
-        public CanNotRelease(int id, string entity) : base() { ID = id; EntityName = entity; }
-        public CanNotRelease(int id, string entity, string message) :
-            base(message)
-        { ID = id; EntityName = entity; }
-        public CanNotRelease(int id, string entity, string message, Exception innerException) :
-            base(message, innerException)
-        { ID = id; EntityName = entity; }
-    }
+        public NoParcelsToDroneException()
+        {
+        }
 
+        public NoParcelsToDroneException(string entity) : base() { EntityName = entity; }
+        public override string ToString() =>/* base.ToString() +*/ $" {EntityName} ";
+
+
+    }
 }

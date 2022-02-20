@@ -3,78 +3,78 @@
   <Customer>
     <Id>1</Id>
     <Name>customer1</Name>
-    <Phone>0531271332</Phone>
-    <Longitude>2</Longitude>
-    <Lattitude>3</Lattitude>
+    <Phone>0517703798</Phone>
+    <Longitude>5</Longitude>
+    <Lattitude>1</Lattitude>
   </Customer>
   <Customer>
     <Id>2</Id>
     <Name>customer2</Name>
-    <Phone>0502227707</Phone>
-    <Longitude>3</Longitude>
-    <Lattitude>7</Lattitude>
+    <Phone>0522788368</Phone>
+    <Longitude>1</Longitude>
+    <Lattitude>2</Lattitude>
   </Customer>
   <Customer>
     <Id>3</Id>
     <Name>customer3</Name>
-    <Phone>0526850774</Phone>
-    <Longitude>9</Longitude>
-    <Lattitude>9</Lattitude>
+    <Phone>0531849721</Phone>
+    <Longitude>4</Longitude>
+    <Lattitude>8</Lattitude>
   </Customer>
   <Customer>
     <Id>4</Id>
     <Name>customer4</Name>
-    <Phone>0505618664</Phone>
-    <Longitude>4</Longitude>
-    <Lattitude>5</Lattitude>
+    <Phone>0515281581</Phone>
+    <Longitude>7</Longitude>
+    <Lattitude>4</Lattitude>
   </Customer>
   <Customer>
     <Id>5</Id>
     <Name>customer5</Name>
-    <Phone>0533008869</Phone>
-    <Longitude>7</Longitude>
-    <Lattitude>7</Lattitude>
+    <Phone>0536114194</Phone>
+    <Longitude>6</Longitude>
+    <Lattitude>4</Lattitude>
   </Customer>
   <Customer>
     <Id>6</Id>
     <Name>customer6</Name>
-    <Phone>0500108227</Phone>
-    <Longitude>6</Longitude>
-    <Lattitude>3</Lattitude>
+    <Phone>0507405194</Phone>
+    <Longitude>0</Longitude>
+    <Lattitude>6</Lattitude>
   </Customer>
   <Customer>
     <Id>7</Id>
     <Name>customer7</Name>
-    <Phone>0528221550</Phone>
-    <Longitude>4</Longitude>
-    <Lattitude>1</Lattitude>
+    <Phone>0527368099</Phone>
+    <Longitude>6</Longitude>
+    <Lattitude>2</Lattitude>
   </Customer>
   <Customer>
     <Id>8</Id>
     <Name>customer8</Name>
-    <Phone>0505379268</Phone>
-    <Longitude>7</Longitude>
-    <Lattitude>2</Lattitude>
+    <Phone>0524073297</Phone>
+    <Longitude>9</Longitude>
+    <Lattitude>8</Lattitude>
   </Customer>
   <Customer>
     <Id>9</Id>
     <Name>customer9</Name>
-    <Phone>0506618146</Phone>
-    <Longitude>3</Longitude>
-    <Lattitude>5</Lattitude>
+    <Phone>0536495402</Phone>
+    <Longitude>2</Longitude>
+    <Lattitude>0</Lattitude>
   </Customer>
   <Customer>
     <Id>10</Id>
     <Name>customer10</Name>
-    <Phone>0518618808</Phone>
-    <Longitude>8</Longitude>
-    <Lattitude>3</Lattitude>
+    <Phone>0523018035</Phone>
+    <Longitude>3</Longitude>
+    <Lattitude>4</Lattitude>
   </Customer>
   <Customer>
     <Id>11</Id>
     <Name>customer11</Name>
-    <Phone>0515566573</Phone>
-    <Longitude>0</Longitude>
-    <Lattitude>6</Lattitude>
+    <Phone>0508749677</Phone>
+    <Longitude>7</Longitude>
+    <Lattitude>3</Lattitude>
   </Customer>
 </ArrayOfCustomer>

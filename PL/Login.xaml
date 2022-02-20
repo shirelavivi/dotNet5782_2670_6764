@@ -7,15 +7,25 @@
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800" FontFamily="Arial" FontStretch="Normal" FontStyle="Oblique" FontWeight="Bold">
     <Grid RenderTransformOrigin="0.825,-0.002">
-        <Label Name="Title" Content="Welcome Manager" HorizontalAlignment="Left" Margin="225,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,-0.385" Height="70" FontSize="32"/>
-        <Button x:Name="LoginButton" Content="Log in" HorizontalAlignment="Left" Margin="490,328,0,0" VerticalAlignment="Top" Height="50" Width="120" FontFamily="Lucida Console" FontSize="20" RenderTransformOrigin="0.5,0.781"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/הורדה (2).jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="TitleManager" Content="Welcome Manager" HorizontalAlignment="Left" Margin="225,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,-0.385" Height="70" FontSize="32" Width="290"/>
+        <Button x:Name="LoginButton" Content="Log in" HorizontalAlignment="Left" Margin="531,327,0,0" VerticalAlignment="Top" Height="50" Width="120" FontFamily="Lucida Console" FontSize="20" RenderTransformOrigin="0.5,0.781" Click="LogIn_btn" Background="{x:Null}"/>
         <PasswordBox x:Name="PasswordBox" TextBlock.TextAlignment="Center" HorizontalAlignment="Left" Margin="300,252,0,0" VerticalAlignment="Top" Width="140" Height="36"/>
-        <TextBlock HorizontalAlignment="Left" Margin="148,252,0,0" Text="Password:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="114" FontSize="20" FontWeight="Black" RenderTransformOrigin="0.364,0.572"/>
-        <TextBlock HorizontalAlignment="Left" Margin="152,181,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="110" FontSize="20" FontWeight="Black" RenderTransformOrigin="0.461,1.144"/>
+        <TextBlock HorizontalAlignment="Left" Margin="95,253,0,0" Text="Password:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="114" FontSize="20" FontWeight="Black" RenderTransformOrigin="0.364,0.572"/>
+        <TextBlock HorizontalAlignment="Left" Margin="95,177,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="110" FontSize="20" FontWeight="Black" RenderTransformOrigin="0.461,1.144"/>
 
-        <Button x:Name="changeUser_btn" Content="Switch To User" HorizontalAlignment="Left" FontWeight="Bold" FontSize="20" Margin="148,327,0,0" VerticalAlignment="Top" Height="50" Width="199" />
-        <ComboBox x:Name="customerList_combobox" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="300,181,0,0" VerticalAlignment="Top" Width="140" Height="35"/>
-        <Image HorizontalAlignment="Left" Height="194" Margin="515,0,0,0" VerticalAlignment="Center" Width="280" Source="/SNwN.gif" RenderTransformOrigin="0.737,0.68"/>
+        <Button x:Name="changeUser_btn" Content="Switch To User" HorizontalAlignment="Left" FontWeight="Bold" FontSize="20" Margin="148,327,0,0" VerticalAlignment="Top" Height="50" Width="199" Click="ChangeTitle" Background="{x:Null}" />
+        <ComboBox x:Name="customerList_combobox" HorizontalAlignment="Left" Margin="300,181,0,0" VerticalAlignment="Top" Width="140" Height="35" >
+
+        </ComboBox>
+        <TextBox x:Name="namManager" HorizontalAlignment="Left" Margin="300,181,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="35"/>
+        <Button x:Name="sign" Content="Sign in" HorizontalAlignment="Left"  Height="50" Margin="382,327,0,0" FontFamily="Lucida Console" FontSize="20" VerticalAlignment="Top" Width="108" Click="sign_Click" Background="{x:Null}"/>
 
     </Grid>
 </Window>

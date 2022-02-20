@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ParcelWindow" Height="500" Width="800" FontSize="14" FontFamily="Segoe UI Black">
+        Title="ParcelWindow" Height="500" Width="800" FontSize="14" >
 
     <Grid Margin="0,0,0,-16">
         <Grid.Background>
@@ -32,11 +32,11 @@
         </Button>
 
         <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="653,334,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black" Click="btnAdd_Click"/>
-        <Button x:Name="btnUpDate" Content="UpDate" HorizontalAlignment="Left" Margin="653,272,0,0" VerticalAlignment="Top" Height="34" Width="124" FontSize="14" FontFamily="Segoe UI Black" Click="btnUpDate_Click"/>
         <Button x:Name="ShowDrone" Content="show" HorizontalAlignment="Left" Height="22" Margin="323,319,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="11" FontFamily="Arial" Click="ShowDrone_Click" d:IsHidden="True"/>
+
         <Button x:Name="ShowTraget" Content="show" HorizontalAlignment="Left" Height="21" Margin="323,397,0,0" VerticalAlignment="Top" Width="33" FontSize="11" FontFamily="Arial" Click="ShowTraget_Click" d:IsHidden="True"/>
         <Button x:Name="ShowSender" Content="show" HorizontalAlignment="Left" Height="21" Margin="323,360,0,0" VerticalAlignment="Top" Width="33" FontSize="11" FontFamily="Arial" Click="ShowSender_Click" d:IsHidden="True"/>
-        <Grid x:Name="gridUpDate" HorizontalAlignment="Left" Margin="54,58,0,0" VerticalAlignment="Top" Width="272" Height="371" d:IsHidden="True">
+        <Grid x:Name="gridUpDate" HorizontalAlignment="Left" Margin="54,58,0,0" VerticalAlignment="Top" Width="272" Height="371">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -74,7 +74,7 @@
             <Label Style="{StaticResource myLabelStyle}" Content="Id Target:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
             <TextBox x:Name="idTextBox2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="9" Text="{Binding Target.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" FontSize="12" FontFamily="Arial" IsEnabled="False"/>
         </Grid>
-        <Grid x:Name="gridAdd" DataContext="" HorizontalAlignment="Left" Margin="57,100,0,0" VerticalAlignment="Top" Height="206">
+        <Grid x:Name="gridAdd" DataContext="" HorizontalAlignment="Left" Margin="57,100,0,0" VerticalAlignment="Top" Height="206" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -87,7 +87,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Style="{StaticResource myLabelStyle}" Content="Priority:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <ComboBox x:Name="priorityComboBox" Grid.Column="1" DisplayMemberPath="Priority" HorizontalAlignment="Left" Height="Auto"   Margin="3" Grid.Row="1" VerticalAlignment="Center" Width="120">
+            <ComboBox x:Name="priorityComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"   Margin="3" Grid.Row="1" VerticalAlignment="Center" Width="120">
                 <ComboBoxItem Content="Standard" />
                 <ComboBoxItem Content="fast" />
                 <ComboBoxItem Content="emergency" />
@@ -96,14 +96,16 @@
             <TextBox x:Name="senderNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding SenderName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Style="{StaticResource myLabelStyle}" Content="Target Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
             <TextBox x:Name="targetNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding TargetName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
             <Label Style="{StaticResource myLabelStyle}" Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <ComboBox x:Name="weightComboBox" Grid.Column="1" DisplayMemberPath="Weight" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="4" VerticalAlignment="Center" Width="120" SelectionChanged="weightComboBox_SelectionChanged">
-                <ComboBoxItem Content="easy " />
+            <ComboBox x:Name="weightComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="4" VerticalAlignment="Center" Width="120" >
+                <ComboBoxItem Content="easy" />
                 <ComboBoxItem Content=" middle" />
                 <ComboBoxItem Content="weighty" />
             </ComboBox>
 
         </Grid>
+        <Button x:Name="btnUpDate" Content="Up date" HorizontalAlignment="Left" Margin="653,272,0,0" VerticalAlignment="Top" Height="34" Width="124" FontFamily="Segoe UI Black" Click="btnUpDate_Click"/>
 
 
     </Grid>

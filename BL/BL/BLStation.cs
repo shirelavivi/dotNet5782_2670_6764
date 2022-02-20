@@ -77,7 +77,7 @@ namespace BL
                 }
                 if (item.ChargeSlots - counter > 0)// אם יש עמדות טעינה פנויות? 
                 {
-                    temp = BL.DistanceTo(item.Longitude, item.Lattitude, location.Lattitude, location.Longitude);
+                    temp = DistanceTo(item.Longitude, item.Lattitude, location.Lattitude, location.Longitude);
                     if (temp < MinDistanc)
                     {
                         MinDistanc = temp;//שמירת המרחק הקטן עד עכשיו

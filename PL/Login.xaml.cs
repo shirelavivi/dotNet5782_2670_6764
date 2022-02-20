@@ -26,10 +26,9 @@ namespace PL
         private IBL BL;
 
         public MainWindow NewWindow;
-        private string adminUsername = "Manager";
-        private string adminPassword = "325112670";
-        private string userPassword;
-        private object passwordBox;
+        private string adminUsername = "Shirel and Hadasa";
+        private string adminPassword = "12345678";
+        //private object passwordBox;
 
         public LogIn()
         {
@@ -37,54 +36,51 @@ namespace PL
             {
                 InitializeComponent();
                 BL = BlFactory.GetBl();
-                PasswordBox.Password= string.Empty;
-                this.DataContext = BL.GetALLCostumerToList();
+                PasswordBox.Password= string.Empty; 
                 customerList_combobox.Visibility = Visibility.Hidden;
+                sign.Visibility = Visibility.Hidden;
+                customerList_combobox.ItemsSource=from st in BL.GetALLusers() select st.Name ;
+                //this.DataContext = BL.GetALLusers();
+              
             }
             catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         private void LogIn_btn(object sender, RoutedEventArgs e)
         {
-            if ((string)Title.Content == "Welcome Manager") //login to admin
+
+            if ((string)TitleManager.Content == "Welcome Manager") //login to admin
             {
-                if (/*username_box.Text == adminUsername &&*/ PasswordBox.Password == adminPassword)
+                if (namManager.Text == adminUsername && PasswordBox.Password == adminPassword)
                 {
                     NewWindow = new MainWindow();
                     PasswordBox.Password = string.Empty;
-                    NewWindow.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Wrong input , please try again");
-
-                    PasswordBox.Password = string.Empty;
-                }
-            }
-            else // login from user customer
-            {
-                BO.CustomerToList tempCustomer = (BO.CustomerToList)customerList_combobox.SelectedItem;
-
-                if (tempCustomer != null)
-                {
-                    userPassword = tempCustomer.Id.ToString(); //user customer password will be as the user id
-                }
-                if (PasswordBox.Password == userPassword)
-                {
-                    //check if we already opend this window
-
-                    NewWindow = new MainWindow(/*BL, tempCustomer.Id*/);
-
                     NewWindow.Show();
                     this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Wrong input , please try again");
-
+                    namManager.Text = "";
                     PasswordBox.Password = string.Empty;
                 }
+            }
+            else // login from user customer
+            {
+                IEnumerable<BO.User> user = new List<BO.User>();
+                user = BL.GetAllUsersByPredicat(x => x.PassWord == Convert.ToInt32(PasswordBox.Password) && x.Name == customerList_combobox.SelectedItem.ToString());
+                if (user.Count() != 0)
+                {
+                    NewWindow = new MainWindow();
+                    NewWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Wrong input , please try again");
+                    PasswordBox.Password = string.Empty;
+                }
+
             }
         }
 
@@ -93,19 +89,47 @@ namespace PL
         {
             if (changeUser_btn.Content.ToString() == "Switch To User")
             {
-                Title.Content = "Welcome User Name";
+                TitleManager.Content = "Welcome User Name";
                 changeUser_btn.Content = "Switch To Manager";
                 customerList_combobox.Visibility = Visibility.Visible;
-                //username_box.Visibility = Visibility.Hidden;
-
+                sign.Visibility = Visibility.Visible;
+                namManager.Visibility= Visibility.Hidden;
             }
             else // switch to admin
             {
-                Title.Content = "Welcome Manager";
+                namManager.Text = "";
+                TitleManager.Content = "Welcome Manager";
                 changeUser_btn.Content = "Switch To User";
                 customerList_combobox.Visibility = Visibility.Hidden;
-                //username_box.Visibility = Visibility.Visible;
+                namManager.Visibility = Visibility.Visible;
+                sign.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void sign_Click(object sender, RoutedEventArgs e)
+        {
+            if (sign.Content.ToString() == "save")
+            {
+                BO.User user = new User();
+                user.Name = namManager.Text.ToString();
+                user.PassWord = Convert.ToInt32(PasswordBox.Password);
+                BL.AddUser(user);
+                MessageBox.Show("Sign is completed");
+                namManager.Visibility = Visibility.Hidden;
+                customerList_combobox.Visibility = Visibility.Visible;
+                sign.Visibility = Visibility.Hidden;
+                PasswordBox.Password = "";
+                customerList_combobox.ItemsSource = from st in BL.GetALLusers() select st.Name;
+                sign.Content = "sign in";
+            }
+            else
+            {
+                namManager.Visibility = Visibility.Visible;
+                customerList_combobox.Visibility = Visibility.Hidden;
+                sign.Content = "save";
+            }
+            
+            
         }
     }
 

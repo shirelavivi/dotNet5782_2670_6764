@@ -147,12 +147,12 @@ namespace BL
                     throw new ArgumentException("Drone with the given ID number doesn't exist");
 
                 if (droneToList.DroneStatuses != DroneStatuses.maintenance)
-                    throw new InvalidOperationException("The drone is not charging");
+                    throw new UnsuitableDroneMode(droneToList.DroneStatuses, "The drone is not charging");
 
 
                 dal.ReleaseDroneFromChargeStation(droneId);
                 dronesBl.Remove(droneToList);
-                if (droneToList.ButerryStatus + timeInCharging * ChargingRate > 100)
+                if (droneToList.ButerryStatus + (timeInCharging * ChargingRate) / 50 > 100)
                     droneToList.ButerryStatus = 100;
                 else
                     droneToList.ButerryStatus += (int)(timeInCharging * ChargingRate);//קצב טעינה
@@ -173,8 +173,7 @@ namespace BL
 
 
             DroneToList drone = dronesBl.Find(d => d.Idnumber == id);
-            //if (drone == default(DroneToList))
-            //    throw new ArgumentException("Drone with the given ID number doesn't exist");
+            
 
             if (drone.DroneStatuses != DroneStatuses.transport)
                 throw new InvalidOperationException("The drone is not assigned to any package");
@@ -193,8 +192,7 @@ namespace BL
                     Lattitude = sender.Lattitude,
                     Longitude = sender.Longitude
                 };
-                //if (drone.ButerryStatus - BatteryConsumption(distance, drone.Weightcategories) < 0)
-                //{
+                
                 drone.ButerryStatus -= (int)BatteryConsumption(distance, drone.Weightcategories);
                 dal.collection(parcel.Id);
 

@@ -13,7 +13,7 @@
             <RowDefinition Height="141*"/>
         </Grid.RowDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="/רחפן.jpg"/>
+            <ImageBrush ImageSource="/15897032512236_b.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>

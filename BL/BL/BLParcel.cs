@@ -116,6 +116,10 @@ namespace BL
                         dronesBl.Remove(GetDroneToList(droneid));
                         dronesBl.Add(d);
                     }
+                    else
+                    {
+                        throw new BO.NoParcelsToDroneException("No parcel to this drone");
+                    }
                 }
 
             }

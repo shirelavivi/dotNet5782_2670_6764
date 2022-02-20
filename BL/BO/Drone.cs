@@ -16,7 +16,7 @@ namespace BO
             public Weightcategories Weightcategories { get; set; }
             public double ButerryStatus { get; set; }
             public DroneStatuses DroneStatuses { get; set; }
-            public List <ParcelInTransfer> PackageInTransfer { get; set; }//לשנות
+            public List<ParcelInTransfer> PackageInTransfer { get; set; }
             public Location ThisLocation { get; set; }
             public override string ToString()
             {

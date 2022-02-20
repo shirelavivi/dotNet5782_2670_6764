@@ -33,7 +33,7 @@
             </Button.Background>
         </Button>
         <Grid.Background>
-            <ImageBrush ImageSource="/רחפן.jpg" Opacity="0.95"/>
+            <ImageBrush ImageSource="/15897032512236_b.jpg" Opacity="0.95"/>
         </Grid.Background>
 
     </Grid>

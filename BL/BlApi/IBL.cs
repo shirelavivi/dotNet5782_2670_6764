@@ -61,6 +61,15 @@ namespace BlApi
         public IEnumerable<DroneToList> GetALLDroneToList(Predicate<DroneToList> predicate = null);
         // public Drone GetDrone(int droneId);
         #endregion
+        public void AddUser(BO.User user);
+        public BO.User GetUser(int pass);      
+        public IEnumerable<BO.User> GetALLusers();
+        public IEnumerable<BO.User> GetAllUsersByPredicat(Predicate<BO.User> predicate = null);
+
+        public double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K');
+
+
+        void SimulatorMod(int droneId, Action updateView, Func<bool> stopSimulator); //for the simulator mod
 
     }
 }

@@ -128,7 +128,7 @@ namespace BL
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
         }
-        public static double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K')
+        public  double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K')
         {
             double rlat1 = Math.PI * lat1 / 180;
             double rlat2 = Math.PI * lat2 / 180;
@@ -180,7 +180,24 @@ namespace BL
         {
             return kilometrs * Free;
         }
+        public void SimulatorMod(int droneId, Action updateView, Func<bool> stopSimulator)
+        {
+            try
+            {
+                new Simulator(this, droneId, updateView, stopSimulator);
+            }
+            catch (BO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+            catch (BO.DuplicateIdException ex)
+            {
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+            }
+        }
+
     }
+
 
 }
 

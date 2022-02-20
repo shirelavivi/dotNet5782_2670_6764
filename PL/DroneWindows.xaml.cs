@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using PL;
+
+
 
 namespace PL
 {
@@ -24,15 +29,19 @@ namespace PL
         
         IBL blDrone;
         BO.DroneToList droneWind;
+        private BackgroundWorker droneWorker;
+
         public DroneWindows(IBL bldrone)//הוספה
         {
             InitializeComponent();
             blDrone = bldrone;
             GridAddDrone.Visibility = Visibility.Visible;
             GridUpdateDrone.Visibility = Visibility.Hidden;
+            comboboxUpDate.ItemsSource =Enum.GetValues(typeof( BO.Weightcategories));
             //ComboBoxStatus.Text = IBL.BO.DroneStatuses.available.ToString();
             comboboxstion.ItemsSource = bldrone.GetALLStationWithFreeStation().Select(x => x.idnumber);
             //ComboBoxMaxWeight.ItemsSource =IBL.BO.Weightcategories;
+            
            
 
         }
@@ -112,15 +121,7 @@ namespace PL
 
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -129,15 +130,7 @@ namespace PL
 
 
 
-        private void ComboBoxMaxWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void TextModel_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
 
         private void Button_ClikUpdateDrone(object sender, RoutedEventArgs e)
         {
@@ -190,11 +183,7 @@ namespace PL
            
         } 
        
-        private void ComboBoxS_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-          
-        }
-
+       
         private void btnSendingDroneForCharging_Click(object sender, RoutedEventArgs e)
         {
 
@@ -243,19 +232,20 @@ namespace PL
         {
             try
             {
-                blDrone.ConnectParcelToDrone(Convert.ToInt32(TextIDUpdateDrone.Text));//אם נזרקת כאן חריגה זה אומר שאין חבילה מתאימה
-                FullDrone(blDrone.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text)));
-                if (TextDeliveryUpdateDrone.Text.ToString() == "0")
-                {
-                    MessageBox.Show("No suitable package was found for example by this skimmer!");
-                }
-                else
-                {
+                blDrone.ConnectParcelToDrone(Convert.ToInt32(TextIDUpdateDrone.Text));
+                BO.DroneToList dr = blDrone.GetDroneToList(Convert.ToInt32(TextIDUpdateDrone.Text));//אם נזרקת כאן חריגה זה אומר שאין חבילה מתאימה
+                FullDrone(dr);
+                //if (TextDeliveryUpdateDrone.Text.ToString() == "0")
+                //{
+                //    MessageBox.Show("No suitable package was found for example by this skimmer!");
+                //}
+                //else
+                
                     btnCollectionParcel.Visibility = Visibility.Visible;
                     saildTaimer.Visibility = Visibility.Hidden;
                     lablTimer.Visibility = Visibility.Hidden;
                     btnSentDrone.Visibility = Visibility.Hidden;
-                }
+                
             }
             catch (BO.MissingIdException ex)
             {
@@ -299,10 +289,6 @@ namespace PL
             }
         }
 
-        private void comboboxUpDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void TextButteryUpdateDrone_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -315,11 +301,70 @@ namespace PL
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Startsimulator(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            DroneListWindows droneListWindow = new DroneListWindows(blDrone);
-            droneListWindow.Show();
+            droneWorker = new BackgroundWorker();
+            droneWorker.DoWork += xsdf;
+            //droneWorker.DoWork += (o, args) => bl.SimulatorMod(drone.Id, UpdateView, StopSimulator);
+            droneWorker.ProgressChanged += (o, args) => UpdateView();
+            droneWorker.WorkerSupportsCancellation = true;
+            droneWorker.RunWorkerAsync(droneWind.Idnumber);
+
         }
+        private void xsdf(object? sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                blDrone.SimulatorMod(droneWind.Idnumber, UpdateView, StopSimulator);
+            }
+            catch (BO.NoParcelsToDroneException ex)
+            {
+                droneWorker.CancelAsync();
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void UpdateView()
+        {
+            BO.Drone boDrone = blDrone.GetDrone(droneWind.Idnumber);
+            List<BO.DroneToList> drones = new List<BO.DroneToList>();
+            droneWind.ButerryStatus = boDrone.ButerryStatus;
+            droneWind.DroneStatuses = (DroneStatuses)boDrone.DroneStatuses;
+           // blDrone.CopyPropertiesTo(boDrone.Location, droneWind.Location);
+           // if (droneWind.DroneStatuses == DroneStatuses.transport)
+           // {
+           //     droneWind.ParcelByTransfer = new ParcelInTransfer();
+           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer, droneWind.ParcelByTransfer);
+           //     droneWind.ParcelByTransfer.Sender = new CustomerInParcel();
+           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer.Sender, droneWind.ParcelByTransfer.Sender);
+           //     droneWind.ParcelByTransfer.Target = new CustomerInParcel();
+           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer.Target, droneWind.ParcelByTransfer.Target);
+           //     droneWind.ParcelByTransfer.PickUpLocation = new Location();
+           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer.PickUpLocation, droneWind.ParcelByTransfer.PickUpLocation);
+           //     droneWind.ParcelByTransfer.TargetLocation = new Location();
+           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer.TargetLocation, droneWind.ParcelByTransfer.TargetLocation);
+           // }
+
+           // Update the list
+           //drones = (List<BO.DroneToList>)blDrone.GetALLDroneToList();
+            for (int i = 0; i < drones.Count(); i++)
+                if (drones[i].Idnumber == droneWind.Idnumber)
+                {
+                    drones[i].ButerryStatus = droneWind.ButerryStatus;
+                    drones[i].DroneStatuses = droneWind.DroneStatuses;
+                    Location location = new Location();
+                    location.Longitude = droneWind.ThisLocation.Longitude;
+                    location.Lattitude = droneWind.ThisLocation.Lattitude;
+                    drones[i].ThisLocation = location;
+                    if (droneWind.DroneStatuses == DroneStatuses.transport)
+                        drones[i].PackageNumberTransferred =droneWind.PackageNumberTransferred;
+                }
+        }
+
+        private bool StopSimulator()
+        {
+            return droneWorker.CancellationPending;
+        }
+
+
     }
 }
