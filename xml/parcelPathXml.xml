@@ -53,7 +53,7 @@
     <SenderId>5</SenderId>
     <TargetId>10</TargetId>
     <Weight>weighty</Weight>
-    <Priority>Standard</Priority>
+    <Priority>fast</Priority>
     <DroneId>0</DroneId>
     <Requested xsi:nil="true" />
     <Scheduled xsi:nil="true" />
