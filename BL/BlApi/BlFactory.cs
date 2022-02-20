@@ -13,8 +13,7 @@ namespace BlApi
         {
             return BL.BL.Instance;
         }
-        
+
     }
 }
-
 

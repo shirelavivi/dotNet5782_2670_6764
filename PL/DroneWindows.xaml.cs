@@ -37,7 +37,7 @@ namespace PL
             blDrone = bldrone;
             GridAddDrone.Visibility = Visibility.Visible;
             GridUpdateDrone.Visibility = Visibility.Hidden;
-            comboboxUpDate.ItemsSource =Enum.GetValues(typeof( BO.Weightcategories));
+            //comboboxUpDate.ItemsSource =Enum.GetValues(typeof( BO.Weightcategories));
             //ComboBoxStatus.Text = IBL.BO.DroneStatuses.available.ToString();
             comboboxstion.ItemsSource = bldrone.GetALLStationWithFreeStation().Select(x => x.idnumber);
             //ComboBoxMaxWeight.ItemsSource =IBL.BO.Weightcategories;
@@ -345,7 +345,7 @@ namespace PL
            // }
 
            // Update the list
-           //drones = (List<BO.DroneToList>)blDrone.GetALLDroneToList();
+           drones = (List<BO.DroneToList>)blDrone.GetALLDroneToList();
             for (int i = 0; i < drones.Count(); i++)
                 if (drones[i].Idnumber == droneWind.Idnumber)
                 {

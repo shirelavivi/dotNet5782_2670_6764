@@ -24,12 +24,12 @@ namespace PL
     public partial class LogIn : Window
     {
         private IBL BL;
-
+        
         public MainWindow NewWindow;
         private string adminUsername = "Shirel and Hadasa";
         private string adminPassword = "12345678";
         //private object passwordBox;
-
+       
         public LogIn()
         {
             try

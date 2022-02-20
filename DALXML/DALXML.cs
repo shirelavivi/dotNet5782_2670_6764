@@ -36,7 +36,7 @@ namespace Dal
             listCustomer.Add(c);
             XMLTools.SaveListToXMLSerializer(listCustomer, customerPath);
         }
-
+       
         public bool CheckCusromer(int id)
         {
             List<Customer> listCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);

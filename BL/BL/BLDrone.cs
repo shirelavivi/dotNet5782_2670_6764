@@ -221,8 +221,11 @@ namespace BL
                     Model = droneToList.Model
                 };
 
-                //if (droneToList.DroneStatuses == DroneStatuses.transport)
-                drone.PackageInTransfer.Add(getPackageInDelivery(droneToList.PackageNumberTransferred));
+                parcel = getPackageInDelivery(droneToList.PackageNumberTransferred);
+                drone.PackageInTransfer = new List<ParcelInTransfer>();
+                if (GetParcel(parcel.IdPacket).PickedUp != default(DateTime))
+                    parcel.PackageMode = true;
+                drone.PackageInTransfer.Add(parcel);
                 return drone;
 
             }
