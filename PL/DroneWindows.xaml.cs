@@ -329,21 +329,7 @@ namespace PL
             List<BO.DroneToList> drones = new List<BO.DroneToList>();
             droneWind.ButerryStatus = boDrone.ButerryStatus;
             droneWind.DroneStatuses = (DroneStatuses)boDrone.DroneStatuses;
-           // blDrone.CopyPropertiesTo(boDrone.Location, droneWind.Location);
-           // if (droneWind.DroneStatuses == DroneStatuses.transport)
-           // {
-           //     droneWind.ParcelByTransfer = new ParcelInTransfer();
-           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer, droneWind.ParcelByTransfer);
-           //     droneWind.ParcelByTransfer.Sender = new CustomerInParcel();
-           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer.Sender, droneWind.ParcelByTransfer.Sender);
-           //     droneWind.ParcelByTransfer.Target = new CustomerInParcel();
-           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer.Target, droneWind.ParcelByTransfer.Target);
-           //     droneWind.ParcelByTransfer.PickUpLocation = new Location();
-           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer.PickUpLocation, droneWind.ParcelByTransfer.PickUpLocation);
-           //     droneWind.ParcelByTransfer.TargetLocation = new Location();
-           //     blDrone.CopyPropertiesTo(boDrone.ParcelByTransfer.TargetLocation, droneWind.ParcelByTransfer.TargetLocation);
-           // }
-
+          
            // Update the list
            drones = (List<BO.DroneToList>)blDrone.GetALLDroneToList();
             for (int i = 0; i < drones.Count(); i++)
